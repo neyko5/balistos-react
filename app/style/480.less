@@ -1,0 +1,105 @@
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max){
+
+
+    .container{
+        width:480px;
+        padding:0px;
+    }
+    header{
+        height:auto;
+
+        .search{
+            width:100%;
+            margin-left:0px;
+            margin-bottom:8px;
+            ul.results{
+                li{
+                    .title{
+                        width:398px;
+                    }
+                }
+            }
+        }
+        .logo{
+            margin-left:0px;
+        }
+        .dropdown{
+            width:100%;
+            border:0px;
+            position:relative;
+            background:@header;
+            float:left;
+            top:0px;
+            right:0px;
+            padding:10px 0px;
+            label{
+                .title{
+                    color:@volume;
+                }
+            }
+            .button{
+                margin-top:10px;
+            }
+            .noaccount{
+                color:@volume;
+            }
+        }
+    }
+    .main{
+        padding: 10px 16px;
+    }
+
+    .box{
+        width: 100%;
+    }
+
+    .left-gutter{
+        padding:0px;
+    }
+    .body{
+        display:table;
+        float:none;
+    }
+    .playlist_item{
+        .info{
+            width:266px;
+            .title{
+                font-size:13px;
+            }
+        }
+    }
+
+    .button.share{
+        margin-top:10px;
+        clear:left;
+    }
+    .button.share:active{
+        margin-top:11px;
+    }
+    .video{
+        iframe{
+            height: 250px;
+        }
+    }
+    .settings{
+        padding-left:0px;
+        margin-bottom:10px;
+    }
+    .social{
+        h2{
+            color:@volume;
+        }
+    }
+
+    h1{
+        font-size:42px;
+    }
+    .search_playlist{
+        width:450px;
+        .inner{
+            input{
+                width: 376px;
+            }
+        }
+    }
+}
