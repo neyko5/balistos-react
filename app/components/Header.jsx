@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'react-router'
 
 var Header = React.createClass({
   render: function() {
@@ -6,17 +7,6 @@ var Header = React.createClass({
     	<header>
             <div className="container">
                 <h1 className="logo">Balistos</h1>
-                <div className="menu">
-                    <div className="menu-button border-left open-login">Log in</div>
-                    <div className="menu-button open-register">Register</div>
-                    <div className="menu-button open-create" >New playlist</div>
-                    <div className="user" >
-                        <img src={require("../img/user.png")} />
-                        <div className="text">Hello</div>
-                        <div className="username">Username</div>
-                        <div className="arrow_down"></div>
-                    </div>
-                </div>
                 <div className="dropdown small" id="logout" >
                     <a href="/logout" className="button green logout">Log Out</a>
                 </div>

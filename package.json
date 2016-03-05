@@ -18,9 +18,17 @@
   },
   "homepage": "https://github.com/neyko5/balistos-react#readme",
   "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-core": "^6.6.5",
+    "babel-preset-es2015": "^6.6.0",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-hmre": "^1.1.0",
     "file-loader": "^0.8.5",
     "less-loader": "^2.2.2",
-    "webpack": "^1.12.14"
+    "npm-install-webpack-plugin": "^2.0.2",
+    "style-loader": "^0.13.0",
+    "webpack": "^1.12.14",
+    "webpack-merge": "^0.8.3"
   },
   "dependencies": {
     "babel-loader": "^6.2.4",
@@ -28,6 +36,7 @@
     "img": "^1.0.0",
     "react": "^0.14.7",
     "react-dom": "^0.14.7",
+    "react-router": "^2.0.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7"
   }
