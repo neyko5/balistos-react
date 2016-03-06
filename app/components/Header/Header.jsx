@@ -23,7 +23,7 @@ var Header = React.createClass({
   },
   onRegisterClick: function(e){
       this.setState({
-        showLogin: !this.state.showLogin
+        showRegister: !this.state.showRegister
       })
   },
   onCreatePlaylistClick: function(e){

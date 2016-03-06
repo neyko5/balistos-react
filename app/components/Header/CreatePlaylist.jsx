@@ -3,7 +3,7 @@ import React from 'react';
 var CreatePlaylist = React.createClass({
   render: function() {
     return (	
-		<div className="dropdown hidden" id="create"  >
+		<div className={"dropdown " + (this.props.show ? '':'hidden')} id="create"  >
             <form action="/create_playlist" method="POST" id="create_playlist">
                 <label>
                     <div className="title">Title</div>

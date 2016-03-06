@@ -5,9 +5,9 @@ var Header = React.createClass({
     return (    
         <div className="menu">
             <div onClick={this.props.onLoginClick} className="menu-button border-left open-login">Log in</div>
-            <div className="menu-button open-register">Register</div>
-            <div className="menu-button open-create" >New playlist</div>
-            <div className="user" >
+            <div onClick={this.props.onRegisterClick} className="menu-button open-register">Register</div>
+            <div onClick={this.props.onCreatePlaylistClick} className="menu-button open-create" >New playlist</div>
+            <div className="user" onClick={this.props.onLogoutClick} >
                 <img src={require("../../img/user.png")} />
                 <div className="text">Hello</div>
                 <div className="username">Username</div>
