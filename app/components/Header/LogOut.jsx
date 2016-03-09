@@ -1,13 +1,11 @@
 import React from 'react';
 
-var LogOut = React.createClass({
-  render: function() {
+var LogOut = function(props){
     return (	
-		<div className={"dropdown small " + (this.props.show ? '':'hidden')} id="logout" >
+		<div className={"dropdown small "+ (props.open?"":"hidden")} id="logout" >
             <a href="/logout" className="button green logout">Log Out</a>
         </div>
     );
-  }
-});
+}
 
 module.exports = LogOut;

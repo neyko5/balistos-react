@@ -6,52 +6,64 @@ import CreatePlaylist from './CreatePlaylist';
 import Login from './Login';
 import Register from './Register';
 import SearchVideo from './SearchVideo';
+import { connect } from 'react-redux';
+import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow  } from '../../actions'
 
-var Header = React.createClass({
-  getInitialState: function(){
+const mapStateToProps = (state, ownProps) => {
     return {
-        showLogin: false,
-        showCreatePlaylist: false,
-        showLogOut: false,
-        showRegister: false
+        ...ownProps,
+        username: state.auth.username,
+        loggedIn: state.auth.logged_in,
+        loginOpen: state.windows.login_open,
+        registerOpen: state.windows.register_open,
+        logoutOpen: state.windows.logout_open,
+        createPlaylistOpen: state.windows.create_playlist_open
     }
-  },
-  onLoginClick: function(e){
-      this.setState({
-        showLogin: !this.state.showLogin
-      })
-  },
-  onRegisterClick: function(e){
-      this.setState({
-        showRegister: !this.state.showRegister
-      })
-  },
-  onCreatePlaylistClick: function(e){
-      this.setState({
-        showCreatePlaylist: !this.state.showCreatePlaylist
-      })
-  },
-  onLogOutClick: function(e){
-      this.setState({
-        showLogOut: !this.state.showLogOut
-      })
-  },
-  render: function() {
-    return (    
-        <HeaderContainer>
-            <UserMenu 
-              onLoginClick={this.onLoginClick}
-              onRegisterClick={this.onRegisterClick}
-              onCreatePlaylistClick={this.onCreatePlaylistClick}
-              onLogOutClick={this.onLogOutClick} />
-            <LogOut show={this.state.showLogOut}/>
-            <CreatePlaylist show={this.state.showCreatePlaylist}/>
-            <Login show={this.state.showLogin} />
-            <Register show={this.state.showRegister}/>
-            {this.props.search ? <SearchVideo  /> : false}
-        </HeaderContainer>
-    )
   }
-});
+
+  const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        onOpenLoginClick: () => {
+            dispatch(toggleLoginWindow());
+        },
+        onOpenRegisterClick: () => {
+            dispatch(toggleRegisterWindow());
+        },
+        onOpenLogoutClick: () => {
+            dispatch(toggleLogoutWindow());
+        },
+        onOpenCreatePlaylistClick: () => {
+             dispatch(toggleCreatePlaylistWindow());
+        }
+    }
+  }
+
+var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, createPlaylistOpen, onOpenLoginClick, onOpenRegisterClick, onOpenCreatePlaylistClick, onOpenLogoutClick, username, search, dispatch }) => {
+      if(loggedIn){
+          return (
+            <HeaderContainer>
+                <UserMenu onOpenLogoutClick={onOpenLogoutClick} onOpenCreatePlaylistClick={onOpenCreatePlaylistClick} username={username} loggedIn={loggedIn} search={search}/>
+                <LogOut open={logoutOpen}/>
+                <CreatePlaylist open={createPlaylistOpen} />
+                {search ? <SearchVideo  /> : false}
+            </HeaderContainer>
+          )
+      }
+      else{
+          return(
+              <HeaderContainer onLogoClick="">
+                  <UserMenu search={search} onOpenLoginClick={onOpenLoginClick} onOpenRegisterClick={onOpenRegisterClick} username={username} loggedIn={loggedIn} />
+                  <Login  open={loginOpen} />
+                  <Register open={registerOpen} />
+              </HeaderContainer>
+          )
+      }
+}
+
+Header = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Header)
+
 
 module.exports = Header;

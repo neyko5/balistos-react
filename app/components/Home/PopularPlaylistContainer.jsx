@@ -12,7 +12,7 @@ var PopularPlaylistContainer = React.createClass({
 		return (
 			<div className="col-lg-6 col-md-6" >
                 {playlists.map(function(result) {
-		          return <PopularPlaylist data={result}/>;
+		          return <PopularPlaylist data={result} key={result.number}/>;
 		        })}
             </div>
 		);

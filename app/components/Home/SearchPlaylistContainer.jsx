@@ -1,21 +1,58 @@
 import React from 'react';
-import SearchPlaylistResults from './SearchPlaylistResults'
+import SearchPlaylistResult from './SearchPlaylistResult'
+import axios from 'axios';
+import { connect } from 'react-redux';
+
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        ...ownProps,
+        username: state.auth.username,
+        loggedIn: state.auth.logged_in,
+        token: state.auth.token
+    }
+  }
 
 var SearchPlaylistContainer = React.createClass({
+  getInitialState: function(){
+    return {
+        results: [
+          {title: "dsd", uri: "dsda", description: "dsesctiodsd"}
+        ]  
+    }
+  },
   render: function() {
+    console.log(this.props);
     return (    
         <div className="search_playlist">
             <div className="inner">
                 <input type="text" id="search_playlist" placeholder="Search playlist" onChange={this.onSearchInputChange} />
                 <div className="search_icon"></div>
-                <SearchPlaylistResults />
+                <ul className="results playlist_results" id="response-playlist">
+                    {this.state.results.map(function(result){
+                        return <SearchPlaylistResult uri={result.uri} title={result.title} description={result.description}/>
+                    })}
+                </ul>
             </div>
         </div>
     )
   },
   onSearchInputChange: function(e) {
-    console.log(e.target.value);
+      axios.get('http://localhost/playlists?q=' + e.target.value, {
+            headers: {'Authorization': 'Bearer ' + this.props.token }
+          }
+        ).then(function (response) {
+            if(response.data.playlists){
+                this.setState({
+                    results: response.data.playlists
+                });
+            }
+        }.bind(this));
   }
 });
+
+SearchPlaylistContainer = connect(
+  mapStateToProps
+)(SearchPlaylistContainer)
 
 module.exports = SearchPlaylistContainer;

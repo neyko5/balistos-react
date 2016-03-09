@@ -1,5 +1,5 @@
 import React from 'react';
-import axios from 'axios';
+
 
 var VideoListItem = React.createClass({
 	render: function() {
