@@ -1,8 +1,19 @@
 import React from 'react';
 import Header from '../Header/Header';
 import VideoListContainer from './VideoListContainer';
-import VideoPlayer from './VideoListContainer';
+import VideoPlayer from './VideoPlayer';
+import ChatContainer from './ChatContainer';
 import axios from 'axios';
+import { connect } from 'react-redux';
+import { changePlaylist } from '../../actions'
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        changePlaylist: (playlist) => {
+            dispatch(changePlaylist(playlist));
+        }
+    }
+}
 
 var Main = React.createClass({
       getVideos: function(){
@@ -21,6 +32,8 @@ var Main = React.createClass({
                 videos: videos
             });
         }.bind(this)); 
+        const { changePlaylist } = this.props;
+        changePlaylist(this.props.params.playlistUri);
     },
     getFirstVideo: function(){
         if(this.state.videos){
@@ -34,6 +47,7 @@ var Main = React.createClass({
         }
     },
     render: function() {
+        console.log(this.props);
         return (
             <div className="full-height"> 
                 <Header search={true} />
@@ -51,26 +65,7 @@ var Main = React.createClass({
                                     <div className="user green"></div>
                                 </div>
                             </div>
-                            <div className="box">
-                                <div className="header">
-                                    <i className="icon chat"></i>
-                                    <div className="title">Chat with your buddies</div>
-                                </div>
-                                <div className="chatbox">
-                                    <div className="message">
-                                        <span className="author red"></span>: <span></span>
-                                    </div>
-                                </div>
-                                <div className="send">
-                                    <form id="chat-form" role="form">
-                                        <textarea name="message" placeholder="Send a message"></textarea>
-                                        <button type="submit" className="button green chat">
-                                            <i className="icon message"></i>
-                                            Chat
-                                        </button>
-                                    </form>
-                                </div>
-                            </div>
+                            <ChatContainer />
                         </div>
                     </div>
                 </main>
@@ -79,4 +74,4 @@ var Main = React.createClass({
     }
 });    
 
-module.exports = Main;
+export default connect(mapDispatchToProps)(Main)

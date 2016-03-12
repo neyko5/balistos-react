@@ -6,7 +6,7 @@ const UserMenu = props => {
             <div className="menu">
                 <div className="menu-button open-create" onClick={props.onOpenCreatePlaylistClick} >New playlist</div>
                 <div className="user" onClick={props.onOpenLogoutClick} >
-                    <img src={require("../../img/user.png")} />
+                    <img src="/app/img/user.png" />
                     <div className="text">Hello</div>
                     <div className="username">{props.username}</div>
                     <div className="arrow_down"></div>

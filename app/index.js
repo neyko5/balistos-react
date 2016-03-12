@@ -9,6 +9,7 @@ import Home from './components/Home/Home.jsx';
 import Main from './components/Main/Main.jsx';
 import balistosApp from './reducers'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
+import { setAuthFromStorage } from './actions'
 
 require("!style!css!less!./style/style.less");
 
@@ -22,8 +23,6 @@ let store = createStore(
 store.subscribe(function(){
 	console.log(store.getState());
 });
-
-
 
 ReactDOM.render(
 	<Provider store={store}>

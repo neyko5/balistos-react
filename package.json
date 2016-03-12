@@ -44,6 +44,7 @@
     "react-router": "^2.0.0",
     "redux": "^3.3.1",
     "redux-thunk": "^2.0.1",
+    "socket.io": "^1.4.5",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.7"
   }

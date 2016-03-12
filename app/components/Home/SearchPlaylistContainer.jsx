@@ -16,13 +16,11 @@ const mapStateToProps = (state, ownProps) => {
 var SearchPlaylistContainer = React.createClass({
   getInitialState: function(){
     return {
-        results: [
-          {title: "dsd", uri: "dsda", description: "dsesctiodsd"}
-        ]  
+        results: []  
     }
   },
   render: function() {
-    console.log(this.props);
+
     return (    
         <div className="search_playlist">
             <div className="inner">

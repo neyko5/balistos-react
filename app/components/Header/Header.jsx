@@ -7,7 +7,7 @@ import Login from './Login';
 import Register from './Register';
 import SearchVideo from './SearchVideo';
 import { connect } from 'react-redux';
-import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow  } from '../../actions'
+import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -19,9 +19,9 @@ const mapStateToProps = (state, ownProps) => {
         logoutOpen: state.windows.logout_open,
         createPlaylistOpen: state.windows.create_playlist_open
     }
-  }
+}
 
-  const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onOpenLoginClick: () => {
             dispatch(toggleLoginWindow());
@@ -34,16 +34,19 @@ const mapStateToProps = (state, ownProps) => {
         },
         onOpenCreatePlaylistClick: () => {
              dispatch(toggleCreatePlaylistWindow());
+        },
+        onLogoutClick: () => {
+             dispatch(logOut());
         }
     }
-  }
+}
 
-var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, createPlaylistOpen, onOpenLoginClick, onOpenRegisterClick, onOpenCreatePlaylistClick, onOpenLogoutClick, username, search, dispatch }) => {
+var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, onLogoutClick, createPlaylistOpen, onOpenLoginClick, onOpenRegisterClick, onOpenCreatePlaylistClick, onOpenLogoutClick, username, search, dispatch }) => {
       if(loggedIn){
           return (
             <HeaderContainer>
                 <UserMenu onOpenLogoutClick={onOpenLogoutClick} onOpenCreatePlaylistClick={onOpenCreatePlaylistClick} username={username} loggedIn={loggedIn} search={search}/>
-                <LogOut open={logoutOpen}/>
+                <LogOut open={logoutOpen} onLogoutClick={onLogoutClick} />
                 <CreatePlaylist open={createPlaylistOpen} />
                 {search ? <SearchVideo  /> : false}
             </HeaderContainer>
@@ -61,8 +64,8 @@ var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, createPlaylistOpe
 }
 
 Header = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(Header)
 
 

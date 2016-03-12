@@ -1,11 +1,23 @@
 import axios from 'axios';
 
 export function loginUser(username, token){
+  localStorage.setItem('token', token);
+  localStorage.setItem('username', username);
   return {
     type: "POST_LOGIN",
     username,
     token
   }
+}
+
+export function setAuthFromStorage(){
+  if(localStorage.getItem("token") && localStorage.getItem("username")){
+      return {
+        type: "AUTH_SET_FROM_STORAGE",
+        token: localStorage.getItem("token"),
+        username: localStorage.getItem("username")
+      }
+    }
 }
 
 export function sendLoginRequest(username, password){
@@ -33,6 +45,72 @@ export function sendRegisterRequest(username, email, password){
                 dispatch(loginUser(username, response.data.token));
             }
         });
+    }
+}
+
+export function setMessages(messages){
+    return{
+        type: "SET_MESSAGES",
+        messages: messages
+    }
+}
+
+export function fetchMessages(){
+    return function(dispatch){
+        return axios.get('http://localhost/chat')
+        .then(function (response) {
+            if(response.data.messages){
+                dispatch(setMessages(response.data.messages));
+            }
+        });
+    }
+}
+
+export function receiveRawMessage(msg){
+    return{
+        type: "RECIEVE_MESSAGE",
+        message: msg
+    }
+}
+
+export function logOut(){
+    return{
+        type: "LOG_OUT"
+    }
+}
+
+export function changePlaylist(playlist){
+    console.log(playlist);
+    return {
+        type: "CHANGE_PLAYLIST",
+        playlist: playlist
+    }
+}
+
+export function sendMessage(message, playlist_uri){
+  console.log(playlist_uri);
+    return function(dispatch){
+        return axios.post('http://localhost/message/' + playlist_uri, {
+            message: message,
+            playlist_uri: playlist_uri
+        })
+        .then(function (response) {
+            if(response.data.message){
+                dispatch(setMessage(message));
+            }
+        });
+    }
+    return{
+        type: "SEND_MESSAGE",
+        message: message,
+        playlist_uri: playlist_uri
+    }
+}
+
+export function setMessage(message){
+    return{
+        type: "SET_MESSAGE",
+        message: message
     }
 }
 

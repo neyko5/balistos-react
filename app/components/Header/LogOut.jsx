@@ -3,7 +3,7 @@ import React from 'react';
 var LogOut = function(props){
     return (	
 		<div className={"dropdown small "+ (props.open?"":"hidden")} id="logout" >
-            <a href="/logout" className="button green logout">Log Out</a>
+            <button className="button green logout" onClick={props.onLogoutClick} >Log Out</button>
         </div>
     );
 }
