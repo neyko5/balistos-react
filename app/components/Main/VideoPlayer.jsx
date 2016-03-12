@@ -1,64 +1,66 @@
-var React = require('react');
+import React, { Component, PropTypes } from 'react'
+import YouTube from 'react-youtube';
+import ReactSlider from 'react-slider';
+import { youtubeParams } from '../../settings';
 
-var VideoPlayer = React.createClass({
+var VideoPlayer =  React.createClass({
+    onReady: function(event) {
+        this.setState({
+            player: event.target
+        });
+    },
+    getInitialState(){
+        return {
+            videoId: "kszLwBaC4Sw"
+        }
+    },
+    pause(){
+        this.state.player.pauseVideo();
+    },
+    play(){
+        this.state.player.playVideo();
+    },
+    onSliderChange(value){
+        this.state.player.setVolume(value);
+    },
+    onChangeVideo() {
+        this.setState({
+            videoId: "bvC_0foemLY"
+        });
+    },
     render: function() {
         return (
-            <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
-                <div className="main_window">
-                    <div className="video_player">
-                        <div className="subtitle">Now playing:</div>
-                        <div className="title">{this.props.video.title}</div>
-                        <div className="video-id"></div>
-                        <div className="player">
-                            <div className="overlay"></div>
-                            <div id="player"></div>
-                        </div>
-                        <div className="progress">
-                            <div className="bar" role="progressbar"></div>
-                        </div>
-                        <div className="toolbar">
-                            <div className="controls">
-                                <div className="control play"></div>
-                                <div className="control pause"></div>
-                                <div className="control stop"></div>
-                            </div>
-                            <div className="timer">
-                                <div className="elapsed"></div>
-                                <div className="total"> / </div>
-                            </div>
-                            <div className="volume">
-                                <div className="speaker"></div>
-                                <input type="hidden" id="volume-slider" value="100" />
-                            </div>
-                        </div>
+            <div className="video_player">
+                <div className="subtitle">Now playing:</div>
+                <div className="title">Title</div>
+                <div className="video-id"></div>
+                <div className="player">
+                    <div className="overlay"></div>
+                    <YouTube
+                        videoId={this.state.videoId}
+                        opts={youtubeParams} onReady={this.onReady} />
+                </div>
+                <div className="progress">
+                    <div className="bar" role="progressbar"></div>
+                </div>
+                <div className="toolbar">
+                    <div className="controls">
+                        <div className="control play" onClick={this.play}></div>
+                        <div className="control pause" onClick={this.pause}></div>
+                        <div className="control stop" onClick={this.onChangeVideo}></div>
                     </div>
-                    <div className="button_menu">
-                        <div className="button grey delete">
-                            <i className="icon delete"></i>
-                            Delete video
-                        </div>
-                        <div className="button red hide" id="hide-player">
-                            <i className="icon hide"></i>
-                            Hide player
-                        </div>
-                         <div className="button green show" id="show-player">
-                            <i className="icon show"></i>
-                            Show player
-                        </div>
-                        <div className="share-row">
-                            <div className="share-left"></div>
-                            <div className="share-icon facebook"></div>
-                            <div className="share-icon twitter"></div>
-                            <div className="share-icon google"></div>
-                            <div className="share-icon email"></div>
-                            <div className="share-right"></div>
-                        </div>
+                    <div className="timer">
+                        <div className="elapsed"></div>
+                        <div className="total"> / </div>
+                    </div>
+                    <div className="volume">
+                        <div className="speaker"></div>
+                        <ReactSlider onChange={this.onSliderChange} />
                     </div>
                 </div>
             </div>
         );
     }
-
 });
 
 module.exports = VideoPlayer;

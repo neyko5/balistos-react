@@ -2,9 +2,9 @@ import React from 'react';
 
 
 var VideoListItem = React.createClass({
-	render: function() {
-		return (
-			<div className="playlist_item">
+    render: function() {
+        return (
+            <div className="playlist_item">
                 <div className="vote">
                     <div className="up active"></div>
                     <div className="number">245</div>
@@ -19,9 +19,8 @@ var VideoListItem = React.createClass({
                     <div className="delete"></div>
                 </div>
             </div>
-		);
-	}
-
+        );
+    }
 });
 
 module.exports = VideoListItem;

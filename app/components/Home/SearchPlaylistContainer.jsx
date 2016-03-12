@@ -11,34 +11,33 @@ const mapStateToProps = (state, ownProps) => {
         loggedIn: state.auth.logged_in,
         token: state.auth.token
     }
-  }
+}
 
 var SearchPlaylistContainer = React.createClass({
-  getInitialState: function(){
-    return {
-        results: []  
-    }
-  },
-  render: function() {
-
-    return (    
-        <div className="search_playlist">
-            <div className="inner">
-                <input type="text" id="search_playlist" placeholder="Search playlist" onChange={this.onSearchInputChange} />
-                <div className="search_icon"></div>
-                <ul className="results playlist_results" id="response-playlist">
-                    {this.state.results.map(function(result){
-                        return <SearchPlaylistResult uri={result.uri} title={result.title} description={result.description}/>
-                    })}
-                </ul>
+    getInitialState: function(){
+        return {
+            results: []  
+        }
+    },
+    render: function() {
+        return (    
+            <div className="search_playlist">
+                <div className="inner">
+                    <input type="text" id="search_playlist" placeholder="Search playlist" onChange={this.onSearchInputChange} />
+                    <div className="search_icon"></div>
+                    <ul className="results playlist_results" id="response-playlist">
+                        {this.state.results.map(function(result){
+                            return <SearchPlaylistResult uri={result.uri} title={result.title} description={result.description}/>
+                        })}
+                    </ul>
+                </div>
             </div>
-        </div>
-    )
-  },
-  onSearchInputChange: function(e) {
-      axios.get('http://localhost/playlists?q=' + e.target.value, {
-            headers: {'Authorization': 'Bearer ' + this.props.token }
-          }
+        )
+    },
+    onSearchInputChange: function(e) {
+        axios.get('http://localhost/playlists?q=' + e.target.value, {
+               headers: {'Authorization': 'Bearer ' + this.props.token }
+            }
         ).then(function (response) {
             if(response.data.playlists){
                 this.setState({
@@ -46,11 +45,7 @@ var SearchPlaylistContainer = React.createClass({
                 });
             }
         }.bind(this));
-  }
+    }
 });
 
-SearchPlaylistContainer = connect(
-  mapStateToProps
-)(SearchPlaylistContainer)
-
-module.exports = SearchPlaylistContainer;
+module.exports = connect( mapStateToProps )(SearchPlaylistContainer)

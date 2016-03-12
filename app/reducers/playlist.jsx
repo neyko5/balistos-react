@@ -1,13 +1,13 @@
 function playlist(state = {}, action){
-  switch(action.type){
-    case "CHANGE_PLAYLIST":
-        return {
-          ...state,
-          playlist: action.playlist
-        }
-    default:
-      return state;
-  }
+    switch(action.type){
+        case "SET_VIDEOS":
+            return {
+                ...state,
+                videos: action.videos
+            }
+        default:
+            return state;
+    }
 }
 
 module.exports = playlist;

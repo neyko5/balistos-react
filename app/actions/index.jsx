@@ -1,22 +1,22 @@
 import axios from 'axios';
 
 export function loginUser(username, token){
-  localStorage.setItem('token', token);
-  localStorage.setItem('username', username);
-  return {
-    type: "POST_LOGIN",
-    username,
-    token
-  }
+    localStorage.setItem('token', token);
+    localStorage.setItem('username', username);
+    return {
+        type: "POST_LOGIN",
+        username,
+        token
+    }
 }
 
 export function setAuthFromStorage(){
-  if(localStorage.getItem("token") && localStorage.getItem("username")){
-      return {
-        type: "AUTH_SET_FROM_STORAGE",
-        token: localStorage.getItem("token"),
-        username: localStorage.getItem("username")
-      }
+    if(localStorage.getItem("token") && localStorage.getItem("username")){
+        return {
+            type: "AUTH_SET_FROM_STORAGE",
+            token: localStorage.getItem("token"),
+            username: localStorage.getItem("username")
+        }
     }
 }
 
@@ -66,6 +66,24 @@ export function fetchMessages(){
     }
 }
 
+export function fetchVideos(){
+    return function(dispatch){
+        return axios.get('http://localhost/')
+            .then(function (response) {
+                if(response.data){
+                    dispatch(setVideos(response.data));
+                }
+            });
+    }
+}
+
+export function setVideos(videos){
+    return{
+        type: "SET_VIDEOS",
+        videos: videos
+    }
+}
+
 export function receiveRawMessage(msg){
     return{
         type: "RECIEVE_MESSAGE",
@@ -88,7 +106,6 @@ export function changePlaylist(playlist){
 }
 
 export function sendMessage(message, playlist_uri){
-  console.log(playlist_uri);
     return function(dispatch){
         return axios.post('http://localhost/message/' + playlist_uri, {
             message: message,
@@ -116,19 +133,19 @@ export function setMessage(message){
 
 export function toggleLoginWindow(){
     return{
-       type: "TOGGLE_LOGIN_WINDOW"
+        type: "TOGGLE_LOGIN_WINDOW"
     }
 }
 
 export function toggleRegisterWindow(){
     return{
-       type: "TOGGLE_REGISTER_WINDOW"
+        type: "TOGGLE_REGISTER_WINDOW"
     }
 }
 
 export function toggleLogoutWindow(){
     return{
-       type: "TOGGLE_LOGOUT_WINDOW"
+        type: "TOGGLE_LOGOUT_WINDOW"
     }
 }
 

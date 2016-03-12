@@ -2,11 +2,11 @@ import React from 'react';
 
 const UserMenu = props => {
     if(props.loggedIn){
-        return (    
+        return (
             <div className="menu">
                 <div className="menu-button open-create" onClick={props.onOpenCreatePlaylistClick} >New playlist</div>
                 <div className="user" onClick={props.onOpenLogoutClick} >
-                    <img src="/app/img/user.png" />
+                    <div className="user_icon"></div>
                     <div className="text">Hello</div>
                     <div className="username">{props.username}</div>
                     <div className="arrow_down"></div>
@@ -21,7 +21,7 @@ const UserMenu = props => {
                 <div className="menu-button open-register" onClick={props.onOpenRegisterClick}>Register</div>
             </div>
         )
-    } 
+    }
 }
 
 module.exports = UserMenu;

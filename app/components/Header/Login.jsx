@@ -5,8 +5,8 @@ import { sendLoginRequest } from '../../actions'
 let Login = ({ dispatch, open }) => {
     let username
     let password 
-	return (
-		<div className={"dropdown "+ (open?"":"hidden")} id="login" >
+    return (
+        <div className={"dropdown "+ (open?"":"hidden")} id="login" >
             <form role="form" id="login-form" onSubmit={e => {
                 e.preventDefault()
                 if (!username.value.trim() || !password.value.trim) {
@@ -36,8 +36,7 @@ let Login = ({ dispatch, open }) => {
                 <a className="facebook-login" href=""></a>
             </div>
         </div>
-	);
+    );
 };
 
-Login = connect()(Login)
 module.exports = Login;

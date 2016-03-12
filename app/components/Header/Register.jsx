@@ -4,10 +4,10 @@ import { sendRegisterRequest } from '../../actions'
 
 let Register = ({ dispatch, open }) => {
     let username
-    let email 
-    let password 
-    return (	
-		<div className={"dropdown " + (open? '':'hidden')}  id="register" >
+    let email
+    let password
+    return (
+        <div className={"dropdown " + (open? '':'hidden')}  id="register" >
             <form role="form" method="POST" id="register-form"  onSubmit={e => {
                 e.preventDefault()
                 if (!username.value.trim() || !password.value.trim  || !email.value.trim()) {
@@ -39,7 +39,6 @@ let Register = ({ dispatch, open }) => {
             </form>
         </div>
     );
-
 }
-Register = connect()(Register)
+
 module.exports = Register;

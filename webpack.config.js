@@ -42,7 +42,7 @@ const common = {
       {
         //IMAGE LOADER
         test: /\.(jpe?g|png|gif|svg)$/i,
-        loader:'file'
+        loader:'url?limit=25000'
       },
     ]
   }

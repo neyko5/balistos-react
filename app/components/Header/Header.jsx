@@ -42,31 +42,25 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, onLogoutClick, createPlaylistOpen, onOpenLoginClick, onOpenRegisterClick, onOpenCreatePlaylistClick, onOpenLogoutClick, username, search, dispatch }) => {
-      if(loggedIn){
-          return (
-            <HeaderContainer>
-                <UserMenu onOpenLogoutClick={onOpenLogoutClick} onOpenCreatePlaylistClick={onOpenCreatePlaylistClick} username={username} loggedIn={loggedIn} search={search}/>
-                <LogOut open={logoutOpen} onLogoutClick={onLogoutClick} />
-                <CreatePlaylist open={createPlaylistOpen} />
-                {search ? <SearchVideo  /> : false}
+    if(loggedIn){
+        return (
+          <HeaderContainer>
+              <UserMenu onOpenLogoutClick={onOpenLogoutClick} onOpenCreatePlaylistClick={onOpenCreatePlaylistClick} username={username} loggedIn={loggedIn} search={search}/>
+              <LogOut open={logoutOpen} onLogoutClick={onLogoutClick} />
+              <CreatePlaylist open={createPlaylistOpen} />
+              {search ? <SearchVideo  /> : false}
+          </HeaderContainer>
+        )
+    }
+    else{
+        return(
+            <HeaderContainer onLogoClick="">
+                <UserMenu search={search} onOpenLoginClick={onOpenLoginClick} onOpenRegisterClick={onOpenRegisterClick} username={username} loggedIn={loggedIn} />
+                <Login  open={loginOpen} />
+                <Register open={registerOpen} />
             </HeaderContainer>
-          )
-      }
-      else{
-          return(
-              <HeaderContainer onLogoClick="">
-                  <UserMenu search={search} onOpenLoginClick={onOpenLoginClick} onOpenRegisterClick={onOpenRegisterClick} username={username} loggedIn={loggedIn} />
-                  <Login  open={loginOpen} />
-                  <Register open={registerOpen} />
-              </HeaderContainer>
-          )
-      }
+        )
+    }
 }
 
-Header = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(Header)
-
-
-module.exports = Header;
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
