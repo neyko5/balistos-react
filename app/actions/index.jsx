@@ -68,12 +68,43 @@ export function fetchMessages(){
 
 export function fetchVideos(){
     return function(dispatch){
-        return axios.get('http://localhost/')
+        return axios.get('http://localhost/',{})
             .then(function (response) {
                 if(response.data){
                     dispatch(setVideos(response.data));
                 }
             });
+    }
+}
+
+export function searchYoutube(query){
+    console.log("inside", query);
+    return function(dispatch){
+        return axios.get('https://www.googleapis.com/youtube/v3/search', {
+            params: {
+                q: query,
+                key: "AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0",
+                part: "snippet"
+            }
+
+        }).then(function (response) {
+            dispatch(setResultsYoutube(response.data.items));
+        });
+    }
+}
+
+export function setResultsYoutube(results){
+    return {
+        type: "SET_RESULTS",
+        results: results
+    }
+}
+
+export function addItem(id){
+    console.log("id", id);
+    return {
+        type: "ADD_ITEM",
+        results: id
     }
 }
 

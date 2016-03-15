@@ -25,11 +25,13 @@ var SearchPlaylistContainer = React.createClass({
                 <div className="inner">
                     <input type="text" id="search_playlist" placeholder="Search playlist" onChange={this.onSearchInputChange} />
                     <div className="search_icon"></div>
-                    <ul className="results playlist_results" id="response-playlist">
-                        {this.state.results.map(function(result){
-                            return <SearchPlaylistResult uri={result.uri} title={result.title} description={result.description}/>
-                        })}
-                    </ul>
+                    {this.state.results.length ?
+                        <ul className="results playlist_results" id="response-playlist">
+                            {this.state.results.map(function (result) {
+                                return <SearchPlaylistResult uri={result.uri} title={result.title}
+                                                             description={result.description}/>
+                            })}
+                        </ul> : null }
                 </div>
             </div>
         )
