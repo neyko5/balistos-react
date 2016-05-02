@@ -1,13 +1,12 @@
-import React from 'react';
 import { Link } from 'react-router'
 
 function HeaderContainer(props){
-    return (    
+    return (
         <header>
             <div className="container">
                 <Link to="/">
                     <h1 className="logo" onLogoClick={props.onLogoClick} >Balistos</h1>
-                </Link> 
+                </Link>
                 {props.children}
             </div>
             <div className="clearfix"></div>

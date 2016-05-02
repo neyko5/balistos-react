@@ -1,4 +1,3 @@
-var React = require('react');
 var VideoList = require('./VideoList');
 
 function VideoListContainer(props){

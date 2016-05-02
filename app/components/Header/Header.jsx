@@ -1,4 +1,3 @@
-import React from 'react';
 import UserMenu from './UserMenu';
 import HeaderContainer from './HeaderContainer';
 import LogOut from './LogOut';
@@ -7,7 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import SearchVideo from './SearchVideo';
 import { connect } from 'react-redux';
-import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut } from '../../actions'
+import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylist } from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -37,30 +36,35 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         },
         onLogoutClick: () => {
              dispatch(logOut());
+        },
+        onCreatePlaylistSubmit: (title, description) => {
+             dispatch(createPlaylist(title, description));
         }
     }
 }
 
-var Header = ({ loggedIn, registerOpen, loginOpen, logoutOpen, onLogoutClick, createPlaylistOpen, onOpenLoginClick, onOpenRegisterClick, onOpenCreatePlaylistClick, onOpenLogoutClick, username, search, dispatch }) => {
-    if(loggedIn){
-        return (
-          <HeaderContainer>
-              <UserMenu onOpenLogoutClick={onOpenLogoutClick} onOpenCreatePlaylistClick={onOpenCreatePlaylistClick} username={username} loggedIn={loggedIn} search={search}/>
-              <LogOut open={logoutOpen} onLogoutClick={onLogoutClick} />
-              <CreatePlaylist open={createPlaylistOpen} />
-              {search ? <SearchVideo  /> : false}
-          </HeaderContainer>
-        )
-    }
-    else{
-        return(
-            <HeaderContainer onLogoClick="">
-                <UserMenu search={search} onOpenLoginClick={onOpenLoginClick} onOpenRegisterClick={onOpenRegisterClick} username={username} loggedIn={loggedIn} />
-                <Login  open={loginOpen} />
-                <Register open={registerOpen} />
+var Header = React.createClass({
+    render: function(){
+      if(this.props.loggedIn){
+          return (
+            <HeaderContainer>
+                <UserMenu onOpenLogoutClick={this.props.onOpenLogoutClick} onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick} username={this.props.username} loggedIn={this.props.loggedIn} search={this.props.search}/>
+                <LogOut open={this.props.logoutOpen} onLogoutClick={this.props.onLogoutClick} />
+                <CreatePlaylist open={this.props.createPlaylistOpen} onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}/>
+                {this.props.search ? <SearchVideo  /> : false}
             </HeaderContainer>
-        )
+          )
+      }
+      else{
+          return(
+              <HeaderContainer onLogoClick="">
+                  <UserMenu search={this.props.search} onOpenLoginClick={this.props.onOpenLoginClick} onOpenRegisterClick={this.props.onOpenRegisterClick} username={this.props.username} loggedIn={this.props.loggedIn} />
+                  <Login  open={this.props.loginOpen} />
+                  <Register open={this.props.registerOpen} />
+              </HeaderContainer>
+          )
+      }
     }
-}
+});
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)

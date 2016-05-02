@@ -1,4 +1,3 @@
-import React from 'react';
 import VideoListItem from './VideoListItem';
 
 var VideoList = React.createClass({
@@ -13,7 +12,7 @@ var VideoList = React.createClass({
         }
         else{
             return (
-                <div className="video-list"> 
+                <div className="video-list">
                     {this.props.videos.map(function(result) {
                       return <VideoListItem data={result} key={result.id} />;
                     })}

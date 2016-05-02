@@ -1,6 +1,4 @@
-import React from 'react';
-
-const UserMenu = props => {
+function UserMenu(props){
     if(props.loggedIn){
         return (
             <div className="menu">

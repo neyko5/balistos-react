@@ -1,8 +1,6 @@
-import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer';
 import Playlist from './Playlist';
-
 
 function Main(props){
     return (

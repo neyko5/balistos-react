@@ -1,5 +1,3 @@
-var React = require('react');
-
 var ChatForm = React.createClass({
     render: function() {
         let message;

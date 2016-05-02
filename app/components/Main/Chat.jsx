@@ -1,12 +1,9 @@
-var React = require('react');
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
 import { receiveRawMessage, sendMessage } from '../../actions'
 import { connect } from 'react-redux';
 
 var Chat = React.createClass({
-    componentDidMount: function(){
-    },
     render: function() {
         return (
             <div className="box">
@@ -16,7 +13,7 @@ var Chat = React.createClass({
                 </div>
                 <div className="chatbox">
                     {this.props.messages.map(function(message){
-                        return <ChatMessage id_user={message.id_user} message={message.message} key={message.id}/>
+                        return <ChatMessage user={message.user} message={message.message} key={message.id}/>
                     })}
                 </div>
                 <ChatForm />

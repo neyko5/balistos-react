@@ -1,4 +1,3 @@
-import React from 'react';
 import Footer from './Footer';
 
 var App = React.createClass({
@@ -6,9 +5,8 @@ var App = React.createClass({
         return (
             <div className="full-height">
                 {this.props.children}
-                
             </div>
-        );  
+        );
     }
 });
 

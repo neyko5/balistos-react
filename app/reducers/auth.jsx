@@ -12,6 +12,7 @@ function auth(state = {
                 logged_in: true
             };
         case "LOG_OUT":
+          localStorage.removeItem("token");
           return {};
         case "POST_LOGIN":
             return {

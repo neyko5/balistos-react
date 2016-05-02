@@ -1,4 +1,3 @@
-var React = require('react');
 var VideoPlayer = require('./VideoPlayer');
 var VideoControls = require('./VideoControls');
 
@@ -7,7 +6,7 @@ var VideoPlayerContainer = React.createClass({
         return (
             <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
                 <div className="main_window">
-                    <VideoPlayer />
+                    <VideoPlayer videos={this.props.videos} />
                     <VideoControls />
                 </div>
             </div>

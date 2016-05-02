@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { browserHistory } from 'react-router'
 
 export function loginUser(username, token){
     localStorage.setItem('token', token);
@@ -20,23 +21,50 @@ export function setAuthFromStorage(){
     }
 }
 
+export function createPlaylist(title, description){
+  console.log(title, description);
+  return function(dispatch){
+      return axios.post('http://localhost/playlist',
+          {
+              title: title,
+              description: description
+          },
+          {
+            headers: {
+              'Authorization': 'Bearer ' + localStorage.getItem("token")
+            },
+
+          }
+      ).then(function (response) {
+          if(response.data.uri){
+              dispatch(redirectToPlaylist(response.data.uri));
+          }
+      }.bind(this));
+  }
+}
+
+export function redirectToPlaylist(uri){
+     console.log("redirect", uri)
+     browserHistory.push('/playlist/' + uri);
+}
+
 export function sendLoginRequest(username, password){
     return function(dispatch){
         return axios.post('http://localhost/login', {
-            name: username,
+            username: username,
             password: password
         })
         .then(function (response) {
              dispatch(loginUser(username, response.data.token));
         });
-      
+
     }
 }
 
 export function sendRegisterRequest(username, email, password){
     return function(dispatch){
         return axios.post('http://localhost/register', {
-            name: username,
+            username: username,
             email: email,
             password: password
         })
@@ -66,12 +94,12 @@ export function fetchMessages(){
     }
 }
 
-export function fetchVideos(){
+export function fetchPlaylist(){
     return function(dispatch){
-        return axios.get('http://localhost/',{})
+        return axios.get('http://localhost/playlist/sample',{})
             .then(function (response) {
                 if(response.data){
-                    dispatch(setVideos(response.data));
+                    dispatch(setIntialPlaylistData(response.data));
                 }
             });
     }
@@ -108,10 +136,11 @@ export function addItem(id){
     }
 }
 
-export function setVideos(videos){
+export function setIntialPlaylistData(data){
     return{
-        type: "SET_VIDEOS",
-        videos: videos
+        type: "SET_INITIAL_PLAYLIST_DATA",
+        videos: data.videos,
+        messages: data.messages
     }
 }
 
@@ -136,6 +165,28 @@ export function changePlaylist(playlist){
     }
 }
 
+export function searchPlaylists(query){
+    return function(dispatch){
+        return axios.get('http://localhost/playlists?q=' + query, {
+               headers: {
+                 'Authorization': 'Bearer ' + localStorage.getItem("token")
+               }
+            }
+        ).then(function (response) {
+            if(response.data.playlists){
+                dispatch(setPlaylistResults(response.data.playlists));
+            }
+        }.bind(this));
+    }
+}
+
+export function setPlaylistResults(playlists){
+    return {
+        type: "SET_PLAYLIST_RESULTS",
+        results: playlists
+    }
+}
+
 export function sendMessage(message, playlist_uri){
     return function(dispatch){
         return axios.post('http://localhost/message/' + playlist_uri, {
@@ -147,11 +198,6 @@ export function sendMessage(message, playlist_uri){
                 dispatch(setMessage(message));
             }
         });
-    }
-    return{
-        type: "SEND_MESSAGE",
-        message: message,
-        playlist_uri: playlist_uri
     }
 }
 

@@ -1,4 +1,3 @@
-var React = require('react');
 import { connect } from 'react-redux';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
@@ -9,7 +8,7 @@ import { fetchMessages, sendMessage } from '../../actions'
 
 function mapStateToProps(state) {
     return {
-        messages: state.chat.messages,
+        messages: state.playlist.messages,
         playlist: 'neykoshits'
     }
 }
@@ -18,23 +17,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         sendMessage: (message, playlist) => {
             dispatch(sendMessage(message, playlist));
-        },
-        fetchMessages: () => {
-            dispatch(fetchMessages());
         }
     }
 }
 
 var ChatContainer = React.createClass({
-    componentWillMount() {
-        this.props.fetchMessages();
-    },
     render: function() {
         const { dispatch, sendMessage } = this.props;
         return (
             <div className="right-sidebar col-lg-5 col-md-6 col-sm-5 col-xs-12 left-gutter middle-gutter">
                 <ChatOnline />
-                <Chat {...this.props} sendMessage={sendMessage} />
+                <Chat messages={this.props.messages} sendMessage={sendMessage} />
             </div>
         );
     }

@@ -1,5 +1,3 @@
-var React = require('react');
-
 var ShareIcons = React.createClass({
     render: function() {
         return (

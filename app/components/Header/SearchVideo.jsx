@@ -1,4 +1,3 @@
-var React = require('react');
 import { connect } from 'react-redux'
 import { searchYoutube, addItem } from '../../actions'
 import VideoResult from './VideoResult';

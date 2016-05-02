@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../Header/Header';
 import Footer from '../Footer';
 import SearchPlaylistContainer from './SearchPlaylistContainer';
@@ -7,7 +6,7 @@ import PopularPlaylistContainer from './PopularPlaylistContainer';
 var Home = React.createClass({
     render: function() {
         return (
-            <div className="full-height"> 
+            <div className="full-height">
                 <Header search={false} />
                 <main className="background">
                     <div className="container">

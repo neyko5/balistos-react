@@ -1,4 +1,3 @@
-var React = require('react');
 var ShareIcons = require('./ShareIcons');
 
 var VideoControls = React.createClass({

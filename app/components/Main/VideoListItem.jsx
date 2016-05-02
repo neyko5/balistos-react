@@ -1,6 +1,3 @@
-import React from 'react';
-
-
 var VideoListItem = React.createClass({
     render: function() {
         return (
@@ -10,7 +7,7 @@ var VideoListItem = React.createClass({
                     <div className="number">245</div>
                     <div className="down"></div>
                 </div>
-                <img src={this.props.data.image}/>
+                <img src={"http://img.youtube.com/vi/" + this.props.data.youtube_id + "/0.jpg"}/>
                 <div className="info">
                     <div className="title" >{this.props.data.title}</div>
                     <div className="addedby">added by <span className="black"></span></div>

@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-const SearchPlaylistResult = ( props ) => {
-    return (    
+function SearchPlaylistResult(props){
+    return (
         <Link to={"/playlist/" + props.uri }>
             <div className="title">{props.title}</div>
             <div className="description">{props.description}</div>

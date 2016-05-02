@@ -2,31 +2,67 @@ import React, { Component, PropTypes } from 'react'
 import YouTube from 'react-youtube';
 import ReactSlider from 'react-slider';
 import { youtubeParams } from '../../settings';
+import vTime from 'video-time';
 
 var VideoPlayer =  React.createClass({
+    componentWillMount: function(){
+        youtubeParams.playerVars.start = 0;
+    },
     onReady: function(event) {
         this.setState({
-            player: event.target
+            player: event.target,
         });
+        setTimeout(this.updateElapsed, 200);
+    },
+    updateElapsed(){
+      this.setState({
+        elapsed: this.state.player.getCurrentTime(),
+        total: this.state.player.getDuration()
+      });
+      setTimeout(this.updateElapsed, 200);
     },
     getInitialState(){
         return {
-            videoId: "kszLwBaC4Sw"
+            elapsed: 0,
+            total: 0,
+            volume: 100,
+            previousVolume: 0,
+            paused: false
         }
     },
     pause(){
+        this.setState({
+            paused: true
+        });
         this.state.player.pauseVideo();
     },
     play(){
+        this.setState({
+            paused: false
+        });
         this.state.player.playVideo();
     },
     onSliderChange(value){
+        this.setState({
+            volume: value
+        });
         this.state.player.setVolume(value);
     },
-    onChangeVideo() {
-        this.setState({
-            videoId: "bvC_0foemLY"
-        });
+    onSpeakerClick() {
+        if(this.state.volume == 0){
+          this.setState({
+            volume: this.state.previousVolume,
+            previousVolume: 0
+          });
+          this.state.player.setVolume(this.state.previousVolume);
+        }
+        else {
+          this.setState({
+            volume: 0,
+            previousVolume: this.state.volume
+          });
+          this.state.player.setVolume(0);
+        }
     },
     render: function() {
         return (
@@ -36,26 +72,28 @@ var VideoPlayer =  React.createClass({
                 <div className="video-id"></div>
                 <div className="player">
                     <div className="overlay"></div>
+                    {this.props.videos.length > 0?
                     <YouTube
-                        videoId={this.state.videoId}
+                        videoId={this.props.videos[0].youtube_id}
                         opts={youtubeParams} onReady={this.onReady} />
+                      :false}
                 </div>
                 <div className="progress">
-                    <div className="bar" role="progressbar"></div>
+                    <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
                 </div>
                 <div className="toolbar">
                     <div className="controls">
-                        <div className="control play" onClick={this.play}></div>
-                        <div className="control pause" onClick={this.pause}></div>
-                        <div className="control stop" onClick={this.onChangeVideo}></div>
+                        {this.state.paused?
+                        <div className="control play" onClick={this.play}></div>:
+                        <div className="control pause" onClick={this.pause}></div>}
                     </div>
                     <div className="timer">
-                        <div className="elapsed"></div>
-                        <div className="total"> / </div>
+                        <div className="elapsed">{vTime(this.state.elapsed)}</div>
+                        <div className="total"> / {vTime(this.state.total)} </div>
                     </div>
                     <div className="volume">
-                        <div className="speaker"></div>
-                        <ReactSlider onChange={this.onSliderChange} />
+                        <div className="speaker" onClick={this.onSpeakerClick}></div>
+                        <ReactSlider defaultValue={100} value={this.state.volume} onChange={this.onSliderChange} />
                     </div>
                 </div>
             </div>

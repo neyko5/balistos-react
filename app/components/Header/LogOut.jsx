@@ -1,5 +1,3 @@
-import React from 'react';
-
 var LogOut = function(props){
     return (
         <div className={"dropdown small "+ (props.open?"":"hidden")} id="logout" >
