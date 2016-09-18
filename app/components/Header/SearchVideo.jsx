@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { searchYoutube, addItem } from '../../actions'
+import { searchYoutube, addVideo } from '../../actions'
 import VideoResult from './VideoResult';
 
 
@@ -8,8 +8,8 @@ const mapDispatchToProps = (dispatch) => {
         searchYoutube: (e) => {
             dispatch(searchYoutube(e.currentTarget.value));
         },
-        addItem: (id) => {
-            dispatch(addItem(id));
+        addVideo: (id, title) => {
+            dispatch(addVideo(id, title));
         },
     }
 }
@@ -28,7 +28,7 @@ var SearchVideo = React.createClass({
                 <input type="text" name="search" id="search" placeholder="search video" onChange={this.props.searchYoutube} autoComplete="off" />
                 {this.props.results.length? <ul className="results" id="response">
                     {this.props.results.map(function(result){
-                        return <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={this.props.addItem} id={result.id.videoId} key={result.id.videoId} />
+                        return <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={this.props.addVideo({id: results.id.videoId, title: "#sdsd"})} aid={result.id.videoId} key={result.id.videoId} />
                     }.bind(this))}
                 </ul> : null }
 

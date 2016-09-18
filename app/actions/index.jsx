@@ -106,7 +106,6 @@ export function fetchPlaylist(){
 }
 
 export function searchYoutube(query){
-    console.log("inside", query);
     return function(dispatch){
         return axios.get('https://www.googleapis.com/youtube/v3/search', {
             params: {
@@ -128,12 +127,15 @@ export function setResultsYoutube(results){
     }
 }
 
-export function addItem(id){
-    console.log("id", id);
-    return {
-        type: "ADD_ITEM",
-        results: id
-    }
+export function addVideo(id, title){
+  return axios.get('http://localhost/video/add', {
+      params: {
+          title: title,
+          id: id
+      }
+  }).then(function (response) {
+      dispatch(setResultsYoutube(null));
+  });
 }
 
 export function setIntialPlaylistData(data){

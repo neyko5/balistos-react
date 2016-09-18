@@ -68,7 +68,7 @@ var VideoPlayer =  React.createClass({
         return (
             <div className="video_player">
                 <div className="subtitle">Now playing:</div>
-                <div className="title">Title</div>
+                <div className="title">{this.props.videos[0].title}</div>
                 <div className="video-id"></div>
                 <div className="player">
                     <div className="overlay"></div>
