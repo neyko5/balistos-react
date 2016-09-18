@@ -13,6 +13,7 @@ function playlist(state = {
             }
         case "SET_RESULTS":
             console.log("dsd");
+            console.log(action.results);
             return {
                 ...state,
                 results: action.results

@@ -51,13 +51,13 @@ var Header = React.createClass({
                 <UserMenu onOpenLogoutClick={this.props.onOpenLogoutClick} onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick} username={this.props.username} loggedIn={this.props.loggedIn} search={this.props.search}/>
                 <LogOut open={this.props.logoutOpen} onLogoutClick={this.props.onLogoutClick} />
                 <CreatePlaylist open={this.props.createPlaylistOpen} onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}/>
-                {this.props.search ? <SearchVideo  /> : false}
+                {this.props.search ? <SearchVideo /> : false}
             </HeaderContainer>
           )
       }
       else{
           return(
-              <HeaderContainer onLogoClick="">
+              <HeaderContainer>
                   <UserMenu search={this.props.search} onOpenLoginClick={this.props.onOpenLoginClick} onOpenRegisterClick={this.props.onOpenRegisterClick} username={this.props.username} loggedIn={this.props.loggedIn} />
                   <Login  open={this.props.loginOpen} />
                   <Register open={this.props.registerOpen} />

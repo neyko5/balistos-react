@@ -14,7 +14,7 @@ var VideoList = React.createClass({
             return (
                 <div className="video-list">
                     {this.props.videos.map(function(result) {
-                      return <VideoListItem data={result} key={result.id} />;
+                      return <VideoListItem data={result.video} key={result.video.id} />;
                     })}
                 </div>
             );

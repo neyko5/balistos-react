@@ -5,7 +5,7 @@ function HeaderContainer(props){
         <header>
             <div className="container">
                 <Link to="/">
-                    <h1 className="logo" onLogoClick={props.onLogoClick} >Balistos</h1>
+                    <h1 className="logo" >Balistos</h1>
                 </Link>
                 {props.children}
             </div>

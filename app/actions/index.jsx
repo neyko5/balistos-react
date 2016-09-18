@@ -24,7 +24,7 @@ export function setAuthFromStorage(){
 export function createPlaylist(title, description){
   console.log(title, description);
   return function(dispatch){
-      return axios.post('http://localhost/playlist',
+      return axios.post('http://localhost:3000/playlists',
           {
               title: title,
               description: description
@@ -50,7 +50,7 @@ export function redirectToPlaylist(uri){
 
 export function sendLoginRequest(username, password){
     return function(dispatch){
-        return axios.post('http://localhost/login', {
+        return axios.post('http://localhost/api/login', {
             username: username,
             password: password
         })
@@ -63,7 +63,7 @@ export function sendLoginRequest(username, password){
 
 export function sendRegisterRequest(username, email, password){
     return function(dispatch){
-        return axios.post('http://localhost/register', {
+        return axios.post('http://localhost/api/register', {
             username: username,
             email: email,
             password: password
@@ -85,7 +85,7 @@ export function setMessages(messages){
 
 export function fetchMessages(){
     return function(dispatch){
-        return axios.get('http://localhost/chat')
+        return axios.get('http://localhost/api/chat')
         .then(function (response) {
             if(response.data.messages){
                 dispatch(setMessages(response.data.messages));
@@ -94,11 +94,11 @@ export function fetchMessages(){
     }
 }
 
-export function fetchPlaylist(){
+export function fetchPlaylist(playlist_uri){
     return function(dispatch){
-        return axios.get('http://localhost/playlist/sample',{})
+        return axios.get('http://localhost:3000/playlists/' + playlist_uri,{})
             .then(function (response) {
-                if(response.data){
+                if(response.data.videos){
                     dispatch(setIntialPlaylistData(response.data));
                 }
             });
@@ -115,7 +115,9 @@ export function searchYoutube(query){
             }
 
         }).then(function (response) {
-            dispatch(setResultsYoutube(response.data.items));
+            if(response.data.items){
+              dispatch(setResultsYoutube(response.data.items));
+            }
         });
     }
 }
@@ -128,11 +130,9 @@ export function setResultsYoutube(results){
 }
 
 export function addVideo(id, title){
-  return axios.get('http://localhost/video/add', {
-      params: {
-          title: title,
-          id: id
-      }
+  return axios.post('http://localhost:3000/videos/add', {
+      title: title,
+      youtube_id: id
   }).then(function (response) {
       dispatch(setResultsYoutube(null));
   });
@@ -169,14 +169,10 @@ export function changePlaylist(playlist){
 
 export function searchPlaylists(query){
     return function(dispatch){
-        return axios.get('http://localhost/playlists?q=' + query, {
-               headers: {
-                 'Authorization': 'Bearer ' + localStorage.getItem("token")
-               }
-            }
-        ).then(function (response) {
-            if(response.data.playlists){
-                dispatch(setPlaylistResults(response.data.playlists));
+        return axios.get('http://localhost:3000/playlists').then(function (response) {
+            console.log(response.data);
+            if(response.data){
+                dispatch(setPlaylistResults(response.data));
             }
         }.bind(this));
     }
@@ -191,7 +187,7 @@ export function setPlaylistResults(playlists){
 
 export function sendMessage(message, playlist_uri){
     return function(dispatch){
-        return axios.post('http://localhost/message/' + playlist_uri, {
+        return axios.post('http://localhost/api/message/' + playlist_uri, {
             message: message,
             playlist_uri: playlist_uri
         })

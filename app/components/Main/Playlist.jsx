@@ -17,15 +17,16 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchVideos: () => {
-            dispatch(fetchPlaylist());
+        fetchVideos: (id) => {
+            dispatch(fetchPlaylist(id));
         }
     }
 }
 
 var Playlist =  React.createClass({
+
     componentDidMount: function(){
-        this.props.fetchVideos();
+        this.props.fetchVideos(this.props.playlist);
     },
     render: function (){
         return (
@@ -33,7 +34,7 @@ var Playlist =  React.createClass({
                 <div className="container">
                     <VideoPlayerContainer videos={this.props.videos} />
                     <VideoListContainer videos={this.props.videos} />
-                    <ChatContainer />
+                    
                 </div>
             </main>
         );

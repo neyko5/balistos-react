@@ -68,13 +68,13 @@ var VideoPlayer =  React.createClass({
         return (
             <div className="video_player">
                 <div className="subtitle">Now playing:</div>
-                <div className="title">{this.props.videos[0].title}</div>
+                <div className="title">{this.props.videos[0]?this.props.videos[0].video.title:"no title"}</div>
                 <div className="video-id"></div>
                 <div className="player">
                     <div className="overlay"></div>
                     {this.props.videos.length > 0?
                     <YouTube
-                        videoId={this.props.videos[0].youtube_id}
+                        videoId={this.props.videos[0].video.youtube_id}
                         opts={youtubeParams} onReady={this.onReady} />
                       :false}
                 </div>
