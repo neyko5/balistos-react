@@ -107,10 +107,11 @@ export function setResultsYoutube(results) {
     return {type: "SET_RESULTS", results: results}
 }
 
-export function addVideo(id, title) {
+export function addVideo(id, title, playlist) {
     return axios.post('http://localhost:3000/videos/add', {
         title: title,
-        youtube_id: id
+        youtube_id: id,
+        playlist: playlist
     }).then(function(response) {
         dispatch(setResultsYoutube(null));
     });
