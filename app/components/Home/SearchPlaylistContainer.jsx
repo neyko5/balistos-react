@@ -35,7 +35,7 @@ var SearchPlaylistContainer = React.createClass({
                     {this.props.playlist_results.length ?
                         <ul className="results playlist_results" id="response-playlist">
                             {this.props.playlist_results.map(function (result) {
-                                return <SearchPlaylistResult key={result.uri} uri={result.uri} title={result.title}
+                                return <SearchPlaylistResult key={result.id} uri={result.uri} title={result.title}
                                                              description={result.description}/>
                             })}
                         </ul> : null }

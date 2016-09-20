@@ -136,7 +136,11 @@ export function changePlaylist(playlist) {
 
 export function searchPlaylists(query) {
     return function(dispatch) {
-        return axios.get('http://localhost:3000/playlists').then(function(response) {
+        return axios.get('http://localhost:3000/playlists',{
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+          }
+      }).then(function(response) {
             console.log(response.data);
             if (response.data) {
                 dispatch(setPlaylistResults(response.data));
