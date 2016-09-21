@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
-import io from 'socket.io-client';
 import { fetchMessages, sendMessage } from '../../actions'
 
 //const socket = io('http://localhost:4000');
@@ -9,14 +8,13 @@ import { fetchMessages, sendMessage } from '../../actions'
 function mapStateToProps(state) {
     return {
         messages: state.playlist.messages,
-        playlist: 'neykoshits'
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        sendMessage: (message, playlist) => {
-            dispatch(sendMessage(message, playlist));
+        sendMessage: (message) => {
+            dispatch(sendMessage(message, ownProps.playlist, ownProps.playlist_id));
         }
     }
 }

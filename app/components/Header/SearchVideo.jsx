@@ -8,17 +8,17 @@ const mapDispatchToProps = (dispatch) => {
         searchYoutube: (e) => {
             dispatch(searchYoutube(e.currentTarget.value));
         },
-        addVideo: (id, title, playlist) => {
-            dispatch(addVideo(id, title, playlist));
+        addVideo: (id, title, playlist_uri, playlist_id) => {
+            dispatch(addVideo(id, title, playlist_uri, playlist_id));
         },
     }
 }
 
 const mapStateToProps = (state, ownProps) => {
-    console.log(state);
     return {
         ...ownProps,
-        results: state.playlist.results
+        results: state.playlist.results,
+        playlist_id: state.playlist.id
     }
 }
 
@@ -29,7 +29,7 @@ var SearchVideo = React.createClass({
                 <input type="text" name="search" id="search" placeholder="search video" onChange={this.props.searchYoutube} autoComplete="off" />
                 {this.props.results? <ul className="results" id="response">
                     {this.props.results.map(function(result){
-                        return <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={()=>this.props.addVideo(result.id.videoId, result.snippet.title, 'top_playlist')} aid={result.id.videoId} key={result.id.videoId} />
+                        return <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={()=>this.props.addVideo(result.id.videoId, result.snippet.title, this.props.playlist, this.props.playlist_id)} aid={result.id.videoId} key={result.id.videoId} />
                     }.bind(this))}
                 </ul> : null }
 

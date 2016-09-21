@@ -13,10 +13,10 @@ var Chat = React.createClass({
                 </div>
                 <div className="chatbox">
                     {this.props.messages.map(function(message){
-                        return <ChatMessage user={message.user} message={message.message} key={message.id}/>
+                        return <ChatMessage user={message.user.username} message={message.message} key={message.id}/>
                     })}
                 </div>
-                <ChatForm />
+                <ChatForm sendMessage={this.props.sendMessage} />
             </div>
         );
     }

@@ -8,7 +8,7 @@ var ChatForm = React.createClass({
                     if (!message.value.trim()) {
                       return
                     }
-                    this.props.sendMessage(message.value, this.props.playlist)
+                    this.props.sendMessage(message.value)
                     message.value = ''
                   }}>
                     <textarea name="message" placeholder="Send a message" ref={node => { message = node }}></textarea>

@@ -1,7 +1,7 @@
 function ChatMessage(props){
     return (
         <div className="message">
-            <span className="author red">{props.user}</span><span>{props.message}</span>
+            <span className="author red">{props.user}:</span><span>{props.message}</span>
         </div>
     );
 }

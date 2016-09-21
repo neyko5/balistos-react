@@ -32,8 +32,9 @@ export function createPlaylist(title, description) {
 }
 
 export function redirectToPlaylist(uri) {
-    console.log("redirect", uri)
     browserHistory.push('/playlist/' + uri);
+    return {type: "SET_CURRENT_PLAYLIST_URI", uri: uri}
+
 }
 
 export function sendLoginRequest(username, password) {
@@ -79,7 +80,8 @@ export function fetchMessages() {
 export function fetchPlaylist(playlist_uri) {
     return function(dispatch) {
         return axios.get('http://localhost:3000/playlists/' + playlist_uri, {}).then(function(response) {
-            if (response.data.videos) {
+            if (response.data) {
+                console.log(response.data);
                 dispatch(setIntialPlaylistData(response.data));
             }
         });
@@ -92,7 +94,8 @@ export function searchYoutube(query) {
             params: {
                 q: query,
                 key: "AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0",
-                part: "snippet"
+                part: "snippet",
+                type: "video"
             }
 
         }).then(function(response) {
@@ -107,18 +110,26 @@ export function setResultsYoutube(results) {
     return {type: "SET_RESULTS", results: results}
 }
 
-export function addVideo(id, title, playlist) {
+export function addVideo(id, title, playlist_uri, playlist_id) {
+    return function(dispatch){
     return axios.post('http://localhost:3000/videos/add', {
         title: title,
         youtube_id: id,
-        playlist: playlist
+        playlist_uri: playlist_uri,
+        playlist_id: playlist_id
+    },
+    {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }
     }).then(function(response) {
         dispatch(setResultsYoutube(null));
     });
+  }
 }
 
 export function setIntialPlaylistData(data) {
-    return {type: "SET_INITIAL_PLAYLIST_DATA", videos: data.videos, messages: data.messages}
+    return {type: "SET_INITIAL_PLAYLIST_DATA", videos: data.playlistVideos, chats: data.chats, id: data.id}
 }
 
 export function receiveRawMessage(msg) {
@@ -153,14 +164,17 @@ export function setPlaylistResults(playlists) {
     return {type: "SET_PLAYLIST_RESULTS", results: playlists}
 }
 
-export function sendMessage(message, playlist_uri) {
+export function sendMessage(message, playlist_uri, playlist_id) {
+    console.log(playlist_uri, playlist_id);
     return function(dispatch) {
-        return axios.post('http://localhost:3000/message/' + playlist_uri, {
+        return axios.post('http://localhost:3000/chat/send', {
             message: message,
+            playlist_id: playlist_id,
             playlist_uri: playlist_uri
-        }).then(function(response) {
-            if (response.data.message) {
-                dispatch(setMessage(message));
+        },
+        {
+            headers: {
+                'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
         });
     }

@@ -13,7 +13,7 @@ var VideoList = React.createClass({
         else{
             return (
                 <div className="video-list">
-                    {this.props.videos.map(function(result) {
+                    {this.props.videos.sort((a, b) => a.video.title < b.video.title? -1 : 1).map(function(result) {
                       return <VideoListItem data={result.video} key={result.video.id} />;
                     })}
                 </div>

@@ -51,7 +51,7 @@ var Header = React.createClass({
                 <UserMenu onOpenLogoutClick={this.props.onOpenLogoutClick} onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick} username={this.props.username} loggedIn={this.props.loggedIn} search={this.props.search}/>
                 <LogOut open={this.props.logoutOpen} onLogoutClick={this.props.onLogoutClick} />
                 <CreatePlaylist open={this.props.createPlaylistOpen} onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}/>
-                {this.props.search ? <SearchVideo /> : false}
+                {this.props.search ? <SearchVideo playlist={this.props.playlist}/> : false}
             </HeaderContainer>
           )
       }
