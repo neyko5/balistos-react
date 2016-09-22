@@ -1,4 +1,4 @@
-function UserMenu(props){
+let UserMenu = (props) => {
     if(props.loggedIn){
         return (
             <div className="menu">

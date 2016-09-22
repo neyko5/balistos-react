@@ -9,12 +9,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     }
 }
 
-function mapStateToProps(state) {
-    return {
-        playlist: 'neykoshits'
-    }
-}
-
 var Register = React.createClass({
     render: function() {
         let username
@@ -56,4 +50,4 @@ var Register = React.createClass({
     }
 });
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Register)
+module.exports = connect(undefined, mapDispatchToProps)(Register)

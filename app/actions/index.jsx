@@ -1,20 +1,30 @@
 import axios from 'axios';
 import {browserHistory} from 'react-router'
 
-export function loginUser(username, token) {
+export function loginUser(username, token, user_id) {
     localStorage.setItem('token', token);
     localStorage.setItem('username', username);
-    return {type: "POST_LOGIN", username, token}
+    localStorage.setItem('user_id', user_id);
+    return {
+      type: "POST_LOGIN",
+      username,
+      token,
+      user_id
+    }
 }
 
 export function setAuthFromStorage() {
     if (localStorage.getItem("token") && localStorage.getItem("username")) {
-        return {type: "AUTH_SET_FROM_STORAGE", token: localStorage.getItem("token"), username: localStorage.getItem("username")}
+        return {
+          type: "AUTH_SET_FROM_STORAGE",
+          token: localStorage.getItem("token"),
+          username: localStorage.getItem("username"),
+          user_id: localStorage.getItem("user_id")
+        }
     }
 }
 
 export function createPlaylist(title, description) {
-    console.log(title, description);
     return function(dispatch) {
         return axios.post('http://localhost:3000/playlists', {
             title: title,
@@ -23,18 +33,16 @@ export function createPlaylist(title, description) {
             headers: {
                 'Authorization': 'Bearer ' + localStorage.getItem("token")
             }
-        }).then(function(response) {
-            if (response.data.uri) {
-                dispatch(redirectToPlaylist(response.data.uri));
+        }).then((response) => {
+            if (response.data.id) {
+                dispatch(redirectToPlaylist(response.data.id));
             }
-        }.bind(this));
+        });
     }
 }
 
-export function redirectToPlaylist(uri) {
-    browserHistory.push('/playlist/' + uri);
-    return {type: "SET_CURRENT_PLAYLIST_URI", uri: uri}
-
+export function redirectToPlaylist(id) {
+    browserHistory.push('/playlist/' + id);
 }
 
 export function sendLoginRequest(username, password) {
@@ -43,7 +51,7 @@ export function sendLoginRequest(username, password) {
             username: username,
             password: password
         }).then(function(response) {
-            dispatch(loginUser(username, response.data.token));
+            dispatch(loginUser(response.data.username, response.data.token, response.data.user_id));
         });
 
     }
@@ -56,15 +64,11 @@ export function sendRegisterRequest(username, email, password) {
             email: email,
             password: password
         }).then(function(response) {
-            if (response.data.token) {
-                dispatch(loginUser(username, response.data.token));
+            if (response.data) {
+                dispatch(loginUser(response.data.username, response.data.token, response.data.user_id));
             }
         });
     }
-}
-
-export function setMessages(messages) {
-    return {type: "SET_MESSAGES", messages: messages}
 }
 
 export function fetchMessages() {
@@ -77,11 +81,10 @@ export function fetchMessages() {
     }
 }
 
-export function fetchPlaylist(playlist_uri) {
+export function fetchPlaylist(playlist_id) {
     return function(dispatch) {
-        return axios.get('http://localhost:3000/playlists/' + playlist_uri, {}).then(function(response) {
+        return axios.get('http://localhost:3000/playlists/' + playlist_id, {}).then(function(response) {
             if (response.data) {
-                console.log(response.data);
                 dispatch(setIntialPlaylistData(response.data));
             }
         });
@@ -107,15 +110,17 @@ export function searchYoutube(query) {
 }
 
 export function setResultsYoutube(results) {
-    return {type: "SET_RESULTS", results: results}
+    return {
+      type: "SET_RESULTS",
+      results: results
+    }
 }
 
-export function addVideo(id, title, playlist_uri, playlist_id) {
+export function addVideo(id, title, playlist_id) {
     return function(dispatch){
     return axios.post('http://localhost:3000/videos/add', {
         title: title,
         youtube_id: id,
-        playlist_uri: playlist_uri,
         playlist_id: playlist_id
     },
     {
@@ -128,21 +133,38 @@ export function addVideo(id, title, playlist_uri, playlist_id) {
   }
 }
 
+export function likeVideo(video_id, value) {
+    return function(dispatch){
+    return axios.post('http://localhost:3000/videos/like', {
+        video_id: video_id,
+        value: value,
+    },
+    {
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem("token")
+        }
+    });
+  }
+}
+
 export function setIntialPlaylistData(data) {
-    return {type: "SET_INITIAL_PLAYLIST_DATA", videos: data.playlistVideos, chats: data.chats, id: data.id}
+    return {
+      type: "SET_INITIAL_PLAYLIST_DATA",
+      playlist: data
+    }
 }
 
 export function receiveRawMessage(msg) {
-    return {type: "RECIEVE_MESSAGE", message: msg}
+    return {
+      type: "RECIEVE_MESSAGE",
+      message: msg
+    }
 }
 
 export function logOut() {
-    return {type: "LOG_OUT"}
-}
-
-export function changePlaylist(playlist) {
-    console.log(playlist);
-    return {type: "CHANGE_PLAYLIST", playlist: playlist}
+    return {
+      type: "LOG_OUT"
+    }
 }
 
 export function searchPlaylists(query) {
@@ -151,26 +173,26 @@ export function searchPlaylists(query) {
           headers: {
             'Authorization': 'Bearer ' + localStorage.getItem("token")
           }
-      }).then(function(response) {
-            console.log(response.data);
+      }).then((response) => {
             if (response.data) {
                 dispatch(setPlaylistResults(response.data));
             }
-        }.bind(this));
+        });
     }
 }
 
 export function setPlaylistResults(playlists) {
-    return {type: "SET_PLAYLIST_RESULTS", results: playlists}
+    return {
+      type: "SET_PLAYLIST_RESULTS",
+      results: playlists
+    }
 }
 
-export function sendMessage(message, playlist_uri, playlist_id) {
-    console.log(playlist_uri, playlist_id);
+export function sendMessage(message, playlist_id) {
     return function(dispatch) {
         return axios.post('http://localhost:3000/chat/send', {
             message: message,
-            playlist_id: playlist_id,
-            playlist_uri: playlist_uri
+            playlist_id: playlist_id
         },
         {
             headers: {
@@ -180,22 +202,26 @@ export function sendMessage(message, playlist_uri, playlist_id) {
     }
 }
 
-export function setMessage(message) {
-    return {type: "SET_MESSAGE", message: message}
-}
-
 export function toggleLoginWindow() {
-    return {type: "TOGGLE_LOGIN_WINDOW"}
+    return {
+      type: "TOGGLE_LOGIN_WINDOW"
+    }
 }
 
 export function toggleRegisterWindow() {
-    return {type: "TOGGLE_REGISTER_WINDOW"}
+    return {
+      type: "TOGGLE_REGISTER_WINDOW"
+    }
 }
 
 export function toggleLogoutWindow() {
-    return {type: "TOGGLE_LOGOUT_WINDOW"}
+    return {
+      type: "TOGGLE_LOGOUT_WINDOW"
+    }
 }
 
 export function toggleCreatePlaylistWindow() {
-    return {type: "TOGGLE_CREATE_PLAYLIST_WINDOW"}
+    return {
+      type: "TOGGLE_CREATE_PLAYLIST_WINDOW"
+    }
 }

@@ -7,7 +7,7 @@ import PopularPlaylistContainer from './PopularPlaylistContainer';
 var Home = React.createClass({
     render: function() {
         return (
-            <div className="full-heighto">
+            <div className="full-height">
                 <Header search={false} />
                 <main className="background">
                     <div className="container">

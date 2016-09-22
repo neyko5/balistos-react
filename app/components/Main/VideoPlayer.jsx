@@ -19,7 +19,7 @@ var VideoPlayer =  React.createClass({
         elapsed: this.state.player.getCurrentTime(),
         total: this.state.player.getDuration()
       });
-      setTimeout(this.updateElapsed, 200);
+      this.timeout = setTimeout(this.updateElapsed, 200);
     },
     getInitialState(){
         return {
@@ -63,6 +63,9 @@ var VideoPlayer =  React.createClass({
           });
           this.state.player.setVolume(0);
         }
+    },
+    componentWillUnmount(){
+      clearTimeout(this.timeout);
     },
     render: function() {
         return (

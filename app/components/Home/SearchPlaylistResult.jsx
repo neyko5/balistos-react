@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router'
 
-function SearchPlaylistResult(props){
+let SearchPlaylistResult = (props) => {
     return (
-        <Link to={"/playlist/" + props.uri }>
+        <Link to={"/playlist/" + props.id }>
             <div className="title">{props.title}</div>
             <div className="description">{props.description}</div>
         </Link>

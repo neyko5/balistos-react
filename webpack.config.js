@@ -23,6 +23,7 @@ const common = {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.ProvidePlugin({
       'React':     'react'
     })
@@ -31,7 +32,7 @@ const common = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['babel?cacheDirectory'],
+        loaders: ['react-hot','babel?cacheDirectory'],
         include: PATHS.app
       },
       {

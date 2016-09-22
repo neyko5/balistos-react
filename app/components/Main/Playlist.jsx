@@ -14,6 +14,7 @@ const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
         videos: state.playlist.videos,
+        title: state.playlist.title,
         playlist_id: state.playlist.id
     }
 }
@@ -31,23 +32,19 @@ const mapDispatchToProps = (dispatch) => {
 
 var Playlist =  React.createClass({
     componentDidMount: function(){
-        let playlist = this.props.playlist;
         this.props.fetchVideos(this.props.playlist);
-        socket.emit("join", playlist);
-        console.log("JOINING: " + playlist);
+        socket.emit("join", "playlist_" + this.props.playlist);
         socket.on('action', (action) => this.props.socketAction(action));
-
     },
     componentWillUnmount: function(){
-      console.log("LEAVING: " + this.props.playlist);
-      socket.emit("leave", this.props.playlist);
+      socket.emit("leave", "playlist_" + this.props.playlist);
     },
     render: function (){
         return (
             <main>
                 <div className="container">
                     <VideoPlayerContainer videos={this.props.videos} />
-                    <VideoListContainer videos={this.props.videos} />
+                    <VideoListContainer videos={this.props.videos} title={this.props.title}/>
                     <ChatContainer playlist={this.props.playlist} playlist_id={this.props.playlist_id}/>
                 </div>
             </main>

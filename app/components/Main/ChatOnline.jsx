@@ -1,4 +1,4 @@
-function ChatOnline(props){
+let ChatOnline = (props) => {
     return (
         <div className="users">
             <div className="header">

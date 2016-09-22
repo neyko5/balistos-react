@@ -7,7 +7,7 @@ import { fetchMessages, sendMessage } from '../../actions'
 
 function mapStateToProps(state) {
     return {
-        messages: state.playlist.messages,
+        messages: state.playlist.messages        
     }
 }
 

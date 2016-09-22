@@ -1,6 +1,6 @@
-function PopularPlaylist(props){
+let PopularPlaylist = (props) => {
     return (
-        <a href={"/playlist/" + props.data.uri} className="play-list">
+        <a href={"/playlist/" + props.data.id} className="play-list">
             <div className="number" >{props.data.number}</div>
             <div className="square">
                 <div className="title">{props.data.title}</div>

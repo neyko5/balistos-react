@@ -1,7 +1,8 @@
 function auth(state = {
     token: localStorage.getItem('token') || null,
     username: localStorage.getItem('username') || null,
-    logged_in: localStorage.getItem('token')?true:false
+    logged_in: localStorage.getItem('token')?true:false,
+    user_id: parseInt(localStorage.getItem('user_id')) || null
 }, action){
     switch(action.type){
         case "AUTH_SET_FROM_STORAGE":
@@ -9,6 +10,7 @@ function auth(state = {
                 ...state,
                 token: action.token,
                 username: action.username,
+                user_id: action.user_id,
                 logged_in: true
             };
         case "LOG_OUT":
@@ -19,6 +21,7 @@ function auth(state = {
             ...state,
             username: action.username,
             token: action.token,
+            user_id: action.user_id,
             logged_in: true
         }
         default:

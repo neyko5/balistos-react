@@ -1,4 +1,4 @@
-function CreatePlaylist(props){
+let CreatePlaylist = (props) => {
     let title
     let description
     return (
@@ -8,7 +8,6 @@ function CreatePlaylist(props){
                 if (!title.value.trim() || !description.value.trim) {
                   return
                 }
-                console.log("inside", title.value, description.value);
                 props.onCreatePlaylistSubmit(title.value, description.value);
                 title.value = ''
                 description.value = ''

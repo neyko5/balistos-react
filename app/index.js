@@ -26,7 +26,7 @@ ReactDOM.render(
     <Provider store={store}>
         <Router history={browserHistory}>
             <Route path="/" component={Home}></Route>
-            <Route path="playlist/:playlist_uri" component={Main} />
+            <Route path="playlist/:playlist_id" component={Main} />
         </Router>
     </Provider>,
     document.getElementById('app')

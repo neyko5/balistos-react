@@ -1,6 +1,6 @@
 import { Link } from 'react-router'
 
-function HeaderContainer(props){
+let HeaderContainer = (props) => {
     return (
         <header>
             <div className="container">
