@@ -6,10 +6,10 @@ let VideoListContainer = (props) => {
             <div className="box first">
                 <div className="header">
                     <i className="icon note"></i>
-                    <div className="title">{props.title}</div>
+                    <div className="title">{props.playlist.title} <span>created by {props.playlist.username}</span></div>
                 </div>
                 <div className="body">
-                    <VideoList videos={props.videos} />
+                    <VideoList videos={props.playlist.videos} />
                 </div>
             </div>
         </div>

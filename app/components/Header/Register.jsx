@@ -1,48 +1,58 @@
 import { connect } from 'react-redux'
-import { sendRegisterRequest } from '../../actions'
+import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../actions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         sendRegister: (username, email, password) => {
             dispatch(sendRegisterRequest(username, email, password))
-        }
+        },
+        setErrorMessage: (message) => {
+            dispatch(setRegisterError(message));
+        },
+        onOpenLoginClick: () => {
+            dispatch(toggleLoginWindow());
+        },
+    }
+}
+
+const mapStateToProps = (state, ownProps) => {
+    return {
+        ...ownProps,
+        error: state.auth.register_error,
     }
 }
 
 var Register = React.createClass({
     render: function() {
         let username
-        let email
         let password
         return (
             <div className={"dropdown " + (this.props.open? '':'hidden')}  id="register" >
-                <form role="form" method="POST" id="register-form"  onSubmit={e => {
+                <form role="form" method="POST" onSubmit={e => {
                     e.preventDefault()
-                    if (!username.value.trim() || !password.value.trim  || !email.value.trim()) {
-                      return
+                    if (username.value.trim().length < 4) {
+                        this.props.setErrorMessage("Username should be min 4 characters.");
+                        return;
                     }
-                    this.props.sendRegister(username.value, email.value, password.value);
+                    if (password.value.trim().length < 6) {
+                        this.props.setErrorMessage("Password should be min 6 characters.");
+                        return;
+                    }
+                    this.props.sendRegister(username.value, password.value);
                     username.value = ''
                     password.value = ''
-                    email.value = ''
                   }}>
                     <label>
                         <div className="title">Username</div>
-                        <div className="error" id="registration-username-error"></div>
+                        <div className="error">{this.props.error}</div>
                         <input type="text" ref={node => { username = node }} />
                     </label>
                     <label>
-                        <div className="title">Email address</div>
-                        <div className="error" id="registration-email-error"></div>
-                        <input type="text" ref={node => { email = node }} />
-                    </label>
-                    <label>
                         <div className="title">Password</div>
-                        <div className="error" id="registration-password-error"></div>
                         <input type="password" ref={node => { password = node }} />
                     </label>
                     <button className="button green" type="submit">Register</button>
-                    <div className="noaccount">Already have an account? <span className="link open-login">Log in now!</span>
+                    <div className="noaccount">Already have an account? <span className="link open-login" onClick={this.props.onOpenLoginClick}>Log in now!</span>
                     </div>
                 </form>
             </div>
@@ -50,4 +60,4 @@ var Register = React.createClass({
     }
 });
 
-module.exports = connect(undefined, mapDispatchToProps)(Register)
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Register)

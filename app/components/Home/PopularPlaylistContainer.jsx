@@ -1,20 +1,43 @@
-var React = require('react');
 var PopularPlaylist = require('./PopularPlaylist');
+import { connect } from 'react-redux';
+import { fetchPopularPlaylists } from '../../actions'
+
+//const socket = io('http://localhost:4000');
+
+function mapStateToProps(state) {
+    return {
+        playlists: state.results.popular
+    }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+    return {
+        fetchPopularPlaylists: (message) => {
+            dispatch(fetchPopularPlaylists());
+        }
+    }
+}
 
 var PopularPlaylistContainer = React.createClass({
+    componentWillMount: function(){
+      this.props.fetchPopularPlaylists();
+    },
     render: function() {
-        var playlists = [
-            {id: 3, number: 1, title: "Top notch", creator: "Ulverbite" },
-            {id: 4, number: 2, title: "Top notch2", creator: "Ulverbite2" }
-        ];
         return (
-            <div className="col-lg-6 col-md-6" >
-                {playlists.map(function(result) {
-                  return <PopularPlaylist data={result} key={result.number}/>;
-                })}
+            <div>
+                <div className="col-lg-6 col-md-6" >
+                    {this.props.playlists.filter((playlist, index) => index%2 === 0).map(function(result, index) {
+                      return <PopularPlaylist data={result} index={index*2} key={index}/>;
+                    })}
+                </div>
+                <div className="col-lg-6 col-md-6" >
+                    {this.props.playlists.filter((playlist, index) => index%2 === 1).map(function(result, index) {
+                      return <PopularPlaylist data={result} index={index*2 + 1} key={index}/>;
+                    })}
+                </div>
             </div>
         );
     }
 });
 
-module.exports = PopularPlaylistContainer;
+module.exports = connect( mapStateToProps, mapDispatchToProps )(PopularPlaylistContainer)

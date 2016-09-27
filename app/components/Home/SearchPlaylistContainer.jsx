@@ -7,7 +7,7 @@ import { searchPlaylists } from '../../actions'
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        playlist_results: state.playlist.playlist_results
+        results: state.results.playlists
     }
 }
 
@@ -30,15 +30,13 @@ var SearchPlaylistContainer = React.createClass({
         return (
             <div className="search_playlist">
                 <div className="inner">
-                    <input type="text" id="search_playlist" placeholder="Search playlist" onChange={this.props.onSearchInputChange} />
+                    <input type="text" placeholder="Search playlist" onChange={this.props.onSearchInputChange} />
                     <div className="search_icon"></div>
-                    {this.props.playlist_results.length ?
-                        <ul className="results playlist_results" id="response-playlist">
-                            {this.props.playlist_results.map(function (result) {
-                                return <SearchPlaylistResult key={result.id} id={result.id} title={result.title}
-                                                             description={result.description}/>
-                            })}
-                        </ul> : null }
+                    <ul className="results playlist_results">
+                        {this.props.results.map(function (result) {
+                            return <SearchPlaylistResult key={result.id} result={result}/>
+                        })}
+                    </ul>
                 </div>
             </div>
         )

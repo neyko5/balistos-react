@@ -13,9 +13,8 @@ let socket = io('http://localhost:3000');
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        videos: state.playlist.videos,
-        title: state.playlist.title,
-        playlist_id: state.playlist.id
+        playlist: state.playlist,
+        username: state.auth.username
     }
 }
 
@@ -32,20 +31,20 @@ const mapDispatchToProps = (dispatch) => {
 
 var Playlist =  React.createClass({
     componentDidMount: function(){
-        this.props.fetchVideos(this.props.playlist);
-        socket.emit("join", "playlist_" + this.props.playlist);
+        this.props.fetchVideos(this.props.id);
+        socket.emit("join", {"playlist": this.props.id, "username" : this.props.username});
         socket.on('action', (action) => this.props.socketAction(action));
     },
     componentWillUnmount: function(){
-      socket.emit("leave", "playlist_" + this.props.playlist);
+      socket.emit("leave", {"playlist": this.props.id, "username" : this.props.username});
     },
     render: function (){
         return (
             <main>
                 <div className="container">
-                    <VideoPlayerContainer videos={this.props.videos} />
-                    <VideoListContainer videos={this.props.videos} title={this.props.title}/>
-                    <ChatContainer playlist={this.props.playlist} playlist_id={this.props.playlist_id}/>
+                    <VideoPlayerContainer playlist={this.props.playlist} />
+                    <VideoListContainer playlist={this.props.playlist}/>
+                    <ChatContainer playlist={this.props.playlist} />
                 </div>
             </main>
         );

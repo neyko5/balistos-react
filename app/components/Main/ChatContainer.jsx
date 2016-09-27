@@ -7,25 +7,26 @@ import { fetchMessages, sendMessage } from '../../actions'
 
 function mapStateToProps(state) {
     return {
-        messages: state.playlist.messages        
+        messages: state.playlist.messages,
+        users: state.playlist.users,
+        username: state.auth.username
     }
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         sendMessage: (message) => {
-            dispatch(sendMessage(message, ownProps.playlist, ownProps.playlist_id));
+            dispatch(sendMessage(message, ownProps.playlist.id));
         }
     }
 }
 
 var ChatContainer = React.createClass({
     render: function() {
-        const { dispatch, sendMessage } = this.props;
         return (
             <div className="right-sidebar col-lg-5 col-md-6 col-sm-5 col-xs-12 left-gutter middle-gutter">
-                <ChatOnline />
-                <Chat messages={this.props.messages} sendMessage={sendMessage} />
+                <ChatOnline users={this.props.users} username={this.props.username} />
+                <Chat messages={this.props.playlist.messages} sendMessage={this.props.sendMessage} />
             </div>
         );
     }

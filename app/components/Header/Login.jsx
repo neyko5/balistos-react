@@ -1,11 +1,20 @@
 import { connect } from 'react-redux'
-import { sendLoginRequest } from '../../actions'
+import { sendLoginRequest, toggleRegisterWindow, setRegisterError } from '../../actions'
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         sendLogin: (username, password) => {
             dispatch(sendLoginRequest(username, password))
-        }
+        },
+        onOpenRegisterClick: () => {
+            dispatch(toggleRegisterWindow());
+        },
+    }
+}
+const mapStateToProps = (state, ownProps) => {
+    return {
+        ...ownProps,
+        error: state.auth.login_error,
     }
 }
 
@@ -26,16 +35,15 @@ var Login = React.createClass({
                 }}>
                   <label>
                       <div className="title">Username</div>
-                      <div className="error" id="login-username-error"></div>
+                      <div className="error">{this.props.error}</div>
                       <input type="text" ref={node => { username = node }} />
                   </label>
                   <label>
                       <div className="title" >Password</div>
-                      <div className="forgot">Forgot password?</div>
                       <input type="password" id="login-password" name="login-password"  ref={node => { password = node }} />
                   </label>
                   <button type="submit" className="button green">Log In</button>
-                  <div className="noaccount">No account yet? <span className="link open-register">Create one now!</span>
+                  <div className="noaccount">No account yet? <span className="link open-register" onClick={this.props.onOpenRegisterClick}>Create one now!</span>
                   </div>
               </form>
               <div className="social">
@@ -48,4 +56,4 @@ var Login = React.createClass({
     }
 });
 
-module.exports = connect( undefined, mapDispatchToProps )(Login)
+module.exports = connect( mapStateToProps, mapDispatchToProps )(Login)

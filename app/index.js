@@ -11,7 +11,7 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 require("!style!css!less!./style/style.less");
 
-let store = createStore(
+export const store = createStore(
     balistosApp,
     applyMiddleware(
         thunkMiddleware
@@ -21,6 +21,7 @@ let store = createStore(
 store.subscribe(function(){
     console.log(store.getState());
 });
+
 
 ReactDOM.render(
     <Provider store={store}>

@@ -3,20 +3,17 @@ function playlist(state = {
     results: [],
     playlist_results: [],
     messages: [],
+    users: []
 }, action){
     switch(action.type){
         case "SET_INITIAL_PLAYLIST_DATA":
             return {
-                ...state,
                 videos: action.playlist.playlistVideos,
                 messages: action.playlist.chats,
+                users: action.playlist.playlistUsers,
                 id: action.playlist.id,
-                title: action.playlist.title
-            }
-        case "SET_CURRENT_PLAYLIST_ID":
-            return {
-                ...state,
-                id: action.id
+                title: action.playlist.title,
+                username: action.playlist.user.username
             }
         case "UPDATE_OR_INSERT_LIKE":
             return {
@@ -40,16 +37,6 @@ function playlist(state = {
                           }
                         })
             }
-        case "SET_RESULTS":
-            return {
-                ...state,
-                results: action.results
-            }
-        case "SET_PLAYLIST_RESULTS":
-            return {
-                ...state,
-                playlist_results: action.results
-            }
         case "INSERT_VIDEO":
             return {
                 ...state,
@@ -59,6 +46,20 @@ function playlist(state = {
             return {
                 ...state,
                 messages: [...state.messages, action.message]
+            }
+        case "ADD_USER":
+            return {
+                ...state,
+                users: [...state.users, action.user]
+            }
+        case "REMOVE_USER":
+            return {
+                ...state,
+                users: state.users.map((user) => {
+                  if(user.username !== action.user.username){
+                    return user;
+                  }
+                })
             }
         default:
             return state;
