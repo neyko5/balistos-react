@@ -47,20 +47,11 @@ function playlist(state = {
                 ...state,
                 messages: [...state.messages, action.message]
             }
-        case "ADD_USER":
-            return {
-                ...state,
-                users: [...state.users, action.user]
-            }
-        case "REMOVE_USER":
-            return {
-                ...state,
-                users: state.users.map((user) => {
-                  if(user.username !== action.user.username){
-                    return user;
-                  }
-                })
-            }
+        case "SET_ACTIVE_USERS":
+           return {
+               ...state,
+               users: action.users
+           }
         default:
             return state;
     }

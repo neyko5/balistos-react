@@ -12,7 +12,7 @@ axios.interceptors.request.use(function (config) {
 });
 
 axios.interceptors.response.use(null, function(err) {
-  if ( err.response && err.response.status === 403 ) {
+  if ( err.response && err.response.status === 401 ) {
       localStorage.clear();
       store.dispatch(logOut());
       store.dispatch(toggleLoginWindow());
@@ -117,6 +117,8 @@ export function fetchMessages() {
     }
 }
 
+
+
 export function fetchPlaylist(playlist_id) {
     return function(dispatch) {
         return axios.get('/playlists/' + playlist_id, {}).then(function(response) {
@@ -159,12 +161,30 @@ export function addVideo(id, title, playlist_id) {
   }
 }
 
+export function sendHeartbeat(username, playlist) {
+    return function(dispatch){
+      return axios.post('/playlists/heartbeat', {
+          playlist_id: playlist,
+          username: username,
+      }).then(function(response) {
+          dispatch(setActiveUsers(response.data));
+      });
+    }
+}
+
 export function likeVideo(video_id, value) {
     return function(dispatch){
     return axios.post('/videos/like', {
         video_id: video_id,
         value: value,
     });
+  }
+}
+
+export function setActiveUsers(users) {
+  return {
+    type: "SET_ACTIVE_USERS",
+    users: users
   }
 }
 

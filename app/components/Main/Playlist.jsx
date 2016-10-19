@@ -6,7 +6,7 @@ import VideoPlayerContainer from './VideoPlayerContainer';
 import ChatContainer from './ChatContainer';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchPlaylist } from '../../actions';
+import { fetchPlaylist, sendHeartbeat } from '../../actions';
 import io from 'socket.io-client'
 let socket = io('http://localhost:3000');
 
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         socketAction: (action) => {
             dispatch(action);
+        },
+        heartbeat: (username, playlist) => {
+           dispatch(sendHeartbeat(username, playlist));
         }
     }
 }
@@ -32,11 +35,19 @@ const mapDispatchToProps = (dispatch) => {
 var Playlist =  React.createClass({
     componentDidMount: function(){
         this.props.fetchVideos(this.props.id);
-        socket.emit("join", {"playlist": this.props.id, "username" : this.props.username});
-        socket.on('action', (action) => this.props.socketAction(action));
+        socket.emit("join", "playlist_" + this.props.id);
+        socket.on('action', (action) => {
+          console.log(action);
+          this.props.socketAction(action)
+        });
+        this.heartbeat();
+    },
+    heartbeat: function() {
+      this.props.heartbeat(this.props.username, this.props.id);
+      setTimeout(this.heartbeat, 30000);
     },
     componentWillUnmount: function(){
-      socket.emit("leave", {"playlist": this.props.id, "username" : this.props.username});
+      socket.emit("leave", "playlist_" + this.props.id);
     },
     render: function (){
         return (
