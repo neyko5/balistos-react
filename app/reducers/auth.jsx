@@ -14,12 +14,11 @@ function auth(state = {
                 logged_in: true
             };
         case "LOG_OUT":
-          localStorage.clear();
           return {};
         case "SET_LOGIN_ERROR":
             return {
                 login_error: action.message,
-                register_error: undefined
+                register_error: undefined,
             }
         case "SET_REGISTER_ERROR":
             return {
@@ -27,6 +26,9 @@ function auth(state = {
                 login_error: undefined
             }
         case "POST_LOGIN":
+            localStorage.setItem('token', action.token);
+            localStorage.setItem('username', action.username);
+            localStorage.setItem('user_id', action.user_id);
             return {
             ...state,
                 username: action.username,

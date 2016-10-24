@@ -3,24 +3,28 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
-import thunkMiddleware from 'redux-thunk'
+import createSagaMiddleware from 'redux-saga'
 import Home from './components/Home/Home.jsx';
 import Main from './components/Main/Main.jsx';
-import balistosApp from './reducers'
+import reducer from './reducers'
+import rootSaga from './sagas'
 import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 require("!style!css!less!./style/style.less");
 
+
+const sagaMiddleware = createSagaMiddleware();
 export const store = createStore(
-    balistosApp,
-    applyMiddleware(
-        thunkMiddleware
-    )
+    reducer,
+    applyMiddleware(sagaMiddleware)
 )
+
+sagaMiddleware.run(rootSaga);
 
 store.subscribe(function(){
     console.log(store.getState());
 });
+
 
 
 ReactDOM.render(

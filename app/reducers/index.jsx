@@ -4,10 +4,10 @@ import windows from './windows'
 import playlist from './playlist'
 import results from './results'
 
-const balistosApp = combineReducers({
+const reducer = combineReducers({
   auth,
   windows,
   playlist,
   results
 })
-export default balistosApp;
+export default reducer;

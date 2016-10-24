@@ -34,12 +34,20 @@ const mapDispatchToProps = (dispatch) => {
 
 var Playlist =  React.createClass({
     componentDidMount: function(){
+        this.initPlaylist();
+        socket.on('action', (action) => {
+            this.props.socketAction(action)
+        });
+    },
+    componentDidUpdate(prevProps) {
+        if(this.props.id !== prevProps.id){
+            socket.emit("leave", "playlist_" + prevProps.id);
+            this.initPlaylist();
+        }
+    },
+    initPlaylist: function() {
         this.props.fetchVideos(this.props.id);
         socket.emit("join", "playlist_" + this.props.id);
-        socket.on('action', (action) => {
-          console.log(action);
-          this.props.socketAction(action)
-        });
         this.heartbeat();
     },
     heartbeat: function() {

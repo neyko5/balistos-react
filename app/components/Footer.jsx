@@ -3,7 +3,7 @@ let Footer = (props) => {
         <footer>
             <div className="container">
                 <a href="https://www.youtube.com" target="_blank" className="youtube" alt="Powered by YouTube"></a>
-                <div className="copyright">&copy; Baalistos 2016</div>
+                <div className="copyright">&copy; Balistos 2016</div>
             </div>
         </footer>
     )
