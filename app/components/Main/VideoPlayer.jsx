@@ -14,14 +14,14 @@ var VideoPlayer =  React.createClass({
         });
         setTimeout(this.updateElapsed, 200);
     },
-    updateElapsed(){
+    updateElapsed: function(){
       this.setState({
         elapsed: this.state.player.getCurrentTime(),
         total: this.state.player.getDuration()
       });
       this.timeout = setTimeout(this.updateElapsed, 200);
     },
-    getInitialState(){
+    getInitialState: function(){
         return {
             elapsed: 0,
             total: 0,
@@ -30,25 +30,31 @@ var VideoPlayer =  React.createClass({
             paused: false
         }
     },
-    pause(){
+    pause: function(){
         this.setState({
             paused: true
         });
         this.state.player.pauseVideo();
     },
-    play(){
+    play: function(){
         this.setState({
             paused: false
         });
         this.state.player.playVideo();
     },
-    onSliderChange(value){
+    finishCurrentVideo: function() {
+        this.props.finishVideo(this.props.current.id);
+    },
+    deleteCurrentVideo: function() {
+        this.props.deleteVideo(this.props.current.id);
+    },
+    onSliderChange: function(value){
         this.setState({
             volume: value
         });
         this.state.player.setVolume(value);
     },
-    onSpeakerClick() {
+    onSpeakerClick: function() {
         if(this.state.volume == 0){
           this.setState({
             volume: this.state.previousVolume,
@@ -69,34 +75,44 @@ var VideoPlayer =  React.createClass({
     },
     render: function() {
         return (
-            <div className="video_player">
-                <div className="subtitle">Now playing:</div>
-                <div className="title">{this.props.videos[0]?this.props.videos[0].video.title:"no title"}</div>
-                <div className="video-id"></div>
-                <div className="player">
-                    <div className="overlay"></div>
-                    {this.props.videos.length > 0?
-                    <YouTube
-                        videoId={this.props.videos[0].video.youtube_id}
-                        opts={youtubeParams} onReady={this.onReady} />
-                      :false}
-                </div>
-                <div className="progress">
-                    <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
-                </div>
-                <div className="toolbar">
-                    <div className="controls">
-                        {this.state.paused?
-                        <div className="control play" onClick={this.play}></div>:
-                        <div className="control pause" onClick={this.pause}></div>}
+            <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
+                <div className="main_window">
+                    <div className="video_player">
+                        <div className="subtitle">Now playing:</div>
+                        <div className="title">{this.props.current?this.props.current.video.title:"no title"}</div>
+                        <div className="video-id"></div>
+                        <div className="player">
+                            <div className="overlay"></div>
+                            {this.props.current?
+                            <YouTube
+                                videoId={this.props.current.video.youtube_id}
+                                opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}  />
+                              :false}
+                        </div>
+                        <div className="progress">
+                            <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
+                        </div>
+                        <div className="toolbar">
+                            <div className="controls">
+                                {this.state.paused?
+                                <div className="control play" onClick={this.play}></div>:
+                                <div className="control pause" onClick={this.pause}></div>}
+                            </div>
+                            <div className="timer">
+                                <div className="elapsed">{vTime(this.state.elapsed)}</div>
+                                <div className="total"> / {vTime(this.state.total)} </div>
+                            </div>
+                            <div className="volume">
+                                <div className="speaker" onClick={this.onSpeakerClick}></div>
+                                <ReactSlider defaultValue={100} value={this.state.volume} onChange={this.onSliderChange} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="timer">
-                        <div className="elapsed">{vTime(this.state.elapsed)}</div>
-                        <div className="total"> / {vTime(this.state.total)} </div>
-                    </div>
-                    <div className="volume">
-                        <div className="speaker" onClick={this.onSpeakerClick}></div>
-                        <ReactSlider defaultValue={100} value={this.state.volume} onChange={this.onSliderChange} />
+                    <div className="button_menu">
+                        <div className="button grey delete" onClick={this.deleteCurrentVideo}>
+                            <i className="icon delete"></i>
+                            Delete video
+                        </div>
                     </div>
                 </div>
             </div>

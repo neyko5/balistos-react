@@ -96,6 +96,23 @@ export function* likeVideo(action) {
     } catch(error){}
 }
 
+export function* finishVideo(action) {
+    try {
+        yield axios.post('/videos/finish', {
+            video_id: action.video_id
+        });
+        yield put({type: "SELECT_NEXT_VIDEO"});
+    } catch(error){}
+}
+
+export function* deleteVideo(action) {
+    try {
+        yield axios.post('/videos/delete', {
+            video_id: action.video_id
+        });
+    } catch(error){}
+}
+
 export function* sendHeartbeat(action) {
     try {
         const response = yield axios.post('/playlists/heartbeat', {
@@ -157,4 +174,6 @@ export default function* rootSaga() {
     yield takeEvery('ADD_VIDEO', addVideo);
     yield takeEvery('SEARCH_YOUTUBE', searchYoutube);
     yield takeEvery('EXPIRE_SESSION', expireSession);
+    yield takeEvery('FINISH_VIDEO', finishVideo);
+    yield takeEvery('DELETE_VIDEO', deleteVideo);
 }

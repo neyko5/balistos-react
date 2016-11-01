@@ -7,8 +7,13 @@ function playlist(state = {
 }, action){
     switch(action.type){
         case "SET_INITIAL_PLAYLIST_DATA":
+            let first = action.playlist.playlistVideos.sort((a, b) => {
+                var diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+                return diff === 0 ? a.id - b.id : diff;
+            })[0];
             return {
-                videos: action.playlist.playlistVideos,
+                videos: action.playlist.playlistVideos.filter(video => !first || video.id !== first.id),
+                current: first,
                 messages: action.playlist.chats,
                 users: action.playlist.playlistUsers,
                 id: action.playlist.id,
@@ -36,6 +41,39 @@ function playlist(state = {
                             return video;
                           }
                         })
+            }
+        case "REMOVE_VIDEO":
+            if(state.current.id === action.video_id) {
+                let next = state.videos.sort((a, b) => {
+                    var diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+                    return diff === 0 ? a.id - b.id : diff;
+                })[0];
+                return {
+                    ...state,
+                    current: next,
+                    videos: state.videos.filter(video => !next || video.id !== next.id)
+                }
+            }
+            else{
+                return {
+                    ...state,
+                    videos: state.videos.filter(video => video.id !== action.video_id)
+                }
+            }
+        case "DEACTIVATE_VIDEO":
+            return {
+                ...state,
+                videos: state.videos.filter(video => video.id !== action.video_id)
+            }
+        case "SELECT_NEXT_VIDEO":
+            let next = state.videos.sort((a, b) => {
+                var diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+                return diff === 0 ? a.id - b.id : diff;
+            })[0];
+            return {
+                ...state,
+                current: next,
+                videos: state.videos.filter(video => !next || video.id !== next.id)
             }
         case "INSERT_VIDEO":
             return {

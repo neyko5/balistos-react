@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { likeVideo } from '../../actions';
+import { likeVideo, deleteVideo } from '../../actions';
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -12,11 +12,17 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         likeVideo: (value) => {
             dispatch(likeVideo(ownProps.video.id, value));
+        },
+        deleteVideo: (video_id) => {
+            dispatch(deleteVideo(video_id));
         }
     }
 }
 
 var VideoListItem = React.createClass({
+    deleteCurrentVideo: function() {
+        this.props.deleteVideo(this.props.video.id);
+    },
     render: function() {
         let upLike = this.props.video.likes.some((like) => like.user_id === this.props.user_id && like.value === 1);
         let downLike = this.props.video.likes.some((like) => like.user_id === this.props.user_id && like.value === -1);
@@ -31,10 +37,10 @@ var VideoListItem = React.createClass({
                 <img src={"http://img.youtube.com/vi/" + this.props.video.video.youtube_id + "/0.jpg"}/>
                 <div className="info">
                     <div className="title" >{this.props.video.video.title}</div>
-                    <div className="addedby">added by <span className="black"></span></div>
+                    <div className="addedby">added by <span className="black">{this.props.video.user.username}</span></div>
                 </div>
                 <div className="delete-column">
-                    <div className="delete"></div>
+                    <div className="delete" onClick={this.deleteCurrentVideo}></div>
                 </div>
             </div>
         );

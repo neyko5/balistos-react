@@ -1,12 +1,9 @@
 import { Component, PropTypes } from 'react'
-import Header from '../Header/Header';
-import Footer from '../Footer';
 import VideoListContainer from './VideoListContainer';
-import VideoPlayerContainer from './VideoPlayerContainer';
+import VideoPlayer from './VideoPlayer';
 import ChatContainer from './ChatContainer';
-import axios from 'axios';
 import { connect } from 'react-redux';
-import { fetchPlaylist, sendHeartbeat } from '../../actions';
+import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo } from '../../actions';
 import io from 'socket.io-client'
 let socket = io('http://localhost:3000');
 
@@ -28,6 +25,12 @@ const mapDispatchToProps = (dispatch) => {
         },
         heartbeat: (username, playlist) => {
            dispatch(sendHeartbeat(username, playlist));
+        },
+        finishVideo: (video_id) => {
+            dispatch(finishVideo(video_id));
+        },
+        deleteVideo: (video_id) => {
+            dispatch(deleteVideo(video_id));
         }
     }
 }
@@ -36,6 +39,7 @@ var Playlist =  React.createClass({
     componentDidMount: function(){
         this.initPlaylist();
         socket.on('action', (action) => {
+            console.log("socket", action);
             this.props.socketAction(action)
         });
     },
@@ -61,8 +65,8 @@ var Playlist =  React.createClass({
         return (
             <main>
                 <div className="container">
-                    <VideoPlayerContainer playlist={this.props.playlist} />
-                    <VideoListContainer playlist={this.props.playlist}/>
+                    <VideoPlayer current={this.props.playlist.current} finishVideo={this.props.finishVideo} deleteVideo={this.props.deleteVideo} />
+                    <VideoListContainer playlist={this.props.playlist} />
                     <ChatContainer playlist={this.props.playlist} />
                 </div>
             </main>

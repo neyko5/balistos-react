@@ -1,7 +1,7 @@
 import {expireSession} from "../actions";
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:3000'
+axios.defaults.baseURL = 'http://localhost:3000';
 
 axios.interceptors.request.use(function (config) {
     if(localStorage.getItem("token")){

@@ -792,6 +792,8 @@ footer{
     padding:12px 10px;
     float:left;
     width:100%;
+    max-height: 300px;
+    overflow-y: scroll;
     .message{
         float:left;
         clear:left;
@@ -1094,9 +1096,22 @@ h1{
     }
 }
 
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+    background: transparent;
+}
 
+::-webkit-scrollbar-track {
+    width: 5px;
+    height: 5px;
+    background: transparent;
+}
 
-
+::-webkit-scrollbar-thumb {
+    background: #CCCCCC;
+    border-radius: 4px;
+}
 
 .clearfix{
     clear:both;

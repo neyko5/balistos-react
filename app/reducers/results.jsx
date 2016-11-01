@@ -10,7 +10,6 @@ function results(state = {
                 playlists: action.results
             }
         case "SET_POPULAR_RESULTS":
-            console.log("ACTION", action);
             return {
                 ...state,
                 popular: action.results

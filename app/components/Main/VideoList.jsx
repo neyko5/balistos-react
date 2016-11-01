@@ -7,7 +7,10 @@ let VideoList = (props) => {
     else{
         return (
             <div className="video-list">
-                {props.videos.sort((a, b) => a.likes.reduce((total, like) => total + like.value, 0) > b.likes.reduce((total, like) => total + like.value, 0)?-1:1).map(function(video) {
+                {props.videos.sort((a, b) => {
+                    var diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+                    return diff === 0 ? a.id - b.id : diff;
+                }).map(function(video) {
                   return <VideoListItem video={video} key={video.video.id} />;
                 })}
             </div>

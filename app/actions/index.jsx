@@ -82,6 +82,20 @@ export function logOut() {
     }
 }
 
+export function deleteVideo(video_id) {
+    return {
+        type: "DELETE_VIDEO",
+        video_id: video_id
+    }
+}
+
+export function finishVideo(video_id) {
+    return {
+        type: "FINISH_VIDEO",
+        video_id: video_id
+    }
+}
+
 export function searchPlaylists(query) {
     return {
         type: "SEARCH_PLAYLISTS",
