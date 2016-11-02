@@ -32,7 +32,7 @@ const common = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loaders: ['react-hot','babel?cacheDirectory'],
+        loaders: ['babel?cacheDirectory'],
         include: PATHS.app
       },
       {
