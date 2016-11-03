@@ -2,7 +2,7 @@ var VideoList = require('./VideoList');
 
 let VideoListContainer = (props) => {
     return (
-        <div className="sidebar col-lg-5 col-md-6 col-sm-7 col-xs-12 left-gutter">
+        <div className="col-lg-12 col-md-12 col-sm-7 col-xs-12 no-gutter">
             <div className="box first">
                 <div className="header">
                     <i className="icon note"></i>

@@ -1,9 +1,7 @@
 import { connect } from 'react-redux';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
-import { fetchMessages, sendMessage } from '../../actions'
-
-//const socket = io('http://localhost:4000');
+import { sendMessage } from '../../actions'
 
 function mapStateToProps(state) {
     return {
@@ -24,9 +22,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 var ChatContainer = React.createClass({
     render: function() {
         return (
-            <div className="right-sidebar col-lg-5 col-md-6 col-sm-5 col-xs-12 left-gutter middle-gutter">
-                <ChatOnline users={this.props.users} username={this.props.username} />
-                <Chat messages={this.props.playlist.messages} sendMessage={this.props.sendMessage} />
+            <div className="chat-container col-lg-12 col-md-12 col-sm-5 col-xs-12 no-gutter">
+                {this.props.users?<ChatOnline users={this.props.users} username={this.props.username} />:undefined}
+                <Chat messages={this.props.playlist.messages} sendMessage={this.props.sendMessage} username={this.props.username} />
             </div>
         );
     }

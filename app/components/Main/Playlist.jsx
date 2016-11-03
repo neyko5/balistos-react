@@ -39,7 +39,6 @@ var Playlist =  React.createClass({
     componentDidMount: function(){
         this.initPlaylist();
         socket.on('action', (action) => {
-            console.log("socket", action);
             this.props.socketAction(action)
         });
     },
@@ -56,7 +55,7 @@ var Playlist =  React.createClass({
     },
     heartbeat: function() {
       this.props.heartbeat(this.props.username, this.props.id);
-      setTimeout(this.heartbeat, 30000);
+      setTimeout(this.heartbeat, 60000);
     },
     componentWillUnmount: function(){
       socket.emit("leave", "playlist_" + this.props.id);
@@ -66,8 +65,10 @@ var Playlist =  React.createClass({
             <main>
                 <div className="container">
                     <VideoPlayer current={this.props.playlist.current} finishVideo={this.props.finishVideo} deleteVideo={this.props.deleteVideo} />
-                    <VideoListContainer playlist={this.props.playlist} />
-                    <ChatContainer playlist={this.props.playlist} id={this.props.id} />
+                    <div className="sidebar col-lg-5 col-md-6 col-sm-12 col-xs-12 left-gutter">
+                        <VideoListContainer playlist={this.props.playlist} />
+                        <ChatContainer playlist={this.props.playlist} id={this.props.id} />
+                    </div>
                 </div>
             </main>
         );
