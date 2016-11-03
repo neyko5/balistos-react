@@ -21,11 +21,6 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 var SearchPlaylistContainer = React.createClass({
-    getInitialState: function(){
-        return {
-            results: []
-        }
-    },
     render: function() {
         return (
             <div className="search_playlist">

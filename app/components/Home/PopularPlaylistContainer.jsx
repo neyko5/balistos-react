@@ -2,8 +2,6 @@ var PopularPlaylist = require('./PopularPlaylist');
 import { connect } from 'react-redux';
 import { fetchPopularPlaylists } from '../../actions'
 
-//const socket = io('http://localhost:4000');
-
 function mapStateToProps(state) {
     return {
         playlists: state.results.popular
@@ -12,7 +10,7 @@ function mapStateToProps(state) {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        fetchPopularPlaylists: (message) => {
+        fetchPopularPlaylists: () => {
             dispatch(fetchPopularPlaylists());
         }
     }

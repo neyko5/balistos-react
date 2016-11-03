@@ -12,7 +12,6 @@ import { Router, Route, browserHistory, IndexRoute } from 'react-router'
 
 require("!style!css!less!./style/style.less");
 
-
 const sagaMiddleware = createSagaMiddleware();
 export const store = createStore(
     reducer,
@@ -20,12 +19,6 @@ export const store = createStore(
 )
 
 sagaMiddleware.run(rootSaga);
-
-store.subscribe(function(){
-    console.log(store.getState());
-});
-
-
 
 ReactDOM.render(
     <Provider store={store}>

@@ -13,7 +13,7 @@ let Chat = (props) => {
                     return <ChatMessage user={message.user.username} message={message.message} key={message.id}/>
                 })}
             </div>
-            <ChatForm sendMessage={props.sendMessage} />
+            {props.username?<ChatForm sendMessage={props.sendMessage} />:undefined}
         </div>
     );
 };

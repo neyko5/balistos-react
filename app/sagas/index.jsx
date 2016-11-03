@@ -76,13 +76,11 @@ export function* fetchPlaylist(action) {
 
 export function* sendMessage(action) {
     try{
-        console.log(action);
         yield axios.post('/chat/send', {
             message: action.message,
             playlist_id: action.playlist_id
         });
     } catch(error){
-        console.log(error);
         yield put(error);
     }
 }

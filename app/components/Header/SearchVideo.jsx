@@ -25,10 +25,10 @@ var SearchVideo = React.createClass({
     render: function() {
         return (
             <div className="search">
-                <input type="text" name="search" id="search" placeholder="search video" onChange={this.props.searchYoutube} autoComplete="off" />
-                {this.props.results? <ul className="results" id="response">
+                <input type="text" id="search" placeholder="Search for YouTube video" onChange={this.props.searchYoutube} autoComplete="off" />
+                {this.props.results? <ul className="results">
                     {this.props.results.map((result) =>
-                       <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={()=>this.props.addVideo(result.id.videoId, result.snippet.title, this.props.id)} aid={result.id.videoId} key={result.id.videoId} />
+                       <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={()=>this.props.addVideo(result.id.videoId, result.snippet.title, this.props.id)} id={result.id.videoId} key={result.id.videoId} />
                     )}
                 </ul> : null }
 

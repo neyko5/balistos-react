@@ -76,10 +76,19 @@ function playlist(state = {
                 videos: state.videos.filter(video => !next || video.id !== next.id)
             }
         case "INSERT_VIDEO":
-            return {
-                ...state,
-                videos: [...state.videos, action.video]
+            if(state.current){
+                return {
+                    ...state,
+                    videos: [...state.videos, action.video]
+                }
             }
+            else {
+                return {
+                    ...state,
+                    current: action.video
+                }
+            }
+
         case "INSERT_MESSAGE":
             return {
                 ...state,
