@@ -1,31 +1,29 @@
+const webpack = require('webpack');
 const path = require('path');
 const merge = require('webpack-merge');
 const TARGET = process.env.npm_lifecycle_event;
-const webpack = require('webpack');
-const NpmInstallPlugin = require('npm-install-webpack-plugin');
 process.env.BABEL_ENV = TARGET;
 
 
-const PATHS = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
-};
-
 const common = {
   entry: {
-    app: PATHS.app
+    app: path.join(__dirname, 'app')
   },
   output: {
-    path: PATHS.build,
+    path: path.join(__dirname, 'build'),
     filename: 'bundle.js'
   },
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   plugins: [
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
     new webpack.ProvidePlugin({
-      'React':     'react'
+      'React': 'react'
     })
   ],
   module: {
@@ -33,7 +31,7 @@ const common = {
       {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
-        include: PATHS.app
+        include: path.join(__dirname, 'app'),
       },
       {
         test: /\.less$/,
@@ -53,7 +51,7 @@ if(TARGET === 'start' || !TARGET) {
   module.exports = merge(common, {
     devtool: 'eval-source-map',
     devServer: {
-      contentBase: PATHS.build,
+      contentBase: path.join(__dirname, 'build'),
 
       historyApiFallback: true,
       hot: true,
@@ -69,10 +67,7 @@ if(TARGET === 'start' || !TARGET) {
       port: process.env.PORT
     },
     plugins: [
-      new webpack.HotModuleReplacementPlugin(),
-      new NpmInstallPlugin({
-        save: true // --save
-      })
+      new webpack.HotModuleReplacementPlugin()
     ]
   });
 }
