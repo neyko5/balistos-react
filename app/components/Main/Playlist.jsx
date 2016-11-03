@@ -5,7 +5,7 @@ import ChatContainer from './ChatContainer';
 import { connect } from 'react-redux';
 import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo } from '../../actions';
 import io from 'socket.io-client'
-let socket = io('http://localhost:3000');
+let socket = io('http://balistos-api.mtgslo.si');
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -67,7 +67,7 @@ var Playlist =  React.createClass({
                 <div className="container">
                     <VideoPlayer current={this.props.playlist.current} finishVideo={this.props.finishVideo} deleteVideo={this.props.deleteVideo} />
                     <VideoListContainer playlist={this.props.playlist} />
-                    <ChatContainer playlist={this.props.playlist} />
+                    <ChatContainer playlist={this.props.playlist} id={this.props.id} />
                 </div>
             </main>
         );

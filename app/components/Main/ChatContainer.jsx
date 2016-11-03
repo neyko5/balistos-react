@@ -16,7 +16,7 @@ function mapStateToProps(state) {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         sendMessage: (message) => {
-            dispatch(sendMessage(message, ownProps.playlist.id));
+            dispatch(sendMessage(message, ownProps.id));
         }
     }
 }

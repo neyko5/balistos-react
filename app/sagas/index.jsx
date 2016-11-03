@@ -18,7 +18,7 @@ export function* sendLoginRequest(action) {
             yield put({type: "SET_LOGIN_ERROR", message: response.data.message});
         }
     } catch (error){
-        yield put({type: "SET_LOGIN_ERROR", message: error});
+        yield put({type: "SET_LOGIN_ERROR", message: error.message});
     }
 }
 
@@ -35,7 +35,7 @@ export function* sendRegisterRequest(action) {
             yield put({type: "SET_REGISTER_ERROR", message: response.data.message});
         }
     } catch (error){
-        yield put({type: "SET_REGISTER_ERROR", message: error});
+        yield put({type: "SET_REGISTER_ERROR", message: error.message});
     }
 }
 
@@ -145,7 +145,9 @@ export function* searchYoutube(action) {
                 q: action.query,
                 key: "AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0",
                 part: "snippet",
-                type: "video"
+                type: "video",
+                videoSyndicated: true,
+                videoEmbeddable: true
             }
         });
         if (response.data.items){
