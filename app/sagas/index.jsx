@@ -60,6 +60,7 @@ export function* createPlaylist(action) {
             description: action.description
         });
         if (response.data.id) {
+            yield put({type: "CLOSE_ALL_WINDOWS"});
             yield browserHistory.push('/playlist/' + response.data.id);
         }
     } catch(error){}

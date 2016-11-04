@@ -109,10 +109,10 @@ var VideoPlayer =  React.createClass({
                         </div>
                     </div>
                     <div className="button_menu">
-                        <div className="button grey delete" onClick={this.deleteCurrentVideo}>
+                        {this.props.username?<div className="button grey delete" onClick={this.deleteCurrentVideo}>
                             <i className="icon delete"></i>
                             Delete video
-                        </div>
+                        </div>:null}
                     </div>
                 </div>
             </div>

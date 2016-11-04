@@ -72,9 +72,9 @@ var Playlist =  React.createClass({
         return (
             <main>
                 <div className="container">
-                    <VideoPlayer current={this.props.playlist.current} finishVideo={this.props.finishVideo} deleteVideo={this.props.deleteVideo} />
+                    <VideoPlayer current={this.props.playlist.current} username={this.props.username} finishVideo={this.props.finishVideo} deleteVideo={this.props.deleteVideo} />
                     <div className="sidebar col-lg-5 col-md-6 col-sm-12 col-xs-12 left-gutter">
-                        <VideoListContainer playlist={this.props.playlist} />
+                        <VideoListContainer playlist={this.props.playlist}/>
                         <ChatContainer playlist={this.props.playlist} id={this.props.id} />
                     </div>
                 </div>

@@ -7,18 +7,18 @@ function playlist(state = {
 }, action){
     switch(action.type){
         case "SET_INITIAL_PLAYLIST_DATA":
-            let first = action.playlist.playlistVideos.sort((a, b) => {
+            let first = action.playlist.playlistVideos && action.playlist.playlistVideos.sort((a, b) => {
                 var diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
                 return diff === 0 ? a.id - b.id : diff;
             })[0];
             return {
-                videos: action.playlist.playlistVideos.filter(video => !first || video.id !== first.id),
+                videos: action.playlist.playlistVideos && action.playlist.playlistVideos.filter(video => !first || video.id !== first.id) || [],
                 current: first,
                 messages: action.playlist.chats,
                 users: action.playlist.playlistUsers,
                 id: action.playlist.id,
                 title: action.playlist.title,
-                username: action.playlist.user.username
+                username: action.playlist.user.username,
             }
         case "UPDATE_OR_INSERT_LIKE":
             return {

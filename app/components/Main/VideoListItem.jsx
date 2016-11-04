@@ -29,19 +29,22 @@ var VideoListItem = React.createClass({
         let likeCount = this.props.video.likes.reduce((total, like) => total + like.value, 0);
         return (
             <div className="playlist_item">
-                <div className="vote">
+                {this.props.user_id?<div className="vote">
                     <div className={"up " + (upLike?"active":"")} onClick={() => this.props.likeVideo(upLike?0:1)} title={this.props.video.likes.filter(like => like.value === 1).map(like => like.user.username).join(', ')}></div>
                     <div className="number">{likeCount}</div>
                     <div className={"down " + (downLike?"active":"")} onClick={() => this.props.likeVideo(downLike?0:-1)} title={this.props.video.likes.filter(like => like.value === -1).map(like => like.user.username).join(', ')}></div>
-                </div>
+                </div>:
+                <div className="vote">
+                    <div className="number full">{likeCount}</div>
+                </div>}
                 <img src={"http://img.youtube.com/vi/" + this.props.video.video.youtube_id + "/0.jpg"}/>
                 <div className="info">
                     <div className="title" >{this.props.video.video.title}</div>
                     <div className="addedby">added by <span className="black">{this.props.video.user.username}</span></div>
                 </div>
-                <div className="delete-column">
+                {this.props.user_id?<div className="delete-column">
                     <div className="delete" onClick={this.deleteCurrentVideo}></div>
-                </div>
+                </div>:null}
             </div>
         );
     }
