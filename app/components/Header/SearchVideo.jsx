@@ -17,7 +17,8 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state, ownProps) => {
     return {
         ...ownProps,
-        results: state.results.youtube
+        results: state.results.youtube,
+        query: state.results.query
     }
 }
 
@@ -25,8 +26,8 @@ var SearchVideo = React.createClass({
     render: function() {
         return (
             <div className="search">
-                <input type="text" id="search" placeholder="Search for YouTube video" onChange={this.props.searchYoutube} autoComplete="off" />
-                {this.props.results? <ul className="results">
+                <input type="text" id="search" placeholder="Search for YouTube video" onChange={this.props.searchYoutube} value={this.props.query} autoComplete="off" />
+                {this.props.results&&this.props.query? <ul className="results">
                     {this.props.results.map((result) =>
                        <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url}  onItemClick={()=>this.props.addVideo(result.id.videoId, result.snippet.title, this.props.id)} id={result.id.videoId} key={result.id.videoId} />
                     )}

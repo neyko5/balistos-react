@@ -131,10 +131,12 @@ export function* addVideo(action) {
             playlist_id: action.playlist_id
         });
         yield put({type: "SET_YOUTUBE_RESULTS", results:[]});
+        yield put({type: "SET_YOUTUBE_SEARCH_QUERY", query:''});
     } catch(error){}
 }
 
 export function* searchYoutube(action) {
+    yield put({type: "SET_YOUTUBE_SEARCH_QUERY", query: action.query});
     try{
         const response = yield axios.create({
             baseURL: "https://www.googleapis.com"

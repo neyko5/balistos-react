@@ -19,6 +19,11 @@ function results(state = {
                 ...state,
                 youtube: action.results
             }
+        case "SET_YOUTUBE_SEARCH_QUERY":
+            return {
+                ...state,
+                query: action.query
+            }
         default:
             return state;
     }
