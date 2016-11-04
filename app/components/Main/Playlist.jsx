@@ -3,7 +3,7 @@ import VideoListContainer from './VideoListContainer';
 import VideoPlayer from './VideoPlayer';
 import ChatContainer from './ChatContainer';
 import { connect } from 'react-redux';
-import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo } from '../../actions';
+import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo, getActiveUsers } from '../../actions';
 import io from 'socket.io-client'
 let socket = io('http://balistos-api.mtgslo.si');
 
@@ -25,6 +25,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         heartbeat: (username, playlist) => {
            dispatch(sendHeartbeat(username, playlist));
+        },
+        getActiveUsers: (playlist) => {
+            dispatch(getActiveUsers(playlist));
         },
         finishVideo: (video_id) => {
             dispatch(finishVideo(video_id));
@@ -54,8 +57,13 @@ var Playlist =  React.createClass({
         this.heartbeat();
     },
     heartbeat: function() {
-      this.props.heartbeat(this.props.username, this.props.id);
-      setTimeout(this.heartbeat, 60000);
+        if(this.props.username){
+            this.props.heartbeat(this.props.username, this.props.id);
+        }
+        else{
+            this.props.getActiveUsers(this.props.id);
+        }
+        setTimeout(this.heartbeat, 60000);
     },
     componentWillUnmount: function(){
       socket.emit("leave", "playlist_" + this.props.id);

@@ -123,6 +123,15 @@ export function* sendHeartbeat(action) {
     } catch(error){}
 }
 
+export function* getActiveUsers(action) {
+    try {
+        const response = yield axios.get('/playlists/users/' + action.playlist);
+        if(response.data) {
+            yield put({type: "SET_ACTIVE_USERS", users: response.data});
+        }
+    } catch(error){}
+}
+
 export function* addVideo(action) {
     try {
         yield axios.post('/videos/add', {
@@ -172,6 +181,7 @@ export default function* rootSaga() {
     yield takeEvery('FETCH_PLAYLIST', fetchPlaylist);
     yield takeEvery('SEND_MESSAGE', sendMessage);
     yield takeEvery('LIKE_VIDEO', likeVideo);
+    yield takeEvery('GET_ACTIVE_USERS', getActiveUsers);
     yield takeEvery('SEND_HEARTBEAT', sendHeartbeat);
     yield takeEvery('ADD_VIDEO', addVideo);
     yield takeEvery('SEARCH_YOUTUBE', searchYoutube);

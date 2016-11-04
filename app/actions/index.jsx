@@ -67,6 +67,13 @@ export function sendHeartbeat(username, playlist) {
     }
 }
 
+export function getActiveUsers(playlist) {
+    return {
+        type: "GET_ACTIVE_USERS",
+        playlist: playlist
+    }
+}
+
 export function likeVideo(video_id, value) {
     return {
         type: "LIKE_VIDEO",
