@@ -46,11 +46,6 @@ var Login = React.createClass({
                   <div className="noaccount">No account yet? <span className="link open-register" onClick={this.props.onOpenRegisterClick}>Create one now!</span>
                   </div>
               </form>
-              <div className="social">
-                  <h2>Login with:</h2>
-                  <a className="google-login" href=""></a>
-                  <a className="facebook-login" href=""></a>
-              </div>
           </div>
       );
     }
