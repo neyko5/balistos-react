@@ -87,7 +87,11 @@ var VideoPlayer =  React.createClass({
                             <YouTube
                                 videoId={this.props.current.video.youtube_id}
                                 opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}  />
-                              :false}
+                                :<div className="video-empty"> 
+                                    <div className="text-big">No video</div> 
+                                    <div className="text-small">Make sure you add some new videos to the playlist</div> 
+                                </div>
+                            } 
                         </div>
                         <div className="progress">
                             <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
