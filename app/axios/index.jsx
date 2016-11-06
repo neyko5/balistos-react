@@ -1,7 +1,8 @@
 import {expireSession} from "../actions";
 import axios from 'axios';
+import {API_INDEX} from '../settings';
 
-axios.defaults.baseURL = 'http://balistos-api.mtgslo.si';
+axios.defaults.baseURL = API_INDEX;
 
 axios.interceptors.request.use(function (config) {
     if(localStorage.getItem("token")){

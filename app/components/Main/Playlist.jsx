@@ -5,7 +5,9 @@ import ChatContainer from './ChatContainer';
 import { connect } from 'react-redux';
 import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo, getActiveUsers } from '../../actions';
 import io from 'socket.io-client'
-let socket = io('http://balistos-api.mtgslo.si');
+import {API_INDEX} from '../../settings';
+
+let socket = io(API_INDEX);
 
 const mapStateToProps = (state, ownProps) => {
     return {

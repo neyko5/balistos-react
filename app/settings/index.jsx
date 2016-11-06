@@ -8,3 +8,5 @@ export const youtubeParams = {
         origin: 'https://www.youtube.com'
     }
 };
+
+export const API_INDEX = 'http://api.balistos.com';
