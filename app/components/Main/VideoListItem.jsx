@@ -39,7 +39,7 @@ var VideoListItem = React.createClass({
                 </div>}
                 <img src={"https://img.youtube.com/vi/" + this.props.video.video.youtube_id + "/0.jpg"}/>
                 <div className="info">
-                    <div className="title" >{this.props.video.video.title}</div>
+                    <a className="title" target="_blank" title={"Open in YouTube"} href={"https://www.youtube.com/watch?v=" + this.props.video.video.youtube_id} >{this.props.video.video.title}</a>
                     <div className="addedby">added by <span className="black">{this.props.video.user.username}</span></div>
                 </div>
                 {this.props.user_id?<div className="delete-column">

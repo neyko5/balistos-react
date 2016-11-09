@@ -9,7 +9,7 @@ let Chat = (props) => {
                 <div className="title">Chat with your buddies</div>
             </div>
             <div className="chatbox">
-                {props.messages.map(function(message){
+                {props.messages.sort((a, b) => a.created_at < b.created_at ? -1 : 1).map(function(message){
                     return <ChatMessage message={message} username={props.username} key={message.id}/>
                 })}
             </div>
