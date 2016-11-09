@@ -20,6 +20,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 var ChatContainer = React.createClass({
+    componentDidUpdate(){
+        document.getElementById("chatbox").scrollTop = document.getElementById("chatbox").scrollHeight;
+    },
     render: function() {
         return (
             <div className="chat-container col-lg-12 col-md-12 col-sm-5 col-xs-12 no-gutter">

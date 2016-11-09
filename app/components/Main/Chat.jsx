@@ -8,7 +8,7 @@ let Chat = (props) => {
                 <i className="icon chat"></i>
                 <div className="title">Chat with your buddies</div>
             </div>
-            <div className="chatbox">
+            <div className="chatbox" id="chatbox">
                 {props.messages.sort((a, b) => a.created_at < b.created_at ? -1 : 1).map(function(message){
                     return <ChatMessage message={message} username={props.username} key={message.id}/>
                 })}

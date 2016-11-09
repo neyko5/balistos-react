@@ -49,7 +49,7 @@ var SearchVideo = React.createClass({
                 break;
             case "Enter":
                 let index = this.props.index < 0 ? (5 + this.props.index%5) : this.props.index%5;
-                this.props.addVideo(this.props.results[index].id.videoId, this.props.results[index].snippet.title, this.props.id);
+                this.props.results[index] && this.props.addVideo(this.props.results[index].id.videoId, this.props.results[index].snippet.title, this.props.id);
                 break;
             case "Escape":
                 this.props.clearYoutubeResults();
