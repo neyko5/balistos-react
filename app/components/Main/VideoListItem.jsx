@@ -37,7 +37,7 @@ var VideoListItem = React.createClass({
                 <div className="vote">
                     <div className="number full">{likeCount}</div>
                 </div>}
-                <img src={"http://img.youtube.com/vi/" + this.props.video.video.youtube_id + "/0.jpg"}/>
+                <img src={"https://img.youtube.com/vi/" + this.props.video.video.youtube_id + "/0.jpg"}/>
                 <div className="info">
                     <div className="title" >{this.props.video.video.title}</div>
                     <div className="addedby">added by <span className="black">{this.props.video.user.username}</span></div>
