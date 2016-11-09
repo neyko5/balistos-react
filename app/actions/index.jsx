@@ -74,6 +74,27 @@ export function getActiveUsers(playlist) {
     }
 }
 
+export function updateSearchIndex(value) {
+    return {
+        type: "UPDATE_SEARCH_INDEX",
+        value: value
+    }
+}
+
+export function clearYoutubeResults() {
+    return {
+        type: "SET_YOUTUBE_RESULTS",
+        results: []
+    }
+}
+
+export function resetYoutubeSearchQuery() {
+    return {
+        type: "SET_YOUTUBE_SEARCH_QUERY",
+        query: ""
+    }
+}
+
 export function likeVideo(video_id, value) {
     return {
         type: "LIKE_VIDEO",
