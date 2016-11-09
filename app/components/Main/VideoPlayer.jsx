@@ -30,6 +30,13 @@ var VideoPlayer =  React.createClass({
             paused: false
         }
     },
+    componentDidUpdate(prevProps) {
+        if(prevProps.current && this.props.current && prevProps.current.video.youtube_id !== this.props.current.video.youtube_id){
+            this.setState({
+                paused: false
+            });
+        }
+    },
     pause: function(){
         this.setState({
             paused: true
