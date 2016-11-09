@@ -78,9 +78,9 @@ var VideoPlayer =  React.createClass({
             <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
                 <div className="main_window">
                     <div className="video_player">
-                        <div className="subtitle">Now playing:</div>
-                        <div className="title">{this.props.current?this.props.current.video.title:"no title"}</div>
-                        <div className="video-id"></div>
+                        <div className="subtitle">{this.props.current?"Now playing:":"No video in playlist"}</div>
+                        {this.props.current?<div className="author">added by <span className="black">{this.props.current.user.username}</span></div>:null}
+                        <div className="title">{this.props.current?this.props.current.video.title:""}</div>
                         <div className="player">
                             <div className="overlay"></div>
                             {this.props.current?
@@ -113,6 +113,10 @@ var VideoPlayer =  React.createClass({
                         </div>
                     </div>
                     <div className="button_menu">
+                        {this.props.current?<span className="voting">
+                            <div className="voted up" title={this.props.current.likes.filter(like => like.value === 1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === 1).length}</div>
+                            <div className="voted down" title={this.props.current.likes.filter(like => like.value === -1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === -1).length}</div>
+                        </span>:null}
                         {this.props.username?<div className="button grey delete" onClick={this.deleteCurrentVideo}>
                             <i className="icon delete"></i>
                             Delete video

@@ -366,16 +366,24 @@ footer{
 }
 .video_player{
     .subtitle{
-        width:100%;
         font-size:18px;
         font-style:italic;
         color:@light;
         line-height:25px;
+        float: left;
     }
     .title{
         width:100%;
         font-size:24px;
         color:@title;
+        line-height:29px;
+        margin-bottom:10px;
+        clear:both;
+    }
+    .author{
+        float: right;
+        font-size:12px;
+        color:@light;
         line-height:29px;
         margin-bottom:10px;
     }
@@ -613,6 +621,27 @@ footer{
     width:100%;
     margin-top:24px;
     clear:left;
+    .voted {
+        display: inline-block;
+        height:26px;
+        padding-left:30px;
+        margin: 5px 0px;
+        background-repeat: no-repeat;
+        line-height:26px;
+        color:@title;
+        font-size:14px;
+        font-weight:700;
+        margin-right: 5px;
+        text-align: center;
+        &.up {
+            background-image: url('../img/thumbs_up.png');
+            background-position:0px -52px;
+        }
+        &.down {
+            background-image: url('../img/thumbs_down.png');
+            background-position:0px -48px;
+        }
+    }
 }
 .no-gutter{
     padding:0px;
@@ -693,12 +722,6 @@ footer{
             background-position:0px -49px;
         }
         .number{
-            line-height:30px;
-            color:@title;
-            font-size:14px;
-            font-weight:700;
-            margin-right: 5px;
-            text-align: center;
             &.full {
                 line-height: 76px;
             }
@@ -1115,6 +1138,10 @@ h1{
             background-position:0px -36px;
         }
     }
+}
+
+.black {
+    color: black;
 }
 
 ::-webkit-scrollbar {
