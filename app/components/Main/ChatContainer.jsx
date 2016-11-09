@@ -24,7 +24,7 @@ var ChatContainer = React.createClass({
         return (
             <div className="chat-container col-lg-12 col-md-12 col-sm-5 col-xs-12 no-gutter">
                 {this.props.users?<ChatOnline users={this.props.users} username={this.props.username} />:undefined}
-                <Chat messages={this.props.playlist.messages} sendMessage={this.props.sendMessage} username={this.props.username} />
+                <Chat messages={this.props.playlist.messages.sort((a, b) => a.created_at > b.created_at)} sendMessage={this.props.sendMessage} username={this.props.username} />
             </div>
         );
     }

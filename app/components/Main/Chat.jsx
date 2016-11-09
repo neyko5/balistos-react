@@ -10,7 +10,7 @@ let Chat = (props) => {
             </div>
             <div className="chatbox">
                 {props.messages.map(function(message){
-                    return <ChatMessage user={message.user.username} message={message.message} key={message.id}/>
+                    return <ChatMessage message={message} username={props.username} key={message.id}/>
                 })}
             </div>
             {props.username?<ChatForm sendMessage={props.sendMessage} />:undefined}
