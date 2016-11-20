@@ -82,53 +82,51 @@ var VideoPlayer =  React.createClass({
     },
     render: function() {
         return (
-            <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
-                <div className="main_window">
-                    <div className="video_player">
-                        <div className="subtitle">{this.props.current?"Now playing:":"No video in playlist"}</div>
-                        {this.props.current?<div className="author">added by <span className="black">{this.props.current.user.username}</span></div>:null}
-                        <div className="title">{this.props.current?this.props.current.video.title:""}</div>
-                        <div className="player">
-                            <div className="overlay"></div>
-                            {this.props.current?
-                            <YouTube
-                                videoId={this.props.current.video.youtube_id}
-                                opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}  />
-                                :<div className="video-empty"> 
-                                    <div className="text-big">No video</div> 
-                                    <div className="text-small">Make sure you add some new videos to the playlist</div> 
-                                </div>
-                            } 
+            <div className="main_window">
+                <div className="video_player">
+                    <div className="subtitle">{this.props.current?"Now playing:":"No video in playlist"}</div>
+                    {this.props.current?<div className="author">added by <span className="black">{this.props.current.user.username}</span></div>:null}
+                    <div className="title">{this.props.current?this.props.current.video.title:""}</div>
+                    <div className="player">
+                        <div className="overlay"></div>
+                        {this.props.current?
+                        <YouTube
+                            videoId={this.props.current.video.youtube_id}
+                            opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}  />
+                            :<div className="video-empty">
+                                <div className="text-big">No video</div>
+                                <div className="text-small">Make sure you add some new videos to the playlist</div>
+                            </div>
+                        }
+                    </div>
+                    <div className="progress">
+                        <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
+                    </div>
+                    <div className="toolbar">
+                        <div className="controls">
+                            {this.state.paused?
+                            <div className="control play" onClick={this.play}></div>:
+                            <div className="control pause" onClick={this.pause}></div>}
                         </div>
-                        <div className="progress">
-                            <div className="bar" role="progressbar" style={{width: this.state.elapsed/this.state.total*100 + "%"}}></div>
+                        <div className="timer">
+                            <div className="elapsed">{vTime(this.state.elapsed)}</div>
+                            <div className="total"> / {vTime(this.state.total)} </div>
                         </div>
-                        <div className="toolbar">
-                            <div className="controls">
-                                {this.state.paused?
-                                <div className="control play" onClick={this.play}></div>:
-                                <div className="control pause" onClick={this.pause}></div>}
-                            </div>
-                            <div className="timer">
-                                <div className="elapsed">{vTime(this.state.elapsed)}</div>
-                                <div className="total"> / {vTime(this.state.total)} </div>
-                            </div>
-                            <div className="volume">
-                                <div className="speaker" onClick={this.onSpeakerClick}></div>
-                                <ReactSlider defaultValue={100} value={this.state.volume} onChange={this.onSliderChange} />
-                            </div>
+                        <div className="volume">
+                            <div className="speaker" onClick={this.onSpeakerClick}></div>
+                            <ReactSlider defaultValue={100} value={this.state.volume} onChange={this.onSliderChange} />
                         </div>
                     </div>
-                    <div className="button_menu">
-                        {this.props.current?<span className="voting">
-                            <div className="voted up" title={this.props.current.likes.filter(like => like.value === 1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === 1).length}</div>
-                            <div className="voted down" title={this.props.current.likes.filter(like => like.value === -1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === -1).length}</div>
-                        </span>:null}
-                        {this.props.username?<div className="button grey delete" onClick={this.deleteCurrentVideo}>
-                            <i className="icon delete"></i>
-                            Delete video
-                        </div>:null}
-                    </div>
+                </div>
+                <div className="button_menu">
+                    {this.props.current?<span className="voting">
+                        <div className="voted up" title={this.props.current.likes.filter(like => like.value === 1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === 1).length}</div>
+                        <div className="voted down" title={this.props.current.likes.filter(like => like.value === -1).map(like => like.user.username).join(', ')}>{this.props.current.likes.filter((like) => like.value === -1).length}</div>
+                    </span>:null}
+                    {this.props.username?<div className="button grey delete" onClick={this.deleteCurrentVideo}>
+                        <i className="icon delete"></i>
+                        Delete video
+                    </div>:null}
                 </div>
             </div>
         );

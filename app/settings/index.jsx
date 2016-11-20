@@ -9,4 +9,5 @@ export const youtubeParams = {
     }
 };
 
-export const API_INDEX = 'https://api.balistos.com';
+export const API_INDEX = 'http://localhost:3000';
+//export const API_INDEX = 'https://api.balistos.com';
