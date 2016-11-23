@@ -82,6 +82,7 @@ var VideoPlayer =  React.createClass({
     },
     render: function() {
         return (
+          <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
             <div className="main_window">
                 <div className="video_player">
                     <div className="subtitle">{this.props.current?"Now playing:":"No video in playlist"}</div>
@@ -128,6 +129,7 @@ var VideoPlayer =  React.createClass({
                         Delete video
                     </div>:null}
                 </div>
+            </div>
             </div>
         );
     }
