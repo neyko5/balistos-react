@@ -36,6 +36,12 @@ var VideoPlayer =  React.createClass({
                 paused: false
             });
         }
+        this.changeTitle();
+    },
+    changeTitle(){
+        if(this.props.current && this.props.current.video.title){
+            document.title = "Balistos | " + this.props.current.video.title;
+        }
     },
     pause: function(){
         this.setState({
