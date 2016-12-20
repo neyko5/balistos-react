@@ -29,6 +29,12 @@ export function setRegisterError(message){
     }
 }
 
+export function verifyToken(){
+    return {
+        type: "VERIFY_TOKEN"
+    }
+}
+
 export function setLoginError(message){
     return {
         type: "SET_LOGIN_ERROR",

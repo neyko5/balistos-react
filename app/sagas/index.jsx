@@ -39,6 +39,16 @@ export function* sendRegisterRequest(action) {
     }
 }
 
+export function* verifyToken() {
+    try {
+        const response = yield axios.get('/authentication/verify');
+    } catch (error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
+}
+
 export function* fetchPopularPlaylists(action) {
     try {
         const response = yield axios.get('/playlists/');
@@ -63,7 +73,11 @@ export function* createPlaylist(action) {
             yield put({type: "CLOSE_ALL_WINDOWS"});
             yield browserHistory.push('/playlist/' + response.data.id);
         }
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* fetchPlaylist(action) {
@@ -82,7 +96,9 @@ export function* sendMessage(action) {
             playlist_id: action.playlist_id
         });
     } catch(error){
-        yield put(error);
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
     }
 }
 
@@ -92,7 +108,11 @@ export function* likeVideo(action) {
             video_id: action.video_id,
             value: action.value,
         });
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* finishVideo(action) {
@@ -101,7 +121,11 @@ export function* finishVideo(action) {
             video_id: action.video_id
         });
         yield put({type: "SELECT_NEXT_VIDEO"});
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* deleteVideo(action) {
@@ -109,7 +133,11 @@ export function* deleteVideo(action) {
         yield axios.post('/videos/delete', {
             video_id: action.video_id
         });
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* sendHeartbeat(action) {
@@ -121,7 +149,11 @@ export function* sendHeartbeat(action) {
         if(response.data) {
             yield put({type: "SET_ACTIVE_USERS", users: response.data});
         }
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* getActiveUsers(action) {
@@ -142,7 +174,11 @@ export function* addVideo(action) {
         });
         yield put({type: "SET_YOUTUBE_RESULTS", results:[]});
         yield put({type: "SET_YOUTUBE_SEARCH_QUERY", query:''});
-    } catch(error){}
+    } catch(error){
+        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
+            yield put({type: "EXPIRE_SESSION"});
+        }
+    }
 }
 
 export function* searchYoutube(action) {
@@ -189,4 +225,5 @@ export default function* rootSaga() {
     yield takeEvery('EXPIRE_SESSION', expireSession);
     yield takeEvery('FINISH_VIDEO', finishVideo);
     yield takeEvery('DELETE_VIDEO', deleteVideo);
+    yield takeEvery('VERIFY_TOKEN', verifyToken);
 }

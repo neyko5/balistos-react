@@ -1,4 +1,3 @@
-import {expireSession} from "../actions";
 import axios from 'axios';
 import {API_INDEX} from '../settings';
 
@@ -11,12 +10,4 @@ axios.interceptors.request.use(function (config) {
     return config;
 });
 
-axios.interceptors.response.use(null, function(err) {
-    if ( err.response && (err.response.status === 401 || err.response.status === 403 )) {
-        return Promise.reject({type: "EXPIRE_SESSION"});
-    }
-    return Promise.reject(err);
-
-});
-
-module.exports=axios;
+module.exports = axios;

@@ -6,7 +6,7 @@ import Login from './Login';
 import Register from './Register';
 import SearchVideo from './SearchVideo';
 import { connect } from 'react-redux';
-import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylist } from '../../actions'
+import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylistm, verifyToken} from '../../actions'
 
 const mapStateToProps = (state, ownProps) => {
     return {
@@ -22,6 +22,9 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
+        verifyToken: () => {
+            dispatch(verifyToken());
+        },
         onOpenLoginClick: () => {
             dispatch(toggleLoginWindow());
         },
@@ -44,6 +47,11 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 }
 
 var Header = React.createClass({
+    componentDidMount: function() {
+        if(this.props.loggedIn) {
+            this.props.verifyToken();
+        }
+    },
     render: function(){
       if(this.props.loggedIn){
           return (
