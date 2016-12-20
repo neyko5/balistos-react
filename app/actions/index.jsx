@@ -130,6 +130,14 @@ export function finishVideo(video_id) {
     }
 }
 
+export function startVideo(video_id) {
+    return {
+        type: "START_VIDEO",
+        video_id: video_id
+    }
+}
+
+
 export function searchPlaylists(query) {
     return {
         type: "SEARCH_PLAYLISTS",

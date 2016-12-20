@@ -121,11 +121,15 @@ export function* finishVideo(action) {
             video_id: action.video_id
         });
         yield put({type: "SELECT_NEXT_VIDEO"});
-    } catch(error){
-        if (error.response && (error.response.status === 401 || error.response.status === 403 )) {
-            yield put({type: "EXPIRE_SESSION"});
-        }
-    }
+    } catch(error){}
+}
+
+export function* startVideo(action) {
+    try {
+        yield axios.post('/videos/start', {
+            video_id: action.video_id
+        });
+    } catch(error){}
 }
 
 export function* deleteVideo(action) {
@@ -226,4 +230,5 @@ export default function* rootSaga() {
     yield takeEvery('FINISH_VIDEO', finishVideo);
     yield takeEvery('DELETE_VIDEO', deleteVideo);
     yield takeEvery('VERIFY_TOKEN', verifyToken);
+    yield takeEvery('START_VIDEO', startVideo);
 }

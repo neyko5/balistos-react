@@ -19,11 +19,11 @@ var VideoPlayer =  React.createClass({
         elapsed: this.state.player.getCurrentTime(),
         total: this.state.player.getDuration()
       });
-      this.timeout = setTimeout(this.updateElapsed, 200);
+      this.timeout = setTimeout(this.updateElapsed, 500);
     },
     getInitialState: function(){
         return {
-            elapsed: 0,
+            elapsed:0,
             total: 0,
             volume: 100,
             previousVolume: 0,
@@ -32,15 +32,15 @@ var VideoPlayer =  React.createClass({
     },
     componentDidUpdate(prevProps) {
         if(prevProps.current && this.props.current && prevProps.current.video.youtube_id !== this.props.current.video.youtube_id){
+            youtubeParams.playerVars.start = 0;
             this.setState({
                 paused: false
             });
+            this.props.startVideo(this.props.current.id);
         }
-        this.changeTitle();
-    },
-    changeTitle(){
-        if(this.props.current && this.props.current.video.title){
-            document.title = "Balistos | " + this.props.current.video.title;
+        if(!prevProps.current && this.props.current){
+            this.props.startVideo(this.props.current.id);
+            youtubeParams.playerVars.start = this.props.current.started_at;
         }
     },
     pause: function(){
