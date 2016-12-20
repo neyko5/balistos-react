@@ -1,5 +1,4 @@
 import Header from '../Header/Header';
-import Footer from '../Footer';
 import SearchPlaylistContainer from './SearchPlaylistContainer';
 import PopularPlaylistContainer from './PopularPlaylistContainer';
 
@@ -38,7 +37,6 @@ var Home = React.createClass({
                         </div>
                     </div>
                 </main>
-                <Footer />
             </div>
         );
     }

@@ -96,6 +96,7 @@ var VideoPlayer =  React.createClass({
                     <div className="title">{this.props.current?this.props.current.video.title:""}</div>
                     <div className="player">
                         <div className="overlay"></div>
+                        <a href="https://www.youtube.com" target="_blank" className="youtube" alt="Powered by YouTube"></a> 
                         {this.props.current?
                         <YouTube
                             videoId={this.props.current.video.youtube_id}
