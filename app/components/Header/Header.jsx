@@ -4,7 +4,6 @@ import LogOut from './LogOut';
 import CreatePlaylist from './CreatePlaylist';
 import Login from './Login';
 import Register from './Register';
-import SearchVideo from './SearchVideo';
 import { connect } from 'react-redux';
 import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylistm, verifyToken} from '../../actions'
 
@@ -59,7 +58,6 @@ var Header = React.createClass({
                 <UserMenu onOpenLogoutClick={this.props.onOpenLogoutClick} onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick} username={this.props.username} loggedIn={this.props.loggedIn} search={this.props.search}/>
                 <LogOut open={this.props.logoutOpen} onLogoutClick={this.props.onLogoutClick} />
                 <CreatePlaylist open={this.props.createPlaylistOpen} onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}/>
-                {this.props.search ? <SearchVideo id={this.props.id}/> : false}
             </HeaderContainer>
           )
       }
