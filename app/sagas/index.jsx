@@ -206,6 +206,26 @@ export function* searchYoutube(action) {
     } catch(error){}
 }
 
+export function* getRelatedVideos(action) {
+    try{
+        const response = yield axios.create({
+            baseURL: "https://www.googleapis.com"
+        }).get('/youtube/v3/search', {
+            params: {
+                relatedToVideoId: action.video_id,
+                key: "AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0",
+                part: "snippet",
+                type: "video",
+                videoSyndicated: true,
+                videoEmbeddable: true
+            }
+        });
+        if (response.data.items){
+            yield put({type: "SET_RELATED_RESULTS", results: response.data.items});
+        }
+    } catch(error){}
+}
+
 export function* expireSession(){
     localStorage.clear();
     yield put({type: "LOG_OUT"});
@@ -231,4 +251,5 @@ export default function* rootSaga() {
     yield takeEvery('DELETE_VIDEO', deleteVideo);
     yield takeEvery('VERIFY_TOKEN', verifyToken);
     yield takeEvery('START_VIDEO', startVideo);
+    yield takeEvery('GET_RELATED_VIDEOS', getRelatedVideos);
 }

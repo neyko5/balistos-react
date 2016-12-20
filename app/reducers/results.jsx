@@ -2,6 +2,7 @@ function results(state = {
     popular : [],
     youtube: [],
     playlists: [],
+    related: [],
     youtube_index: 0
 }, action){
     switch(action.type){
@@ -30,6 +31,11 @@ function results(state = {
             return {
                 ...state,
                 query: action.query
+            }
+        case "SET_RELATED_RESULTS":
+            return {
+                ...state,
+                related: action.results
             }
         default:
             return state;

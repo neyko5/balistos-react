@@ -2,8 +2,9 @@ import { Component, PropTypes } from 'react'
 import VideoListContainer from './VideoListContainer';
 import VideoPlayer from './VideoPlayer';
 import ChatContainer from './ChatContainer';
+import RelatedVideos from './RelatedVideos';
 import { connect } from 'react-redux';
-import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo, getActiveUsers, startVideo } from '../../actions';
+import { fetchPlaylist, sendHeartbeat, finishVideo, deleteVideo, getActiveUsers, startVideo, getRelatedVideos } from '../../actions';
 import io from 'socket.io-client'
 import {API_INDEX} from '../../settings';
 
@@ -39,6 +40,9 @@ const mapDispatchToProps = (dispatch) => {
         },
         startVideo: (video_id) => {
             dispatch(startVideo(video_id));
+        },
+        getRelatedVideos: (video_id) => {
+            dispatch(getRelatedVideos(video_id));
         }
     }
 }
@@ -69,6 +73,7 @@ var Playlist =  React.createClass({
             this.props.getActiveUsers(this.props.id);
         }
         setTimeout(this.heartbeat, 60000);
+        
     },
     componentWillUnmount: function(){
       socket.emit("leave", "playlist_" + this.props.id);
@@ -77,10 +82,11 @@ var Playlist =  React.createClass({
         return (
             <main>
                 <div className="container">
-                    <VideoPlayer current={this.props.playlist.current} username={this.props.username} finishVideo={this.props.finishVideo} startVideo={this.props.startVideo} deleteVideo={this.props.deleteVideo} />
+                    <VideoPlayer current={this.props.playlist.current} username={this.props.username} getRelatedVideos={this.props.getRelatedVideos} finishVideo={this.props.finishVideo} startVideo={this.props.startVideo} deleteVideo={this.props.deleteVideo} />
                     <div className="sidebar col-lg-5 col-md-6 col-sm-12 col-xs-12 left-gutter">
                         <VideoListContainer playlist={this.props.playlist}/>
                         <ChatContainer playlist={this.props.playlist} id={this.props.id} />
+                        <RelatedVideos />
                     </div>
                 </div>
             </main>

@@ -101,6 +101,13 @@ export function resetYoutubeSearchQuery() {
     }
 }
 
+export function getRelatedVideos(video_id) {
+    return {
+        type: "GET_RELATED_VIDEOS",
+        video_id
+    }
+}
+
 export function likeVideo(video_id, value) {
     return {
         type: "LIKE_VIDEO",

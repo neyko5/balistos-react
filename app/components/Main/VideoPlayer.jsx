@@ -37,9 +37,11 @@ var VideoPlayer =  React.createClass({
                 paused: false
             });
             this.props.startVideo(this.props.current.id);
+            this.props.getRelatedVideos(this.props.current.video.youtube_id);
         }
         if(!prevProps.current && this.props.current){
             this.props.startVideo(this.props.current.id);
+            this.props.getRelatedVideos(this.props.current.video.youtube_id);
             youtubeParams.playerVars.start = this.props.current.started_at;
         }
     },
