@@ -1,0 +1,14 @@
+exports[`test renders correctly 1`] = `
+<a
+  onClick={[Function]}
+  style={Object {}}>
+  <div
+    className="title">
+    ssd
+  </div>
+  <div
+    className="description">
+    dsd
+  </div>
+</a>
+`;

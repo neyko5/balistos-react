@@ -14,12 +14,13 @@
   },
   "homepage": "https://github.com/neyko5/balistos-react#readme",
   "dependencies": {
+    "axios": "^0.15.2",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
-    "axios": "^0.15.2",
     "react-redux": "^4.4.5",
     "react-router": "^2.0.0",
     "react-slider": "^0.7.0",
+    "react-test-renderer": "^15.4.2",
     "react-youtube": "^7.3.0",
     "redux": "^3.6.0",
     "redux-saga": "^0.12.0",
@@ -27,7 +28,14 @@
     "video-time": "^1.1.0"
   },
   "devDependencies": {
+    "enzyme": "^2.8.0",
+    "eslint": "^3.18.0",
+    "eslint-config-airbnb": "^14.1.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^4.0.0",
+    "eslint-plugin-react": "^6.10.3",
     "npm-run-all": "^4.0.2",
+    "react-addons-test-utils": "^15.4.2",
     "react-scripts": "0.9.5"
   },
   "scripts": {
