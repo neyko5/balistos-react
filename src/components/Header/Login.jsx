@@ -1,55 +1,65 @@
 import React from 'react';
-import { connect } from 'react-redux'
-import { sendLoginRequest, toggleRegisterWindow } from '../../actions'
+import { connect } from 'react-redux';
+import { sendLoginRequest, toggleRegisterWindow } from '../../actions';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        sendLogin: (username, password) => {
-            dispatch(sendLoginRequest(username, password))
-        },
-        onOpenRegisterClick: () => {
-            dispatch(toggleRegisterWindow());
-        },
-    }
-}
-const mapStateToProps = (state, ownProps) => {
-    return {
-        ...ownProps,
-        error: state.auth.login_error,
-    }
-}
-
-var Login = React.createClass({
-    render: function(){
-      let username
-      let password
-      return (
-          <div className={"dropdown "+ (this.props.open?"":"hidden")} id="login" >
-              <form role="form" id="login-form" onSubmit={e => {
-                  e.preventDefault()
-                  if (!username.value.trim() || !password.value.trim) {
-                    return
-                  }
-                  this.props.sendLogin(username.value, password.value);
-                  username.value = ''
-                  password.value = ''
-                }}>
-                  <label>
-                      <div className="title">Username</div>
-                      <div className="error">{this.props.error}</div>
-                      <input type="text" ref={node => { username = node }} />
-                  </label>
-                  <label>
-                      <div className="title" >Password</div>
-                      <input type="password" id="login-password" name="login-password"  ref={node => { password = node }} />
-                  </label>
-                  <button type="submit" className="button green">Log In</button>
-                  <div className="noaccount">No account yet? <span className="link open-register" onClick={this.props.onOpenRegisterClick}>Create one now!</span>
-                  </div>
-              </form>
-          </div>
-      );
-    }
+const mapDispatchToProps = dispatch => ({
+  sendLogin: (username, password) => {
+    dispatch(sendLoginRequest(username, password));
+  },
+  onOpenRegisterClick: () => {
+    dispatch(toggleRegisterWindow());
+  },
+});
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+  error: state.auth.login_error,
 });
 
-module.exports = connect( mapStateToProps, mapDispatchToProps )(Login)
+const Login = (props) => {
+  let username;
+  let password;
+  return (
+    <div className={`dropdown ${props.open ? '' : 'hidden'}`} id="login" >
+      <form
+        role="form" id="login-form" onSubmit={(e) => {
+          e.preventDefault();
+          if (!username.value.trim() || !password.value.trim) {
+            return;
+          }
+          props.sendLogin(username.value, password.value);
+          username.value = '';
+          password.value = '';
+        }}
+      >
+        <label htmlFor="login-username">
+          <div className="title">Username</div>
+          <div className="error">{props.error}</div>
+          <input type="text" name="login-username" ref={(node) => { username = node; }} />
+        </label>
+        <label htmlFor="password">
+          <div className="title" >Password</div>
+          <input
+            type="password" id="login-password" name="login-password"
+            ref={(node) => { password = node; }}
+          />
+        </label>
+        <button type="submit" className="button green">Log In</button>
+        <div className="noaccount">No account yet?
+            <button
+              className="link open-register"
+              onClick={props.onOpenRegisterClick}
+            >Create one now!</button>
+        </div>
+      </form>
+    </div>
+  );
+};
+
+Login.propTypes = {
+  open: React.PropTypes.boolean.isRequired,
+  error: React.PropTypes.string.isRequired,
+  sendLogin: React.PropTypes.function.isRequired,
+  onOpenRegisterClick: React.PropTypes.function.isRequired,
+};
+
+module.exports = connect(mapStateToProps, mapDispatchToProps)(Login);
