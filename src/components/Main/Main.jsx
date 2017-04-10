@@ -9,4 +9,10 @@ const Main = props => (
   </div>
     );
 
+Main.propTypes = {
+  params: React.PropTypes.shape({
+    playlist_id: React.propTypes.string.isRequired,
+  }).isRequired,
+};
+
 export default Main;

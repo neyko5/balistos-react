@@ -15,20 +15,32 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const RelatedVideoItem = React.createClass({
-  render() {
-    return (
-      <div className="playlist_item">
-        <img src={`https://img.youtube.com/vi/${this.props.video.id.videoId}/0.jpg`} alt={this.props.video.snippet.title} />
-        <div className="info">
-          <a className="title" target="_blank" title={'Open in YouTube'} href={`https://www.youtube.com/watch?v=${this.props.video.id.videoId}`} >{this.props.video.snippet.title}</a>
-        </div>
-        <button className="button green chat" onClick={this.props.addVideo}>
-                    Add
-                </button>
-      </div>
-    );
-  },
-});
+const RelatedVideoItem = props => (
+  <div className="playlist_item">
+    <img src={`https://img.youtube.com/vi/${props.video.id.videoId}/0.jpg`} alt={props.video.snippet.title} />
+    <div className="info">
+      <a
+        className="title" rel="noopener noreferrer"
+        target="_blank" title={'Open in YouTube'}
+        href={`https://www.youtube.com/watch?v=${props.video.id.videoId}`}
+      >{props.video.snippet.title}</a>
+    </div>
+    <button className="button green chat" onClick={props.addVideo}> Add</button>
+  </div>
+
+);
+
+RelatedVideoItem.propTypes = {
+  addVideo: React.PropTypes.function.isRequired,
+  video: React.PropTypes.shape({
+    id: React.PropTypes.shape({
+      videoId: React.propTypes.string.isRequired,
+    }).isRequired,
+    snippet: React.PropTypes.shape({
+      title: React.propTypes.string.isRequired,
+    }).isRequired,
+    messages: React.propTypes.arrayof(React.PropTypes.element.isRequired).isRequired,
+  }).isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RelatedVideoItem);

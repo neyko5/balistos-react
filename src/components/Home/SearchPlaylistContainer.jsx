@@ -1,6 +1,6 @@
 import React from 'react';
-import SearchPlaylistResult from './SearchPlaylistResult';
 import { connect } from 'react-redux';
+import SearchPlaylistResult from './SearchPlaylistResult';
 import { searchPlaylists } from '../../actions';
 
 

@@ -8,13 +8,28 @@ const VideoListContainer = props => (
     <div className="box first">
       <div className="header">
         <i className="icon note" />
-        <div className="title">{props.playlist.title} <span>created by {props.playlist.username}</span></div>
+        <div className="title">
+          {props.playlist.title}
+          <span>created by {props.playlist.username}</span>
+        </div>
       </div>
       <div className="body">
         <VideoList videos={props.playlist.videos} />
       </div>
     </div>
   </div>
-    );
+);
+
+VideoListContainer.propTypes = {
+  playlist: React.propTypes.shape({
+    username: React.propTypes.string.isRequired,
+    id: React.propTypes.string.isRequired,
+    title: React.propTypes.title,
+    videos: React.propTypes.arrayof(
+      React.PropTypes.element.isRequired,
+    ).isRequired,
+  }).isRequired,
+
+};
 
 module.exports = VideoListContainer;

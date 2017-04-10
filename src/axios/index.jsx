@@ -4,10 +4,11 @@ import { API_INDEX } from '../settings';
 axios.defaults.baseURL = API_INDEX;
 
 axios.interceptors.request.use((config) => {
+  const newConfig = config;
   if (localStorage.getItem('token')) {
-    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+    newConfig.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
   }
-  return config;
+  return newConfig;
 });
 
 module.exports = axios;
