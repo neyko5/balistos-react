@@ -1,8 +1,8 @@
 function auth(state = {
-  token: localStorage.getItem('token') || null,
-  username: localStorage.getItem('username') || null,
-  logged_in: !!localStorage.getItem('token'),
-  user_id: parseInt(localStorage.getItem('user_id'), 10) || null,
+  token: localStorage.getItem('token') || undefined,
+  username: localStorage.getItem('username') || undefined,
+  logged_in: localStorage.getItem('token') !== undefined,
+  user_id: parseInt(localStorage.getItem('user_id'), 10) || undefined,
 }, action) {
   switch (action.type) {
     case 'AUTH_SET_FROM_STORAGE':

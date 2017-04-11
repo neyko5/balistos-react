@@ -1,10 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class ChatForm extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       message: '',
     };
+    this.handleChange = this.handleChange.bind(this);
+    this.submitForm = this.submitForm.bind(this);
   }
   submitForm(e) {
     e.preventDefault();
@@ -35,7 +39,7 @@ class ChatForm extends React.Component {
 }
 
 ChatForm.propTypes = {
-  sendMessage: React.PropTypes.function.isRequired,
+  sendMessage: PropTypes.func.isRequired,
 };
 
 module.exports = ChatForm;

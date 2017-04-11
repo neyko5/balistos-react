@@ -1,4 +1,9 @@
-function windows(state = {}, action) {
+function windows(state = {
+  create_playlist_open: false,
+  logout_open: false,
+  login_open: false,
+  register_open: false,
+}, action) {
   switch (action.type) {
     case 'TOGGLE_LOGIN_WINDOW':
       return {

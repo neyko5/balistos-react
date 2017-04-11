@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import SearchPlaylistResult from './SearchPlaylistResult';
 import { searchPlaylists } from '../../actions';
@@ -29,12 +30,12 @@ const SearchPlaylistContainer = props => (
 );
 
 SearchPlaylistContainer.propTypes = {
-  onSearchInputChange: React.PropTypes.func.isRequired,
-  results: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        title: React.PropTypes.string.isRequired,
-        id: React.PropTypes.string.isRequired,
-        description: React.PropTypes.string.isRequired,
+  onSearchInputChange: PropTypes.func.isRequired,
+  results: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
       }),
   ).isRequired,
 };

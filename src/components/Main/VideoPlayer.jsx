@@ -1,12 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
 import ReactSlider from 'react-slider';
 import vTime from 'video-time';
 import { youtubeParams } from '../../settings';
 
 class VideoPlayer extends React.Component {
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       elapsed: 0,
       total: 0,
       volume: 100,
@@ -21,9 +23,7 @@ class VideoPlayer extends React.Component {
     if (prevProps.current && this.props.current &&
       prevProps.current.video.youtube_id !== this.props.current.video.youtube_id) {
       youtubeParams.playerVars.start = 0;
-      this.setState({
-        paused: false,
-      });
+      this.resumeVideo();
       this.props.startVideo(this.props.current.id);
       this.props.getRelatedVideos(this.props.current.video.youtube_id);
     }
@@ -36,6 +36,7 @@ class VideoPlayer extends React.Component {
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
+
   onReady(event) {
     this.setState({
       player: event.target,
@@ -62,6 +63,11 @@ class VideoPlayer extends React.Component {
       volume: value,
     });
     this.state.player.setVolume(value);
+  }
+  resumeVideo() {
+    this.setState({
+      paused: false,
+    });
   }
   finishCurrentVideo() {
     this.props.finishVideo(this.props.current.id);
@@ -126,15 +132,15 @@ class VideoPlayer extends React.Component {
             <div className="toolbar">
               <div className="controls">
                 {this.state.paused ?
-                  <div className="control play" onClick={this.play} /> :
-                  <div className="control pause" onClick={this.pause} />}
+                  <button className="control play" onClick={this.play} /> :
+                  <button className="control pause" onClick={this.pause} />}
               </div>
               <div className="timer">
                 <div className="elapsed">{vTime(this.state.elapsed)}</div>
                 <div className="total"> / {vTime(this.state.total)} </div>
               </div>
               <div className="volume">
-                <div className="speaker" click={this.onSpeakerClick} />
+                <button className="speaker" onClick={this.onSpeakerClick} />
                 <ReactSlider
                   defaultValue={100}
                   value={this.state.volume}
@@ -157,9 +163,9 @@ class VideoPlayer extends React.Component {
               >{this.props.current.likes.filter(like => like.value === -1).length}</div>
             </span> : null}
             {this.props.username ?
-              <div className="button grey delete" click={this.deleteCurrentVideo}>
+              <button className="button grey delete" onClick={this.deleteCurrentVideo}>
                 <i className="icon delete" /> Delete video
-              </div> : null}
+              </button> : null}
           </div>
         </div>
       </div>
@@ -168,29 +174,33 @@ class VideoPlayer extends React.Component {
 }
 
 VideoPlayer.propTypes = {
-  username: React.propTypes.string.isRequired,
-  deleteVideo: React.PropTypes.function.isRequired,
-  finishVideo: React.PropTypes.function.isRequired,
-  getRelatedVideos: React.PropTypes.function.isRequired,
-  startVideo: React.PropTypes.function.isRequired,
-  current: React.PropTypes.shape({
-    id: React.PropTypes.shape({
-      videoId: React.propTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  deleteVideo: PropTypes.func.isRequired,
+  finishVideo: PropTypes.func.isRequired,
+  getRelatedVideos: PropTypes.func.isRequired,
+  startVideo: PropTypes.func.isRequired,
+  current: PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
     }).isRequired,
-    started_at: React.propTypes.string.isRequired,
-    video: React.PropTypes.shape({
-      youtube_id: React.propTypes.string.isRequired,
-      title: React.propTypes.string.isRequired,
+    started_at: PropTypes.string.isRequired,
+    video: PropTypes.shape({
+      youtube_id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
     }).isRequired,
-    likes: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        value: React.propTypes.number,
+    likes: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number,
       }),
     ).isRequired,
-    user: React.PropTypes.shape({
-      username: React.propTypes.string.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
     }).isRequired,
-  }).isRequired,
+  }),
+};
+
+VideoPlayer.defaultProps = {
+  current: undefined,
 };
 
 module.exports = VideoPlayer;

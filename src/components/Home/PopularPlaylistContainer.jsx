@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import PopularPlaylist from './PopularPlaylist';
 import { fetchPopularPlaylists } from '../../actions';
@@ -43,12 +44,12 @@ class PopularPlaylistContainer extends React.Component {
 }
 
 PopularPlaylistContainer.propTypes = {
-  fetchPopularPlaylists: React.PropTypes.func.isRequired,
-  playlists: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        title: React.PropTypes.string.isRequired,
-        id: React.PropTypes.string.isRequired,
-        username: React.PropTypes.string.isRequired,
+  fetchPopularPlaylists: PropTypes.func.isRequired,
+  playlists: PropTypes.arrayOf(
+      PropTypes.shape({
+        title: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
+        username: PropTypes.string.isRequired,
       }),
   ).isRequired,
 };

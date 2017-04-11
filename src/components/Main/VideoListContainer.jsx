@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import VideoList from './VideoList';
 import SearchVideo from '../Header/SearchVideo';
 
@@ -14,22 +15,31 @@ const VideoListContainer = props => (
         </div>
       </div>
       <div className="body">
-        <VideoList videos={props.playlist.videos} />
+        <VideoList videos={props.playlist.current ? [props.playlist.current, ...props.playlist.videos] : []} />
       </div>
     </div>
   </div>
 );
 
 VideoListContainer.propTypes = {
-  playlist: React.propTypes.shape({
-    username: React.propTypes.string.isRequired,
-    id: React.propTypes.string.isRequired,
-    title: React.propTypes.title,
-    videos: React.propTypes.arrayof(
-      React.PropTypes.element.isRequired,
+  playlist: PropTypes.shape({
+    username: PropTypes.string,
+    id: PropTypes.number,
+    title: PropTypes.title,
+    videos: PropTypes.arrayOf(
+      PropTypes.object.isRequired,
     ).isRequired,
+    current: PropTypes.object,
   }).isRequired,
 
+};
+
+VideoListContainer.defaultProps = {
+  playlist: {
+    username: undefined,
+    id: undefined,
+    current: undefined,
+  },
 };
 
 module.exports = VideoListContainer;

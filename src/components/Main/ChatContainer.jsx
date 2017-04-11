@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
@@ -38,12 +39,16 @@ class ChatContainer extends React.Component {
 }
 
 ChatContainer.propTypes = {
-  username: React.PropTypes.string.isRequired,
-  sendMessage: React.PropTypes.function.isRequired,
-  users: React.propTypes.arrayof(React.PropTypes.element.isRequired).isRequired,
-  playlist: React.PropTypes.shape({
-    messages: React.propTypes.arrayof(React.PropTypes.element.isRequired).isRequired,
+  username: PropTypes.string.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  users: PropTypes.arrayOf(PropTypes.object.isRequired),
+  playlist: PropTypes.shape({
+    messages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }).isRequired,
+};
+
+ChatContainer.defaultProps = {
+  users: [],
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

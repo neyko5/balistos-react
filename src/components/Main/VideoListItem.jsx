@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { likeVideo, deleteVideo } from '../../actions';
 
@@ -47,7 +48,7 @@ class VideoListItem extends React.Component {
         <div className="vote">
           <div className="number full">{likeCount}</div>
         </div>}
-        <img src={`https://img.youtube.com/vi/${this.props.video.video.youtube_id}/0.jpg`} alt={this.props.video..video.title} />
+        <img src={`https://img.youtube.com/vi/${this.props.video.video.youtube_id}/0.jpg`} alt={this.props.video.video.title} />
         <div className="info">
           <a
             className="title" target="_blank"
@@ -55,10 +56,12 @@ class VideoListItem extends React.Component {
             title={'Open in YouTube'}
             href={`https://www.youtube.com/watch?v=${this.props.video.video.youtube_id}`}
           >{this.props.video.video.title}</a>
-          <div className="addedby">added by <span className="black">{this.props.video.user.username}</span></div>
+          <div className="addedby">
+            added by <span className="black">{this.props.video.user.username}</span>
+          </div>
         </div>
         {this.props.user_id ? <div className="delete-column">
-          <div className="delete" onClick={this.deleteCurrentVideo} />
+          <button className="delete" onClick={this.deleteCurrentVideo} />
         </div> : null}
       </div>
     );
@@ -66,24 +69,24 @@ class VideoListItem extends React.Component {
 }
 
 VideoListItem.propTypes = {
-  user_id: React.propTypes.string.isRequired,
-  deleteVideo: React.PropTypes.function.isRequired,
-  likeVideo: React.PropTypes.function.isRequired,
-  video: React.PropTypes.shape({
-    id: React.PropTypes.shape({
-      videoId: React.propTypes.string.isRequired,
+  user_id: PropTypes.string.isRequired,
+  deleteVideo: PropTypes.func.isRequired,
+  likeVideo: PropTypes.func.isRequired,
+  video: PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
     }).isRequired,
-    video: React.PropTypes.shape({
-      youtube_id: React.propTypes.string.isRequired,
-      title: React.propTypes.string.isRequired,
+    video: PropTypes.shape({
+      youtube_id: PropTypes.string.isRequired,
+      title: PropTypes.string.isRequired,
     }).isRequired,
-    likes: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        value: React.propTypes.number,
+    likes: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.number,
       }),
     ).isRequired,
-    user: React.PropTypes.shape({
-      username: React.propTypes.string.isRequired,
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

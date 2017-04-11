@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ChatOnline = props => (
   <div className="users">
@@ -16,10 +17,10 @@ const ChatOnline = props => (
 );
 
 ChatOnline.propTypes = {
-  username: React.PropTypes.string.isRequired,
-  users: React.PropTypes.arrayOf(
-    React.PropTypes.shape({
-      username: React.propTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  users: PropTypes.arrayOf(
+    PropTypes.shape({
+      username: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
 };

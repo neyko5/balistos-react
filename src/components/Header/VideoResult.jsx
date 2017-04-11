@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const VideoResult = props => (
   <button onClick={props.onItemClick} className={props.active ? 'active' : ''}>
@@ -8,10 +9,10 @@ const VideoResult = props => (
     );
 
 VideoResult.propTypes = {
-  active: React.PropTypes.boolean.isRequired,
-  onItemClick: React.PropTypes.function.isRequired,
-  image: React.PropTypes.string.isRequired,
-  title: React.PropTypes.string.isRequired,
+  active: PropTypes.bool.isRequired,
+  onItemClick: PropTypes.func.isRequired,
+  image: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default VideoResult;

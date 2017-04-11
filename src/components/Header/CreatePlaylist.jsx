@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const CreatePlaylist = (props) => {
   let title;
@@ -30,8 +31,8 @@ const CreatePlaylist = (props) => {
 };
 
 CreatePlaylist.propTypes = {
-  onCreatePlaylistSubmit: React.PropTypes.function.isRequired,
-  open: React.PropTypes.bool.isRequired,
+  onCreatePlaylistSubmit: PropTypes.func.isRequired,
+  open: PropTypes.bool.isRequired,
 };
 
 module.exports = CreatePlaylist;

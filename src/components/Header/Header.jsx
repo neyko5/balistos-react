@@ -1,11 +1,13 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import UserMenu from './UserMenu';
 import HeaderContainer from './HeaderContainer';
 import LogOut from './LogOut';
 import CreatePlaylist from './CreatePlaylist';
 import Login from './Login';
 import Register from './Register';
-import { connect } from 'react-redux';
+
 import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylist, verifyToken } from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
@@ -91,20 +93,29 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  verifyToken: React.PropTypes.function.isRequired,
-  onOpenLoginClick: React.PropTypes.function.isRequired,
-  onOpenRegisterClick: React.PropTypes.function.isRequired,
-  onOpenLogoutClick: React.PropTypes.function.isRequired,
-  onCreatePlaylistSubmit: React.PropTypes.function.isRequired,
-  onLogoutClick: React.PropTypes.function.isRequired,
-  createPlaylistOpen: React.PropTypes.function.isRequired,
-  logoutOpen: React.PropTypes.function.isRequired,
-  registerOpen: React.PropTypes.function.isRequired,
-  loginOpen: React.PropTypes.function.isRequired,
-  onOpenCreatePlaylistClick: React.PropTypes.function.isRequired,
-  loggedIn: React.PropTypes.bool.isRequired,
-  username: React.PropTypes.string.isRequired,
-  search: React.PropTypes.string.isRequired,
+  verifyToken: PropTypes.func.isRequired,
+  onOpenLoginClick: PropTypes.func.isRequired,
+  onOpenRegisterClick: PropTypes.func.isRequired,
+  onOpenLogoutClick: PropTypes.func.isRequired,
+  onCreatePlaylistSubmit: PropTypes.func.isRequired,
+  onLogoutClick: PropTypes.func.isRequired,
+  createPlaylistOpen: PropTypes.bool,
+  logoutOpen: PropTypes.bool.isRequired,
+  registerOpen: PropTypes.bool,
+  loginOpen: PropTypes.bool,
+  onOpenCreatePlaylistClick: PropTypes.func.isRequired,
+  loggedIn: PropTypes.bool,
+  username: PropTypes.string,
+  search: PropTypes.bool.isRequired,
+};
+
+Header.defaultProps = {
+  registerOpen: false,
+  username: undefined,
+  loggedIn: false,
+  createPlaylistOpen: false,
+  logoutOpen: false,
+  loginOpen: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

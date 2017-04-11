@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UserMenu = (props) => {
   if (props.loggedIn) {
@@ -33,12 +34,20 @@ const UserMenu = (props) => {
 };
 
 UserMenu.propTypes = {
-  loggedIn: React.PropTypes.boolean.isRequired,
-  onOpenLoginClick: React.PropTypes.function.isRequired,
-  onOpenRegisterClick: React.PropTypes.function.isRequired,
-  onOpenLogoutClick: React.PropTypes.function.isRequired,
-  username: React.PropTypes.string.isRequired,
-  onOpenCreatePlaylistClick: React.PropTypes.function.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
+  onOpenLoginClick: PropTypes.func,
+  onOpenRegisterClick: PropTypes.func,
+  onOpenLogoutClick: PropTypes.func,
+  username: PropTypes.string,
+  onOpenCreatePlaylistClick: PropTypes.func,
+};
+
+UserMenu.defaultProps = {
+  onOpenLoginClick: undefined,
+  onOpenRegisterClick: undefined,
+  onOpenLogoutClick: undefined,
+  username: undefined,
+  onOpenCreatePlaylistClick: undefined,
 };
 
 

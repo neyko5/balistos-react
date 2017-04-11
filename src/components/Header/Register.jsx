@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../actions';
 
@@ -63,11 +64,16 @@ const Register = (props) => {
 };
 
 Register.propTypes = {
-  open: React.PropTypes.boolean.isRequired,
-  error: React.PropTypes.string.isRequired,
-  setErrorMessage: React.PropTypes.function.isRequired,
-  sendRegister: React.PropTypes.function.isRequired,
-  onOpenLoginClick: React.PropTypes.function.isRequired,
+  open: PropTypes.bool,
+  error: PropTypes.string,
+  setErrorMessage: PropTypes.func.isRequired,
+  sendRegister: PropTypes.func.isRequired,
+  onOpenLoginClick: PropTypes.func.isRequired,
+};
+
+Register.defaultProps = {
+  error: undefined,
+  open: false,
 };
 
 module.exports = connect(mapStateToProps, mapDispatchToProps)(Register);

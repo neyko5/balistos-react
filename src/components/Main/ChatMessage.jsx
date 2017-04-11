@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const ChatMessage = props => (
   <div className="message">
@@ -10,13 +11,13 @@ const ChatMessage = props => (
     );
 
 ChatMessage.propTypes = {
-  username: React.PropTypes.string.isRequired,
-  message: React.PropTypes.shape({
-    user: React.PropTypes.shape({
-      username: React.propTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  message: PropTypes.shape({
+    user: PropTypes.shape({
+      username: PropTypes.string.isRequired,
     }).isRequired,
-    message: React.propTypes.string.isRequired,
-    created_at: React.propTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    created_at: PropTypes.string.isRequired,
   }).isRequired,
 };
 

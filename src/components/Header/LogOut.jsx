@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const LogOut = props => (
   <div className={`dropdown small ${props.open ? '' : 'hidden'}`} id="logout" >
@@ -7,8 +8,8 @@ const LogOut = props => (
     );
 
 LogOut.propTypes = {
-  open: React.PropTypes.boolean.isRequired,
-  onLogoutClick: React.PropTypes.function.isRequired,
+  open: PropTypes.bool.isRequired,
+  onLogoutClick: PropTypes.func.isRequired,
 };
 
 module.exports = LogOut;

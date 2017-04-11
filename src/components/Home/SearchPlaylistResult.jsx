@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const SearchPlaylistResult = props => (
@@ -9,10 +10,10 @@ const SearchPlaylistResult = props => (
 );
 
 SearchPlaylistResult.propTypes = {
-  result: React.PropTypes.shape({
-    title: React.PropTypes.string.isRequired,
-    id: React.PropTypes.string.isRequired,
-    description: React.PropTypes.string.isRequired,
+  result: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
   }).isRequired,
 };
 

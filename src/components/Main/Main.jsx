@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Header from '../Header/Header';
 import Playlist from './Playlist';
 
@@ -10,8 +11,8 @@ const Main = props => (
     );
 
 Main.propTypes = {
-  params: React.PropTypes.shape({
-    playlist_id: React.propTypes.string.isRequired,
+  params: PropTypes.shape({
+    playlist_id: PropTypes.string.isRequired,
   }).isRequired,
 };
 

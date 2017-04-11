@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
 
@@ -20,13 +21,13 @@ const Chat = props => (
     );
 
 Chat.propTypes = {
-  username: React.PropTypes.string.isRequired,
-  sendMessage: React.PropTypes.function.isRequired,
-  messages: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        created_at: React.PropTypes.string.isRequired,
-        message: React.PropTypes.string.isRequired,
-        id: React.PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  sendMessage: PropTypes.func.isRequired,
+  messages: PropTypes.arrayOf(
+      PropTypes.shape({
+        created_at: PropTypes.string.isRequired,
+        message: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
       }),
   ).isRequired,
 };

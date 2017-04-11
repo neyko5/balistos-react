@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router';
 
 const PopularPlaylist = props => (
@@ -12,11 +13,11 @@ const PopularPlaylist = props => (
     );
 
 PopularPlaylist.propTypes = {
-  index: React.PropTypes.number.isRequired,
-  data: React.PropTypes.shape({
-    title: React.PropTypes.string.isRequired,
-    id: React.PropTypes.string.isRequired,
-    username: React.PropTypes.string.isRequired,
+  index: PropTypes.number.isRequired,
+  data: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    username: PropTypes.string.isRequired,
   }).isRequired,
 };
 

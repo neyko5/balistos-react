@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../actions';
 import VideoResult from './VideoResult';
@@ -37,6 +38,7 @@ class SearchVideo extends React.Component {
     document.removeEventListener('keyup', this.handleKeyEvent, false);
   }
   handleKeyEvent($event) {
+    let index;
     switch ($event.key) {
       case 'ArrowUp':
         this.props.updateSearchIndex(-1);
@@ -45,8 +47,12 @@ class SearchVideo extends React.Component {
         this.props.updateSearchIndex(1);
         break;
       case 'Enter':
-        const index = this.props.index < 0 ? (5 + this.props.index % 5) : this.props.index % 5;
-        this.props.results[index] && this.props.addVideo(this.props.results[index].id.videoId, this.props.results[index].snippet.title, this.props.id);
+        index = this.props.index < 0 ? ((5 + this.props.index) % 5) : this.props.index % 5;
+        if (this.props.results[index]) {
+          this.props.addVideo(
+            this.props.results[index].id.videoId,
+            this.props.results[index].snippet.title, this.props.id);
+        }
         break;
       case 'Escape':
         this.props.clearYoutubeResults();
@@ -59,33 +65,50 @@ class SearchVideo extends React.Component {
   render() {
     return (
       <div className="search">
-        <input type="text" id="search" placeholder="Search for YouTube video" onChange={this.props.searchYoutube} value={this.props.query || ''} autoComplete="off" />
+        <input
+          type="text" id="search" placeholder="Search for YouTube video"
+          onChange={this.props.searchYoutube}
+          value={this.props.query || ''}
+          autoComplete="off"
+        />
         {this.props.results && this.props.query ? <ul className="results">
           {this.props.results.map((result, index) =>
-            <VideoResult title={result.snippet.title} image={result.snippet.thumbnails.default.url} onItemClick={() => this.props.addVideo(result.id.videoId, result.snippet.title, this.props.id)} id={result.id.videoId} key={result.id.videoId} active={index === this.props.index % 5 || index === (5 + this.props.index % 5)} />,
+            <VideoResult
+              title={result.snippet.title}
+              image={result.snippet.thumbnails.default.url}
+              onItemClick={() => this.props.addVideo(result.id.videoId,
+                result.snippet.title, this.props.id)}
+              id={result.id.videoId}
+              key={result.id.videoId}
+              active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
+            />,
                     )}
-        </ul> : null }
+        </ul> : undefined }
       </div>
     );
-  },
-};
+  }
+}
 
 SearchVideo.propTypes = {
-  query: React.PropTypes.string.isRequired,
-  addVideo: React.PropTypes.function.isRequired,
-  searchYoutube: React.PropTypes.function.isRequired,
-  updateSearchIndex: React.PropTypes.function.isRequired,
-  resetYoutubeSearchQuery: React.PropTypes.function.isRequired,
-  clearYoutubeResults: React.PropTypes.function.isRequired,
-  index: React.PropTypes.number.isRequired,
-  id: React.PropTypes.string.isRequired,
-  results: React.propTypes.arrayof(
-      React.PropTypes.shape({
-        snippet: React.PropTypes.element.isRequired,
-        id: React.PropTypes.element.isRequired,
-        username: React.PropTypes.element.isRequired,
+  query: PropTypes.string,
+  addVideo: PropTypes.func.isRequired,
+  searchYoutube: PropTypes.func.isRequired,
+  updateSearchIndex: PropTypes.func.isRequired,
+  resetYoutubeSearchQuery: PropTypes.func.isRequired,
+  clearYoutubeResults: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  id: PropTypes.number,
+  results: PropTypes.arrayOf(
+      PropTypes.shape({
+        snippet: PropTypes.object.isRequired,
+        id: PropTypes.object.isRequired,
       }),
   ).isRequired,
+};
+
+SearchVideo.defaultProps = {
+  query: '',
+  id: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchVideo);

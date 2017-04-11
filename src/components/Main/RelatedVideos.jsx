@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RelatedVideoItem from './RelatedVideoItem';
 
@@ -26,14 +27,18 @@ const RelatedVideos = props => (
 );
 
 RelatedVideos.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  related: React.propTypes.arrayof(
-    React.PropTypes.shape({
-      id: React.PropTypes.shape({
-        videoId: React.PropTypes.videoId.isRequired,
+  id: PropTypes.number,
+  related: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.shape({
+        videoId: PropTypes.string.isRequired,
       }).isRequired,
     }).isRequired,
   ).isRequired,
+};
+
+RelatedVideos.defaultProps = {
+  id: undefined,
 };
 
 export default connect(mapStateToProps, undefined)(RelatedVideos);

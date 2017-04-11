@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 
@@ -54,6 +55,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Playlist extends React.Component {
+  constructor(props) {
+    super(props);
+    this.heartbeat = this.heartbeat.bind(this);
+  }
   componentDidMount() {
     this.initPlaylist();
     socket.on('action', (action) => {
@@ -105,19 +110,25 @@ class Playlist extends React.Component {
 }
 
 Playlist.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  username: React.PropTypes.string.isRequired,
-  socketAction: React.PropTypes.function.isRequired,
-  fetchVideos: React.PropTypes.function.isRequired,
-  deleteVideo: React.PropTypes.function.isRequired,
-  finishVideo: React.PropTypes.function.isRequired,
-  startVideo: React.PropTypes.function.isRequired,
-  heartbeat: React.PropTypes.function.isRequired,
-  getActiveUsers: React.PropTypes.function.isRequired,
-  getRelatedVideos: React.PropTypes.function.isRequired,
-  playlist: React.PropTypes.shape({
-    current: React.PropTypes.element.isRequired,
+  id: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
+  socketAction: PropTypes.func.isRequired,
+  fetchVideos: PropTypes.func.isRequired,
+  deleteVideo: PropTypes.func.isRequired,
+  finishVideo: PropTypes.func.isRequired,
+  startVideo: PropTypes.func.isRequired,
+  heartbeat: PropTypes.func.isRequired,
+  getActiveUsers: PropTypes.func.isRequired,
+  getRelatedVideos: PropTypes.func.isRequired,
+  playlist: PropTypes.shape({
+    current: PropTypes.object,
   }).isRequired,
+};
+
+Playlist.defaultProps = {
+  playlist: {
+    current: undefined,
+  },
 };
 
 

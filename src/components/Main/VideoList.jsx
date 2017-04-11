@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import VideoListItem from './VideoListItem';
 
 const VideoList = (props) => {
@@ -18,18 +19,22 @@ const VideoList = (props) => {
 };
 
 VideoList.propTypes = {
-  videos: React.propTypes.arrayof(
-    React.PropTypes.shape({
-      id: React.PropTypes.shape({
-        videoId: React.PropTypes.videoId.isRequired,
+  videos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.shape({
+        videoId: PropTypes.string.isRequired,
       }).isRequired,
-      likes: React.propTypes.arrayof(
-        React.PropTypes.shape({
-          value: React.propTypes.number,
+      likes: PropTypes.arrayOf(
+        PropTypes.shape({
+          value: PropTypes.number,
         }),
       ).isRequired,
-    }).isRequired,
-  ).isRequired,
+    }),
+  ),
+};
+
+VideoList.defaultProps = {
+  videos: [],
 };
 
 module.exports = VideoList;
