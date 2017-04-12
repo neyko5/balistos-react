@@ -61,7 +61,7 @@ export function addVideo(id, title, playlistId) {
     type: 'ADD_VIDEO',
     title,
     youtube_id: id,
-    playlistId,
+    playlist_id: playlistId,
   };
 }
 

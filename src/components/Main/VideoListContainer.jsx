@@ -9,8 +9,8 @@ const VideoListContainer = props => (
       <SearchVideo id={props.playlist.id} />
       <div className="body">
         <VideoList
-          videos={props.playlist.current ?
-          [props.playlist.current, ...props.playlist.videos] : []}
+          current={props.playlist.current}
+          videos={props.playlist.videos}
         />
       </div>
     </div>

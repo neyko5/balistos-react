@@ -42,16 +42,16 @@ class VideoListItem extends React.Component {
     return (
       <div className={`playlist_item ${playlistItemClass}`}>
         {this.props.user_id ? <div className="vote">
-          <div
+          <button
             className={`up ${upLike ? 'active' : ''}`}
-            click={() => this.props.likeVideo(upLike ? 0 : 1)}
+            onClick={() => this.props.likeVideo(upLike ? 0 : 1)}
             title={this.props.video.likes.filter(like => like.value === 1)
               .map(like => like.user.username).join(', ')}
           />
           <div className="number">{likeCount}</div>
-          <div
+          <button
             className={`down ${downLike ? 'active' : ''}`}
-            click={() => this.props.likeVideo(downLike ? 0 : -1)}
+            onClick={() => this.props.likeVideo(downLike ? 0 : -1)}
             title={this.props.video.likes.filter(like => like.value === -1)
               .map(like => like.user.username).join(', ')}
           />
@@ -84,7 +84,7 @@ class VideoListItem extends React.Component {
 
 VideoListItem.propTypes = {
   index: PropTypes.number.isRequired,
-  user_id: PropTypes.string,
+  user_id: PropTypes.number,
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,
   video: PropTypes.shape({
