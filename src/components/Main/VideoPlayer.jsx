@@ -15,6 +15,15 @@ class VideoPlayer extends React.Component {
       previousVolume: 0,
       paused: false,
     };
+    this.onReady = this.onReady.bind(this);
+    this.onSpeakerClick = this.onSpeakerClick.bind(this);
+    this.onSliderChange = this.onSliderChange.bind(this);
+    this.resumeVideo = this.resumeVideo.bind(this);
+    this.play = this.play.bind(this);
+    this.pause = this.pause.bind(this);
+    this.updateElapsed = this.updateElapsed.bind(this);
+    this.finishCurrentVideo = this.finishCurrentVideo.bind(this);
+    this.deleteCurrentVideo = this.deleteCurrentVideo.bind(this);
   }
   componentWillMount() {
     youtubeParams.playerVars.start = 0;
@@ -150,16 +159,13 @@ class VideoPlayer extends React.Component {
 }
 
 VideoPlayer.propTypes = {
-  username: PropTypes.string.isRequired,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
   startVideo: PropTypes.func.isRequired,
   current: PropTypes.shape({
-    id: PropTypes.shape({
-      videoId: PropTypes.string.isRequired,
-    }).isRequired,
-    started_at: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    started_at: PropTypes.number.isRequired,
     video: PropTypes.shape({
       youtube_id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,

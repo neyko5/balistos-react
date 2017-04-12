@@ -1,6 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 
 const HeaderContainer = props => (
   <header>
@@ -14,8 +13,5 @@ const HeaderContainer = props => (
   </header>
     );
 
-HeaderContainer.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element.isRequired),
-};
 
 module.exports = HeaderContainer;

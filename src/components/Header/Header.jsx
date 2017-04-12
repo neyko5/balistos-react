@@ -59,7 +59,6 @@ class Header extends React.Component {
             onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick}
             username={this.props.username}
             loggedIn={this.props.loggedIn}
-            search={this.props.search}
           />
           <LogOut
             open={this.props.logoutOpen}
@@ -75,7 +74,6 @@ class Header extends React.Component {
     return (
       <HeaderContainer>
         <UserMenu
-          search={this.props.search}
           onOpenLoginClick={this.props.onOpenLoginClick}
           onOpenRegisterClick={this.props.onOpenRegisterClick}
           username={this.props.username}
@@ -106,7 +104,6 @@ Header.propTypes = {
   onOpenCreatePlaylistClick: PropTypes.func.isRequired,
   loggedIn: PropTypes.bool,
   username: PropTypes.string,
-  search: PropTypes.bool.isRequired,
 };
 
 Header.defaultProps = {

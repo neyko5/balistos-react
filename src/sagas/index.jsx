@@ -1,6 +1,5 @@
-import { takeEvery } from 'redux-saga';
 import { browserHistory } from 'react-router';
-import { put } from 'redux-saga/effects';
+import { put, takeEvery } from 'redux-saga/effects';
 
 import axios from '../axios';
 

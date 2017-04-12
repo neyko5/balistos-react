@@ -113,7 +113,7 @@ class Playlist extends React.Component {
 
 Playlist.propTypes = {
   id: PropTypes.string.isRequired,
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   socketAction: PropTypes.func.isRequired,
   fetchVideos: PropTypes.func.isRequired,
   deleteVideo: PropTypes.func.isRequired,
@@ -131,6 +131,7 @@ Playlist.defaultProps = {
   playlist: {
     current: undefined,
   },
+  username: undefined,
 };
 
 

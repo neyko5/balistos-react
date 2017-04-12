@@ -21,7 +21,7 @@ const Chat = props => (
     );
 
 Chat.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   sendMessage: PropTypes.func.isRequired,
   messages: PropTypes.arrayOf(
       PropTypes.shape({
@@ -30,6 +30,11 @@ Chat.propTypes = {
         id: PropTypes.number.isRequired,
       }),
   ).isRequired,
+};
+
+
+Chat.defaultProps = {
+  username: undefined,
 };
 
 export default Chat;

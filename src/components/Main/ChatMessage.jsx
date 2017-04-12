@@ -11,7 +11,7 @@ const ChatMessage = props => (
     );
 
 ChatMessage.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   message: PropTypes.shape({
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
@@ -19,6 +19,10 @@ ChatMessage.propTypes = {
     message: PropTypes.string.isRequired,
     created_at: PropTypes.string.isRequired,
   }).isRequired,
+};
+
+ChatMessage.defaultProps = {
+  username: undefined,
 };
 
 module.exports = ChatMessage;

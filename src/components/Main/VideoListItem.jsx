@@ -84,13 +84,11 @@ class VideoListItem extends React.Component {
 
 VideoListItem.propTypes = {
   index: PropTypes.number.isRequired,
-  user_id: PropTypes.string.isRequired,
+  user_id: PropTypes.string,
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,
   video: PropTypes.shape({
-    id: PropTypes.shape({
-      videoId: PropTypes.string.isRequired,
-    }).isRequired,
+    id: PropTypes.number.isRequired,
     video: PropTypes.shape({
       youtube_id: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
@@ -104,6 +102,10 @@ VideoListItem.propTypes = {
       username: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+};
+
+VideoListItem.defaultProps = {
+  user_id: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoListItem);

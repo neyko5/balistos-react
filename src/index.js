@@ -26,8 +26,8 @@ ReactDOM.render(
   <Provider store={store}>
     <Router>
       <div>
-        <Route path="/" component={Home} />
-        <Route path="playlist/:playlist_id" component={Main} />
+        <Route exact path="/" component={Home} />
+        <Route path="/playlist/:playlist_id" component={Main} />
       </div>
     </Router>
   </Provider>,

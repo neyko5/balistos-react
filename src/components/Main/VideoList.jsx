@@ -21,9 +21,7 @@ const VideoList = (props) => {
 VideoList.propTypes = {
   videos: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.shape({
-        videoId: PropTypes.string.isRequired,
-      }).isRequired,
+      id: PropTypes.number.isRequired,
       likes: PropTypes.arrayOf(
         PropTypes.shape({
           value: PropTypes.number,

@@ -40,7 +40,6 @@ RelatedVideoItem.propTypes = {
     snippet: PropTypes.shape({
       title: PropTypes.string.isRequired,
     }).isRequired,
-    messages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   }).isRequired,
 };
 

@@ -39,7 +39,7 @@ class ChatContainer extends React.Component {
 }
 
 ChatContainer.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   sendMessage: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object.isRequired),
   playlist: PropTypes.shape({
@@ -49,6 +49,7 @@ ChatContainer.propTypes = {
 
 ChatContainer.defaultProps = {
   users: [],
+  username: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
