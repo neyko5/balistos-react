@@ -28,8 +28,19 @@ class VideoListItem extends React.Component {
       .some(like => like.user_id === this.props.user_id && like.value === -1);
     const likeCount = this.props.video.likes
       .reduce((total, like) => total + like.value, 0);
+
+    let playlistItemStatus = '';
+    let playlistItemClass = '';
+    if (this.props.index === 0) {
+      playlistItemClass = 'first';
+      playlistItemStatus = 'Now playing';
+    } else if (this.props.index === 1) {
+      playlistItemClass = 'next';
+      playlistItemStatus = 'Next';
+    }
+
     return (
-      <div className="playlist_item">
+      <div className={`playlist_item ${playlistItemClass}`}>
         {this.props.user_id ? <div className="vote">
           <div
             className={`up ${upLike ? 'active' : ''}`}
@@ -48,7 +59,10 @@ class VideoListItem extends React.Component {
         <div className="vote">
           <div className="number full">{likeCount}</div>
         </div>}
-        <img src={`https://img.youtube.com/vi/${this.props.video.video.youtube_id}/0.jpg`} alt={this.props.video.video.title} />
+        <div className="img-wrapper">
+          <div className="status">{playlistItemStatus}</div>
+          <img src={`https://img.youtube.com/vi/${this.props.video.video.youtube_id}/0.jpg`} alt={this.props.video.video.title} />
+        </div>
         <div className="info">
           <a
             className="title" target="_blank"
@@ -69,6 +83,7 @@ class VideoListItem extends React.Component {
 }
 
 VideoListItem.propTypes = {
+  index: PropTypes.number.isRequired,
   user_id: PropTypes.string.isRequired,
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,

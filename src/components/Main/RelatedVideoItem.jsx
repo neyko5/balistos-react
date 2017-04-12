@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 });
 
 const RelatedVideoItem = props => (
-  <div className="playlist_item">
+  <div className="playlist_item related">
     <img src={`https://img.youtube.com/vi/${props.video.id.videoId}/0.jpg`} alt={props.video.snippet.title} />
     <div className="info">
       <a
@@ -26,7 +26,7 @@ const RelatedVideoItem = props => (
         href={`https://www.youtube.com/watch?v=${props.video.id.videoId}`}
       >{props.video.snippet.title}</a>
     </div>
-    <button className="button green chat" onClick={props.addVideo}> Add</button>
+    <button className="button-add" onClick={props.addVideo}> Add</button>
   </div>
 
 );

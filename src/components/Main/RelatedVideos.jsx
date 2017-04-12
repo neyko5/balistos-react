@@ -11,9 +11,8 @@ function mapStateToProps(state) {
 }
 
 const RelatedVideos = props => (
-  <div className="box first">
+  <div className="box related">
     <div className="header">
-      <i className="icon note" />
       <div className="title">Related videos</div>
     </div>
     <div className="body">

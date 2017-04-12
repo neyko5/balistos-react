@@ -13,7 +13,7 @@ const VideoList = (props) => {
         const diff = b.likes.reduce((total, like) => total + like.value, 0) -
           a.likes.reduce((total, like) => total + like.value, 0);
         return diff === 0 ? a.id - b.id : diff;
-      }).map(video => <VideoListItem video={video} key={video.id} />)}
+      }).map((video, index) => <VideoListItem video={video} key={video.id} index={index} />)}
     </div>
   );
 };

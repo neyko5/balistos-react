@@ -14,20 +14,10 @@
             }
         }
     }
-    .video{
-        iframe{
-
-        }
-    }
     .main{
         padding: 10px 16px;
     }
 
-    .playlist_item{
-        .info{
-            width: 248px;
-        }
-    }
     .button.share{
         margin-top:10px;
     }
@@ -53,11 +43,5 @@
     }
     main {
         margin-top: 00px;
-    }
-    .main_window {
-        position: fixed;
-
-        top: 50px;
-        width: 470px;
     }
 }

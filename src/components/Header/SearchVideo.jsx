@@ -66,7 +66,7 @@ class SearchVideo extends React.Component {
     return (
       <div className="search">
         <input
-          type="text" id="search" placeholder="Search for YouTube video"
+          type="text" id="search" placeholder="Search for YouTube video and add to playlist"
           onChange={this.props.searchYoutube}
           value={this.props.query || ''}
           autoComplete="off"

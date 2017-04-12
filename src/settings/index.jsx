@@ -6,6 +6,8 @@ export const youtubeParams = {
     controls: 0,
     referer: 'https://www.youtube.com',
     origin: 'https://www.youtube.com',
+    rel: 0,
+    showinfo: 0,
   },
 };
 

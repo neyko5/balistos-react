@@ -98,10 +98,12 @@ class Playlist extends React.Component {
             finishVideo={this.props.finishVideo} startVideo={this.props.startVideo}
             deleteVideo={this.props.deleteVideo}
           />
-          <div className="sidebar col-lg-5 col-md-6 col-sm-12 col-xs-12 left-gutter">
+          <div className="sidebar col-lg-6 col-md-6 col-sm-12 col-xs-12 left-gutter">
             <VideoListContainer playlist={this.props.playlist} />
-            <ChatContainer playlist={this.props.playlist} id={this.props.id} />
             <RelatedVideos />
+          </div>
+          <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
+            <ChatContainer playlist={this.props.playlist} id={this.props.id} />
           </div>
         </div>
       </main>

@@ -97,15 +97,9 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <div className="col-lg-7 col-md-6 col-sm-12 no-gutter">
+      <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
         <div className="main_window">
           <div className="video_player">
-            <div className="subtitle">{this.props.current ? 'Now playing:' : 'No video in playlist'}</div>
-            {this.props.current ?
-              <div className="author">
-                added by <span className="black">{this.props.current.user.username}</span>
-              </div> : undefined}
-            <div className="title">{this.props.current ? this.props.current.video.title : ''}</div>
             <div className="player">
               <div className="overlay" />
               <a
@@ -148,24 +142,6 @@ class VideoPlayer extends React.Component {
                 />
               </div>
             </div>
-          </div>
-          <div className="button_menu">
-            {this.props.current ? <span className="voting">
-              <div
-                className="voted up"
-                title={this.props.current.likes
-                  .filter(like => like.value === 1).map(like => like.user.username).join(', ')}
-              >{this.props.current.likes.filter(like => like.value === 1).length}</div>
-              <div
-                className="voted down"
-                title={this.props.current.likes
-                  .filter(like => like.value === -1).map(like => like.user.username).join(', ')}
-              >{this.props.current.likes.filter(like => like.value === -1).length}</div>
-            </span> : null}
-            {this.props.username ?
-              <button className="button grey delete" onClick={this.deleteCurrentVideo}>
-                <i className="icon delete" /> Delete video
-              </button> : null}
           </div>
         </div>
       </div>
