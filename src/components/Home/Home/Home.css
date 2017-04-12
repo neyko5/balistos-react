@@ -1,0 +1,40 @@
+main.background {
+  background: url("../../../img/back.png") repeat-x;
+  background-position: 0 50px; }
+
+.homeback {
+  background: #EAEAEA;
+  margin-top: 60px;
+  margin-bottom: 60px;
+  float: left; }
+
+.presentation {
+  padding: 16px; }
+
+.presentation h2 {
+  color: #758000;
+  font-size: 34px;
+  font-weight: 300; }
+
+.presentation .text {
+  margin-top: 20px;
+  color: #333333;
+  font-size: 14px; }
+
+.popular {
+  border-top: #AAAAAA 3px solid;
+  margin: 20px 0px; }
+
+.popular .icon-note {
+  width: 54px;
+  height: 54px;
+  background: #adbf00 url("../../../img/note-big.png") no-repeat center;
+  float: left; }
+
+.popular h3 {
+  color: #000000;
+  font-weight: 600;
+  font-size: 28px;
+  display: inline-block;
+  margin-left: 20px;
+  line-height: 54px; }

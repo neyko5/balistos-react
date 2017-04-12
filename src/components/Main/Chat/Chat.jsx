@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import ChatMessage from '../ChatMessage';
 import ChatForm from '../ChatForm';
 
+import './Chat.css';
+
 const Chat = props => (
   <div className="box">
     <div className="header">

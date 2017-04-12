@@ -9,61 +9,6 @@
         margin-bottom:10px;
     }
 
-    header{
-        height:auto;
-        .search{
-            width:100%;
-            margin-left:0px;
-            margin-bottom:8px;
-            ul.results{
-                li{
-                    .title{
-                        width:288px;
-                        font-size:13px;
-                    }
-                    img{
-                        display:none;
-                    }
-                }
-            }
-        }
-        .logo{
-            width:30px;
-            margin-left:0px;
-            background-size:100px 30px;
-            background-repeat:no-repeat;
-            background-position:center left;
-        }
-        .menu {
-            .menu-button{
-                border-bottom:1px solid $dark;
-                padding: 0px 10px;
-            }
-        }
-
-        .dropdown{
-            width:100%;
-            border:0px;
-            position:relative;
-            background:$header;
-            float:left;
-            top:0px;
-            right:0px;
-            padding:10px 0px;
-            label{
-                .title{
-                    color:$volume;
-                }
-            }
-            .button{
-                margin-top:10px;
-            }
-            .noaccount{
-                color:$volume;
-            }
-
-        }
-    }
     .left-gutter{
         padding:0px;
     }

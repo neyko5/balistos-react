@@ -1,0 +1,141 @@
+@import '../../../style/variables';
+
+.video_player{
+    iframe{
+        width:100%;
+        height: 400px;
+        display: block;
+    }
+    .progress{
+        width:100%;
+        height:5px;
+        background:$slider;
+        float:left;
+        .bar{
+            width:0%;
+            background:$red;
+            height:5px;
+            max-width:100%;
+        }
+    }
+    .toolbar{
+        width:100%;
+        height:36px;
+        float:left;
+        background:$toolbar;
+        padding:11px 11px;
+        .controls{
+            float:left;
+            .control{
+                width:20px;
+                height:20px;
+                cursor:pointer;
+                margin-right:5px;
+                float:left;
+            }
+            .play{
+                background:url('../../../img/play.png') no-repeat center;
+            }
+            .stop{
+                background:url('../../../img/stop.png') no-repeat center;
+            }
+            .pause{
+                background:url('../../../img/pause.png') no-repeat center;
+            }
+        }
+        .timer{
+            float:left;
+            margin-left:20px;
+            .elapsed{
+                font-weight:600;
+                line-height:22px;
+                color:$white;
+                font-size:12px;
+                float:left;
+            }
+            .total{
+                color:$total;
+                font-weight:600;
+                font-size:12px;
+                line-height:22px;
+                float:left;
+                margin-left:6px;
+            }
+        }
+    }
+    .volume{
+        float:right;
+        .speaker{
+            width:16px;
+            height:22px;
+            background:url('../../../img/volume.png') center no-repeat;
+            float:left;
+            margin-right:10px;
+            cursor:pointer;
+        }
+        .slider{
+            width:64px;
+            height:5px;
+            float:left;
+            margin-top:9px;
+            height:5px;
+            float:left;
+            background:$volume;
+            cursor:pointer;
+            .handle{
+                width:5px;
+                height:13px;
+                top:-4px;
+                left:40%;
+                background:$white;
+                position:absolute;
+            }
+        }
+    }
+    .video-empty {
+        height: 400px;
+        padding-top: 160px;
+        background-color: $black;
+        text-align: center;
+        vertical-align: middle;
+
+        .text-big {
+            font-size: 24px;
+            color: $volume;
+        }
+        .text-small {
+            font-size: 16px;
+            color: $light;
+        }
+    }
+    .youtube{
+        width:142px;
+        background:url('../../../img/youtube.png');
+        height:19px;
+        position:absolute;
+        left: 10px;
+        top: 10px;
+    }
+    .player{
+        position:relative;
+        .overlay{
+            position:absolute;
+            width:100%;
+            height:100%;
+            background:white;
+            opacity:0;
+            cursor:default;
+        }
+    }
+    .player:hover{
+        .overlay{
+            opacity:0.1;
+        }
+    }
+}
+.main_window{
+    background:white;
+    float:left;
+    width:100%;
+    margin: 25px 0px 20px 0px;
+}

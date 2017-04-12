@@ -1,0 +1,45 @@
+@import '../../../style/variables';
+
+main.background{
+    background:url('../../../img/back.png') repeat-x;
+    background-position:0 50px;
+}
+
+.homeback{
+    background:$background;
+    margin-top:60px;
+    margin-bottom:60px;
+    float: left;
+}
+.presentation{
+    padding:16px;
+    h2{
+        color:$subtitle;
+        font-size:34px;
+        font-weight:300;
+    }
+    .text{
+        margin-top:20px;
+        color:$dark;
+        font-size:14px;
+    }
+}
+.popular{
+    border-top:$slider 3px solid;
+    margin:20px 0px;
+    .icon-note{
+        width:54px;
+        height:54px;
+        background: $green url('../../../img/note-big.png') no-repeat center;
+        float:left;
+    }
+    h3{
+        color:$black;
+        font-weight:600;
+        font-size: 28px;
+        display:inline-block;
+        margin-left:20px;
+        line-height:54px;
+    }
+}
+

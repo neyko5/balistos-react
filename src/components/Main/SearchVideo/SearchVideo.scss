@@ -1,0 +1,66 @@
+@import '../../../style/variables';
+.search{
+    float:left;
+    position:relative;
+    width:100%;
+    padding: 5px;
+    input[type="text"]{
+        width: 100%;
+        height: 40px;
+        border-radius: 0px;
+        float: left;
+        
+        line-height:18px;
+        font-size:13px;
+        color:$dark;
+        background-color: white;
+        padding:11px 10px;
+        margin: 0px;
+    }
+    ul.results{
+        position:absolute;
+        top: 43px;
+        width:100%;
+        background:white;
+        z-index:20;
+        background:$box;
+        border:1px solid $border;
+        border-radius:3px;
+        float:left;
+        list-style: none;
+        padding:0px;
+        &:empty {
+            display: none;
+        }
+        li{
+            width: 100%;
+            padding: 1px 5px;
+            float: left;
+            cursor: pointer;
+            img{
+                float: left;
+                margin-right: 10px;
+                height: 40px;
+                width: 60px;
+            }
+            .title {
+                line-height: 40px;
+                float: left;
+                font-size: 14px;
+                color: #333333;
+                width: calc(100% - 70px);
+                overflow:hidden;
+                height:40px;
+            }
+        }
+        li:hover{
+            background:$white;
+        }
+        li.active{
+            background:$grey;
+        }
+        li.active:hover{
+            background:$white;
+        }
+    }
+}

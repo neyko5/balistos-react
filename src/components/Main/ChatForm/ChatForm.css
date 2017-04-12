@@ -1,0 +1,13 @@
+.send {
+  padding: 10px;
+  background: #e8e8e8;
+  float: left;
+  width: 100%; }
+  .send textarea {
+    border: 1px solid #CCCCCC;
+    width: 100%;
+    background: #ffffff;
+    font-size: 11px;
+    resize: none;
+    height: 55px;
+    padding: 6px; }

@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import RelatedVideoItem from '../RelatedVideoItem';
 
+import './RelatedVideos.css';
+
 function mapStateToProps(state) {
   return {
     related: state.results.related,

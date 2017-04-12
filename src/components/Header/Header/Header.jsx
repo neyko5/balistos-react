@@ -10,6 +10,8 @@ import Register from '../Register';
 
 import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylist, verifyToken } from '../../../actions';
 
+import './Header.css';
+
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   username: state.auth.username,

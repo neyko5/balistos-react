@@ -1,19 +1,4 @@
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-
-
-    header{
-        .search{
-            margin-left: 20px;
-            width:470px;
-            ul.results{
-                li{
-                    .title{
-                        width:388px;
-                    }
-                }
-            }
-        }
-    }
     .main{
         padding: 10px 16px;
     }
@@ -34,12 +19,6 @@
     .settings {
         margin-left: 0px;
         margin-bottom: 10px;
-    }
-
-    header {
-        position: fixed;
-        top:0px;
-        z-index: 2;
     }
     main {
         margin-top: 00px;

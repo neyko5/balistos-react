@@ -1,0 +1,21 @@
+.chatbox {
+  padding: 12px 10px;
+  float: left;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll; }
+  .chatbox .message {
+    float: left;
+    clear: left;
+    margin-bottom: 3px;
+    color: #3E414C;
+    font-size: 12px; }
+    .chatbox .message .author {
+      margin-right: 3px;
+      font-weight: 700; }
+    .chatbox .message .author.green {
+      color: #9FA600; }
+    .chatbox .message .author.blue {
+      color: #003366; }
+    .chatbox .message .author.red {
+      color: #F84C12; }

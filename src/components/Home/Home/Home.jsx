@@ -2,6 +2,7 @@ import React from 'react';
 import SearchPlaylistContainer from '../SearchPlaylistContainer';
 import PopularPlaylistContainer from '../PopularPlaylistContainer';
 
+import './Home.css';
 
 const Home = () => (
   <main className="background">

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../../actions';
 import VideoResult from '../VideoResult';
 
+import './SearchVideo.css';
+
 
 const mapDispatchToProps = dispatch => ({
   searchYoutube: (e) => {

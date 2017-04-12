@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { addVideo, getRelatedVideos } from '../../../actions';
 
+import './RelatedVideoItem.css';
+
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   user_id: state.auth.user_id,

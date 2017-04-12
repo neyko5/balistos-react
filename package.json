@@ -42,7 +42,7 @@
   },
   "scripts": {
     "build-css": "node-sass src/style/style.scss  src/style/style.css",
-    "watch-css": "npm run build-css && node-sass src/style -o src/style --watch --recursive",
+    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",

@@ -22,7 +22,7 @@ const CreatePlaylist = (props) => {
           <div className="error" id="create-playlist-error" />
           <input type="text" id="playlist-title" ref={(node) => { title = node; }} />
           <div className="title">Description</div>
-          <input type="text" id="playlist-title" ref={(node) => { description = node; }} />
+          <input type="text" id="playlist-description" ref={(node) => { description = node; }} />
         </div>
         <button type="submit" className="button green">Create</button>
       </form>

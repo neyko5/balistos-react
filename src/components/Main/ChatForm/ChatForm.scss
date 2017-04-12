@@ -1,0 +1,18 @@
+@import '../../../style/variables';
+
+.send{
+    padding:10px;
+    background:$grey;
+    float:left;
+    width:100%;
+    textarea{
+        border:1px solid $border;
+        width:100%;
+        background:$white;
+        font-size:11px;
+        resize:none;
+        height:55px;
+        padding:6px;
+    }
+}
+

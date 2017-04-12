@@ -1,0 +1,89 @@
+.playlist_item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 100px;
+  padding: 5px 5px 5px 10px; }
+  .playlist_item .vote {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    height: 100%; }
+    .playlist_item .vote .up {
+      background: url("../../../img/thumbs_up.png") no-repeat;
+      width: 25px;
+      height: 26px;
+      cursor: pointer; }
+    .playlist_item .vote .up:hover, .playlist_item .vote .up.active:hover {
+      background-position: 0px -26px; }
+    .playlist_item .vote .up.active {
+      background-position: 0px -52px; }
+    .playlist_item .vote .down {
+      cursor: pointer;
+      background: url("../../../img/thumbs_down.png") no-repeat;
+      width: 25px;
+      height: 26px;
+      background-position: 0px 1px; }
+    .playlist_item .vote .down:hover, .playlist_item .vote .down.active:hover {
+      background-position: 0px -24px; }
+    .playlist_item .vote .down.active {
+      background-position: 0px -49px; }
+    .playlist_item .vote .number {
+      line-height: 30px;
+      color: #3E414C;
+      font-size: 14px;
+      font-weight: 700;
+      margin-right: 5px;
+      text-align: center; }
+      .playlist_item .vote .number.full {
+        line-height: 76px; }
+  .playlist_item .img-wrapper .status {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    width: 120px;
+    font-size: 13px;
+    font-weight: 600;
+    font-style: italic;
+    padding-left: 5px; }
+  .playlist_item img {
+    float: left;
+    display: block;
+    width: 120px;
+    height: 100%; }
+  .playlist_item .info {
+    float: left;
+    padding: 0px 8px;
+    width: 100%;
+    position: relative;
+    height: 100%; }
+    .playlist_item .info .title {
+      font-size: 15px;
+      color: #000000;
+      display: block;
+      max-height: 52px;
+      line-height: 17px;
+      overflow: hidden; }
+    .playlist_item .info .addedby {
+      color: #333333;
+      font-size: 12px;
+      font-style: italic;
+      margin-top: 3px; }
+      .playlist_item .info .addedby .black {
+        font-weight: 600; }
+  .playlist_item .delete-column {
+    width: 24px;
+    float: left; }
+    .playlist_item .delete-column .delete {
+      width: 24px;
+      height: 24px;
+      float: left;
+      background: url("../../../img/delete.png") no-repeat center;
+      cursor: pointer;
+      border-radius: 100%; }
+  .playlist_item.first {
+    background-color: #D96459; }
+  .playlist_item.next {
+    background-color: #b0b0b0; }

@@ -5,6 +5,8 @@ import ReactSlider from 'react-slider';
 import vTime from 'video-time';
 import { youtubeParams } from '../../../settings';
 
+import './VideoPlayer.css';
+
 class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);

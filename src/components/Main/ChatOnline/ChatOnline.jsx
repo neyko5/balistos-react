@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import './ChatOnline.css';
+
 const ChatOnline = props => (
   <div className="users">
     <div className="header">

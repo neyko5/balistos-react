@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import SearchPlaylistResult from '../SearchPlaylistResult';
 import { searchPlaylists } from '../../../actions';
 
+import './SearchPlaylistContainer.css';
+
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
