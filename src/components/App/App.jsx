@@ -5,7 +5,6 @@ import Playlist from '../Main/Playlist';
 import Header from '../Header/Header';
 
 import './App.css';
-import '../../style/grid.css';
 
 const App = () => (
   <BrowserRouter>

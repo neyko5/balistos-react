@@ -1,4 +1,57 @@
-@import '../../style/variables';
+@import "../../style/mixins.scss";
+@import "../../style/normalize.scss";
+@import "../../style/variables.scss";
+
+
+//== Grid system
+$grid-columns:              12;
+$grid-gutter-width:         30px;
+$grid-float-breakpoint:     $screen-sm-min;
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1);
+$container-tablet:             ((720px + $grid-gutter-width));
+$container-sm:                 $container-tablet;
+$container-desktop:            ((940px + $grid-gutter-width));
+$container-md:                 $container-desktop;
+$container-large-desktop:      ((1220px + $grid-gutter-width));
+$container-lg:                 $container-large-desktop;
+
+.container {
+  @include container-fixed;
+
+  @media (min-width: $screen-sm-min) {
+    width: $container-sm;
+  }
+  @media (min-width: $screen-md-min) {
+    width: $container-md;
+  }
+  @media (min-width: $screen-lg-min) {
+    width: $container-lg;
+  }
+}
+
+.container-fluid {
+  @include container-fixed;
+}
+
+.row {
+  @include make-row;
+}
+
+@include make-grid-columns;
+
+@include make-grid(xs);
+
+@media (min-width: $screen-sm-min) {
+  @include make-grid(sm);
+}
+
+@media (min-width: $screen-md-min) {
+  @include make-grid(md);
+}
+
+@media (min-width: $screen-lg-min) {
+  @include make-grid(lg);
+}
 
 html,body{
     height: 100%;
@@ -176,12 +229,6 @@ main{
     float:left;
     margin-top:6px;
     margin-right:6px;
-    &.show{
-        background-image:url('../../img/show.png');
-    }
-    &.hide{
-        background-image:url('../../img/hide.png');
-    }
     &.note{
         background-image:url('../../img/note.png');
         margin-top:0px;
