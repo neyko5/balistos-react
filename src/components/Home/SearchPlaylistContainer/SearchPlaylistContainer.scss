@@ -71,3 +71,28 @@
         }
     }
 }
+
+@media (min-width:320px) and (max-width:479px) {
+    .search_playlist{
+        width: 270px;
+        .inner{
+            input{
+                width:250px;
+                border-radius:5px;
+            }
+            .search_icon{
+                display:none;
+            }
+        }
+    }
+}
+@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
+    .search_playlist{
+        width:450px;
+        .inner{
+            input{
+                width: 376px;
+            }
+        }
+    }
+}

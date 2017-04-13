@@ -8,9 +8,6 @@ import App from './components/App';
 import reducer from './reducers';
 import rootSaga from './sagas';
 
-
-import './style/style.css';
-
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(
     reducer,

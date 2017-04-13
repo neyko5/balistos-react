@@ -30,3 +30,48 @@
         }
     }
 }
+@media (min-width:320px) and (max-width:479px) {
+    .playlist_item{
+        img{
+            display:none;
+
+        }
+        .info{
+            width:226px;
+            .title{
+                font-size:13px;
+            }
+        }
+    }
+}
+
+@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
+    .playlist_item{
+        .info{
+            width:266px;
+            .title{
+                font-size:13px;
+            }
+        }
+    }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)  {
+    .playlist_item{
+        height:92px;
+        img{
+            width:125px;
+            height:86px;
+        }
+        .info{
+            width:221px;
+            height:86px;
+            .title{
+                font-size:13px;
+            }
+        }
+        .vote{
+            padding:2px 6px;
+        }
+    }
+}
