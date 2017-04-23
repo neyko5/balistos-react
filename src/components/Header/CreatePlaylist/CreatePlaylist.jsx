@@ -5,7 +5,7 @@ const CreatePlaylist = (props) => {
   let title;
   let description;
   return (
-    <div className={`dropdown ${props.open ? '' : 'hidden'}`} id="create" >
+    props.open ? <div className="dropdown" >
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -19,14 +19,13 @@ const CreatePlaylist = (props) => {
       >
         <div>
           <div className="title">Title</div>
-          <div className="error" id="create-playlist-error" />
-          <input type="text" id="playlist-title" ref={(node) => { title = node; }} />
+          <input type="text" ref={(node) => { title = node; }} />
           <div className="title">Description</div>
-          <input type="text" id="playlist-description" ref={(node) => { description = node; }} />
+          <input type="text" ref={(node) => { description = node; }} />
         </div>
         <button type="submit" className="button green">Create</button>
       </form>
-    </div>
+    </div> : undefined
   );
 };
 

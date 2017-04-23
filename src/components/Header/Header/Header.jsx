@@ -67,14 +67,13 @@ class Header extends React.Component {
                 username={this.props.username}
                 loggedIn={this.props.loggedIn}
               />
-              <LogOut
-                open={this.props.logoutOpen}
+              {this.props.logoutOpen ? <LogOut
                 onLogoutClick={this.props.onLogoutClick}
-              />
-              <CreatePlaylist
-                open={this.props.createPlaylistOpen}
+              /> : undefined}
+              
+              {this.props.createPlaylistOpen ? <CreatePlaylist
                 onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}
-              />
+              /> : undefined}
             </div> :
             <div>
               <UserMenu
@@ -83,12 +82,9 @@ class Header extends React.Component {
                 username={this.props.username}
                 loggedIn={this.props.loggedIn}
               />
-              <Login
-                open={this.props.loginOpen}
+              {this.props.loginOpen ? <Login /> : undefined}
               />
-              <Register
-                open={this.props.registerOpen}
-              />
+              {this.props.registerOpen ? <Register /> : undefined }
             </div>
               }
         </div>

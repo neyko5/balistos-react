@@ -19,69 +19,64 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-class VideoListItem extends React.Component {
-  deleteCurrentVideo() {
-    this.props.deleteVideo(this.props.video.id);
+const VideoListItem = (props) => {
+  const upLike = props.video.likes
+    .some(like => like.user_id === props.user_id && like.value === 1);
+  const downLike = props.video.likes
+    .some(like => like.user_id === props.user_id && like.value === -1);
+  const likeCount = props.video.likes
+    .reduce((total, like) => total + like.value, 0);
+
+  let playlistItemStatus = '';
+  let playlistItemClass = '';
+  if (props.index === 0) {
+    playlistItemClass = 'first';
+    playlistItemStatus = 'Now playing';
+  } else if (props.index === 1) {
+    playlistItemClass = 'next';
+    playlistItemStatus = 'Next';
   }
-  render() {
-    const upLike = this.props.video.likes
-      .some(like => like.user_id === this.props.user_id && like.value === 1);
-    const downLike = this.props.video.likes
-      .some(like => like.user_id === this.props.user_id && like.value === -1);
-    const likeCount = this.props.video.likes
-      .reduce((total, like) => total + like.value, 0);
 
-    let playlistItemStatus = '';
-    let playlistItemClass = '';
-    if (this.props.index === 0) {
-      playlistItemClass = 'first';
-      playlistItemStatus = 'Now playing';
-    } else if (this.props.index === 1) {
-      playlistItemClass = 'next';
-      playlistItemStatus = 'Next';
-    }
-
-    return (
-      <div className={`playlist_item ${playlistItemClass}`}>
-        {this.props.user_id ? <div className="vote">
-          <button
-            className={`up ${upLike ? 'active' : ''}`}
-            onClick={() => this.props.likeVideo(upLike ? 0 : 1)}
-            title={this.props.video.likes.filter(like => like.value === 1)
-              .map(like => like.user.username).join(', ')}
-          />
-          <div className="number">{likeCount}</div>
-          <button
-            className={`down ${downLike ? 'active' : ''}`}
-            onClick={() => this.props.likeVideo(downLike ? 0 : -1)}
-            title={this.props.video.likes.filter(like => like.value === -1)
-              .map(like => like.user.username).join(', ')}
-          />
-        </div> :
-        <div className="vote">
-          <div className="number full">{likeCount}</div>
-        </div>}
-        <div className="img-wrapper">
-          <div className="status">{playlistItemStatus}</div>
-          <img src={`https://img.youtube.com/vi/${this.props.video.video.youtube_id}/0.jpg`} alt={this.props.video.video.title} />
-        </div>
-        <div className="info">
-          <a
-            className="title" target="_blank"
-            rel="noopener noreferrer"
-            title={'Open in YouTube'}
-            href={`https://www.youtube.com/watch?v=${this.props.video.video.youtube_id}`}
-          >{this.props.video.video.title}</a>
-          <div className="addedby">
-            added by <span className="black">{this.props.video.user.username}</span>
-          </div>
-        </div>
-        {this.props.user_id ? <div className="delete-column">
-          <button className="delete" onClick={this.deleteCurrentVideo} />
-        </div> : null}
+  return (
+    <div className={`playlist_item ${playlistItemClass}`}>
+      {props.user_id ? <div className="vote">
+        <button
+          className={`up ${upLike ? 'active' : ''}`}
+          onClick={() => props.likeVideo(upLike ? 0 : 1)}
+          title={props.video.likes.filter(like => like.value === 1)
+            .map(like => like.user.username).join(', ')}
+        />
+        <div className="number">{likeCount}</div>
+        <button
+          className={`down ${downLike ? 'active' : ''}`}
+          onClick={() => props.likeVideo(downLike ? 0 : -1)}
+          title={props.video.likes.filter(like => like.value === -1)
+            .map(like => like.user.username).join(', ')}
+        />
+      </div> :
+      <div className="vote">
+        <div className="number full">{likeCount}</div>
+      </div>}
+      <div className="img-wrapper">
+        <div className="status">{playlistItemStatus}</div>
+        <img src={`https://img.youtube.com/vi/${props.video.video.youtube_id}/0.jpg`} alt={props.video.video.title} />
       </div>
-    );
-  }
+      <div className="info">
+        <a
+          className="title" target="_blank"
+          rel="noopener noreferrer"
+          title={'Open in YouTube'}
+          href={`https://www.youtube.com/watch?v=${props.video.video.youtube_id}`}
+        >{props.video.video.title}</a>
+        <div className="addedby">
+          added by <span className="black">{props.video.user.username}</span>
+        </div>
+      </div>
+      {props.user_id ? <div className="delete-column">
+        <button className="delete" onClick={() => deleteVideo(props.video.id)} />
+      </div> : undefined}
+    </div>
+  );
 }
 
 VideoListItem.propTypes = {

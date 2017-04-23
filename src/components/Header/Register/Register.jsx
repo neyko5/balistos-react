@@ -4,15 +4,26 @@ import { connect } from 'react-redux';
 import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../../actions';
 
 const mapDispatchToProps = dispatch => ({
-  sendRegister: (username, email, password) => {
-    dispatch(sendRegisterRequest(username, email, password));
-  },
   setErrorMessage: (message) => {
     dispatch(setRegisterError(message));
   },
   onOpenLoginClick: () => {
     dispatch(toggleLoginWindow());
   },
+  onSubmit: (e, username, password) => {
+    e.preventDefault();
+    if (username.value.trim().length < 4) {
+      dispatch(setRegisterError('Username should be min 4 characters.'));
+      return;
+    }
+    if (password.value.trim().length < 6) {
+      dispatch(setRegisterError('Password should be min 6 characters.'));
+      return;
+    }
+    dispatch(sendRegisterRequest(username.value, password.value));
+    username.value = '';
+    password.value = '';
+  }
 });
 
 const mapStateToProps = (state, ownProps) => ({
@@ -24,23 +35,8 @@ const Register = (props) => {
   let username;
   let password;
   return (
-    <div className={`dropdown ${props.open ? '' : 'hidden'}`} id="register" >
-      <form
-        role="form" method="POST" onSubmit={(e) => {
-          e.preventDefault();
-          if (username.value.trim().length < 4) {
-            props.setErrorMessage('Username should be min 4 characters.');
-            return;
-          }
-          if (password.value.trim().length < 6) {
-            props.setErrorMessage('Password should be min 6 characters.');
-            return;
-          }
-          props.sendRegister(username.value, password.value);
-          username.value = '';
-          password.value = '';
-        }}
-      >
+    <div className="dropdown">
+      <form onSubmit={(e) => props.onSubmit(e, username, password)}>
         <label htmlFor="register-username">
           <div className="title">Username</div>
           <div className="error">{props.error}</div>

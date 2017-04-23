@@ -126,9 +126,9 @@ class VideoPlayer extends React.Component {
                   opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}
                 />
               : <div className="video-empty">
-                <div className="text-big">No video</div>
-                <div className="text-small">Make sure you add some new videos to the playlist</div>
-              </div>
+                  <div className="text-big">No video</div>
+                  <div className="text-small">Make sure you add some new videos to the playlist</div>
+                </div>
             }
             </div>
             <div className="progress">

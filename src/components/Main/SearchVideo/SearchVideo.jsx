@@ -73,7 +73,7 @@ class SearchVideo extends React.Component {
           value={this.props.query || ''}
           autoComplete="off"
         />
-        {this.props.results && this.props.query ? <ul className="results">
+        {this.props.results && this.props.query ? <div className="results">
           {this.props.results.map((result, index) =>
             <VideoResult
               title={result.snippet.title}
@@ -85,7 +85,7 @@ class SearchVideo extends React.Component {
               active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
             />,
                     )}
-        </ul> : undefined }
+        </div> : undefined }
       </div>
     );
   }

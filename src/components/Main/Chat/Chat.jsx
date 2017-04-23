@@ -20,7 +20,7 @@ const Chat = props => (
     </div>
     {props.username ? <ChatForm sendMessage={props.sendMessage} /> : undefined}
   </div>
-    );
+);
 
 Chat.propTypes = {
   username: PropTypes.string,

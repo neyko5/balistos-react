@@ -12,7 +12,6 @@ const mapStateToProps = (state, ownProps) => ({
   results: state.results.playlists,
 });
 
-
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSearchInputChange: (e) => {
     dispatch(searchPlaylists(e.target.value, ownProps.token));

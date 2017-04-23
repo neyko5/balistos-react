@@ -17,25 +17,24 @@
         padding:11px 10px;
         margin: 0px;
     }
-    ul.results{
+    .results{
         position:absolute;
         top: 43px;
-        width:100%;
+        width: calc(100% - 10px);
         background:white;
         z-index:20;
         background:$box;
         border:1px solid $border;
         border-radius:3px;
-        float:left;
         list-style: none;
         padding:0px;
+        text-align: left;
         &:empty {
             display: none;
         }
-        li{
+        button {
             width: 100%;
             padding: 1px 5px;
-            float: left;
             cursor: pointer;
             img{
                 float: left;
@@ -52,15 +51,16 @@
                 overflow:hidden;
                 height:40px;
             }
+            &:hover{
+                background:$white;
+            }
+            &.active{
+                background:$grey;
+            }
+            &.active:hover{
+                background:$white;
+            }
         }
-        li:hover{
-            background:$white;
-        }
-        li.active{
-            background:$grey;
-        }
-        li.active:hover{
-            background:$white;
-        }
+        
     }
 }
