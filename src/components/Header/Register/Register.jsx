@@ -28,7 +28,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  error: state.auth.register_error,
+  error: state.auth.registerError,
 });
 
 const Register = (props) => {

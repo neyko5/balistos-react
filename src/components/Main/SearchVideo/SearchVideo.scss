@@ -1,33 +1,32 @@
 @import '../../../style/variables';
-.search{
-    float:left;
-    position:relative;
-    width:100%;
+.search {
+    float: left;
+    position: relative;
+    width: 100%;
     padding: 5px;
-    input[type="text"]{
+    input[type="text"] {
         width: 100%;
         height: 40px;
         border-radius: 0px;
         float: left;
-        
-        line-height:18px;
-        font-size:13px;
-        color:$dark;
+        line-height: 18px;
+        font-size: 13px;
+        color: $dark;
         background-color: white;
-        padding:11px 10px;
+        padding: 11px 10px;
         margin: 0px;
     }
-    .results{
-        position:absolute;
+    .results {
+        position: absolute;
         top: 43px;
         width: calc(100% - 10px);
-        background:white;
-        z-index:20;
-        background:$box;
-        border:1px solid $border;
-        border-radius:3px;
+        background: white;
+        z-index: 20;
+        background: $box;
+        border: 1px solid $border;
+        border-radius: 3px;
         list-style: none;
-        padding:0px;
+        padding: 0px;
         text-align: left;
         &:empty {
             display: none;
@@ -51,16 +50,15 @@
                 overflow:hidden;
                 height:40px;
             }
-            &:hover{
-                background:$white;
+            &:hover {
+                background: $white;
             }
-            &.active{
-                background:$grey;
+            &.active {
+                background: $grey;
             }
-            &.active:hover{
-                background:$white;
+            &.active:hover {
+                background: $white;
             }
         }
-        
     }
 }

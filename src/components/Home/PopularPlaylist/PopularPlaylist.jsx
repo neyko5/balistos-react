@@ -6,7 +6,7 @@ import './PopularPlaylist.css';
 
 const PopularPlaylist = props => (
   <Link to={`/playlist/${props.data.id}`} className="playlist">
-    <div className="number" >{props.index + 1}</div>
+    <div className="place" >{props.index + 1}</div>
     <div className="square">
       <div className="title">{props.data.title}</div>
       <div className="created">created by <span className="black">{props.data.username}</span></div>

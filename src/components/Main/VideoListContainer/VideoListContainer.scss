@@ -1,19 +1,19 @@
 @import '../../../style/variables';
 
-.box.playlist{
+.box.playlist {
     background: #e1e1e1;
     border-top: 0px;
-    float:left;
+    float: left;
     width: 100%;
     margin-top: 25px;
-    .header{
+    .header {
         height: 40px;
         width: 100%;
         padding: 10px 10px;
         background-color: #e6e6e6;
         display: flex;
         align-items: center;
-        .title{
+        .title {
             font-size: 14px;
             font-weight: 600;
             color: $dark;
@@ -25,14 +25,14 @@
             color: $dark;
          }		         
     }
-    .body{
-        float:left;
-        width:100%;
+    .body {
+        float: left;
+        width: 100%;
         height: 390px;
         overflow: auto;
     }
 }
-.empty_item{
+.empty_item {
     color:$title;
     padding:10px;
 }

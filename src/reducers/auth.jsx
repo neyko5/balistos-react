@@ -1,42 +1,44 @@
+import * as actionTypes from '../constants/actionTypes';
+
 function auth(state = {
   token: localStorage.getItem('token') || undefined,
   username: localStorage.getItem('username') || undefined,
-  logged_in: localStorage.getItem('token') !== undefined,
-  user_id: parseInt(localStorage.getItem('user_id'), 10) || undefined,
+  loggedIn: localStorage.getItem('token') !== undefined,
+  userId: parseInt(localStorage.getItem('userId'), 10) || undefined,
 }, action) {
   switch (action.type) {
-    case 'AUTH_SET_FROM_STORAGE':
+    case actionTypes.AUTH_SET_FROM_STORAGE:
       return {
         ...state,
         token: action.token,
         username: action.username,
-        user_id: action.user_id,
-        logged_in: true,
+        userId: action.userId,
+        loggedIn: true,
       };
-    case 'LOG_OUT':
+    case actionTypes.LOG_OUT:
       return {};
-    case 'SET_LOGIN_ERROR':
+    case actionTypes.SET_LOGIN_ERROR:
       return {
-        login_error: action.message,
-        register_error: undefined,
+        loginError: action.message,
+        registerError: undefined,
       };
-    case 'SET_REGISTER_ERROR':
+    case actionTypes.SET_REGISTER_ERROR:
       return {
-        register_error: action.message,
-        login_error: undefined,
+        registerError: action.message,
+        loginError: undefined,
       };
-    case 'POST_LOGIN':
+    case actionTypes.POST_LOGIN:
       localStorage.setItem('token', action.token);
       localStorage.setItem('username', action.username);
-      localStorage.setItem('user_id', action.user_id);
+      localStorage.setItem('userId', action.userId);
       return {
         ...state,
         username: action.username,
         token: action.token,
-        user_id: action.user_id,
-        logged_in: true,
-        register_error: undefined,
-        login_error: undefined,
+        userId: action.userId,
+        loggedIn: true,
+        registerError: undefined,
+        loginError: undefined,
       };
     default:
       return state;

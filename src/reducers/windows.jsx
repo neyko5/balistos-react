@@ -1,27 +1,29 @@
+import * as actionTypes from '../constants/actionTypes';
+
 function windows(state = {
-  create_playlist_open: false,
-  logout_open: false,
-  login_open: false,
-  register_open: false,
+  createPlaylistOpen: false,
+  logoutOpen: false,
+  loginOpen: false,
+  registerOpen: false,
 }, action) {
   switch (action.type) {
-    case 'TOGGLE_LOGIN_WINDOW':
+    case actionTypes.TOGGLE_LOGIN_WINDOW:
       return {
-        login_open: !state.login_open,
+        loginOpen: !state.loginOpen,
       };
-    case 'TOGGLE_REGISTER_WINDOW':
+    case actionTypes.TOGGLE_REGISTER_WINDOW:
       return {
-        register_open: !state.register_open,
+        registerOpen: !state.registerOpen,
       };
-    case 'TOGGLE_LOGOUT_WINDOW':
+    case actionTypes.TOGGLE_LOGOUT_WINDOW:
       return {
-        logout_open: !state.logout_open,
+        logoutOpen: !state.logoutOpen,
       };
-    case 'TOGGLE_CREATE_PLAYLIST_WINDOW':
+    case actionTypes.TOGGLE_CREATE_PLAYLIST_WINDOW:
       return {
-        create_playlist_open: !state.create_playlist_open,
+        createPlaylistOpen: !state.createPlaylistOpen,
       };
-    case 'CLOSE_ALL_WINDOWS': {
+    case actionTypes.CLOSE_ALL_WINDOWS: {
       return {};
     }
     default:

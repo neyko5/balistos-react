@@ -1,38 +1,40 @@
+import * as actionTypes from '../constants/actionTypes';
+
 function results(state = {
   popular: [],
   youtube: [],
   playlists: [],
   related: [],
-  youtube_index: 0,
+  youtubeIndex: 0,
 }, action) {
   switch (action.type) {
-    case 'SET_PLAYLIST_RESULTS':
+    case actionTypes.SET_PLAYLIST_RESULTS:
       return {
         ...state,
         playlists: action.results,
       };
-    case 'SET_POPULAR_RESULTS':
+    case actionTypes.SET_POPULAR_RESULTS:
       return {
         ...state,
         popular: action.results,
       };
-    case 'SET_YOUTUBE_RESULTS':
+    case actionTypes.SET_YOUTUBE_RESULTS:
       return {
         ...state,
-        youtube_index: 0,
+        youtubeIndex: 0,
         youtube: action.results,
       };
-    case 'UPDATE_SEARCH_INDEX':
+    case actionTypes.UPDATE_SEARCH_INDEX:
       return {
         ...state,
-        youtube_index: state.youtube_index + action.value,
+        youtubeIndex: state.youtubeIndex + action.value,
       };
-    case 'SET_YOUTUBE_SEARCH_QUERY':
+    case actionTypes.SET_YOUTUBE_SEARCH_QUERY:
       return {
         ...state,
         query: action.query,
       };
-    case 'SET_RELATED_RESULTS':
+    case actionTypes.SET_RELATED_RESULTS:
       return {
         ...state,
         related: action.results,

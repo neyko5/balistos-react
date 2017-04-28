@@ -7,7 +7,6 @@ import './RelatedVideoItem.css';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  user_id: state.auth.user_id,
   id: state.playlist.id,
 });
 

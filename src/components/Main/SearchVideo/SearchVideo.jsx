@@ -29,7 +29,7 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   results: state.results.youtube,
   query: state.results.query,
-  index: state.results.youtube_index,
+  index: state.results.youtubeIndex,
 });
 
 class SearchVideo extends React.Component {

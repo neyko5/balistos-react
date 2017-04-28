@@ -32,16 +32,16 @@ class VideoPlayer extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (prevProps.current && this.props.current &&
-      prevProps.current.video.youtube_id !== this.props.current.video.youtube_id) {
+      prevProps.current.video.youtubeId !== this.props.current.video.youtubeId) {
       youtubeParams.playerVars.start = 0;
       this.resumeVideo();
       this.props.startVideo(this.props.current.id);
-      this.props.getRelatedVideos(this.props.current.video.youtube_id);
+      this.props.getRelatedVideos(this.props.current.video.youtubeId);
     }
     if (!prevProps.current && this.props.current) {
       this.props.startVideo(this.props.current.id);
-      this.props.getRelatedVideos(this.props.current.video.youtube_id);
-      youtubeParams.playerVars.start = this.props.current.started_at;
+      this.props.getRelatedVideos(this.props.current.video.youtubeId);
+      youtubeParams.playerVars.start = this.props.current.startedAt;
     }
   }
   componentWillUnmount() {
@@ -52,7 +52,7 @@ class VideoPlayer extends React.Component {
     this.setState({
       player: event.target,
     });
-    setTimeout(this.updateElapsed, 200);
+    setTimeout(this.updateElapsed, 500);
   }
   onSpeakerClick() {
     if (this.state.volume === 0) {
@@ -122,7 +122,7 @@ class VideoPlayer extends React.Component {
               >Powered by YouTube</a>
               {this.props.current ?
                 <YouTube
-                  videoId={this.props.current.video.youtube_id}
+                  videoId={this.props.current.video.youtubeId}
                   opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}
                 />
               : <div className="video-empty">
@@ -132,7 +132,7 @@ class VideoPlayer extends React.Component {
             }
             </div>
             <div className="progress">
-              <div className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total * 100)}%` }} />
+              <div className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total) * 100}%` }} />
             </div>
             <div className="toolbar">
               <div className="controls">
@@ -141,8 +141,8 @@ class VideoPlayer extends React.Component {
                   <button className="control pause" onClick={this.pause} />}
               </div>
               <div className="timer">
-                <div className="elapsed">{vTime(this.state.elapsed)}</div>
-                <div className="total"> / {vTime(this.state.total)} </div>
+                <div className="time elapsed">{vTime(this.state.elapsed)}</div>
+                <div className="time total"> / {vTime(this.state.total)} </div>
               </div>
               <div className="volume">
                 <button className="speaker" onClick={this.onSpeakerClick} />
@@ -167,9 +167,9 @@ VideoPlayer.propTypes = {
   startVideo: PropTypes.func.isRequired,
   current: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    started_at: PropTypes.number.isRequired,
+    startedAt: PropTypes.number,
     video: PropTypes.shape({
-      youtube_id: PropTypes.string.isRequired,
+      youtubeId: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
     likes: PropTypes.arrayOf(

@@ -66,24 +66,24 @@ class Playlist extends React.Component {
     });
   }
   componentDidUpdate(prevProps) {
-    if (this.props.match.params.playlist_id !== prevProps.match.params.playlist_id) {
-      socket.emit('leave', `playlist_${prevProps.match.params.playlist_id}`);
+    if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
+      socket.emit('leave', `playlist_${prevProps.match.params.playlistId}`);
       this.initPlaylist();
     }
   }
   componentWillUnmount() {
-    socket.emit('leave', `playlist_${this.props.match.params.playlist_id}`);
+    socket.emit('leave', `playlist_${this.props.match.params.playlistId}`);
   }
   initPlaylist() {
-    this.props.fetchVideos(this.props.match.params.playlist_id);
-    socket.emit('join', `playlist_${this.props.match.params.playlist_id}`);
+    this.props.fetchVideos(this.props.match.params.playlistId);
+    socket.emit('join', `playlist_${this.props.match.params.playlistId}`);
     this.heartbeat();
   }
   heartbeat() {
     if (this.props.username) {
-      this.props.heartbeat(this.props.username, this.props.match.params.playlist_id);
+      this.props.heartbeat(this.props.username, this.props.match.params.playlistId);
     } else {
-      this.props.getActiveUsers(this.props.match.params.playlist_id);
+      this.props.getActiveUsers(this.props.match.params.playlistId);
     }
     setTimeout(this.heartbeat, 60000);
   }
@@ -105,7 +105,7 @@ class Playlist extends React.Component {
           <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
             <ChatContainer
               playlist={this.props.playlist}
-              id={this.props.match.params.playlist_id}
+              id={this.props.match.params.playlistId}
             />
           </div>
         </div>
@@ -129,7 +129,7 @@ Playlist.propTypes = {
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      playlist_id: PropTypes.string.isRequired,
+      playlistId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
 };

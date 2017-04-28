@@ -19,12 +19,16 @@ const ChatOnline = props => (
 );
 
 ChatOnline.propTypes = {
-  username: PropTypes.string.isRequired,
+  username: PropTypes.string,
   users: PropTypes.arrayOf(
     PropTypes.shape({
       username: PropTypes.string.isRequired,
     }).isRequired,
   ).isRequired,
+};
+
+ChatOnline.defaultProps = {
+  username: undefined,
 };
 
 module.exports = ChatOnline;

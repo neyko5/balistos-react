@@ -1,49 +1,50 @@
 @import '../../../style/variables';
 
-.playlist_item{
+.playlist_item {
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100px;
     padding: 5px 5px 5px 10px;
-    .vote{
+    position: relative;
+    .vote {
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         margin-right: 10px;
         height: 100%;
-        .up{
-            background:url('../../../img/thumbs_up.png') no-repeat;
-            width:25px;
-            height:26px;
-            cursor:pointer;
+        .up {
+            background: url('../../../img/thumbs_up.png') no-repeat;
+            width: 25px;
+            height: 26px;
+            cursor: pointer;
         }
-        .up:hover,.up.active:hover{
-            background-position:0px -26px;
+        .up:hover,.up.active:hover {
+            background-position: 0px -26px;
         }
-        .up.active{
-            background-position:0px -52px;
+        .up.active {
+            background-position: 0px -52px;
         }
-        .down{
-            cursor:pointer;
-            background:url('../../../img/thumbs_down.png') no-repeat;
-            width:25px;
-            height:26px;
-            background-position:0px 1px;
+        .down {
+            cursor: pointer;
+            background: url('../../../img/thumbs_down.png') no-repeat;
+            width: 25px;
+            height: 26px;
+            background-position: 0px 1px;
         }
-        .down:hover,.down.active:hover{
-            background-position:0px -24px;
+        .down:hover,.down.active:hover {
+            background-position: 0px -24px;
         }
-        .down.active{
-            background-position:0px -49px;
+        .down.active {
+            background-position: 0px -49px;
         }
-        .number{
-            line-height:30px;
-            color:$title;
-            font-size:14px;
-            font-weight:700;
+        .number {
+            line-height: 30px;
+            color: $title;
+            font-size: 14px;
+            font-weight: 700;
             margin-right: 5px;
             text-align: center;
             &.full {
@@ -61,46 +62,46 @@
             font-style: italic;
             padding-left: 5px;
         }
-    }
-    img{
-        float:left;
-        display:block;
-        width: 120px;
-        height: 100%;
-    }
-    .info{
+        img {
+            float:left;
+            display:block;
+            width: 120px;
+            height: 90px;
+        }
+    }   
+    .info {
         float: left;
         padding: 0px 8px;
         width: 100%;
         position: relative;
         height: 100%;
-        .title{
-            font-size:15px;
+        .title {
+            font-size: 15px;
             color: $black;
             display: block;
             max-height: 52px;
             line-height: 17px;
             overflow: hidden;
         }
-        .addedby{
-            color:$dark;
+        .addedby {
+            color: $dark;
             font-size: 12px;
             font-style: italic;
             margin-top: 3px;
-            .black{
+            .black {
                 font-weight: 600;
             }
         }
     }
-    .delete-column{
-        width:24px;
-        float:left;
-        .delete{
-            width:24px;
-            height:24px;
-            float:left;
-            background:url('../../../img/delete.png') no-repeat center;
-            cursor:pointer;
+    .delete-column {
+        width: 24px;
+        float: left;
+        .delete {
+            width: 24px;
+            height: 24px;
+            float: left;
+            background: url('../../../img/delete.png') no-repeat center;
+            cursor: pointer;
             border-radius: 100%;
         }
     }
@@ -113,47 +114,46 @@
 }
 
 @media (min-width:320px) and (max-width:479px) {
-    .playlist_item{
-        img{
-            display:none;
-
+    .playlist_item {
+        img {
+            display: none;
         }
-        .info{
-            width:226px;
-            .title{
-                font-size:13px;
+        .info {
+            width: 226px;
+            .title {
+                font-size: 13px;
             }
         }
     }
 }
 
 @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
-    .playlist_item{
-        .info{
-            width:266px;
-            .title{
-                font-size:13px;
+    .playlist_item {
+        .info {
+            width: 266px;
+            .title {
+                font-size: 13px;
             }
         }
     }
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)  {
-    .playlist_item{
-        height:92px;
-        img{
-            width:125px;
-            height:86px;
+    .playlist_item {
+        height: 92px;
+        img {
+            width: 125px;
+            height: 86px;
         }
-        .info{
-            width:221px;
-            height:86px;
-            .title{
-                font-size:13px;
+        .info {
+            width: 221px;
+            height: 86px;
+            .title {
+                font-size: 13px;
             }
         }
-        .vote{
-            padding:2px 6px;
+        .vote {
+            padding: 2px 6px;
         }
     }
 }

@@ -19,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
 });
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  error: state.auth.login_error,
+  error: state.auth.loginError,
 });
 
 const Login = (props) => {

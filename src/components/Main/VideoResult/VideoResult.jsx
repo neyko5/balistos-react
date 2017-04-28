@@ -6,7 +6,7 @@ const VideoResult = props => (
     <img src={props.image} alt={props.title} />
     <div className="title">{props.title}</div>
   </button>
-    );
+);
 
 VideoResult.propTypes = {
   active: PropTypes.bool.isRequired,

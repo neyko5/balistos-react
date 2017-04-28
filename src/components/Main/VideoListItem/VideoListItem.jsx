@@ -7,7 +7,7 @@ import './VideoListItem.css';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
-  user_id: state.auth.user_id,
+  userId: state.auth.userId,
 });
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
@@ -21,9 +21,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 
 const VideoListItem = (props) => {
   const upLike = props.video.likes
-    .some(like => like.user_id === props.user_id && like.value === 1);
+    .some(like => like.userId === props.userId && like.value === 1);
   const downLike = props.video.likes
-    .some(like => like.user_id === props.user_id && like.value === -1);
+    .some(like => like.userId === props.userId && like.value === -1);
   const likeCount = props.video.likes
     .reduce((total, like) => total + like.value, 0);
 
@@ -39,7 +39,7 @@ const VideoListItem = (props) => {
 
   return (
     <div className={`playlist_item ${playlistItemClass}`}>
-      {props.user_id ? <div className="vote">
+      {props.userId ? <div className="vote">
         <button
           className={`up ${upLike ? 'active' : ''}`}
           onClick={() => props.likeVideo(upLike ? 0 : 1)}
@@ -59,21 +59,21 @@ const VideoListItem = (props) => {
       </div>}
       <div className="img-wrapper">
         <div className="status">{playlistItemStatus}</div>
-        <img src={`https://img.youtube.com/vi/${props.video.video.youtube_id}/0.jpg`} alt={props.video.video.title} />
+        <img src={`https://img.youtube.com/vi/${props.video.video.youtubeId}/0.jpg`} alt={props.video.video.title} />
       </div>
       <div className="info">
         <a
           className="title" target="_blank"
           rel="noopener noreferrer"
           title={'Open in YouTube'}
-          href={`https://www.youtube.com/watch?v=${props.video.video.youtube_id}`}
+          href={`https://www.youtube.com/watch?v=${props.video.video.youtubeId}`}
         >{props.video.video.title}</a>
         <div className="addedby">
           added by <span className="black">{props.video.user.username}</span>
         </div>
       </div>
-      {props.user_id ? <div className="delete-column">
-        <button className="delete" onClick={() => deleteVideo(props.video.id)} />
+      {props.userId ? <div className="delete-column">
+        <button className="delete" onClick={() => props.deleteVideo(props.video.id)} />
       </div> : undefined}
     </div>
   );
@@ -81,13 +81,13 @@ const VideoListItem = (props) => {
 
 VideoListItem.propTypes = {
   index: PropTypes.number.isRequired,
-  user_id: PropTypes.number,
+  userId: PropTypes.number,
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,
   video: PropTypes.shape({
     id: PropTypes.number.isRequired,
     video: PropTypes.shape({
-      youtube_id: PropTypes.string.isRequired,
+      youtubeId: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
     likes: PropTypes.arrayOf(
@@ -102,7 +102,7 @@ VideoListItem.propTypes = {
 };
 
 VideoListItem.defaultProps = {
-  user_id: undefined,
+  userId: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoListItem);

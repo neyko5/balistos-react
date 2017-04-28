@@ -63,286 +63,269 @@ html,body{
 
 
 
-#app, .full-height{
-    height:100%;
+.full-height {
+    height: 100%;
 }
-.container{
+.container {
     position:relative;
 }
-h1{
-    font-size:55px;
-    width:100%;
-    color:$white;
-    font-weight:200;
-    text-align:center;
+h1 {
+    font-size: 55px;
+    width: 100%;
+    color: $white;
+    font-weight: 200;
+    text-align: center;
 }
-h2{
-    margin:0px;
-    font-size:20px;
-    font-weight:700;
-    line-height:36px;
-    color:$title;
+h2 {
+    margin: 0px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 36px;
+    color: $title;
 }
-h3{
-    margin:0px;
-    font-size:16px;
-    font-weight:600;
-    line-height:24px;
-    color:$title;
+h3 {
+    margin: 0px;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 24px;
+    color: $title;
 }
-p{
-    margin:2px 0px;
-    font-size:13px;
-    color:$title;
+p {
+    margin: 2px 0px;
+    font-size: 13px;
+    color: $title;
 }
-input[type="text"]{
-    background:$input;
-    border:1px solid $inputborder;
-    width:100%;
-    height:35px;
-    border-radius:3px;
-    font-size:13px;
-    line-height:13px;
-    padding:11px 10px;
-    margin-bottom:7px;
+input[type="text"] {
+    background: $input;
+    border: 1px solid $inputborder;
+    width: 100%;
+    height: 35px;
+    border-radius: 3px;
+    font-size: 13px;
+    line-height: 13px;
+    padding: 11px 10px;
+    margin-bottom: 7px;
 }
-input[type="text"].small{
-    float:left;
-    width:100%;
-    margin-bottom:0px;
+input[type="text"].small {
+    float: left;
+    width: 100%;
+    margin-bottom: 0px;
 }
-label{
-    width:100%;
-    float:left;
-    margin-bottom:5px;
-    margin-right:20px;
-    span{
-        float:left;
-        line-height:18px;
-        margin-right:10px;
-        font-size:13px;
+label {
+    width: 100%;
+    float: left;
+    margin-bottom: 5px;
+    margin-right: 20px;
+    span {
+        float: left;
+        line-height: 18px;
+        margin-right: 10px;
+        font-size: 13px;
     }
 }
 
-main{
+main {
     min-height: 100%;
     height: auto;
     margin: -50px auto -45px;
     padding: 50px 0 45px;
 }
 
-#content{
+#content {
     height: 100%;
 }
-.button{
-    height:38px;
-    line-height:38px;
-    padding:0px 10px;
-    font-size:13px;
-    font-weight:700;
-    float:left;
-    border:0px;
-    border-radius:5px;
-    margin-bottom:2px;
-    margin-right:2px;
+.button {
+    height: 38px;
+    line-height: 38px;
+    padding: 0px 10px;
+    font-size: 13px;
+    font-weight: 700;
+    float: left;
+    border: 0px;
+    border-radius: 5px;
+    margin-bottom: 2px;
+    margin-right: 2px;
     user-select: none;
-    cursor:pointer;
-    outline:none;
+    cursor: pointer;
+    outline: none;
 }
-.button:active{
-    margin-bottom:1px;
-    margin-right:1px;
-    margin-left:1px;
-    margin-top:1px;
+.button:active {
+    margin-bottom: 1px;
+    margin-right: 1px;
+    margin-left: 1px;
+    margin-top: 1px;
 }
-.button.green{
-    color:$white;
-    background:$buttongreen;
+.button.green {
+    color: $white;
+    background: $buttongreen;
     box-shadow: 2px 2px 0px $buttongreenshadow;
 }
-.button.green:active{
+.button.green:active {
     box-shadow: 1px 1px 0px $buttongreenshadow;
 }
-.button.blue{
-    color:$white;
-    background:$buttonblue;
+.button.blue {
+    color: $white;
+    background: $buttonblue;
     box-shadow: 2px 2px 0px $buttonblueshadow;
 }
-.button.blue:active{
+.button.blue:active {
     box-shadow: 1px 1px 0px $buttonblueshadow;
 }
-.button.grey{
-    color:$title;
-    background:$buttongrey;
+.button.grey {
+    color: $title;
+    background: $buttongrey;
     box-shadow: 2px 2px 0px $buttongreyshadow;
 }
-.button.grey:active{
+.button.grey:active {
     box-shadow: 1px 1px 0px $buttongreyshadow;
 }
 .button.red{
-    color:$white;
-    background:$buttonred;
+    color: $white;
+    background: $buttonred;
     box-shadow: 2px 2px 0px $buttonredshadow;
 }
-.button.red:active{
+.button.red:active {
     box-shadow: 1px 1px 0px $buttonredshadow;
 }
-.button.show{
-    margin-right:30px;
-    display:none;
+.button.show {
+    margin-right: 30px;
+    display: none;
 }
-.button.show:active{
-    margin-right:29px;
+.button.show:active {
+    margin-right: 29px;
 }
-.button.hide:active{
-    margin-right:29px;
+.button.hide:active {
+    margin-right: 29px;
 }
-.button.hide{
-    margin-right:30px;
+.button.hide {
+    margin-right: 30px;
 }
-.button.share{
-    margin-right:30px;
+.button.share {
+    margin-right: 30px;
 }
-.button.share:active{
-    margin-right:29px;
+.button.share:active {
+    margin-right: 29px;
 }
-.button.delete{
-    float:right;
+.button.delete {
+    float: right;
 }
-.button.chat{
-    float:right;
+.button.chat {
+    float: right;
 }
-.button.logout{
-    float:right;
-    margin-right:30px;
-    padding:0px 40px;
+.button.logout {
+    float: right;
+    margin-right: 30px;
+    padding: 0px 40px;
 }
 .button.create{
-    clear:both;
+    clear: both;
 }
-
 .icon{
-    width:26px;
-    height:26px;
-    background-position:center;
-    background-repeat:no-repeat;
-    float:left;
-    margin-top:6px;
-    margin-right:6px;
-    &.note{
-        background-image:url('../../img/note.png');
-        margin-top:0px;
+    width: 26px;
+    height: 26px;
+    background-position: center;
+    background-repeat: no-repeat;
+    float: left;
+    margin-top: 6px;
+    margin-right: 6px;
+    &.note {
+        background-image: url('../../img/note.png');
+        margin-top: 0px;
     }
-    &.chat{
-        background-image:url('../../img/chat.png');
-        margin-top:0px;
+    &.chat {
+        background-image: url('../../img/chat.png');
+        margin-top: 0px;
     }
-    &.message{
-        background-image:url('../../img/message.png');
+    &.message {
+        background-image: url('../../img/message.png');
     }
 }
-
-
 .no-gutter{
-    padding:0px;
+    padding: 0px;
 }
-.left-gutter{
-    padding-right:0px;
+.left-gutter {
+    padding-right: 0px;
     padding-left: 0px;
 }
-
-.sidebar{
+.sidebar {
     float:left;
 }
-
 .black {
     color: black;
 }
-
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
     background: transparent;
 }
-
 ::-webkit-scrollbar-track {
     width: 5px;
     height: 5px;
     background: transparent;
 }
-
 ::-webkit-scrollbar-thumb {
     background: #CCCCCC;
     border-radius: 4px;
 }
-
 .clearfix{
     clear:both;
 }
-
-
 @media (min-width:320px) and (max-width:479px) {
-    .container{
-        width:320px;
-        padding:10px;
+    .container {
+        width: 320px;
+        padding: 10px;
     }
-    .left-gutter{
-        padding:0px;
+    .left-gutter {
+        padding: 0px;
     }
-    .main{
+    .main {
         padding: 10px 16px;
     }
-    h1{
+    h1 {
         font-size:26px;
     }
 }
 
 @media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
-    .container{
-        width:480px;
-        padding:0px;
+    .container {
+        width: 480px;
+        padding: 0px;
     }
-    .main{
+    .main {
         padding: 10px 16px;
     }
-
-    .box{
+    .box {
         width: 100%;
     }
-
-    .left-gutter{
-        padding:0px;
+    .left-gutter {
+        padding: 0px;
     }
-    .body{
-        display:table;
-        float:none;
+    .body {
+        display: table;
+        float: none;
     }
-
-    h1{
-        font-size:42px;
+    h1 {
+        font-size: 42px;
     }
 }
 
 @media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)  {
-    .left-gutter{
-        padding:0px;
+    .left-gutter {
+        padding: 0px;
     }
-
-    .chat-container{
+    .chat-container {
         padding-left: 8px;
     }
-
-    .middle-gutter{
+    .middle-gutter {
         padding-left: 8px;
     }
-
-    h1{
+    h1 {
         font-size:37px;
     }
 }
 
 @media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-    .main{
+    .main {
         padding: 10px 16px;
     }
     main {

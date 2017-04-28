@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
+
 import { connect } from 'react-redux';
 import UserMenu from '../UserMenu';
 import LogOut from '../LogOut';
@@ -8,21 +9,29 @@ import CreatePlaylist from '../CreatePlaylist';
 import Login from '../Login';
 import Register from '../Register';
 
-import { toggleLoginWindow, toggleCreatePlaylistWindow, toggleRegisterWindow, toggleLogoutWindow, logOut, createPlaylist, verifyToken } from '../../../actions';
+import { 
+  toggleLoginWindow,
+  toggleCreatePlaylistWindow,
+  toggleRegisterWindow,
+  toggleLogoutWindow,
+  logOut,
+  createPlaylist,
+  verifyToken
+} from '../../../actions';
 
 import './Header.css';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   username: state.auth.username,
-  loggedIn: state.auth.logged_in,
-  loginOpen: state.windows.login_open,
-  registerOpen: state.windows.register_open,
-  logoutOpen: state.windows.logout_open,
-  createPlaylistOpen: state.windows.create_playlist_open,
+  loggedIn: state.auth.loggedIn,
+  loginOpen: state.windows.loginOpen,
+  registerOpen: state.windows.registerOpen,
+  logoutOpen: state.windows.logoutOpen,
+  createPlaylistOpen: state.windows.createPlaylistOpen,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch, ownProps) => ({
   verifyToken: () => {
     dispatch(verifyToken());
   },
@@ -42,7 +51,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(logOut());
   },
   onCreatePlaylistSubmit: (title, description) => {
-    dispatch(createPlaylist(title, description));
+    dispatch(createPlaylist(title, description, ownProps.history));
   },
 });
 
@@ -119,4 +128,4 @@ Header.defaultProps = {
   loginOpen: false,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

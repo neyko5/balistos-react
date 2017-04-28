@@ -1,61 +1,61 @@
 @import '../../../style/variables';
 
-main.background{
-    background:url('../../../img/back.png') repeat-x;
-    background-position:0 50px;
+main.background {
+    background: url('../../../img/back.png') repeat-x;
+    background-position: 0 50px;
 }
 
-.homeback{
-    background:$background;
-    margin-top:60px;
-    margin-bottom:60px;
+.homeback {
+    background: $background;
+    margin-top: 60px;
+    margin-bottom: 60px;
     float: left;
 }
 .presentation{
-    padding:16px;
-    h2{
-        color:$subtitle;
-        font-size:34px;
-        font-weight:300;
+    padding: 16px;
+    h2 {
+        color: $subtitle;
+        font-size: 34px;
+        font-weight: 300;
     }
-    .text{
-        margin-top:20px;
-        color:$dark;
-        font-size:14px;
+    .text {
+        margin-top: 20px;
+        color: $dark;
+        font-size: 14px;
     }
 }
-.popular{
-    border-top:$slider 3px solid;
-    margin:20px 0px;
-    .icon-note{
-        width:54px;
-        height:54px;
+.popular {
+    border-top: $slider 3px solid;
+    margin: 20px 0px;
+    .icon-note {
+        width: 54px;
+        height: 54px;
         background: $green url('../../../img/note-big.png') no-repeat center;
-        float:left;
+        float: left;
     }
-    h3{
-        color:$black;
-        font-weight:600;
+    h3 {
+        color: $black;
+        font-weight: 600;
         font-size: 28px;
-        display:inline-block;
-        margin-left:20px;
-        line-height:54px;
+        display: inline-block;
+        margin-left: 20px;
+        line-height: 54px;
     }
 }
 @media (min-width:320px) and (max-width:479px) {
-    .presentation{
-        h2{
+    .presentation {
+        h2 {
             font-size: 21px;
         }
-        .text{
+        .text {
             font-size:12px;
         }
     }
-    .popular h3{
+    .popular h3 {
         margin-left:5px;
         font-size:22px;
     }
-    .homeback{
+    .homeback {
         margin-top: 30px;
     }
 }

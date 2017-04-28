@@ -5,7 +5,7 @@ const CreatePlaylist = (props) => {
   let title;
   let description;
   return (
-    props.open ? <div className="dropdown" >
+    <div className="dropdown" >
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -25,13 +25,12 @@ const CreatePlaylist = (props) => {
         </div>
         <button type="submit" className="button green">Create</button>
       </form>
-    </div> : undefined
+    </div>
   );
 };
 
 CreatePlaylist.propTypes = {
-  onCreatePlaylistSubmit: PropTypes.func.isRequired,
-  open: PropTypes.bool.isRequired,
+  onCreatePlaylistSubmit: PropTypes.func.isRequired
 };
 
 module.exports = CreatePlaylist;
