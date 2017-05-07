@@ -16,6 +16,7 @@ import {
   startVideo,
   getRelatedVideos,
   closeAllWindows,
+  addVideo,
 } from '../../../actions';
 
 import { API_INDEX } from '../../../settings';
@@ -26,6 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   playlist: state.playlist,
   username: state.auth.username,
+  related: state.results.related
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -53,6 +55,9 @@ const mapDispatchToProps = dispatch => ({
   getRelatedVideos: (videoId) => {
     dispatch(getRelatedVideos(videoId));
   },
+  addVideo: (youtubeId, title, playlistId) => {
+    dispatch(addVideo(youtubeId, title, playlistId));
+  },
   closeAllWindows: () => {
     dispatch(closeAllWindows());
   },
@@ -74,6 +79,10 @@ class Playlist extends React.Component {
     if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
       socket.emit('leave', `playlist_${prevProps.match.params.playlistId}`);
       this.initPlaylist();
+    }
+    if (prevProps.playlist.current && !this.props.playlist.current && this.props.related.length) {
+       let related = this.props.related[0];
+       this.props.addVideo(related.id.videoId, related.snippet.title, this.props.playlist.id);
     }
   }
   componentWillUnmount() {
