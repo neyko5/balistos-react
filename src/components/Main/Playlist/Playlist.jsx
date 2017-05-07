@@ -15,6 +15,7 @@ import {
   getActiveUsers,
   startVideo,
   getRelatedVideos,
+  closeAllWindows,
 } from '../../../actions';
 
 import { API_INDEX } from '../../../settings';
@@ -51,6 +52,9 @@ const mapDispatchToProps = dispatch => ({
   },
   getRelatedVideos: (videoId) => {
     dispatch(getRelatedVideos(videoId));
+  },
+  closeAllWindows: () => {
+    dispatch(closeAllWindows());
   },
 });
 
@@ -89,7 +93,7 @@ class Playlist extends React.Component {
   }
   render() {
     return (
-      <main>
+      <main onClick={this.props.closeAllWindows}>
         <div className="container">
           <VideoPlayer
             current={this.props.playlist.current}

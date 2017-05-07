@@ -191,3 +191,9 @@ export function toggleCreatePlaylistWindow() {
     type: actionTypes.TOGGLE_CREATE_PLAYLIST_WINDOW,
   };
 }
+
+export function closeAllWindows() {
+  return {
+    type: actionTypes.CLOSE_ALL_WINDOWS,
+  };
+}
