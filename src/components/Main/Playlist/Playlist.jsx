@@ -68,6 +68,7 @@ class Playlist extends React.Component {
     socket.on('action', (action) => {
       this.props.socketAction(action);
     });
+    Notification.requestPermission();
   }
   componentDidUpdate(prevProps) {
     if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {

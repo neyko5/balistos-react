@@ -32,15 +32,28 @@ class VideoPlayer extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.current && this.props.current &&
       prevProps.current.video.youtubeId !== this.props.current.video.youtubeId) {
-      youtubeParams.playerVars.start = 0;
+      if (this.state.player) {
+        this.state.player.seekTo(0);
+      }
       this.resumeVideo(this.props.current.video.youtubeId);
       this.props.startVideo(this.props.current.id);
       this.props.getRelatedVideos(this.props.current.video.youtubeId);
     }
     if (!prevProps.current && this.props.current) {
+      
       this.props.startVideo(this.props.current.id);
       this.props.getRelatedVideos(this.props.current.video.youtubeId);
       youtubeParams.playerVars.start = this.props.current.startedAt;
+    }
+    if (this.props.current && (!prevProps.current || 
+      prevProps.current.video.youtubeId !== this.props.current.video.youtubeId)) {
+      var options = {
+          body: this.props.current.video.title,
+          icon: 'https://img.youtube.com/vi/' + this.props.current.video.youtubeId + '/0.jpg',
+          tag: 'video',
+          requireInteraction: false
+      }
+      new Notification('Balistos', options);
     }
   }
   componentWillUnmount() {
