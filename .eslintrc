@@ -4,6 +4,7 @@
     ],
     "globals": {
         "document": true,
-        "localStorage": true
+        "localStorage": true,
+        "window": true
     }
 }

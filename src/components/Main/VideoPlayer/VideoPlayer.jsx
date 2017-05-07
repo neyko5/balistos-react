@@ -11,11 +11,13 @@ class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      current: undefined,
       elapsed: 0,
       total: 0,
       volume: 100,
       previousVolume: 0,
       paused: false,
+      start: 0,
     };
     this.onReady = this.onReady.bind(this);
     this.onSpeakerClick = this.onSpeakerClick.bind(this);
@@ -27,14 +29,11 @@ class VideoPlayer extends React.Component {
     this.finishCurrentVideo = this.finishCurrentVideo.bind(this);
     this.deleteCurrentVideo = this.deleteCurrentVideo.bind(this);
   }
-  componentWillMount() {
-    youtubeParams.playerVars.start = 0;
-  }
   componentDidUpdate(prevProps) {
     if (prevProps.current && this.props.current &&
       prevProps.current.video.youtubeId !== this.props.current.video.youtubeId) {
       youtubeParams.playerVars.start = 0;
-      this.resumeVideo();
+      this.resumeVideo(this.props.current.video.youtubeId);
       this.props.startVideo(this.props.current.id);
       this.props.getRelatedVideos(this.props.current.video.youtubeId);
     }
@@ -75,8 +74,9 @@ class VideoPlayer extends React.Component {
     });
     this.state.player.setVolume(value);
   }
-  resumeVideo() {
+  resumeVideo(youtubeId) {
     this.setState({
+      current: youtubeId,
       paused: false,
     });
   }

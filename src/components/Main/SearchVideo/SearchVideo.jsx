@@ -33,6 +33,10 @@ const mapStateToProps = (state, ownProps) => ({
 });
 
 class SearchVideo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleKeyEvent = this.handleKeyEvent.bind(this);
+  }
   componentDidMount() {
     document.addEventListener('keyup', this.handleKeyEvent, false);
   }

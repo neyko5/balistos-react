@@ -7,10 +7,10 @@ const ChatForm = (props) => {
   let message;
   const submitForm = (e) => {
     e.preventDefault();
-    if (message.value.trim()) {
+    if (!message.value.trim()) {
       return;
     }
-    props.sendMessage(this.state.message);
+    props.sendMessage(message.value);
     message.value = '';
   };
   return (
