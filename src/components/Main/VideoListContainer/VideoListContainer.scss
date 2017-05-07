@@ -6,6 +6,7 @@
     float: left;
     width: 100%;
     margin-top: 25px;
+    margin-bottom: 25px;
     .header {
         height: 40px;
         width: 100%;
@@ -35,4 +36,41 @@
 .empty_item {
     color:$title;
     padding:10px;
+}
+
+@media (max-width: $screen-md-min) {
+    .box.playlist {
+        margin-top: 0px;
+    }
+}
+
+@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
+    .playlist_item {
+        .info {
+            width: 266px;
+            .title {
+                font-size: 13px;
+            }
+        }
+    }
+}
+
+@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)  {
+    .playlist_item {
+        height: 92px;
+        img {
+            width: 125px;
+            height: 86px;
+        }
+        .info {
+            width: 221px;
+            height: 86px;
+            .title {
+                font-size: 13px;
+            }
+        }
+        .vote {
+            padding: 2px 6px;
+        }
+    }
 }

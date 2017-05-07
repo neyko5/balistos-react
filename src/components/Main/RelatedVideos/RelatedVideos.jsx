@@ -13,16 +13,18 @@ function mapStateToProps(state) {
 }
 
 const RelatedVideos = props => (
-  <div className="box related">
-    <div className="header">
-      <div className="title">Related videos</div>
-    </div>
-    <div className="body">
-      {props.related.map(video => <RelatedVideoItem
-        video={video}
-        id={props.id}
-        key={video.id.videoId}
-      />)}
+  <div className="col-lg-6 col-md-6 col-sm-12 col-xs-12 left-gutter">
+    <div className="box related">
+      <div className="header">
+        <div className="title">Related videos</div>
+      </div>
+      <div className="body">
+        {props.related.map(video => <RelatedVideoItem
+          video={video}
+          id={props.id}
+          key={video.id.videoId}
+        />)}
+      </div>
     </div>
   </div>
 );

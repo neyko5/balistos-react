@@ -25,7 +25,7 @@ class ChatContainer extends React.Component {
   }
   render() {
     return (
-      <div className="chat-container col-lg-12 col-md-12 col-sm-5 col-xs-12 no-gutter">
+      <div className="col-lg-6 col-md-6 col-sm-5 no-gutter">
         {this.props.users && this.props.users.length ?
           <ChatOnline users={this.props.users} username={this.props.username} /> : undefined}
         <Chat

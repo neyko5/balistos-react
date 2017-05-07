@@ -129,14 +129,17 @@ header {
         width: 210px;
     }
     .logo {
-        text-indent: -99999px;
         background: url('../../../img/logo.png') left center;
-        width: 46px;
-        height: 46px;
         margin: 0px;
-        float: left;
+        margin-top: 2px;
+        height: 42px;
+        padding-left: 42px;
+        font-size: 30px;
         background-repeat: no-repeat;
         background-size: contain;
+        line-height: 46px;
+        width: auto;
+        float:left;
     }
 }
 
@@ -146,9 +149,9 @@ header {
         .logo {
             width: 30px;
             margin-left: 0px;
-            background-size: 100px 30px;
             background-repeat: no-repeat;
             background-position: center left;
+            text-indent: -99999px;
         }
         .menu {
             .menu-button {

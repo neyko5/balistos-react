@@ -11,7 +11,7 @@ const UserMenu = (props) => {
         >New playlist</button>
         <button className="user" onClick={props.onOpenLogoutClick} >
           <div className="user_icon" />
-          <div className="text">Hello</div>
+          <div className="text hidden-xs">Hello</div>
           <div className="username">{props.username}</div>
           <div className="arrow_down" />
         </button>

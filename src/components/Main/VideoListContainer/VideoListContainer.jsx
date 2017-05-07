@@ -6,7 +6,7 @@ import SearchVideo from '../SearchVideo';
 import './VideoListContainer.css';
 
 const VideoListContainer = props => (
-  <div className="col-lg-12 col-md-12 col-sm-7 col-xs-12 no-gutter">
+  <div className="col-lg-6 col-md-6 col-sm-7 col-xs-12 no-gutter m-right-gutter">
     <div className="box playlist">
       <SearchVideo id={props.playlist.id} />
       <div className="body">

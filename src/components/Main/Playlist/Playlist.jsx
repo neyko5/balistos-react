@@ -105,24 +105,21 @@ class Playlist extends React.Component {
     return (
       <main onClick={this.props.closeAllWindows}>
         <div className="container">
-        <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
-          <VideoPlayer
-            playlistTitle={this.props.playlist.title}
-            current={this.props.playlist.current}
-            username={this.props.username}
-            getRelatedVideos={this.props.getRelatedVideos}
-            finishVideo={this.props.finishVideo} startVideo={this.props.startVideo}
-            deleteVideo={this.props.deleteVideo}
-          />
-          <ChatContainer
-              playlist={this.props.playlist}
-              id={this.props.match.params.playlistId}
+            <VideoPlayer
+              playlistTitle={this.props.playlist.title}
+              current={this.props.playlist.current}
+              username={this.props.username}
+              getRelatedVideos={this.props.getRelatedVideos}
+              finishVideo={this.props.finishVideo} startVideo={this.props.startVideo}
+              deleteVideo={this.props.deleteVideo}
             />
-          </div>
-          <div className="sidebar col-lg-6 col-md-6 col-sm-12 col-xs-12 left-gutter">
-            <VideoListContainer playlist={this.props.playlist} />
+            <VideoListContainer playlist={this.props.playlist} />   
+            <ChatContainer
+                  playlist={this.props.playlist}
+                  id={this.props.match.params.playlistId}
+                />
+            
             <RelatedVideos />
-          </div>
         </div>
       </main>
     );

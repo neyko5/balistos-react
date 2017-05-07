@@ -213,6 +213,7 @@ export function* getRelatedVideos(action) {
         key: 'AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0',
         part: 'snippet',
         type: 'video',
+        maxResults: 10,
         videoSyndicated: true,
         videoEmbeddable: true,
       },

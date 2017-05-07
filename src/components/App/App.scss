@@ -220,6 +220,9 @@ main {
 .button.create{
     clear: both;
 }
+.hidden-xs {
+    display: none;
+}
 .icon{
     width: 26px;
     height: 26px;
@@ -276,7 +279,7 @@ main {
 @media (min-width:320px) and (max-width:479px) {
     .container {
         width: 320px;
-        padding: 10px;
+        padding: 0px;
     }
     .left-gutter {
         padding: 0px;
@@ -324,6 +327,9 @@ main {
     }
     h1 {
         font-size:37px;
+    }
+    .m-right-gutter{
+        padding-right: 15px;
     }
 }
 

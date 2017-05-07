@@ -121,6 +121,7 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
+      <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
         <div className="main_window">
           <div className="video_player">
             <div className="player">
@@ -167,6 +168,7 @@ class VideoPlayer extends React.Component {
             </div>
           </div>
         </div>
+      </div>
     );
   }
 }
