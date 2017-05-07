@@ -80,6 +80,7 @@ export function* fetchPlaylist(action) {
   try {
     const response = yield axios.get(`/playlists/${action.playlistId}`, {});
     if (response.data) {
+      document.title = 'Balistos - ' + response.data.title;
       yield put({ type: actionTypes.SET_INITIAL_PLAYLIST_DATA, playlist: response.data });
     }
   } catch (error) {}

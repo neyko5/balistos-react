@@ -53,7 +53,7 @@ class VideoPlayer extends React.Component {
           tag: 'video',
           requireInteraction: false
       }
-      new Notification('Balistos', options);
+      new Notification('Balistos - ' + this.props.playlistTitle, options);
     }
   }
   componentWillUnmount() {
@@ -121,7 +121,6 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <div className="col-lg-6 col-md-6 col-sm-12 no-gutter">
         <div className="main_window">
           <div className="video_player">
             <div className="player">
@@ -168,12 +167,12 @@ class VideoPlayer extends React.Component {
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }
 
 VideoPlayer.propTypes = {
+  playlistTitle: PropTypes.string,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
@@ -198,6 +197,7 @@ VideoPlayer.propTypes = {
 
 VideoPlayer.defaultProps = {
   current: undefined,
+  playlistTitle: '',
 };
 
 module.exports = VideoPlayer;
