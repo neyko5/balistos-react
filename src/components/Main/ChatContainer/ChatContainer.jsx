@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import Chat from '../Chat';
 import ChatOnline from '../ChatOnline';
 import { sendMessage } from '../../../actions';
-import { chatIcon } from '../../../img/chat.png';
 
 function mapStateToProps(state) {
   return {
