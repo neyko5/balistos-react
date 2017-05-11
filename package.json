@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/neyko5/balistos-react/issues"
   },
-  "homepage": "https://github.com/neyko5/balistos-react#readme",
+  "homepage": "https://www.balistos.com",
   "dependencies": {
     "axios": "^0.16.1",
     "prop-types": "^15.5.6",
