@@ -40,20 +40,21 @@ class VideoPlayer extends React.Component {
       this.props.getRelatedVideos(this.props.current.video.youtubeId);
     }
     if (!prevProps.current && this.props.current) {
-      
       this.props.startVideo(this.props.current.id);
       this.props.getRelatedVideos(this.props.current.video.youtubeId);
-      youtubeParams.playerVars.start = this.props.current.startedAt;
-    }
-    if (this.props.current && (!prevProps.current || 
-      prevProps.current.video.youtubeId !== this.props.current.video.youtubeId)) {
-      var options = {
-          body: this.props.current.video.title,
-          icon: 'https://img.youtube.com/vi/' + this.props.current.video.youtubeId + '/0.jpg',
-          tag: 'video',
-          requireInteraction: false
+      if (this.state.player) {
+        this.state.player.seekTo(this.props.current.startedAt);
       }
-      new Notification('Balistos - ' + this.props.playlistTitle, options);
+    }
+    if (this.props.current && (!prevProps.current ||
+      prevProps.current.video.youtubeId !== this.props.current.video.youtubeId)) {
+      const options = {
+        body: this.props.current.video.title,
+        icon: `https://img.youtube.com/vi/${this.props.current.video.youtubeId}/0.jpg`,
+        tag: 'video',
+        requireInteraction: false,
+      };
+      new Notification(`Balistos - ${this.props.playlistTitle}`, options);
     }
   }
   componentWillUnmount() {
@@ -139,9 +140,9 @@ class VideoPlayer extends React.Component {
                   opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}
                 />
               : <div className="video-empty">
-                  <div className="text-big">No video</div>
-                  <div className="text-small">Make sure you add some new videos to the playlist</div>
-                </div>
+                <div className="text-big">No video</div>
+                <div className="text-small">Make sure you add some new videos to the playlist</div>
+              </div>
             }
             </div>
             <div className="progress">

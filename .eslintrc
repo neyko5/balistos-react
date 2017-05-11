@@ -5,6 +5,7 @@
     "globals": {
         "document": true,
         "localStorage": true,
-        "window": true
+        "window": true,
+        "Notification": true
     }
 }
