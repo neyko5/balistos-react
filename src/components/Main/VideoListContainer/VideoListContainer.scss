@@ -6,7 +6,7 @@
     float: left;
     width: 100%;
     margin-top: 25px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     .header {
         height: 40px;
         width: 100%;
@@ -29,7 +29,7 @@
     .body {
         float: left;
         width: 100%;
-        height: 390px;
+        height: 400px;
         overflow: auto;
     }
 }
@@ -40,7 +40,7 @@
 
 @media (max-width: $screen-md-min) {
     .box.playlist {
-        margin-top: 0px;
+        margin-top: 15px;
     }
 }
 

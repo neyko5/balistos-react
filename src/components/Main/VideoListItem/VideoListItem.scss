@@ -55,10 +55,11 @@
     .img-wrapper {
         .status {
             position: absolute;
-            background: rgba(255,255,255,0.8);
+            color: white;
+            background: rgba(0, 0, 0, 0.6);
+            line-height: 25px;
             width: 120px;
-            font-size: 13px;
-            font-weight: 600;
+            font-size: 14px;
             font-style: italic;
             padding-left: 5px;
         }
@@ -94,22 +95,22 @@
         }
     }
     .delete-column {
+        align-self: flex-start;
         width: 24px;
         float: left;
         .delete {
             width: 24px;
             height: 24px;
             float: left;
-            background: url('../../../img/delete.png') no-repeat center;
+            background: url('../../../img/del.png') no-repeat center;
             cursor: pointer;
-            border-radius: 100%;
         }
     }
     &.first {
-        background-color: #D96459;
+        background-color: rgba(0,0,0,0.4);
     }
     &.next {
-        background-color: #b0b0b0;
+        background-color: rgba(0,0,0,0.1);
     }
 }
 
