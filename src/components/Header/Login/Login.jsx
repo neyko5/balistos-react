@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onSubmit: (e, username, password) => {
     e.preventDefault();
-    if (!username.value.trim() || !password.value.trim) {
+    if (!username.value.trim() || !password.value.trim()) {
       return;
     }
     dispatch(sendLoginRequest(username.value, password.value));

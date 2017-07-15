@@ -9,7 +9,7 @@ const CreatePlaylist = (props) => {
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          if (!title.value.trim() || !description.value.trim) {
+          if (!title.value.trim() || !description.value.trim()) {
             return;
           }
           props.onCreatePlaylistSubmit(title.value, description.value);
