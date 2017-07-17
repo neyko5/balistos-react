@@ -31,4 +31,4 @@ ChatOnline.defaultProps = {
   username: undefined,
 };
 
-module.exports = ChatOnline;
+export default ChatOnline;

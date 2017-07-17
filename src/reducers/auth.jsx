@@ -45,4 +45,4 @@ function auth(state = {
   }
 }
 
-module.exports = auth;
+export default auth;

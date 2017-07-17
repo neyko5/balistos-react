@@ -54,4 +54,4 @@ PopularPlaylistContainer.propTypes = {
   ).isRequired,
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(PopularPlaylistContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PopularPlaylistContainer);

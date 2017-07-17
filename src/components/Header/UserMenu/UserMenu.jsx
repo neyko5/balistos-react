@@ -48,4 +48,4 @@ UserMenu.defaultProps = {
 };
 
 
-module.exports = UserMenu;
+export default UserMenu;

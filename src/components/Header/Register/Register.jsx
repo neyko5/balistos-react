@@ -72,4 +72,4 @@ Register.defaultProps = {
   open: false,
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

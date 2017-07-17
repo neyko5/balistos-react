@@ -32,4 +32,4 @@ ChatForm.propTypes = {
   sendMessage: PropTypes.func.isRequired,
 };
 
-module.exports = ChatForm;
+export default ChatForm;

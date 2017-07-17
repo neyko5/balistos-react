@@ -33,4 +33,4 @@ CreatePlaylist.propTypes = {
   onCreatePlaylistSubmit: PropTypes.func.isRequired
 };
 
-module.exports = CreatePlaylist;
+export default CreatePlaylist;

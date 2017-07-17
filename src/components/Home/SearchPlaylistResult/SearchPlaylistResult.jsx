@@ -17,4 +17,4 @@ SearchPlaylistResult.propTypes = {
   }).isRequired,
 };
 
-module.exports = SearchPlaylistResult;
+export default SearchPlaylistResult;
