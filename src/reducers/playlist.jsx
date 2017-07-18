@@ -104,4 +104,4 @@ function playlist(state = {
   }
 }
 
-module.exports = playlist;
+export default playlist;

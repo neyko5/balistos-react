@@ -11,4 +11,4 @@ LogOut.propTypes = {
   onLogoutClick: PropTypes.func.isRequired,
 };
 
-module.exports = LogOut;
+export default LogOut;

@@ -8,7 +8,7 @@ import Header from '../Header/Header';
 import './App.css';
 
 const App = () => (
-  <BrowserRouter history={history}>
+  <BrowserRouter>
     <div className="full-height">
       <Header />
       <Route exact path="/" component={Home} />

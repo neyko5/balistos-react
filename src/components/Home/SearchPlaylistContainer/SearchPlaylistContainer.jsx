@@ -41,4 +41,4 @@ SearchPlaylistContainer.propTypes = {
   ).isRequired,
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);
