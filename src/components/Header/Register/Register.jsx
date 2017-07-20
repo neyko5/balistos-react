@@ -1,7 +1,8 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../../actions';
+import { sendRegisterRequest, toggleLoginWindow, toggleRegisterWindow, setRegisterError } from '../../../actions';
 
 const mapDispatchToProps = dispatch => ({
   setErrorMessage: (message) => {
@@ -9,6 +10,9 @@ const mapDispatchToProps = dispatch => ({
   },
   onOpenLoginClick: () => {
     dispatch(toggleLoginWindow());
+  },
+  onCloseRegisterWindow: () => {
+    dispatch(toggleRegisterWindow());
   },
   onSubmit: (e, username, password) => {
     e.preventDefault();
@@ -31,32 +35,50 @@ const mapStateToProps = (state, ownProps) => ({
   error: state.auth.registerError,
 });
 
-const Register = (props) => {
-  let username;
-  let password;
-  return (
-    <div className="dropdown">
-      <form onSubmit={(e) => props.onSubmit(e, username, password)}>
-        <label htmlFor="register-username">
-          <div className="title">Username</div>
-          <div className="error">{props.error}</div>
-          <input type="text" name="register-username" ref={(node) => { username = node; }} />
-        </label>
-        <label htmlFor="register-password">
-          <div className="title">Password</div>
-          <input type="password" name="register-password" ref={(node) => { password = node; }} />
-        </label>
-        <button className="button green" type="submit">Register</button>
-        <div className="noaccount">Already have an account?
-            <button
+class Register extends React.Component {
+  constructor(props) {
+    super(props);
+    
+    this.handleClickEvent = this.handleClickEvent.bind(this);
+  }
+  componentWillMount() {
+    document.addEventListener('click', this.handleClickEvent, false);
+  }
+  componentWillUnmount() {
+    document.removeEventListener('click', this.handleClickEvent, false);
+  }
+  handleClickEvent($event) {
+    if (!ReactDOM.findDOMNode(this).contains($event.target)) {
+      this.props.onCloseRegisterWindow();
+    }
+  }
+  render() {
+    let username;
+    let password;
+    return (
+      <div className="dropdown">
+        <form onSubmit={(e) => this.props.onSubmit(e, username, password)}>
+          <label htmlFor="register-username">
+            <div className="title">Username</div>
+            <div className="error">{this.props.error}</div>
+            <input type="text" name="register-username" ref={(node) => { username = node; }} />
+          </label>
+          <label htmlFor="register-password">
+            <div className="title">Password</div>
+            <input type="password" name="register-password" ref={(node) => { password = node; }} />
+          </label>
+          <button className="button green" type="submit">Register</button>
+          <div className="noaccount">Already have an account?
+              <button
               href="#"
               className="link open-login"
-              onClick={props.onOpenLoginClick}
+              onClick={this.props.onOpenLoginClick}
             >Log in now!</button>
-        </div>
-      </form>
-    </div>
-  );
+          </div>
+        </form>
+      </div>
+    );
+  }
 };
 
 Register.propTypes = {
