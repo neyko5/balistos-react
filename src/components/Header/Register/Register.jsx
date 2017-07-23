@@ -60,16 +60,13 @@ const Register = (props) => {
 };
 
 Register.propTypes = {
-  open: PropTypes.bool,
   error: PropTypes.string,
   setErrorMessage: PropTypes.func.isRequired,
-  sendRegister: PropTypes.func.isRequired,
   onOpenLoginClick: PropTypes.func.isRequired,
 };
 
 Register.defaultProps = {
   error: undefined,
-  open: false,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

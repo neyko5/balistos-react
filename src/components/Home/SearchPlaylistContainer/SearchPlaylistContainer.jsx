@@ -35,7 +35,7 @@ SearchPlaylistContainer.propTypes = {
   results: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
       }),
   ).isRequired,
