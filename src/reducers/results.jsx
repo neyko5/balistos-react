@@ -44,4 +44,4 @@ function results(state = {
   }
 }
 
-module.exports = results;
+export default results;

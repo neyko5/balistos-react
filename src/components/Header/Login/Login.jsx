@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
   },
   onSubmit: (e, username, password) => {
     e.preventDefault();
-    if (!username.value.trim() || !password.value.trim) {
+    if (!username.value.trim() || !password.value.trim()) {
       return;
     }
     dispatch(sendLoginRequest(username.value, password.value));
@@ -26,7 +26,7 @@ const Login = (props) => {
   let username;
   let password;
   return (
-    <div className="dropdown">
+    <div className="dropdown" onClick={(event) => event.stopPropagation()}>
       <form onSubmit={(e) => props.onSubmit(e, username, password)}>
         <label htmlFor="login-username">
           <div className="title">Username</div>
@@ -63,4 +63,4 @@ Login.defaultProps = {
 };
 
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Login);
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

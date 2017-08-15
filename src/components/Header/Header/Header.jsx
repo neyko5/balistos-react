@@ -66,7 +66,7 @@ class Header extends React.Component {
       <header>
         <div className="container">
           <Link to="/">
-            <h1 className="logo" >Balistos</h1>
+            <h1 className="logo">Balistos</h1>
           </Link>
           {this.props.loggedIn ?
             <div>
@@ -92,7 +92,6 @@ class Header extends React.Component {
                 loggedIn={this.props.loggedIn}
               />
               {this.props.loginOpen ? <Login /> : undefined}
-              />
               {this.props.registerOpen ? <Register /> : undefined }
             </div>
               }

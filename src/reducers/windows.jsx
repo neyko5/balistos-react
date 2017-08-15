@@ -31,4 +31,4 @@ function windows(state = {
   }
 }
 
-module.exports = windows;
+export default windows;

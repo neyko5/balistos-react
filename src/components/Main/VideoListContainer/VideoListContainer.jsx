@@ -40,4 +40,4 @@ VideoListContainer.defaultProps = {
   },
 };
 
-module.exports = VideoListContainer;
+export default VideoListContainer;

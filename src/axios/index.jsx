@@ -11,4 +11,4 @@ axios.interceptors.request.use((config) => {
   return newConfig;
 });
 
-module.exports = axios;
+export default axios;

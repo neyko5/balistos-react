@@ -203,4 +203,4 @@ VideoPlayer.defaultProps = {
   playlistTitle: '',
 };
 
-module.exports = VideoPlayer;
+export default VideoPlayer;

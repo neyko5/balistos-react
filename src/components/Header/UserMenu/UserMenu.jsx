@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const UserMenu = (props) => {
-    return (
-      props.loggedIn ? 
-      <div className="menu">
+  return (
+    props.loggedIn ?
+      <div className="menu" onClick={(event) => event.stopPropagation()}>
         <button
           className="menu-button open-create"
           onClick={props.onOpenCreatePlaylistClick}
@@ -15,18 +15,17 @@ const UserMenu = (props) => {
           <div className="username">{props.username}</div>
           <div className="arrow_down" />
         </button>
-        </div> :
-        <div className="menu">
-          <button
-            className="menu-button border-left"
-            onClick={props.onOpenLoginClick}
-          >Log in</button>
-          <button
-            className="menu-button open-register"
-            onClick={props.onOpenRegisterClick}
-          >Register</button>
-        </div>
-      : undefined
+      </div> :
+      <div className="menu" onClick={(event) => event.stopPropagation()}>
+        <button
+          className="menu-button border-left"
+          onClick={props.onOpenLoginClick}
+        >Log in</button>
+        <button
+          className="menu-button open-register"
+          onClick={props.onOpenRegisterClick}
+        >Register</button>
+      </div>
   );
 };
 
@@ -48,4 +47,4 @@ UserMenu.defaultProps = {
 };
 
 
-module.exports = UserMenu;
+export default UserMenu;

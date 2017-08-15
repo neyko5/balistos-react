@@ -35,7 +35,7 @@ const Register = (props) => {
   let username;
   let password;
   return (
-    <div className="dropdown">
+    <div className="dropdown" onClick={(event) => event.stopPropagation()}>
       <form onSubmit={(e) => props.onSubmit(e, username, password)}>
         <label htmlFor="register-username">
           <div className="title">Username</div>
@@ -60,16 +60,13 @@ const Register = (props) => {
 };
 
 Register.propTypes = {
-  open: PropTypes.bool,
   error: PropTypes.string,
   setErrorMessage: PropTypes.func.isRequired,
-  sendRegister: PropTypes.func.isRequired,
   onOpenLoginClick: PropTypes.func.isRequired,
 };
 
 Register.defaultProps = {
   error: undefined,
-  open: false,
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(Register);
+export default connect(mapStateToProps, mapDispatchToProps)(Register);

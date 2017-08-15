@@ -3,7 +3,7 @@ import * as actionTypes from '../constants/actionTypes';
 function auth(state = {
   token: localStorage.getItem('token') || undefined,
   username: localStorage.getItem('username') || undefined,
-  loggedIn: localStorage.getItem('token') !== undefined,
+  loggedIn: localStorage.getItem('token') ? true : false,
   userId: parseInt(localStorage.getItem('userId'), 10) || undefined,
 }, action) {
   switch (action.type) {
@@ -45,4 +45,4 @@ function auth(state = {
   }
 }
 
-module.exports = auth;
+export default auth;

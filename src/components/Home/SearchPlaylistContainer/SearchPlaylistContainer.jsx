@@ -35,10 +35,10 @@ SearchPlaylistContainer.propTypes = {
   results: PropTypes.arrayOf(
       PropTypes.shape({
         title: PropTypes.string.isRequired,
-        id: PropTypes.string.isRequired,
+        id: PropTypes.number.isRequired,
         description: PropTypes.string.isRequired,
       }),
   ).isRequired,
 };
 
-module.exports = connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);

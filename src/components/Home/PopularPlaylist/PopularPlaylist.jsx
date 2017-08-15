@@ -24,4 +24,4 @@ PopularPlaylist.propTypes = {
 };
 
 
-module.exports = PopularPlaylist;
+export default PopularPlaylist;

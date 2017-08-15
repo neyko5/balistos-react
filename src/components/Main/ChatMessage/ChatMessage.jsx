@@ -25,4 +25,4 @@ ChatMessage.defaultProps = {
   username: undefined,
 };
 
-module.exports = ChatMessage;
+export default ChatMessage;

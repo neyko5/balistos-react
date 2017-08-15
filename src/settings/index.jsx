@@ -11,5 +11,4 @@ export const youtubeParams = {
   },
 };
 
-// export const API_INDEX = 'http://localhost:4000';
-export const API_INDEX = 'https://api.balistos.com';
+export const API_INDEX = process.env.REACT_APP_API_ENDPOINT === 'local' ? 'http://localhost:4000' : 'https://api.balistos.com';

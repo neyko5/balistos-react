@@ -48,4 +48,4 @@ VideoList.defaultProps = {
   current: undefined,
 };
 
-module.exports = VideoList;
+export default VideoList;
