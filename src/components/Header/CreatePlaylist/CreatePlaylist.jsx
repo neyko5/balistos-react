@@ -5,7 +5,7 @@ const CreatePlaylist = (props) => {
   let title;
   let description;
   return (
-    <div className="dropdown" >
+    <div className="dropdown" onClick={(event) => event.stopPropagation()} >
       <form
         onSubmit={(e) => {
           e.preventDefault();

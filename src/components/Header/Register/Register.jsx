@@ -35,7 +35,7 @@ const Register = (props) => {
   let username;
   let password;
   return (
-    <div className="dropdown">
+    <div className="dropdown" onClick={(event) => event.stopPropagation()}>
       <form onSubmit={(e) => props.onSubmit(e, username, password)}>
         <label htmlFor="register-username">
           <div className="title">Username</div>

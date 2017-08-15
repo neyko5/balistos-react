@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const UserMenu = (props) => {
   return (
     props.loggedIn ?
-      <div className="menu">
+      <div className="menu" onClick={(event) => event.stopPropagation()}>
         <button
           className="menu-button open-create"
           onClick={props.onOpenCreatePlaylistClick}
@@ -16,7 +16,7 @@ const UserMenu = (props) => {
           <div className="arrow_down" />
         </button>
       </div> :
-      <div className="menu">
+      <div className="menu" onClick={(event) => event.stopPropagation()}>
         <button
           className="menu-button border-left"
           onClick={props.onOpenLoginClick}
