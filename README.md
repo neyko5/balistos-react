@@ -22,7 +22,5 @@ This app uses:
 To use this app, follow these steps:
 
 1. Clone and run Balistos API.
-2. Install webpack globally with node command '**npm install webpack webpack-dev-server -g**' .
-3. Run node command '**npm install**' to install all necessary node.js modules.
-4. Change API_INDEX to '***http://localhost:4000***' in the index.jsx file.
-5. Run app with '**npm run start**'. App will by default start listening to port 3000.
+2. Run node command '**npm install**' to install all necessary node.js modules.
+3. Run app with '**npm run start:local**' for local API. To run against production API, run '**npm run start**'.
