@@ -3,6 +3,8 @@
 Balistos is music sharing app which uses power of YouTube to create collaborative playlist where users can add, vote and listen to videos in real time. You can find the app deployed at [Balistos.com](https://www.balistos.com).
 
 # Balistos React
+[![Build Status](https://travis-ci.org/neyko5/balistos-react.svg?branch=master)](https://travis-ci.org/neyko5/balistos-react)
+
 This repository holds front end for Balistos, YouTube playlist sharing app. 
 This app has a API backend counterpart written in Express.js framework.
 You can find it at [Balistos GitHub repository](https://github.com/neyko5/balistos).
