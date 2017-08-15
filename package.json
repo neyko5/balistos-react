@@ -29,6 +29,7 @@
     "video-time": "1.1.0"
   },
   "devDependencies": {
+    "cross-env": "5.0.5",
     "enzyme": "2.9.1",
     "eslint": "4.3.0",
     "eslint-config-airbnb": "15.1.0",
@@ -46,8 +47,8 @@
     "build-css": "node-sass src/components/ -o src/components/",
     "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "REACT_APP_API_ENDPOINT=production npm-run-all -p watch-css start-js",
-    "start:local": "REACT_APP_API_ENDPOINT=local npm-run-all -p watch-css start-js",
+    "start": "cross-env REACT_APP_API_ENDPOINT=production npm-run-all -p watch-css start-js",
+    "start:local": "cross-env REACT_APP_API_ENDPOINT=local npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
