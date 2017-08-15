@@ -69,7 +69,7 @@ const VideoListItem = (props) => {
           href={`https://www.youtube.com/watch?v=${props.video.video.youtubeId}`}
         >{props.video.video.title}</a>
         <div className="addedby">
-          added by <span className="black">{props.video.user.username}</span>
+          added by <span className="black">{props.video.autoAdded ? "Balistos" : props.video.user.username}</span>
         </div>
       </div>
       {props.userId ? <div className="delete-column">
