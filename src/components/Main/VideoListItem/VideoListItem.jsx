@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { likeVideo, deleteVideo } from '../../../actions';
+import ThumbsUpSVG from '../../../img/thumbs_up.svg';
+import ThumbsDownSVG from '../../../img/thumbs_down.svg';
 
 import './VideoListItem.css';
 
@@ -44,15 +46,21 @@ const VideoListItem = (props) => {
           className={`up ${upLike ? 'active' : ''}`}
           onClick={() => props.likeVideo(upLike ? 0 : 1)}
           title={props.video.likes.filter(like => like.value === 1)
-            .map(like => like.user.username).join(', ')}
-        />
+            .map(like => like.user.username).join(', ')}>
+          <svg className="svg-icon">
+            <use xlinkHref={ThumbsUpSVG + '#thumbs_up'}></use>
+          </svg>
+        </button>
         <div className="number">{likeCount}</div>
         <button
           className={`down ${downLike ? 'active' : ''}`}
           onClick={() => props.likeVideo(downLike ? 0 : -1)}
           title={props.video.likes.filter(like => like.value === -1)
-            .map(like => like.user.username).join(', ')}
-        />
+            .map(like => like.user.username).join(', ')}>
+          <svg className="svg-icon">
+            <use xlinkHref={ThumbsDownSVG + '#thumbs_down'}></use>
+          </svg>
+        </button>
       </div> :
       <div className="vote">
         <div className="number full">{likeCount}</div>

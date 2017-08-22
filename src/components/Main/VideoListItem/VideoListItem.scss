@@ -15,37 +15,44 @@
         justify-content: center;
         margin-right: 10px;
         height: 100%;
-        .up {
-            background: url('../../../img/thumbs_up.png') no-repeat;
-            width: 25px;
-            height: 26px;
-            cursor: pointer;
-        }
-        .up:hover,.up.active:hover {
-            background-position: 0px -26px;
-        }
-        .up.active {
-            background-position: 0px -52px;
-        }
-        .down {
-            cursor: pointer;
-            background: url('../../../img/thumbs_down.png') no-repeat;
-            width: 25px;
-            height: 26px;
-            background-position: 0px 1px;
-        }
-        .down:hover,.down.active:hover {
-            background-position: 0px -24px;
-        }
-        .down.active {
-            background-position: 0px -49px;
+        button {
+            display: flex;
+            padding: 0;
+            border: none;
+            outline: none;
+            color: #696969;
+            transition: color 0.1s ease-out, transform 0.1s ease-out;
+
+            .svg-icon {
+                width: 32px;
+                height: 32px;
+                cursor: pointer;
+            }
+
+            &.up {
+                &:hover,&.active:hover {
+                    color: $thumbs-up;
+                }
+                &.active {
+                    color: $thumbs-up;
+                }
+            }
+            &.down {
+                &:hover,&.active:hover {
+                    color: $thumbs-down;
+                }
+                &.active {
+                    color: $thumbs-down;
+                }
+            }
+            &:hover {
+                transform: scale(1.2);
+            }
         }
         .number {
-            line-height: 30px;
             color: $title;
             font-size: 14px;
             font-weight: 700;
-            margin-right: 5px;
             text-align: center;
             &.full {
                 line-height: 76px;
