@@ -12,7 +12,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   addVideo: () => {
-    dispatch(addVideo(ownProps.video.id.videoId, ownProps.video.snippet.title, ownProps.id));
+    dispatch(addVideo(ownProps.video.id.videoId, ownProps.video.snippet.title, ownProps.id, false));
     dispatch(getRelatedVideos(ownProps.video.id.videoId));
   },
 });

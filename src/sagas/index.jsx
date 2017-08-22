@@ -172,6 +172,7 @@ export function* addVideo(action) {
       title: action.title,
       youtubeId: action.youtubeId,
       playlistId: action.playlistId,
+      autoAdded: action.autoAdded
     });
     yield put({ type: actionTypes.SET_YOUTUBE_RESULTS, results: [] });
     yield put({ type: actionTypes.SET_YOUTUBE_SEARCH_QUERY, query: '' });

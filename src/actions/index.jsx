@@ -58,12 +58,13 @@ export function searchYoutube(query) {
   };
 }
 
-export function addVideo(id, title, playlistId) {
+export function addVideo(id, title, playlistId, autoAdded) {
   return {
     type: actionTypes.ADD_VIDEO,
     title,
     youtubeId: id,
     playlistId: playlistId,
+    autoAdded: autoAdded
   };
 }
 

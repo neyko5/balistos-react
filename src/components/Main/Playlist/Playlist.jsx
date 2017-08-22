@@ -56,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(getRelatedVideos(videoId));
   },
   addVideo: (youtubeId, title, playlistId) => {
-    dispatch(addVideo(youtubeId, title, playlistId));
+    dispatch(addVideo(youtubeId, title, playlistId, true));
   },
   closeAllWindows: () => {
     dispatch(closeAllWindows());
