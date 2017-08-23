@@ -6,7 +6,7 @@ exports[`should render correctly 1`] = `
 >
   <span
     className="author green"
-    title="Thu May 11 2017 20:18:36 GMT+0200 (CEST)"
+    title="Thu May 11 2017"
   >
     testuser
     :

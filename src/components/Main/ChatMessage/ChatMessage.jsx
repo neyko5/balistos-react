@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 const ChatMessage = props => (
   <div className="message">
     <span
-      title={new Date(props.message.createdAt).toString()}
+      title={new Date(props.message.createdAt).toDateString()}
       className={`author ${props.message.user.username === props.username ? 'green' : 'grey'}`}
     >{props.message.user.username}:</span>
     <span className="content">{props.message.message}</span>
