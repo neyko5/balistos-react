@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div
+  className="message"
+>
+  <span
+    className="author green"
+    title="5/11/2017, 8:18:36 PM"
+  >
+    testuser
+    :
+  </span>
+  <span
+    className="content"
+  >
+    test message
+  </span>
+</div>
+`;

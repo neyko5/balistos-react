@@ -6,9 +6,10 @@ const ChatMessage = props => (
     <span
       title={new Date(props.message.createdAt).toLocaleString()}
       className={`author ${props.message.user.username === props.username ? 'green' : 'grey'}`}
-    >{props.message.user.username}:</span><span>{props.message.message}</span>
+    >{props.message.user.username}:</span>
+    <span className="content">{props.message.message}</span>
   </div>
-    );
+);
 
 ChatMessage.propTypes = {
   username: PropTypes.string,
