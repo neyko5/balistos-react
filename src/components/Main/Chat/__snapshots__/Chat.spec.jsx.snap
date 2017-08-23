@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render correctly 1`] = `
+<div
+  className="box"
+>
+  <div
+    className="header"
+  >
+    <i
+      className="icon chat"
+    />
+    <div
+      className="title"
+    >
+      Chat with your buddies
+    </div>
+  </div>
+  <div
+    className="chatbox"
+    id="chatbox"
+  >
+    <div
+      className="message"
+    >
+      <span
+        className="author grey"
+        title="Tue Apr 11 2017"
+      >
+        otheruser
+        :
+      </span>
+      <span
+        className="content"
+      >
+        text 1
+      </span>
+    </div>
+    <div
+      className="message"
+    >
+      <span
+        className="author grey"
+        title="Thu May 11 2017"
+      >
+        otheruser
+        :
+      </span>
+      <span
+        className="content"
+      >
+        text 2
+      </span>
+    </div>
+    <div
+      className="message"
+    >
+      <span
+        className="author grey"
+        title="Sun Jun 11 2017"
+      >
+        otheruser
+        :
+      </span>
+      <span
+        className="content"
+      >
+        text 3
+      </span>
+    </div>
+  </div>
+  <div
+    className="send"
+  >
+    <form
+      onSubmit={[Function]}
+    >
+      <input
+        name="message"
+        onChange={[Function]}
+        placeholder="Send a message"
+        type="text"
+        value=""
+      />
+      <button
+        className="button green chat"
+        type="submit"
+      >
+        <i
+          className="icon message"
+        />
+         Chat
+      </button>
+    </form>
+  </div>
+</div>
+`;
