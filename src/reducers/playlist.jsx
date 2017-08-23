@@ -30,18 +30,19 @@ function playlist(state = {
       return {
         ...state,
         videos: state.videos.map((video) => {
+          let videoLikes = [];
           if (video.id === action.like.playlistVideoId) {
             if (video.likes.some(like => like.userId === action.like.userId)) {
-              video.likes = video.likes.map((like) => {
+              videoLikes = video.likes.map((like) => {
                 if (like.userId === action.like.userId) {
                   return Object.assign({}, action.like);
                 }
                 return like;
               });
             } else {
-              video.likes.push(action.like);
+              videoLikes.push(action.like);
             }
-            return Object.assign({}, video);
+            return Object.assign({}, video, { likes: videoLikes });
           }
           return video;
         }),

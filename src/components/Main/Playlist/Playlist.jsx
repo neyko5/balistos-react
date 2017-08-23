@@ -103,7 +103,7 @@ class Playlist extends React.Component {
   }
   render() {
     return (
-      <main onClick={this.props.closeAllWindows}>
+      <main role="presentation" onClick={this.props.closeAllWindows}>
         <div className="container">
           <VideoPlayer
             playlistTitle={this.props.playlist.title}
@@ -138,20 +138,33 @@ Playlist.propTypes = {
   heartbeat: PropTypes.func.isRequired,
   getActiveUsers: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
+  closeAllWindows: PropTypes.func.isRequired,
   playlist: PropTypes.shape({
     current: PropTypes.object,
+    title: PropTypes.string,
   }).isRequired,
   match: PropTypes.shape({
     params: PropTypes.shape({
       playlistId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
+  related: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.shape({
+        videoId: PropTypes.string.isRequired,
+      }).isRequired,
+    }).isRequired,
+  ).isRequired,
 };
 
 Playlist.defaultProps = {
   playlist: {
     current: undefined,
+    title: '',
+    related: [],
+    id: undefined,
   },
+  related: [],
   username: undefined,
 };
 

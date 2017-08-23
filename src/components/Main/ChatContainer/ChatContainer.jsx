@@ -56,7 +56,7 @@ ChatContainer.propTypes = {
   users: PropTypes.arrayOf(PropTypes.object.isRequired),
   messages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
   playlist: PropTypes.shape({
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
   }).isRequired,
 };
 

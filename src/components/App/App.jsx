@@ -18,7 +18,7 @@ const mapDispatchToProps = dispatch => ({
 
 const App = props => (
   <BrowserRouter>
-    <div className="full-height" onClick={props.clickOutside}>
+    <div className="full-height" role="presentation" onClick={props.clickOutside}>
       <Header />
       <Route exact path="/" component={Home} />
       <Route path="/playlist/:playlistId" component={Playlist} />

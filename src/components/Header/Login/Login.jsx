@@ -7,14 +7,8 @@ const mapDispatchToProps = dispatch => ({
   onOpenRegisterClick: () => {
     dispatch(toggleRegisterWindow());
   },
-  onSubmit: (e, username, password) => {
-    e.preventDefault();
-    if (!username.value.trim() || !password.value.trim()) {
-      return;
-    }
-    dispatch(sendLoginRequest(username.value, password.value));
-    username.value = '';
-    password.value = '';
+  onSubmit: (username, password) => {
+    dispatch(sendLoginRequest(username, password));
   },
 });
 const mapStateToProps = (state, ownProps) => ({
@@ -22,37 +16,64 @@ const mapStateToProps = (state, ownProps) => ({
   error: state.auth.loginError,
 });
 
-const Login = (props) => {
-  let username;
-  let password;
-  return (
-    <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()}>
-      <form onSubmit={e => props.onSubmit(e, username, password)}>
-        <label htmlFor="login-username">
-          <div className="title">Username</div>
-          <div className="error">{props.error}</div>
-          <input type="text" name="login-username" ref={(node) => { username = node; }} />
-        </label>
-        <label htmlFor="password">
-          <div className="title" >Password</div>
-          <input
-            type="password"
-            id="login-password"
-            name="login-password"
-            ref={(node) => { password = node; }}
-          />
-        </label>
-        <button type="submit" className="button green">Log In</button>
-        <div className="noaccount">No account yet?
-          <button
-            className="link"
-            onClick={props.onOpenRegisterClick}
-          >Create one now!</button>
-        </div>
-      </form>
-    </div>
-  );
-};
+class Login extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: '',
+      password: '',
+    };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({
+      [event.target.name]: event.target.value,
+    });
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
+    this.props.onSubmit(this.state.username, this.state.password);
+    this.setState({
+      username: '',
+      password: '',
+    });
+  }
+
+  render() {
+    return (
+      <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()}>
+        <form onSubmit={this.handleSubmit}>
+          <label htmlFor="login-username">
+            <div className="title">Username</div>
+            <div className="error">{this.props.error}</div>
+            <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
+          </label>
+          <label htmlFor="password">
+            <div className="title" >Password</div>
+            <input
+              type="password"
+              id="login-password"
+              name="password"
+              onChange={this.handleChange}
+              value={this.state.password}
+            />
+          </label>
+          <button type="submit" className="button green">Log In</button>
+          <div className="noaccount">No account yet?
+            <button
+              className="link"
+              onClick={this.props.onOpenRegisterClick}
+            >Create one now!</button>
+          </div>
+        </form>
+      </div>
+    );
+  }
+}
 
 Login.propTypes = {
   error: PropTypes.string,
