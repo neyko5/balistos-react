@@ -22,8 +22,10 @@ const RelatedVideoItem = props => (
     <img src={`https://img.youtube.com/vi/${props.video.id.videoId}/0.jpg`} alt={props.video.snippet.title} />
     <div className="info">
       <a
-        className="title" rel="noopener noreferrer"
-        target="_blank" title={'Open in YouTube'}
+        className="title"
+        rel="noopener noreferrer"
+        target="_blank"
+        title={'Open in YouTube'}
         href={`https://www.youtube.com/watch?v=${props.video.id.videoId}`}
       >{props.video.snippet.title}</a>
     </div>

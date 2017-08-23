@@ -1,10 +1,11 @@
 import * as actionTypes from '../constants/actionTypes';
+
 export function createPlaylist(title, description, history) {
   return {
     type: actionTypes.CREATE_PLAYLIST,
     title,
     description,
-    history
+    history,
   };
 }
 
@@ -47,7 +48,7 @@ export function setLoginError(message) {
 export function fetchPlaylist(playlistId) {
   return {
     type: actionTypes.FETCH_PLAYLIST,
-    playlistId: playlistId,
+    playlistId,
   };
 }
 
@@ -63,8 +64,8 @@ export function addVideo(id, title, playlistId, autoAdded) {
     type: actionTypes.ADD_VIDEO,
     title,
     youtubeId: id,
-    playlistId: playlistId,
-    autoAdded: autoAdded
+    playlistId,
+    autoAdded,
   };
 }
 
@@ -107,14 +108,14 @@ export function resetYoutubeSearchQuery() {
 export function getRelatedVideos(videoId) {
   return {
     type: actionTypes.GET_RELATED_VIDEOS,
-    videoId: videoId,
+    videoId,
   };
 }
 
 export function likeVideo(videoId, value) {
   return {
     type: actionTypes.LIKE_VIDEO,
-    videoId: videoId,
+    videoId,
     value,
   };
 }
@@ -129,21 +130,21 @@ export function logOut() {
 export function deleteVideo(videoId) {
   return {
     type: actionTypes.DELETE_VIDEO,
-    videoId: videoId,
+    videoId,
   };
 }
 
 export function finishVideo(videoId) {
   return {
     type: actionTypes.FINISH_VIDEO,
-    videoId: videoId,
+    videoId,
   };
 }
 
 export function startVideo(videoId) {
   return {
     type: actionTypes.START_VIDEO,
-    videoId: videoId,
+    videoId,
   };
 }
 
@@ -165,7 +166,7 @@ export function sendMessage(message, playlistId) {
   return {
     type: actionTypes.SEND_MESSAGE,
     message,
-    playlistId: playlistId,
+    playlistId,
   };
 }
 

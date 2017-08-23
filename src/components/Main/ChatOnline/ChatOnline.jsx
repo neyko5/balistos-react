@@ -10,10 +10,10 @@ const ChatOnline = props => (
       <div className="number">{props.users && props.users.length}</div>
     </div>
     <div className="body">
-      {props.users && props.users.length && props.users.map(user => <div
+      {props.users && props.users.length && props.users.map(user => (<div
         className={`user ${user.username === props.username ? 'green' : 'grey'}`}
         key={user.username}
-      >{user.username}</div>)}
+      >{user.username}</div>))}
     </div>
   </div>
 );

@@ -19,11 +19,11 @@ const RelatedVideos = props => (
         <div className="title">Related videos</div>
       </div>
       <div className="body">
-        {props.related.map(video => <RelatedVideoItem
+        {props.related.map(video => (<RelatedVideoItem
           video={video}
           id={props.id}
           key={video.id.videoId}
-        />)}
+        />))}
       </div>
     </div>
   </div>

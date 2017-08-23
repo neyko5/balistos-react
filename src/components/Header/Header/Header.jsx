@@ -1,22 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
-
 import { connect } from 'react-redux';
+
 import UserMenu from '../UserMenu';
 import LogOut from '../LogOut';
 import CreatePlaylist from '../CreatePlaylist';
 import Login from '../Login';
 import Register from '../Register';
 
-import { 
+import {
   toggleLoginWindow,
   toggleCreatePlaylistWindow,
   toggleRegisterWindow,
   toggleLogoutWindow,
   logOut,
   createPlaylist,
-  verifyToken
+  verifyToken,
 } from '../../../actions';
 
 import './Header.css';
@@ -79,7 +79,7 @@ class Header extends React.Component {
               {this.props.logoutOpen ? <LogOut
                 onLogoutClick={this.props.onLogoutClick}
               /> : undefined}
-              
+
               {this.props.createPlaylistOpen ? <CreatePlaylist
                 onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}
               /> : undefined}
@@ -94,7 +94,7 @@ class Header extends React.Component {
               {this.props.loginOpen ? <Login /> : undefined}
               {this.props.registerOpen ? <Register /> : undefined }
             </div>
-              }
+          }
         </div>
         <div className="clearfix" />
       </header>

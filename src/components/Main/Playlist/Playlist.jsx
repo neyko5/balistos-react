@@ -27,7 +27,7 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   playlist: state.playlist,
   username: state.auth.username,
-  related: state.results.related
+  related: state.results.related,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -81,8 +81,8 @@ class Playlist extends React.Component {
       this.initPlaylist();
     }
     if (prevProps.playlist.current && !this.props.playlist.current && this.props.related.length) {
-       let related = this.props.related[0];
-       this.props.addVideo(related.id.videoId, related.snippet.title, this.props.playlist.id);
+      const related = this.props.related[0];
+      this.props.addVideo(related.id.videoId, related.snippet.title, this.props.playlist.id);
     }
   }
   componentWillUnmount() {
@@ -105,21 +105,22 @@ class Playlist extends React.Component {
     return (
       <main onClick={this.props.closeAllWindows}>
         <div className="container">
-            <VideoPlayer
-              playlistTitle={this.props.playlist.title}
-              current={this.props.playlist.current}
-              username={this.props.username}
-              getRelatedVideos={this.props.getRelatedVideos}
-              finishVideo={this.props.finishVideo} startVideo={this.props.startVideo}
-              deleteVideo={this.props.deleteVideo}
-            />
-            <VideoListContainer playlist={this.props.playlist} />   
-            <ChatContainer
-                  playlist={this.props.playlist}
-                  id={this.props.match.params.playlistId}
-                />
-            
-            <RelatedVideos />
+          <VideoPlayer
+            playlistTitle={this.props.playlist.title}
+            current={this.props.playlist.current}
+            username={this.props.username}
+            getRelatedVideos={this.props.getRelatedVideos}
+            finishVideo={this.props.finishVideo}
+            startVideo={this.props.startVideo}
+            deleteVideo={this.props.deleteVideo}
+          />
+          <VideoListContainer playlist={this.props.playlist} />
+          <ChatContainer
+            playlist={this.props.playlist}
+            id={this.props.match.params.playlistId}
+          />
+
+          <RelatedVideos />
         </div>
       </main>
     );
@@ -129,6 +130,7 @@ class Playlist extends React.Component {
 Playlist.propTypes = {
   username: PropTypes.string,
   socketAction: PropTypes.func.isRequired,
+  addVideo: PropTypes.func.isRequired,
   fetchVideos: PropTypes.func.isRequired,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,

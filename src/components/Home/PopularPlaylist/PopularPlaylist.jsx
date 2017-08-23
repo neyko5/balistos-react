@@ -12,7 +12,7 @@ const PopularPlaylist = props => (
       <div className="created">created by <span className="black">{props.data.username}</span></div>
     </div>
   </Link>
-    );
+);
 
 PopularPlaylist.propTypes = {
   index: PropTypes.number.isRequired,

@@ -5,7 +5,7 @@ const CreatePlaylist = (props) => {
   let title;
   let description;
   return (
-    <div className="dropdown" onClick={(event) => event.stopPropagation()} >
+    <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()} >
       <form
         onSubmit={(e) => {
           e.preventDefault();
@@ -30,7 +30,7 @@ const CreatePlaylist = (props) => {
 };
 
 CreatePlaylist.propTypes = {
-  onCreatePlaylistSubmit: PropTypes.func.isRequired
+  onCreatePlaylistSubmit: PropTypes.func.isRequired,
 };
 
 export default CreatePlaylist;

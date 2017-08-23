@@ -30,7 +30,7 @@ class ChatContainer extends React.Component {
           tag: 'chat',
           requireInteraction: false,
         };
-        new Notification(`Balistos - ${this.props.playlist.title}`, options);
+        Notification(`Balistos - ${this.props.playlist.title}`, options);
       }
     }
     document.getElementById('chatbox').scrollTop = document.getElementById('chatbox').scrollHeight;
@@ -55,6 +55,9 @@ ChatContainer.propTypes = {
   sendMessage: PropTypes.func.isRequired,
   users: PropTypes.arrayOf(PropTypes.object.isRequired),
   messages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  playlist: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+  }).isRequired,
 };
 
 ChatContainer.defaultProps = {

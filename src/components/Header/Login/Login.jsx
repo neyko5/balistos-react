@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(sendLoginRequest(username.value, password.value));
     username.value = '';
     password.value = '';
-  }
+  },
 });
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
@@ -26,8 +26,8 @@ const Login = (props) => {
   let username;
   let password;
   return (
-    <div className="dropdown" onClick={(event) => event.stopPropagation()}>
-      <form onSubmit={(e) => props.onSubmit(e, username, password)}>
+    <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()}>
+      <form onSubmit={e => props.onSubmit(e, username, password)}>
         <label htmlFor="login-username">
           <div className="title">Username</div>
           <div className="error">{props.error}</div>
@@ -36,16 +36,18 @@ const Login = (props) => {
         <label htmlFor="password">
           <div className="title" >Password</div>
           <input
-            type="password" id="login-password" name="login-password"
+            type="password"
+            id="login-password"
+            name="login-password"
             ref={(node) => { password = node; }}
           />
         </label>
         <button type="submit" className="button green">Log In</button>
         <div className="noaccount">No account yet?
-            <button
-              className="link"
-              onClick={props.onOpenRegisterClick}
-            >Create one now!</button>
+          <button
+            className="link"
+            onClick={props.onOpenRegisterClick}
+          >Create one now!</button>
         </div>
       </form>
     </div>

@@ -32,11 +32,11 @@ class PopularPlaylistContainer extends React.Component {
         <div className="col-lg-6 col-md-6" >
           {this.props.playlists
             .filter((playlist, index) => index >= this.props.playlists.length / 2)
-            .map((result, index) => <PopularPlaylist
+            .map((result, index) => (<PopularPlaylist
               data={result}
               index={Math.ceil(this.props.playlists.length / 2) + index}
               key={result.id}
-            />)}
+            />))}
         </div>
       </div>
     );
@@ -46,11 +46,11 @@ class PopularPlaylistContainer extends React.Component {
 PopularPlaylistContainer.propTypes = {
   fetchPopularPlaylists: PropTypes.func.isRequired,
   playlists: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        username: PropTypes.string.isRequired,
-      }),
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      username: PropTypes.string.isRequired,
+    }),
   ).isRequired,
 };
 

@@ -23,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(sendRegisterRequest(username.value, password.value));
     username.value = '';
     password.value = '';
-  }
+  },
 });
 
 const mapStateToProps = (state, ownProps) => ({
@@ -35,8 +35,8 @@ const Register = (props) => {
   let username;
   let password;
   return (
-    <div className="dropdown" onClick={(event) => event.stopPropagation()}>
-      <form onSubmit={(e) => props.onSubmit(e, username, password)}>
+    <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()}>
+      <form onSubmit={e => props.onSubmit(e, username, password)}>
         <label htmlFor="register-username">
           <div className="title">Username</div>
           <div className="error">{props.error}</div>
@@ -48,11 +48,11 @@ const Register = (props) => {
         </label>
         <button className="button green" type="submit">Register</button>
         <div className="noaccount">Already have an account?
-            <button
-              href="#"
-              className="link open-login"
-              onClick={props.onOpenLoginClick}
-            >Log in now!</button>
+          <button
+            href="#"
+            className="link open-login"
+            onClick={props.onOpenLoginClick}
+          >Log in now!</button>
         </div>
       </form>
     </div>
@@ -61,7 +61,7 @@ const Register = (props) => {
 
 Register.propTypes = {
   error: PropTypes.string,
-  setErrorMessage: PropTypes.func.isRequired,
+  onSubmit: PropTypes.func.isRequired,
   onOpenLoginClick: PropTypes.func.isRequired,
 };
 

@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -9,13 +10,13 @@ import { closeAllWindows } from '../../actions';
 
 import './App.css';
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = dispatch => ({
   clickOutside: () => {
     dispatch(closeAllWindows());
   },
 });
 
-const App = (props) => (
+const App = props => (
   <BrowserRouter>
     <div className="full-height" onClick={props.clickOutside}>
       <Header />
@@ -24,6 +25,10 @@ const App = (props) => (
     </div>
   </BrowserRouter>
 );
+
+App.propTypes = {
+  clickOutside: PropTypes.func.isRequired,
+};
 
 export default connect(undefined, mapDispatchToProps)(App);
 

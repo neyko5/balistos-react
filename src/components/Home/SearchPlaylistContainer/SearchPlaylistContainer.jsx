@@ -33,11 +33,11 @@ const SearchPlaylistContainer = props => (
 SearchPlaylistContainer.propTypes = {
   onSearchInputChange: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(
-      PropTypes.shape({
-        title: PropTypes.string.isRequired,
-        id: PropTypes.number.isRequired,
-        description: PropTypes.string.isRequired,
-      }),
+    PropTypes.shape({
+      title: PropTypes.string.isRequired,
+      id: PropTypes.number.isRequired,
+      description: PropTypes.string.isRequired,
+    }),
   ).isRequired,
 };
 

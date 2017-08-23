@@ -8,13 +8,16 @@ function playlist(state = {
   users: [],
 }, action) {
   switch (action.type) {
-    case actionTypes.SET_INITIAL_PLAYLIST_DATA:
-      const first = action.playlist.playlistVideos && action.playlist.playlistVideos.sort((a, b) => {
-        const diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
-        return diff === 0 ? a.id - b.id : diff;
-      })[0];
+    case actionTypes.SET_INITIAL_PLAYLIST_DATA: {
+      const first = action.playlist.playlistVideos &&
+        action.playlist.playlistVideos.sort((a, b) => {
+          const diff = b.likes.reduce((total, like) => total + like.value, 0) -
+            a.likes.reduce((total, like) => total + like.value, 0);
+          return diff === 0 ? a.id - b.id : diff;
+        })[0];
       return {
-        videos: (action.playlist.playlistVideos && action.playlist.playlistVideos.filter(video => !first || video.id !== first.id)) || [],
+        videos: (action.playlist.playlistVideos &&
+          action.playlist.playlistVideos.filter(video => !first || video.id !== first.id)) || [],
         current: first,
         messages: action.playlist.chats,
         users: action.playlist.playlistUsers,
@@ -22,6 +25,7 @@ function playlist(state = {
         title: action.playlist.title,
         username: action.playlist.user.username,
       };
+    }
     case actionTypes.UPDATE_OR_INSERT_LIKE:
       return {
         ...state,
@@ -45,7 +49,8 @@ function playlist(state = {
     case actionTypes.REMOVE_VIDEO:
       if (state.current.id === action.videoId) {
         const next = state.videos.sort((a, b) => {
-          const diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+          const diff = b.likes.reduce((total, like) => total + like.value, 0)
+            - a.likes.reduce((total, like) => total + like.value, 0);
           return diff === 0 ? a.id - b.id : diff;
         })[0];
         return {
@@ -65,9 +70,10 @@ function playlist(state = {
         ...state,
         videos: state.videos.filter(video => video.id !== action.videoId),
       };
-    case actionTypes.SELECT_NEXT_VIDEO:
+    case actionTypes.SELECT_NEXT_VIDEO: {
       const next = state.videos.sort((a, b) => {
-        const diff = b.likes.reduce((total, like) => total + like.value, 0) - a.likes.reduce((total, like) => total + like.value, 0);
+        const diff = b.likes.reduce((total, like) => total + like.value, 0) -
+         a.likes.reduce((total, like) => total + like.value, 0);
         return diff === 0 ? a.id - b.id : diff;
       })[0];
       return {
@@ -75,6 +81,8 @@ function playlist(state = {
         current: next,
         videos: state.videos.filter(video => !next || video.id !== next.id),
       };
+    }
+
     case actionTypes.INSERT_VIDEO:
       if (state.current) {
         return {

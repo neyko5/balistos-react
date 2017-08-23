@@ -72,14 +72,16 @@ class SearchVideo extends React.Component {
     return (
       <div className="search">
         <input
-          type="text" id="search" placeholder="Search for YouTube video and add to playlist"
+          type="text"
+          id="search"
+          placeholder="Search for YouTube video and add to playlist"
           onChange={this.props.searchYoutube}
           value={this.props.query || ''}
           autoComplete="off"
         />
         {this.props.results && this.props.query ? <div className="results">
           {this.props.results.map((result, index) =>
-            <VideoResult
+            (<VideoResult
               title={result.snippet.title}
               image={result.snippet.thumbnails.default.url}
               onItemClick={() => this.props.addVideo(result.id.videoId,
@@ -87,8 +89,8 @@ class SearchVideo extends React.Component {
               id={result.id.videoId}
               key={result.id.videoId}
               active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
-            />,
-                    )}
+            />),
+          )}
         </div> : undefined }
       </div>
     );
@@ -105,10 +107,10 @@ SearchVideo.propTypes = {
   index: PropTypes.number.isRequired,
   id: PropTypes.number,
   results: PropTypes.arrayOf(
-      PropTypes.shape({
-        snippet: PropTypes.object.isRequired,
-        id: PropTypes.object.isRequired,
-      }),
+    PropTypes.shape({
+      snippet: PropTypes.object.isRequired,
+      id: PropTypes.object.isRequired,
+    }),
   ).isRequired,
 };
 

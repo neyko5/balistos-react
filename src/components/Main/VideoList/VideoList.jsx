@@ -11,7 +11,8 @@ const VideoList = (props) => {
     <div className="video-list">
       {props.current ? <VideoListItem
         video={props.current}
-        key={props.current.id} index={0}
+        key={props.current.id}
+        index={0}
       /> : undefined }
       {props.videos.sort((a, b) => {
         const diff = b.likes.reduce((total, like) => total + like.value, 0) -

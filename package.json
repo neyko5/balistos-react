@@ -2,7 +2,7 @@
   "name": "balistos-react",
   "version": "0.1.2",
   "description": "Web front of Balistos app written in React.",
-  "main": "index.js",
+  "main": "index.jsx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/neyko5/balistos-react.git"

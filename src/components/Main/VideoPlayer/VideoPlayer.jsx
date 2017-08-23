@@ -137,13 +137,15 @@ class VideoPlayer extends React.Component {
               {this.props.current ?
                 <YouTube
                   videoId={this.props.current.video.youtubeId}
-                  opts={youtubeParams} onReady={this.onReady} onEnd={this.finishCurrentVideo}
+                  opts={youtubeParams}
+                  onReady={this.onReady}
+                  onEnd={this.finishCurrentVideo}
                 />
-              : <div className="video-empty">
-                <div className="text-big">No video</div>
-                <div className="text-small">Make sure you add some new videos to the playlist</div>
-              </div>
-            }
+                : <div className="video-empty">
+                  <div className="text-big">No video</div>
+                  <div className="text-small">Make sure you add some new videos to the playlist</div>
+                </div>
+              }
             </div>
             <div className="progress">
               <div className="bar" role="progressbar" style={{ width: `${this.state.elapsed / (this.state.total) * 100}%` }} />
