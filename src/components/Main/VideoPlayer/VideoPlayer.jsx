@@ -127,13 +127,6 @@ class VideoPlayer extends React.Component {
           <div className="video_player">
             <div className="player">
               <div className="overlay" />
-              <a
-                href="https://www.youtube.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="youtube"
-                alt="Powered by YouTube"
-              >Powered by YouTube</a>
               {this.props.current ?
                 <YouTube
                   videoId={this.props.current.video.youtubeId}
@@ -170,6 +163,15 @@ class VideoPlayer extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className="playlist_header">
+          <span className="playlist_title">
+            {this.props.playlistTitle}
+          </span>
+          <span> created by </span>
+          <span className="playlist_username">
+            {this.props.username}
+          </span>
         </div>
       </div>
     );
