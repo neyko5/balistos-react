@@ -107,6 +107,7 @@ class Playlist extends React.Component {
         <div className="container">
           <VideoPlayer
             playlistTitle={this.props.playlist.title}
+            playlistUsername={this.props.playlist.username}
             current={this.props.playlist.current}
             username={this.props.username}
             getRelatedVideos={this.props.getRelatedVideos}
