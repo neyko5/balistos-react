@@ -170,7 +170,7 @@ class VideoPlayer extends React.Component {
           </span>
           <span> created by </span>
           <span className="playlist_username">
-            {this.props.username}
+            {this.props.playlistUsername}
           </span>
         </div>
       </div>
@@ -180,6 +180,7 @@ class VideoPlayer extends React.Component {
 
 VideoPlayer.propTypes = {
   playlistTitle: PropTypes.string,
+  playlistUsername: PropTypes.string,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
