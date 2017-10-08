@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Dropdown from '../Dropdown/Dropdown';
+import Input from '../../common/Input';
+import Button from '../../common/Button';
+
 class CreatePlaylist extends React.Component {
   constructor(props) {
     super(props);
@@ -33,22 +37,22 @@ class CreatePlaylist extends React.Component {
 
   render() {
     return (
-      <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()} >
+      <Dropdown>
         <form onSubmit={this.handleSubmit}>
           <div>
-            <div className="title">Title</div>
-            <input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
-            <div className="title">Description</div>
-            <input
+            <label>Title</label>
+            <Input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
+            <label>Description</label>
+            <Input
               type="text"
               name="description"
               onChange={this.handleChange}
               value={this.state.description}
             />
           </div>
-          <button type="submit" className="button green">Create</button>
+          <Button type="submit" className="button green">Create</Button>
         </form>
-      </div>
+      </Dropdown>
     );
   }
 }

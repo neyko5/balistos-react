@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import ChatMessage from '../ChatMessage';
 import ChatForm from '../ChatForm';
 
-import './Chat.css';
+const Chatbox = styled.div`
+  padding: 12px 10px;
+  width: 100%;
+  max-height: 300px;
+  overflow-y: scroll;
+`;
 
 const Chat = props => (
   <div className="box">
@@ -11,7 +17,7 @@ const Chat = props => (
       <i className="icon chat" />
       <div className="title">Chat with your buddies</div>
     </div>
-    <div className="chatbox" id="chatbox">
+    <Chatbox id="chatbox">
       {props.messages.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
         .map(message => (<ChatMessage
           message={message}
@@ -19,7 +25,7 @@ const Chat = props => (
           key={message.id}
         />))
       }
-    </div>
+    </Chatbox>
     {props.username ? <ChatForm sendMessage={props.sendMessage} /> : undefined}
   </div>
 );

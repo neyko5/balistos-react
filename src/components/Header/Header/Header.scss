@@ -64,7 +64,7 @@ header {
             }
         }
     }
-    .dropdown {
+    .dropdown  {
         width: 302px;
         border: 1px solid $dropborder;
         position: absolute;
@@ -125,136 +125,17 @@ header {
             display: none;
         }
     }
-    .dropdown.small {
-        width: 210px;
-    }
-    .logo {
-        background: url('../../../img/logo.png') left center;
-        margin: 0px;
-        margin-top: 2px;
-        height: 42px;
-        padding-left: 42px;
-        font-size: 30px;
-        background-repeat: no-repeat;
-        background-size: contain;
-        line-height: 46px;
-        width: auto;
-        float:left;
-    }
 }
 
 @media (min-width:320px) and (max-width:479px) {
     header {
         height: auto;
-        .logo {
-            width: 30px;
-            margin-left: 0px;
-            background-repeat: no-repeat;
-            background-position: center left;
-            text-indent: -99999px;
-        }
         .menu {
             .menu-button {
                 border-bottom: 1px solid $dark;
                 padding: 0px 10px;
             }
         }
-        .dropdown {
-            width: 100%;
-            border: 0px;
-            position: relative;
-            background: $header;
-            float: left;
-            top: 0px;
-            right: 0px;
-            padding: 10px 0px;
-            label {
-                .title {
-                    color: $volume;
-                }
-            }
-            .button {
-                margin-top: 10px;
-            }
-            .noaccount {
-                color: $volume;
-            }
-        }
     }
 }
 
-@media (min-width: $screen-xs-min) and (max-width: $screen-xs-max){
-    .container {
-        width: 480px;
-        padding: 0px;
-    }
-    header {
-        height: auto;
-        .search {
-            width: 100%;
-            margin-left: 0px;
-            margin-bottom: 8px;
-            ul.results {
-                li {
-                    .title {
-                        width: 398px;
-                    }
-                }
-            }
-        }
-        .logo {
-            margin-left: 0px;
-            width: 50px;
-        }
-        .dropdown {
-            width: 100%;
-            border: 0px;
-            position: relative;
-            background: $header;
-            float: left;
-            top: 0px;
-            right: 0px;
-            padding: 10px 0px;
-            label {
-                .title {
-                    color: $volume;
-                }
-            }
-            .button {
-                margin-top: 10px;
-            }
-            .noaccount {
-                color: $volume;
-            }
-        }
-    }
-}
-@media (min-width: $screen-sm-min) and (max-width: $screen-sm-max)  {
-    .logo {
-        text-indent: -99999px;
-        width: 50px;
-        height: 50px;
-        margin: 0px;
-        float: left;
-    }
-}
-
-@media (min-width: $screen-md-min) and (max-width: $screen-md-max) {
-    header {
-        position: fixed;
-        top: 0px;
-        z-index: 2;
-    }
-}
-
-@media (min-width: $screen-lg-min) {
-    .logo {
-        width: 174px;
-        margin-left: -52px;
-    }
-    header {
-        position: fixed;
-        top: 0px;
-        z-index: 30;
-    }
-}

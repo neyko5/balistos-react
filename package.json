@@ -27,6 +27,7 @@
     "redux": "3.7.2",
     "redux-saga": "0.15.6",
     "socket.io-client": "2.0.3",
+    "styled-components": "^2.2.1",
     "video-time": "1.1.0"
   },
   "devDependencies": {

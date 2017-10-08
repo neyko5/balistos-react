@@ -1,7 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../../actions';
+import Dropdown from '../Dropdown/Dropdown';
+import Input from '../../common/Input';
 
 const mapDispatchToProps = dispatch => ({
   setErrorMessage: (message) => {
@@ -27,6 +30,29 @@ const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
   error: state.auth.registerError,
 });
+
+const NoAccount = styled.div`
+  margin-top: 10px;
+  float: right;
+  color: #3e414c;
+  font-size: 11px;
+  line-height: 38px;
+`;
+
+const NoAccountLink = styled.button `
+  color: #ff4f00;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+`;
+
+const ErrorMessage = styled.div`
+  float: right;
+  font-size: 11px;
+  line-height: 24px;
+  color: #ff4f00;
+`;
+
 
 class Register extends React.Component {
   constructor(props) {
@@ -57,27 +83,25 @@ class Register extends React.Component {
 
   render() {
     return (
-      <div className="dropdown" role="presentation" onClick={event => event.stopPropagation()}>
+      <Dropdown>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="register-username">
-            <div className="title">Username</div>
-            <div className="error">{this.props.error}</div>
-            <input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
+          <label htmlFor="username">
+            <div>Username</div>
+            <ErrorMessage>{this.props.error}</ErrorMessage>
+            <Input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
           </label>
-          <label htmlFor="register-password">
+          <label htmlFor="password">
             <div className="title">Password</div>
-            <input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
+            <Input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
           </label>
           <button className="button green" type="submit">Register</button>
-          <div className="noaccount">Already have an account?
-            <button
-              href="#"
-              className="link open-login"
-              onClick={this.props.onOpenLoginClick}
-            >Log in now!</button>
-          </div>
+          <NoAccount>Already have an account?
+            <NoAccountLink
+            onClick={this.props.onOpenLoginClick}
+            >Log in now!</NoAccountLink>
+          </NoAccount>
         </form>
-      </div>
+      </Dropdown>
     );
   }
 }

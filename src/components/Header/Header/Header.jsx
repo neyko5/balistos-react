@@ -2,12 +2,16 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import UserMenu from '../UserMenu';
 import LogOut from '../LogOut';
 import CreatePlaylist from '../CreatePlaylist';
 import Login from '../Login';
 import Register from '../Register';
+import Container from '../../common/Container';
+
+import logoImage from '../../../img/logo.png';
 
 import {
   toggleLoginWindow,
@@ -55,6 +59,62 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
+const HeaderContainer = styled.header `
+  height: 50px;
+  width: 100%;
+  background-color: #212121;
+  border-bottom: 1px solid #666666;
+  @media (min-width: 1280px) {
+      position: fixed;
+      top: 0;
+      z-index: 30;
+  }
+  @media (max-width: 1279px) and (min-width: 992px) {
+      position: fixed;
+      top: 0;
+      z-index: 2;
+  }
+}
+
+@media (min-width: $screen-lg-min) {
+    .logo {
+        width: 174px;
+        margin-left: -52px;
+    }
+    header {
+        position: fixed;
+        top: 0px;
+        z-index: 30;
+    }
+}
+`;
+
+const Logo = styled.h1`
+  background: url(${logoImage}) left center;
+  margin: 0px;
+  margin-top: 2px;
+  height: 42px;
+  padding-left: 42px;
+  font-size: 30px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  line-height: 46px;
+  width: auto;
+  float:left;
+  @media (max-width: 992px) {
+      margin-left: 0px;
+      width: 50px;
+  }
+  @media (max-width: 768px) {
+    width: 30px;
+    margin-left: 0px;
+    background-repeat: no-repeat;
+    background-position: center left;
+    text-indent: -99999px;     
+  }
+`;
+
+
 class Header extends React.Component {
   componentDidMount() {
     if (this.props.loggedIn) {
@@ -63,10 +123,10 @@ class Header extends React.Component {
   }
   render() {
     return (
-      <header>
-        <div className="container">
+      <HeaderContainer>
+        <Container>
           <Link to="/">
-            <h1 className="logo">Balistos</h1>
+            <Logo>Balistos</Logo>
           </Link>
           {this.props.loggedIn ?
             <div>
@@ -95,9 +155,8 @@ class Header extends React.Component {
               {this.props.registerOpen ? <Register /> : undefined }
             </div>
           }
-        </div>
-        <div className="clearfix" />
-      </header>
+        </Container>
+      </HeaderContainer>
     );
   }
 }

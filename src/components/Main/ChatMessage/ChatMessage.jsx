@@ -1,14 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+
+const Message = styled.div`
+  margin-bottom: 3px;
+  color: #3e414c;
+  font-size: 12px;
+`;
+const Author = styled.span`
+  margin-right: 3px;
+  font-weight: 700;
+  color: ${props => props.current ? '#9FA600': '#3e414c'}
+`;
 
 const ChatMessage = props => (
-  <div className="message">
-    <span
+  <Message>
+    <Author
+      current={props.message.user.username === props.username}
       title={new Date(props.message.createdAt).toDateString()}
-      className={`author ${props.message.user.username === props.username ? 'green' : 'grey'}`}
-    >{props.message.user.username}:</span>
-    <span className="content">{props.message.message}</span>
-  </div>
+    >{props.message.user.username}:</Author>
+    <span>{props.message.message}</span>
+  </Message>
 );
 
 ChatMessage.propTypes = {

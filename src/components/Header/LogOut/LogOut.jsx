@@ -1,10 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Dropdown from '../Dropdown/Dropdown';
+import Button from '../../common/Button';
+
 const LogOut = props => (
-  <div className="dropdown small" role="presentation" onClick={event => event.stopPropagation()} >
-    <button className="button green logout" onClick={props.onLogoutClick} >Log Out</button>
-  </div>
+  <Dropdown small>
+    <Button green onClick={props.onLogoutClick}>Log Out</Button>
+  </Dropdown>
 );
 
 LogOut.propTypes = {
