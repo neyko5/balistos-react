@@ -20,8 +20,8 @@
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-redux": "5.0.6",
-    "react-router": "4.2.2",
-    "react-router-dom": "4.2.2",
+    "react-router": "4.2.0",
+    "react-router-dom": "4.2.0",
     "react-slider": "0.9.0",
     "react-youtube": "7.4.0",
     "redux": "3.7.2",
@@ -30,6 +30,7 @@
     "video-time": "1.1.0"
   },
   "devDependencies": {
+    "babel-preset-flow": "^6.23.0",
     "cross-env": "5.0.5",
     "enzyme": "3.0.0",
     "eslint": "4.8.0",
