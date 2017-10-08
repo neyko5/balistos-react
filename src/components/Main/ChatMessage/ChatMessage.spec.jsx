@@ -1,7 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
 import ChatMessage from './ChatMessage';
+
+Enzyme.configure({ adapter: new Adapter()});
 
 test('chats from current user should have author be displayed in green', () => {
   const chatMessage = shallow(
