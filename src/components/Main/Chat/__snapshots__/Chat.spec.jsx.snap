@@ -17,54 +17,48 @@ exports[`should render correctly 1`] = `
     </div>
   </div>
   <div
-    className="chatbox"
+    className="sc-htpNat bfPJqp"
     id="chatbox"
   >
     <div
-      className="message"
+      className="sc-bdVaJa eNFPzl"
     >
       <span
-        className="author grey"
+        className="sc-bwzfXH BCqOY"
         title="Tue Apr 11 2017"
       >
         otheruser
         :
       </span>
-      <span
-        className="content"
-      >
+      <span>
         text 1
       </span>
     </div>
     <div
-      className="message"
+      className="sc-bdVaJa eNFPzl"
     >
       <span
-        className="author grey"
+        className="sc-bwzfXH BCqOY"
         title="Thu May 11 2017"
       >
         otheruser
         :
       </span>
-      <span
-        className="content"
-      >
+      <span>
         text 2
       </span>
     </div>
     <div
-      className="message"
+      className="sc-bdVaJa eNFPzl"
     >
       <span
-        className="author grey"
+        className="sc-bwzfXH BCqOY"
         title="Sun Jun 11 2017"
       >
         otheruser
         :
       </span>
-      <span
-        className="content"
-      >
+      <span>
         text 3
       </span>
     </div>

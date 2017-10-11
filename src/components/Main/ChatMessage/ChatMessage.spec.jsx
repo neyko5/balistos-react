@@ -78,7 +78,7 @@ test('should display authors username', () => {
         }
       }
     />);
-  expect(chatMessage.find('.author').contains(username)).toBe(true);
+  expect(chatMessage.contains(username)).toBe(true);
 });
 
 test('should display message content', () => {
@@ -94,7 +94,7 @@ test('should display message content', () => {
         }
       }
     />);
-  expect(chatMessage.find('.content').contains(testMessage)).toBe(true);
+  expect(chatMessage.contains(testMessage)).toBe(true);
 });
 
 test('should render correctly', () => {

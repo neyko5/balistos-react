@@ -24,6 +24,7 @@ let ContainerComponent = styled.div`
         width: 320px;
         padding: 0;
     }
+
 `;
 
 const Container = (props) => {

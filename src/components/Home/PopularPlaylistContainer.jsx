@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Flex, Box } from 'grid-styled'
 import { connect } from 'react-redux';
-import PopularPlaylist from '../PopularPlaylist';
-import { fetchPopularPlaylists } from '../../../actions';
+
+import PopularPlaylist from './PopularPlaylist';
+import { fetchPopularPlaylists } from '../../actions';
 
 function mapStateToProps(state) {
   return {
@@ -22,14 +24,14 @@ class PopularPlaylistContainer extends React.Component {
   }
   render() {
     return (
-      <div>
-        <div className="col-lg-6 col-md-6" >
+      <Flex>
+        <Box width={1/2} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index < this.props.playlists.length / 2)
             .map((result, index) =>
               <PopularPlaylist data={result} index={index} key={result.id} />)}
-        </div>
-        <div className="col-lg-6 col-md-6" >
+        </Box>
+        <Box width={1/2} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index >= this.props.playlists.length / 2)
             .map((result, index) => (<PopularPlaylist
@@ -37,8 +39,8 @@ class PopularPlaylistContainer extends React.Component {
               index={Math.ceil(this.props.playlists.length / 2) + index}
               key={result.id}
             />))}
-        </div>
-      </div>
+        </Box>
+      </Flex>
     );
   }
 }

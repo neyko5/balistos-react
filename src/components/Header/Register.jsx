@@ -2,9 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../../actions';
-import Dropdown from '../Dropdown/Dropdown';
-import Input from '../../common/Input';
+
+import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../actions';
+import Dropdown from './Dropdown';
+import Input from '../common/Input';
+import Button from '../common/Button';
 
 const mapDispatchToProps = dispatch => ({
   setErrorMessage: (message) => {
@@ -53,6 +55,22 @@ const ErrorMessage = styled.div`
   color: #ff4f00;
 `;
 
+const LabelTitle = styled.div`
+  font-weight: 700;
+  font-size: 13px;
+  color: #3e414c;
+  float: left;
+  line-height: 24px;
+`
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  margin-right: 20px;
+  width: 100%;
+  float: left;
+  padding-bottom: 5px;
+`
+
 
 class Register extends React.Component {
   constructor(props) {
@@ -85,16 +103,16 @@ class Register extends React.Component {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">
-            <div>Username</div>
+          <Label htmlFor="username">
+            <LabelTitle>Username</LabelTitle>
             <ErrorMessage>{this.props.error}</ErrorMessage>
             <Input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-          </label>
-          <label htmlFor="password">
-            <div className="title">Password</div>
+          </Label>
+          <Label htmlFor="password">
+            <LabelTitle>Password</LabelTitle>
             <Input type="password" name="password" onChange={this.handleChange} value={this.state.password} />
-          </label>
-          <button className="button green" type="submit">Register</button>
+          </Label>
+          <Button green topMargin type="submit">Register</Button>
           <NoAccount>Already have an account?
             <NoAccountLink
             onClick={this.props.onOpenLoginClick}

@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { sendLoginRequest, toggleRegisterWindow } from '../../../actions';
-import Dropdown from '../Dropdown/Dropdown';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
+
+import { sendLoginRequest, toggleRegisterWindow } from '../../actions';
+import Dropdown from './Dropdown';
+import Input from '../common/Input';
+import Button from '../common/Button';
 
 const mapDispatchToProps = dispatch => ({
   onOpenRegisterClick: () => {
@@ -42,6 +43,22 @@ const NoAccountLink = styled.button `
   background: transparent;
 `;
 
+const LabelTitle = styled.div`
+  font-weight: 700;
+  font-size: 13px;
+  color: #3e414c;
+  float: left;
+  line-height: 24px;
+`
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  margin-right: 20px;
+  width: 100%;
+  float: left;
+  padding-bottom: 5px;
+`
+
 class Login extends React.Component {
   constructor(props) {
     super(props);
@@ -73,21 +90,21 @@ class Login extends React.Component {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">
-            <div className="title">Username</div>
+          <Label htmlFor="username">
+            <LabelTitle>Username</LabelTitle>
             <ErrorMessage>{this.props.error}</ErrorMessage>
             <Input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
-          </label>
-          <label htmlFor="password">
-            <div>Password</div>
+          </Label>
+          <Label htmlFor="password">
+            <LabelTitle>Password</LabelTitle>
             <Input
               type="password"
               name="password"
               onChange={this.handleChange}
               value={this.state.password}
             />
-          </label>
-          <Button type="submit" green>Log In</Button>
+          </Label>
+          <Button type="submit" green marginTop>Log In</Button>
           <NoAccount>No account yet?
             <NoAccountLink
               onClick={this.props.onOpenRegisterClick}

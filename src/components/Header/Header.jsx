@@ -4,14 +4,14 @@ import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import UserMenu from '../UserMenu';
-import LogOut from '../LogOut';
-import CreatePlaylist from '../CreatePlaylist';
-import Login from '../Login';
-import Register from '../Register';
-import Container from '../../common/Container';
+import UserMenu from './UserMenu';
+import LogOut from './LogOut';
+import CreatePlaylist from './CreatePlaylist';
+import Login from './Login';
+import Register from './Register';
+import Container from '../common/Container';
 
-import logoImage from '../../../img/logo.png';
+import logoImage from '../../img/logo.png';
 
 import {
   toggleLoginWindow,
@@ -21,9 +21,7 @@ import {
   logOut,
   createPlaylist,
   verifyToken,
-} from '../../../actions';
-
-import './Header.css';
+} from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
@@ -74,20 +72,13 @@ const HeaderContainer = styled.header `
       top: 0;
       z-index: 2;
   }
-}
-
-@media (min-width: $screen-lg-min) {
-    .logo {
-        width: 174px;
-        margin-left: -52px;
-    }
+  @media (min-width: 320px) and (max-width: 479px) {
     header {
-        position: fixed;
-        top: 0px;
-        z-index: 30;
+        height: auto;
     }
-}
-`;
+  }
+`
+
 
 const Logo = styled.h1`
   background: url(${logoImage}) left center;

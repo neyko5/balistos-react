@@ -24,6 +24,9 @@ let StyledButton = styled.button`
         -webkit-box-shadow: 2px 2px 0 #9fa800;
         box-shadow: 2px 2px 0 #9fa800;
     `}
+    ${props => props.topMargin && css`
+        margin-top: 10px;
+    `}
 `;
 
 const Button = (props) => {

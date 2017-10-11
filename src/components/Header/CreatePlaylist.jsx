@@ -1,9 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
-import Dropdown from '../Dropdown/Dropdown';
-import Input from '../../common/Input';
-import Button from '../../common/Button';
+import Dropdown from './Dropdown';
+import Input from '../common/Input';
+import Button from '../common/Button';
+
+const LabelTitle = styled.div`
+  font-weight: 700;
+  font-size: 13px;
+  color: #3e414c;
+  float: left;
+  line-height: 24px;
+`
+
+const Label = styled.label`
+  margin-bottom: 5px;
+  margin-right: 20px;
+  width: 100%;
+  float: left;
+  padding-bottom: 5px;
+`
 
 class CreatePlaylist extends React.Component {
   constructor(props) {
@@ -39,18 +56,20 @@ class CreatePlaylist extends React.Component {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
-          <div>
-            <label>Title</label>
+          <Label htmlFor="title">
+            <LabelTitle>Title</LabelTitle>
             <Input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
-            <label>Description</label>
+          </Label>
+          <Label htmlFor="description">
+            <LabelTitle>Description</LabelTitle>
             <Input
               type="text"
               name="description"
               onChange={this.handleChange}
               value={this.state.description}
             />
-          </div>
-          <Button type="submit" className="button green">Create</Button>
+          </Label>
+          <Button type="submit" green>Create</Button>
         </form>
       </Dropdown>
     );

@@ -2,18 +2,16 @@
 
 exports[`should render correctly 1`] = `
 <div
-  className="message"
+  className="sc-bdVaJa eNFPzl"
 >
   <span
-    className="author green"
+    className="sc-bwzfXH fVnEOv"
     title="Thu May 11 2017"
   >
     testuser
     :
   </span>
-  <span
-    className="content"
-  >
+  <span>
     test message
   </span>
 </div>
