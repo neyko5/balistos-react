@@ -16,13 +16,13 @@ This app uses:
 * Redux Saga
 * Socket.io
 * JWT tokens
-* Webpack
+* Create React App
 * Babel
-* Less
+* Styled Components
 * YouTube API
 
 To use this app, follow these steps:
 
 1. Clone and run Balistos API.
-2. Run node command '**npm install**' to install all necessary node.js modules.
-3. Run app with '**npm run start:local**' for local API. To run against production API, run '**npm run start**'.
+2. Run node command '**npm install**' or '**yarn install**' to install all necessary node.js modules.
+3. Run app with '**npm run start:local**' for local API. To run against public API located at https://api.balistos.com, run '**npm run start**'.
