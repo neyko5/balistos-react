@@ -1,22 +1,41 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Box } from 'grid-styled';
+import styled from 'styled-components';
 import VideoList from '../VideoList';
 import SearchVideo from '../SearchVideo';
 
 import './VideoListContainer.css';
 
+const PlaylistBox = styled.div`
+  background: #e1e1e1;
+  border-top: 0;
+  float: left;
+  width: 100%;
+  margin-top: 25px;
+  margin-bottom: 40px;
+`
+
+const PlaylistBody = styled.div`
+  float: left;
+  width: 100%;
+  height: 400px;
+  overflow: auto;
+`
+
+
 const VideoListContainer = props => (
-  <div className="col-lg-6 col-md-6 col-sm-7 col-xs-12 no-gutter m-right-gutter">
-    <div className="box playlist">
+  <Box width={1/2}>
+    <PlaylistBox>
       <SearchVideo id={props.playlist.id} />
-      <div className="body">
+      <PlaylistBody>
         <VideoList
           current={props.playlist.current}
           videos={props.playlist.videos}
         />
-      </div>
-    </div>
-  </div>
+      </PlaylistBody>
+    </PlaylistBox>
+  </Box>
 );
 
 VideoListContainer.propTypes = {

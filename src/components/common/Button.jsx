@@ -27,6 +27,9 @@ let StyledButton = styled.button`
     ${props => props.topMargin && css`
         margin-top: 10px;
     `}
+    ${props => props.right && css`
+        float: right;
+    `}
 `;
 
 const Button = (props) => {

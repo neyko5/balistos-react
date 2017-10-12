@@ -7,6 +7,7 @@ let ContainerComponent = styled.div`
     margin-left: auto;
     padding-left: 15px;
     padding-right: 15px;
+    display: flex;
     @media (min-width: 1280px) {
         width: 1250px;
     }

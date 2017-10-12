@@ -79,6 +79,10 @@ const HeaderContainer = styled.header `
   }
 `
 
+const RightMenu = styled.div`
+  align-self: flex-end;
+  flex: 1;
+`
 
 const Logo = styled.h1`
   background: url(${logoImage}) left center;
@@ -92,6 +96,8 @@ const Logo = styled.h1`
   line-height: 46px;
   width: auto;
   float:left;
+  color: #ffffff;
+  font-weight: 200;
   @media (max-width: 992px) {
       margin-left: 0px;
       width: 50px;
@@ -120,7 +126,7 @@ class Header extends React.Component {
             <Logo>Balistos</Logo>
           </Link>
           {this.props.loggedIn ?
-            <div>
+            <RightMenu>
               <UserMenu
                 onOpenLogoutClick={this.props.onOpenLogoutClick}
                 onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick}
@@ -134,8 +140,8 @@ class Header extends React.Component {
               {this.props.createPlaylistOpen ? <CreatePlaylist
                 onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}
               /> : undefined}
-            </div> :
-            <div>
+            </RightMenu> :
+            <RightMenu>
               <UserMenu
                 onOpenLoginClick={this.props.onOpenLoginClick}
                 onOpenRegisterClick={this.props.onOpenRegisterClick}
@@ -144,7 +150,7 @@ class Header extends React.Component {
               />
               {this.props.loginOpen ? <Login /> : undefined}
               {this.props.registerOpen ? <Register /> : undefined }
-            </div>
+            </RightMenu>
           }
         </Container>
       </HeaderContainer>

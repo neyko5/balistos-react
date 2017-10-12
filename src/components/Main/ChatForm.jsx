@@ -1,7 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import Input from '../../common/Input';
+import Icon from '../../common/Icon';
+import Button from '../../common/Button';
 
-import './ChatForm.css';
+const Send = styled.div`
+  padding: 10px;
+  background: #e8e8e8;
+  float: left;
+  width: 100%;
+`
 
 class ChatForm extends React.Component {
   constructor(props) {
@@ -33,19 +42,20 @@ class ChatForm extends React.Component {
 
   render() {
     return (
-      <div className="send">
+      <Send>
         <form onSubmit={this.handleSubmit}>
-          <input
+          <Input
             type="text"
             placeholder="Send a message"
             name="message"
             value={this.state.message}
             onChange={this.handleChange}
           />
-          <button type="submit" className="button green chat">
-            <i className="icon message" /> Chat</button>
+          <Button type="submit" green right>
+            <Icon message /> Chat
+          </Button>
         </form>
-      </div>
+      </Send>
     );
   }
 }

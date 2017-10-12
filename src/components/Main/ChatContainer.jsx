@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import { Box } from 'grid-styled'
 import Chat from '../Chat';
 import ChatOnline from '../ChatOnline';
 import { sendMessage } from '../../../actions';
@@ -37,7 +38,7 @@ class ChatContainer extends React.Component {
   }
   render() {
     return (
-      <div className="col-lg-6 col-md-6 col-sm-5 no-gutter">
+      <Box width={1/2}>
         {this.props.users && this.props.users.length ?
           <ChatOnline users={this.props.users} username={this.props.username} /> : undefined}
         <Chat
@@ -45,7 +46,7 @@ class ChatContainer extends React.Component {
           sendMessage={this.props.sendMessage}
           username={this.props.username}
         />
-      </div>
+      </Box>
     );
   }
 }

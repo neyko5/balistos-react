@@ -2,11 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
+import styled from 'styled-components';
 
 import VideoListContainer from '../VideoListContainer';
 import VideoPlayer from '../VideoPlayer';
 import ChatContainer from '../ChatContainer';
 import RelatedVideos from '../RelatedVideos';
+import Container from '../../common/Container';
 import {
   fetchPlaylist,
   sendHeartbeat,
@@ -63,6 +65,17 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+const Main = styled.div `
+  min-height: 100%;
+  height: auto;
+  margin: -50px auto -45px;
+  padding: 50px 0 45px;
+  @media (min-width: 992px)
+  {
+      margin-top: 0;
+  }
+`
+
 class Playlist extends React.Component {
   constructor(props) {
     super(props);
@@ -103,8 +116,8 @@ class Playlist extends React.Component {
   }
   render() {
     return (
-      <main role="presentation" onClick={this.props.closeAllWindows}>
-        <div className="container">
+      <Main onClick={this.props.closeAllWindows}>
+        <Container>
           <VideoPlayer
             playlistTitle={this.props.playlist.title}
             playlistUsername={this.props.playlist.username}
@@ -116,14 +129,15 @@ class Playlist extends React.Component {
             deleteVideo={this.props.deleteVideo}
           />
           <VideoListContainer playlist={this.props.playlist} />
+        </Container>
+        <Container>
           <ChatContainer
             playlist={this.props.playlist}
             id={this.props.match.params.playlistId}
           />
-
           <RelatedVideos />
-        </div>
-      </main>
+        </Container>
+      </Main>
     );
   }
 }

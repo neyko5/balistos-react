@@ -1,5 +1,5 @@
 import React from 'react';
-import { Flex, Box } from 'grid-styled'
+import { Flex, Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import SearchPlaylistContainer from './SearchPlaylistContainer';

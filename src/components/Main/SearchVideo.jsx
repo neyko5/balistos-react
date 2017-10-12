@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../../actions';
 import VideoResult from '../VideoResult';
@@ -31,6 +32,39 @@ const mapStateToProps = (state, ownProps) => ({
   query: state.results.query,
   index: state.results.youtubeIndex,
 });
+
+const Search = styled.div`
+  float: left;
+  position: relative;
+  width: 100%;
+  padding: 5px;
+`
+
+const SearchInput = styled.input`
+  width: 100%;
+  height: 40px;
+  border-radius: 0px;
+  float: left;
+  line-height: 18px;
+  font-size: 13px;
+  color: #333333;
+  background-color: white;
+  padding: 11px 10px;
+  margin: 0px;
+`
+
+const SearchResults = styled.div`
+  position: absolute;
+  top: 43px;
+  width: calc(100% - 10px);
+  z-index: 20;
+  background: #F6F6F6;
+  border: 1px solid #CCCCCC;
+  border-radius: 3px;
+  list-style: none;
+  padding: 0px;
+  text-align: left;
+`
 
 class SearchVideo extends React.Component {
   constructor(props) {
@@ -70,15 +104,15 @@ class SearchVideo extends React.Component {
   }
   render() {
     return (
-      <div className="search">
-        <input
+      <Search>
+        <SearchInput
           type="text"
           placeholder="Search for YouTube video and add to playlist"
           onChange={this.props.searchYoutube}
           value={this.props.query || ''}
           autoComplete="off"
         />
-        {this.props.results && this.props.query ? <div className="results">
+        {this.props.results && this.props.query ? <SearchResults>
           {this.props.results.map((result, index) =>
             (<VideoResult
               title={result.snippet.title}
@@ -90,8 +124,8 @@ class SearchVideo extends React.Component {
               active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
             />),
           )}
-        </div> : undefined }
-      </div>
+        </SearchResults> : undefined }
+      </Search>
     );
   }
 }

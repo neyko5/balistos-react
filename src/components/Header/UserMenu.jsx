@@ -21,6 +21,7 @@ const MenuButton = styled.button`
   float: left;
   font-weight: 700;
   cursor: pointer;
+  align-self: flex-end;
   ${props => props.borderLeft && css`
     border-right: 0px;
   `}
