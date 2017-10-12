@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render correctly 1`] = `
-<div
-  className="box"
->
+<div>
   <div
-    className="header"
+    className="sc-htoDjs iBmSRt"
   >
     <i
-      className="icon chat"
+      className="sc-bxivhb gKAPwg"
     />
     <div
-      className="title"
+      className="sc-gzVnrw dQovUE"
     >
       Chat with your buddies
     </div>
   </div>
   <div
-    className="sc-htpNat bfPJqp"
+    className="sc-bZQynM hQocFL"
     id="chatbox"
   >
     <div
@@ -64,12 +62,13 @@ exports[`should render correctly 1`] = `
     </div>
   </div>
   <div
-    className="send"
+    className="sc-EHOje jQjERX"
   >
     <form
       onSubmit={[Function]}
     >
       <input
+        className="sc-htpNat gcnmGY"
         name="message"
         onChange={[Function]}
         placeholder="Send a message"
@@ -77,11 +76,11 @@ exports[`should render correctly 1`] = `
         value=""
       />
       <button
-        className="button green chat"
+        className="sc-ifAKCX dRcVix"
         type="submit"
       >
         <i
-          className="icon message"
+          className="sc-bxivhb bLEZVs"
         />
          Chat
       </button>
