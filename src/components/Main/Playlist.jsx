@@ -4,11 +4,11 @@ import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import styled from 'styled-components';
 
-import VideoListContainer from '../VideoListContainer';
-import VideoPlayer from '../VideoPlayer';
-import ChatContainer from '../ChatContainer';
-import RelatedVideos from '../RelatedVideos';
-import Container from '../../common/Container';
+import VideoListContainer from './VideoListContainer';
+import VideoPlayer from './VideoPlayer';
+import ChatContainer from './ChatContainer';
+import RelatedVideos from './RelatedVideos';
+import Container from '.././common/Container';
 import {
   fetchPlaylist,
   sendHeartbeat,
@@ -19,9 +19,9 @@ import {
   getRelatedVideos,
   closeAllWindows,
   addVideo,
-} from '../../../actions';
+} from '../../actions';
 
-import { API_INDEX } from '../../../settings';
+import { API_INDEX } from '../../settings';
 
 const socket = io(API_INDEX);
 

@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Box } from 'grid-styled';
-import RelatedVideoItem from '../RelatedVideoItem';
-
-import './RelatedVideos.css';
+import RelatedVideoItem from './RelatedVideoItem';
 
 function mapStateToProps(state) {
   return {

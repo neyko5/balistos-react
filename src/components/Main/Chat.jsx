@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ChatMessage from '../ChatMessage';
-import ChatForm from '../ChatForm';
-import Icon from '../../common/Icon';
+
+import ChatMessage from './ChatMessage';
+import ChatForm from './ChatForm';
+import Icon from '../common/Icon';
 
 const Chatbox = styled.div`
   padding: 12px 10px;

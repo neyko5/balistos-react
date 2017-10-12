@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { addVideo, getRelatedVideos } from '../../../actions';
+
+import { addVideo, getRelatedVideos } from '../../actions';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,

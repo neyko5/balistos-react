@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from 'grid-styled';
 import styled from 'styled-components';
-import VideoList from '../VideoList';
-import SearchVideo from '../SearchVideo';
 
-import './VideoListContainer.css';
+import VideoList from './VideoList';
+import SearchVideo from './SearchVideo';
 
 const PlaylistBox = styled.div`
   background: #e1e1e1;

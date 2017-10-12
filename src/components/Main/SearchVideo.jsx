@@ -2,11 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../../actions';
-import VideoResult from '../VideoResult';
 
-import './SearchVideo.css';
-
+import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../actions';
+import VideoResult from './VideoResult';
 
 const mapDispatchToProps = dispatch => ({
   searchYoutube: (e) => {

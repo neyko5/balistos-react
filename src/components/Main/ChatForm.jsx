@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Input from '../../common/Input';
-import Icon from '../../common/Icon';
-import Button from '../../common/Button';
+
+import Input from '../common/Input';
+import Icon from '../common/Icon';
+import Button from '../common/Button';
 
 const Send = styled.div`
   padding: 10px;

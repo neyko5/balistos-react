@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled, {css} from 'styled-components';
-import { likeVideo, deleteVideo } from '../../../actions';
-import ThumbsUpSVG from '../../../img/thumbs_up.svg';
-import ThumbsDownSVG from '../../../img/thumbs_down.svg';
-import deleteIcon from '../../../img/del.png';
 
-import './VideoListItem.css';
+import { likeVideo, deleteVideo } from '../../actions';
+import ThumbsUpSVG from '../../img/thumbs_up.svg';
+import ThumbsDownSVG from '../../img/thumbs_down.svg';
+import deleteIcon from '../../img/del.png';
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,

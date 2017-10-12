@@ -5,11 +5,11 @@ import ReactSlider from 'react-slider';
 import vTime from 'video-time';
 import styled, {css} from 'styled-components';
 import { Box } from 'grid-styled';
-import { youtubeParams } from '../../../settings';
 
-import playIcon from '../../../img/play.png';
-import pauseIcon from '../../../img/pause.png';
-import speakerIcon from '../../../img/volume.png';
+import { youtubeParams } from '../../settings';
+import playIcon from '../../img/play.png';
+import pauseIcon from '../../img/pause.png';
+import speakerIcon from '../../img/volume.png';
 
 const MainWindow = styled.div`
   background: #ffffff;

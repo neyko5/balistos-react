@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Box } from 'grid-styled'
-import Chat from '../Chat';
-import ChatOnline from '../ChatOnline';
-import { sendMessage } from '../../../actions';
+
+import Chat from './Chat';
+import ChatOnline from './ChatOnline';
+import { sendMessage } from '../../actions';
 
 function mapStateToProps(state) {
   return {

@@ -1,12 +1,11 @@
-
 *{
     box-sizing: border-box;
 }
 
 html {
-    font-family: sans-serif; // 1
-    -ms-text-size-adjust: 100%; // 2
-    -webkit-text-size-adjust: 100%; // 2
+    font-family: sans-serif;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -51,9 +50,9 @@ svg:not(:root) {
 button,
 input,
 textarea {
-    color: inherit; // 1
-    font: inherit; // 2
-    margin: 0; // 3
+    color: inherit; 
+    font: inherit; 
+    margin: 0;
 }
 
 
@@ -69,10 +68,10 @@ select {
 }
 
 button,
-html input[type="button"], // 1
+html input[type="button"],
 input[type="submit"] {
-    -webkit-appearance: button; // 2
-    cursor: pointer; // 3
+    -webkit-appearance: button; 
+    cursor: pointer;
 }
 
 button[disabled],

@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import VideoListItem from '../VideoListItem';
+
+import VideoListItem from './VideoListItem';
 
 const EmptyItem = styled.div`
   color: #3E414C;

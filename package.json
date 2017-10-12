@@ -42,19 +42,16 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.1.0",
-    "node-sass": "4.5.3",
     "npm-run-all": "4.0.2",
     "react-addons-test-utils": "15.6.2",
     "react-scripts": "1.0.14",
     "react-test-renderer": "16.0.0"
   },
   "scripts": {
-    "build-css": "node-sass src/components/ -o src/components/",
-    "watch-css": "npm run build-css && node-sass src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",
-    "start": "cross-env REACT_APP_API_ENDPOINT=production npm-run-all -p watch-css start-js",
-    "start:local": "cross-env REACT_APP_API_ENDPOINT=local npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
+    "start": "cross-env REACT_APP_API_ENDPOINT=production npm-run-all -p start-js",
+    "start:local": "cross-env REACT_APP_API_ENDPOINT=local npm-run-all -p start-js",
+    "build": "npm run && react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
