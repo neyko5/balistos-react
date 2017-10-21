@@ -27,7 +27,7 @@ const Dropdown = props => (
 Dropdown.propTypes = {
   small: PropTypes.bool,
   children: PropTypes.oneOfType([
-    PropTypes.arrayOf(React.PropTypes.node),
+    PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
   ]),
 };
