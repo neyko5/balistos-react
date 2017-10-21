@@ -1,11 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render correctly 1`] = `
+.c0 {
+  margin-bottom: 3px;
+  color: #3e414c;
+  font-size: 12px;
+}
+
+.c1 {
+  margin-right: 3px;
+  font-weight: 700;
+  color: #9FA600;
+}
+
 <div
-  className="sc-bdVaJa eNFPzl"
+  className="c0"
 >
   <span
-    className="sc-bwzfXH fVnEOv"
+    className="c1"
     title="Thu May 11 2017"
   >
     testuser

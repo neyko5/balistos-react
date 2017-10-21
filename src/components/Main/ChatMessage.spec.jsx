@@ -1,14 +1,18 @@
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+import 'jest-styled-components'
 
-import ChatMessage from './ChatMessage';
+
+import ChatMessage, {Author} from './ChatMessage';
 
 Enzyme.configure({ adapter: new Adapter()});
 
+
+
 test('chats from current user should have author be displayed in green', () => {
-  const chatMessage = shallow(
+  const chatMessage = mount(
     <ChatMessage
       username={'testuser'}
       message={
@@ -19,12 +23,11 @@ test('chats from current user should have author be displayed in green', () => {
         }
       }
     />);
-  expect(true).toBe(true);  
-  //expect(chatMessage.find('.author').hasClass('green')).toBe(true);
+  expect(chatMessage.find(Author)).toHaveStyleRule('color', '#9FA600');
 });
 
 test('chats from other users chats should have author be displayed in default color', () => {
-  const chatMessage = shallow(
+  const chatMessage = mount(
     <ChatMessage
       username={'testuser'}
       message={
@@ -35,12 +38,11 @@ test('chats from other users chats should have author be displayed in default co
         }
       }
     />);
-  expect(true).toBe(true);  
-  //expect(chatMessage.find('.author').hasClass('green')).toBe(false);
+  expect(chatMessage.find(Author)).toHaveStyleRule('color', '#3e414c');
 });
 
 test('chats should be displayed in default color if user is logged out', () => {
-  const chatMessage = shallow(
+  const chatMessage = mount(
     <ChatMessage
       message={
         {
@@ -50,12 +52,11 @@ test('chats should be displayed in default color if user is logged out', () => {
         }
       }
     />);
-  expect(true).toBe(true);  
-  //expect(chatMessage.find('.author').hasClass('green')).toBe(false);
+  expect(chatMessage.find(Author)).toHaveStyleRule('color', '#3e414c');
 });
 
 test('chat should have title parameter set', () => {
-  const chatMessage = shallow(
+  const chatMessage = mount(
     <ChatMessage
       username={'testuser'}
       message={
@@ -67,7 +68,7 @@ test('chat should have title parameter set', () => {
       }
     />);
   expect(true).toBe(true);  
-  //expect(chatMessage.find('.author').prop('title')).not.toBeFalsy();
+  expect(chatMessage.find(Author).prop('title')).not.toBeFalsy();
 });
 
 test('should display authors username', () => {

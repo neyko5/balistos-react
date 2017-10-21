@@ -7,7 +7,7 @@ const Message = styled.div`
   color: #3e414c;
   font-size: 12px;
 `;
-const Author = styled.span`
+export const Author = styled.span`
   margin-right: 3px;
   font-weight: 700;
   color: ${props => props.current ? '#9FA600': '#3e414c'}
