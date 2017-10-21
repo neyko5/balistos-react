@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import styled from 'styled-components';
+import { Flex } from 'grid-styled';
 
 import VideoListContainer from './VideoListContainer';
 import VideoPlayer from './VideoPlayer';
@@ -118,24 +119,24 @@ class Playlist extends React.Component {
     return (
       <Main onClick={this.props.closeAllWindows}>
         <Container>
-          <VideoPlayer
-            playlistTitle={this.props.playlist.title}
-            playlistUsername={this.props.playlist.username}
-            current={this.props.playlist.current}
-            username={this.props.username}
-            getRelatedVideos={this.props.getRelatedVideos}
-            finishVideo={this.props.finishVideo}
-            startVideo={this.props.startVideo}
-            deleteVideo={this.props.deleteVideo}
-          />
-          <VideoListContainer playlist={this.props.playlist} />
-        </Container>
-        <Container>
-          <ChatContainer
-            playlist={this.props.playlist}
-            id={this.props.match.params.playlistId}
-          />
-          <RelatedVideos />
+          <Flex wrap>
+            <VideoPlayer
+              playlistTitle={this.props.playlist.title}
+              playlistUsername={this.props.playlist.username}
+              current={this.props.playlist.current}
+              username={this.props.username}
+              getRelatedVideos={this.props.getRelatedVideos}
+              finishVideo={this.props.finishVideo}
+              startVideo={this.props.startVideo}
+              deleteVideo={this.props.deleteVideo}
+            />
+            <VideoListContainer playlist={this.props.playlist} />
+            <ChatContainer
+              playlist={this.props.playlist}
+              id={this.props.match.params.playlistId}
+            />
+            <RelatedVideos />
+          </Flex>
         </Container>
       </Main>
     );

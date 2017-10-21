@@ -40,7 +40,7 @@ const Body = styled.div`
 `
 
 const RelatedVideos = props => (
-  <Box width={1/2}>
+  <Box width={[1, 1, 1/2, 1/2]}>
     <RelatedBox>
       <Header>
         <HeaderTitle>Related videos</HeaderTitle>

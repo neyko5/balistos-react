@@ -15,7 +15,7 @@ const Background = styled.div`
   height: auto;
   margin: -50px auto -45px;
   padding: 50px 0 45px;
-  @media (min-width: 1280px) {
+  @media (min-width: 992px) {
       margin-top: 0;
   }
 `
@@ -46,6 +46,7 @@ const PopularHeader = styled.h3`
   display: inline-block;
   margin-left: 20px;
   line-height: 54px;
+  margin: 0px;
   @media (min-width:320px) and (max-width:479px) {
     margin-left:5px;
     font-size:22px;
@@ -91,8 +92,8 @@ const Home = () => (
         <MainTitle>Share your music taste with your friends!</MainTitle>
         <SearchPlaylistContainer />
         <Homeback>
-          <Flex>
-            <Box width={1/2}>
+          <Flex wrap>
+            <Box width={[1, 1, 1/2, 1/2]}>
               <Presentation>
                 <SectionTitle>What is Balistos?</SectionTitle>
                 <Text>Balistos is a simple application that uses the power of
@@ -102,7 +103,7 @@ const Home = () => (
                     the ones they like.</Text>
               </Presentation>
             </Box>
-            <Box width={1/2}>
+            <Box width={[1, 1, 1/2, 1/2]}>
               <Presentation>
                 <SectionTitle>How do I use Balistos?</SectionTitle>
                 <Text>Simple! You may search all the playlists and select the one

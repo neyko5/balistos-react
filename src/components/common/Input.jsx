@@ -14,9 +14,7 @@ let StyledInput = styled.input`
   ${props => props.search && css`
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    width: 546px;
     border: 1px solid #000;
-    float: left;
     line-height: 15px;
   `}
 `;
