@@ -8,10 +8,14 @@ let DropdownContainer = styled.div`
     z-index: 2;
     background: #ffffff;
     top: 50px;
-    right: 15px;
+    right: 5px;
     border-top: 0px;
     padding: 10px;
-    width: ${props => props.small ? '210px' : '302px'}
+    width: ${props => props.small ? '210px' : '302px'};
+
+    @media (min-width: 40em) {
+        right: 15px;
+    }
 `;
 
 const Dropdown = (props) => {

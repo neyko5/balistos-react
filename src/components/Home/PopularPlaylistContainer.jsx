@@ -24,14 +24,14 @@ class PopularPlaylistContainer extends React.Component {
   }
   render() {
     return (
-      <Flex>
-        <Box width={1/2} px={2}>
+      <Flex wrap>
+        <Box width={[1, 1, 1/2, 1/2]} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index < this.props.playlists.length / 2)
             .map((result, index) =>
               <PopularPlaylist data={result} index={index} key={result.id} />)}
         </Box>
-        <Box width={1/2} px={2}>
+        <Box width={[1, 1, 1/2, 1/2]} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index >= this.props.playlists.length / 2)
             .map((result, index) => (<PopularPlaylist

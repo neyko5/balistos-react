@@ -286,7 +286,7 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <Box  w={[ 1, 1/2 ]}>
+      <Box width={[1, 1, 1/2, 1/2]}>
         <MainWindow>
           <Video>
             <Player>
@@ -305,7 +305,7 @@ class VideoPlayer extends React.Component {
               }
             </Player>
             <Progress>
-              <Bar width={this.state.elapsed / (this.state.total) * 100} />
+              <Bar width={this.state.total ? (this.state.elapsed / (this.state.total) * 100) : 0} />
             </Progress>
             <Toolbar>
               <Controls>

@@ -24,7 +24,7 @@ const PlaylistBody = styled.div`
 
 
 const VideoListContainer = props => (
-  <Box width={1/2}>
+  <Box width={[1, 1, 1/2, 1/2]}>
     <PlaylistBox>
       <SearchVideo id={props.playlist.id} />
       <PlaylistBody>

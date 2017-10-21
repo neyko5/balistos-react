@@ -39,7 +39,7 @@ class ChatContainer extends React.Component {
   }
   render() {
     return (
-      <Box width={1/2}>
+      <Box width={[1, 1, 1/2, 1/2]}>
         {this.props.users && this.props.users.length ?
           <ChatOnline users={this.props.users} username={this.props.username} /> : undefined}
         <Chat

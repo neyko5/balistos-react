@@ -9,7 +9,7 @@ import transparentImg from '../../img/transparent.png';
 import Input from '../common/Input';
 
 const SearchPlaylist = styled.div`
-  width: 620px;
+  max-width: 620px;
   height: 55px;
   background: url(${transparentImg});
   padding: 10px;
@@ -18,7 +18,7 @@ const SearchPlaylist = styled.div`
 `
 
 const SearchPlaylistInner = styled.div`
-  position: relative;
+  display: flex;
 `
 
 const SearchIcon = styled.div`
@@ -28,6 +28,7 @@ const SearchIcon = styled.div`
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
   background: #000 url(${searchIcon}) 50% no-repeat;
+  flex-shrink: 0;
 `
 
 const SearchResults = styled.ul`
