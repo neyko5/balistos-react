@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import { likeVideo, deleteVideo } from '../../actions';
 import ThumbsUpSVG from '../../img/thumbs_up.svg';
@@ -36,7 +36,7 @@ const PlaylistItem = styled.div`
   ${props => props.next && css`
     background-color: rgba(0,0,0,.4);
   `}
-`
+`;
 
 const Vote = styled.div`
   flex-direction: column;
@@ -45,7 +45,7 @@ const Vote = styled.div`
   height: 100%;
   display: flex;
   align-items: center;
-`
+`;
 
 const VoteButton = styled.button`
   display: flex;
@@ -60,13 +60,13 @@ const VoteButton = styled.button`
   ${props => props.downActive && css`
     color: #892f2a;
   `}
-`
+`;
 
 const SvgIcon = styled.svg`
   width: 32px;
   height: 32px;
   cursor: pointer;
-`
+`;
 
 const Number = styled.div`
   color: #3e414c;
@@ -76,11 +76,11 @@ const Number = styled.div`
   ${props => props.full && css`
     line-height: 76px;
   `}
-`
+`;
 
 const ImgWrapper = styled.div`
   position: relative;
-`
+`;
 
 const Status = styled.div`
   position: absolute;
@@ -91,21 +91,21 @@ const Status = styled.div`
   font-size: 14px;
   font-style: italic;
   padding-left: 5px;
-`
+`;
 
 const Image = styled.img`
   float: left;
   display: block;
   width: 120px;
   height: 90px;
-`
+`;
 const Info = styled.div`
   float: left;
   padding: 0 8px;
   width: 100%;
   position: relative;
   height: 100%;
-`
+`;
 
 const Title = styled.a`
   font-size: 15px;
@@ -114,31 +114,31 @@ const Title = styled.a`
   max-height: 52px;
   line-height: 17px;
   overflow: hidden;
-`
+`;
 
 const AddedBy = styled.div`
   color: #333;
   font-size: 12px;
   font-style: italic;
   margin-top: 3px;
-`
+`;
 
 const Black = styled.span`
   color: #000;
-`
+`;
 
 const DeleteColumn = styled.div`
   align-self: flex-start;
   width: 24px;
   float: left;
-`
+`;
 const Delete = styled.button`
   width: 24px;
   height: 24px;
   float: left;
   background: url(${deleteIcon}) no-repeat 50%;
   cursor: pointer;
-`
+`;
 
 const VideoListItem = (props) => {
   const upLike = props.video.likes
@@ -197,14 +197,15 @@ const VideoListItem = (props) => {
           className="title"
           target="_blank"
           rel="noopener noreferrer"
-          title={'Open in YouTube'}
+          title="Open in YouTube"
           href={`https://www.youtube.com/watch?v=${props.video.video.youtubeId}`}
-        >{props.video.video.title}</Title>
+        >{props.video.video.title}
+        </Title>
         <AddedBy>
           added by <Black>{props.video.autoAdded ? 'Balistos' : props.video.user.username}</Black>
         </AddedBy>
       </Info>
-      {props.userId ? 
+      {props.userId ?
         <DeleteColumn>
           <Delete onClick={() => props.deleteVideo(props.video.id)} />
         </DeleteColumn> : undefined}
@@ -223,11 +224,9 @@ VideoListItem.propTypes = {
       youtubeId: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
-    likes: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.number,
-      }),
-    ).isRequired,
+    likes: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.number,
+    })).isRequired,
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
     }).isRequired,

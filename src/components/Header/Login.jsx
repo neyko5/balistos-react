@@ -36,7 +36,7 @@ const NoAccount = styled.div`
   line-height: 38px;
 `;
 
-const NoAccountLink = styled.button `
+const NoAccountLink = styled.button`
   color: #ff4f00;
   cursor: pointer;
   border: none;
@@ -49,7 +49,7 @@ const LabelTitle = styled.div`
   color: #3e414c;
   float: left;
   line-height: 24px;
-`
+`;
 
 const Label = styled.label`
   margin-bottom: 5px;
@@ -57,7 +57,7 @@ const Label = styled.label`
   width: 100%;
   float: left;
   padding-bottom: 5px;
-`
+`;
 
 class Login extends React.Component {
   constructor(props) {
@@ -85,7 +85,7 @@ class Login extends React.Component {
       password: '',
     });
   }
-  
+
   render() {
     return (
       <Dropdown>
@@ -93,7 +93,12 @@ class Login extends React.Component {
           <Label htmlFor="username">
             <LabelTitle>Username</LabelTitle>
             <ErrorMessage>{this.props.error}</ErrorMessage>
-            <Input type="text" name="username" onChange={this.handleChange} value={this.state.username} />
+            <Input
+              type="text"
+              name="username"
+              onChange={this.handleChange}
+              value={this.state.username}
+            />
           </Label>
           <Label htmlFor="password">
             <LabelTitle>Password</LabelTitle>
@@ -108,7 +113,8 @@ class Login extends React.Component {
           <NoAccount>No account yet?
             <NoAccountLink
               onClick={this.props.onOpenRegisterClick}
-            >Create one now!</NoAccountLink>
+            >Create one now!
+            </NoAccountLink>
           </NoAccount>
         </form>
       </Dropdown>

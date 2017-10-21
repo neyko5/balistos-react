@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
-let ContainerComponent = styled.div`
+const ContainerComponent = styled.div`
     margin: 0px auto;
     margin-left: auto;
     display: flex;
@@ -12,12 +13,21 @@ let ContainerComponent = styled.div`
     }
 `;
 
-const Container = (props) => {
-  return (
-    <ContainerComponent>
-        {props.children}
-    </ContainerComponent>
-  );
+const Container = props => (
+  <ContainerComponent>
+    {props.children}
+  </ContainerComponent>
+);
+
+Container.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(React.PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+Container.defaultProps = {
+  children: undefined,
 };
 
 export default Container;

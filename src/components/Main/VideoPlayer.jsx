@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
 import ReactSlider from 'react-slider';
 import vTime from 'video-time';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import { Box } from 'grid-styled';
 
 import { youtubeParams } from '../../settings';
@@ -16,7 +16,7 @@ const MainWindow = styled.div`
   float: left;
   width: 100%;
   margin: 25px 0 0;
-`
+`;
 
 const Video = styled.div`
   width: 100%;
@@ -25,11 +25,11 @@ const Video = styled.div`
     height: 410px;
     display: block;
   }
-`
+`;
 
 const Player = styled.div`
   position: relative;
-`
+`;
 
 const Overlay = styled.div`
   position: absolute;
@@ -41,7 +41,7 @@ const Overlay = styled.div`
   &:hover {
     opacity: 0.1;
   }
-`
+`;
 
 const VideoEmpty = styled.div`
   height: 400px;
@@ -49,30 +49,30 @@ const VideoEmpty = styled.div`
   background-color: #000000;
   text-align: center;
   vertical-align: middle;
-`
+`;
 const EmptyTextBig = styled.div`
   font-size: 24px;
   color: #DCDCDC;
-`
+`;
 
 const EmptyTextSmall = styled.div`
   font-size: 16px;
   color: #666666;
-`
+`;
 
 const Progress = styled.div`
   width: 100%;
   height: 5px;
   background: #dcdcdc;
   float: left;
-`
+`;
 
 const Bar = styled.div`
   width: ${props => props.width || 0}%;
   background: #d96459;
   height: 5px;
   max-width: 100%;
-`
+`;
 
 const Toolbar = styled.div`
   width: 100%;
@@ -80,11 +80,11 @@ const Toolbar = styled.div`
   float: left;
   background: #4d4c4c;
   padding: 7px 10px;
-`
+`;
 
 const Controls = styled.div`
   float: left;
-`
+`;
 
 const ControlButton = styled.button`
   width: 20px;
@@ -98,12 +98,12 @@ const ControlButton = styled.button`
   ${props => props.play && css`
     background: url(${playIcon}) no-repeat 50%;
   `}
-`
+`;
 
 const Timer = styled.div`
   float: left;
   margin-left: 20px;
-`
+`;
 
 const Time = styled.div`
   font-weight: 600;
@@ -115,7 +115,7 @@ const Time = styled.div`
     margin-left: 6px;
     color: #999;
   `}
-`
+`;
 
 const Volume = styled.div`
   float: right;
@@ -135,7 +135,7 @@ const Volume = styled.div`
       position: absolute;
     }
   }
-`
+`;
 
 const Speaker = styled.button`
   width: 16px;
@@ -144,7 +144,7 @@ const Speaker = styled.button`
   float: left;
   margin-right: 10px;
   cursor: pointer;
-`
+`;
 const PlaylistHeader = styled.div`
   float: left;
   padding-right: 10px;
@@ -154,34 +154,32 @@ const PlaylistHeader = styled.div`
   border-bottom: 1px solid #e1e1e1;
   font-size: 14px;
   font-style: italic;
-`
+`;
 
 const PlaylistTitle = styled.span`
   font-size: 20px;
   font-weight: 500;
   font-style: normal;
-`
+`;
 
 const Created = styled.span`
 
-`
+`;
 
 const PlaylistUsername = styled.span`
   font-style: italic;
-`
+`;
 
 
 class VideoPlayer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      current: undefined,
       elapsed: 0,
       total: 0,
       volume: 100,
       previousVolume: 0,
       paused: false,
-      start: 0,
     };
     this.onReady = this.onReady.bind(this);
     this.onSpeakerClick = this.onSpeakerClick.bind(this);
@@ -218,7 +216,7 @@ class VideoPlayer extends React.Component {
         tag: 'video',
         requireInteraction: false,
       };
-      new Notification(`Balistos - ${this.props.playlistTitle}`, options);
+      Notification(`Balistos - ${this.props.playlistTitle}`, options);
     }
   }
   componentWillUnmount() {
@@ -252,9 +250,8 @@ class VideoPlayer extends React.Component {
     });
     this.state.player.setVolume(value);
   }
-  resumeVideo(youtubeId) {
+  resumeVideo() {
     this.setState({
-      current: youtubeId,
       paused: false,
     });
   }
@@ -286,7 +283,7 @@ class VideoPlayer extends React.Component {
 
   render() {
     return (
-      <Box width={[1, 1, 1/2, 1/2]}>
+      <Box width={[1, 1, 1 / 2, 1 / 2]}>
         <MainWindow>
           <Video>
             <Player>
@@ -298,10 +295,11 @@ class VideoPlayer extends React.Component {
                   onReady={this.onReady}
                   onEnd={this.finishCurrentVideo}
                 />
-                : <VideoEmpty>
-                    <EmptyTextBig>No video</EmptyTextBig>
-                    <EmptyTextSmall>Make sure you add some new videos to the playlist</EmptyTextSmall>
-                  </VideoEmpty>
+                :
+                <VideoEmpty>
+                  <EmptyTextBig>No video</EmptyTextBig>
+                  <EmptyTextSmall>Make sure you add some new videos to the playlist</EmptyTextSmall>
+                </VideoEmpty>
               }
             </Player>
             <Progress>
@@ -340,7 +338,7 @@ class VideoPlayer extends React.Component {
 
 VideoPlayer.propTypes = {
   playlistTitle: PropTypes.string,
-  playlistUsername: PropTypes.string,
+  playlistUsername: PropTypes.string.isRequired,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
@@ -352,11 +350,9 @@ VideoPlayer.propTypes = {
       youtubeId: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,
     }).isRequired,
-    likes: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.number,
-      }),
-    ).isRequired,
+    likes: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.number,
+    })).isRequired,
     user: PropTypes.shape({
       username: PropTypes.string.isRequired,
     }).isRequired,

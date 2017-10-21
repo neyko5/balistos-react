@@ -15,11 +15,11 @@ const SearchPlaylist = styled.div`
   padding: 10px;
   border-radius: 5px;
   margin: 0px auto;
-`
+`;
 
 const SearchPlaylistInner = styled.div`
   display: flex;
-`
+`;
 
 const SearchIcon = styled.div`
   width: 54px;
@@ -29,7 +29,7 @@ const SearchIcon = styled.div`
   border-bottom-right-radius: 5px;
   background: #000 url(${searchIcon}) 50% no-repeat;
   flex-shrink: 0;
-`
+`;
 
 const SearchResults = styled.ul`
   position: absolute;
@@ -47,7 +47,7 @@ const SearchResults = styled.ul`
   &:empty {
     display: none;
   }
-`
+`;
 
 const mapStateToProps = (state, ownProps) => ({
   ...ownProps,
@@ -63,7 +63,12 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
 const SearchPlaylistContainer = props => (
   <SearchPlaylist>
     <SearchPlaylistInner>
-      <Input type="text" placeholder="Search playlist" search onChange={props.onSearchInputChange} />
+      <Input
+        type="text"
+        placeholder="Search playlist"
+        search
+        onChange={props.onSearchInputChange}
+      />
       <SearchIcon />
       <SearchResults>
         {props.results.map(result => <SearchPlaylistResult key={result.id} result={result} />)}
@@ -74,13 +79,11 @@ const SearchPlaylistContainer = props => (
 
 SearchPlaylistContainer.propTypes = {
   onSearchInputChange: PropTypes.func.isRequired,
-  results: PropTypes.arrayOf(
-    PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-      description: PropTypes.string.isRequired,
-    }),
-  ).isRequired,
+  results: PropTypes.arrayOf(PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+  })).isRequired,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);

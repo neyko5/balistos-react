@@ -18,13 +18,13 @@ const Title = styled.div`
   font-weight: 600;
   color: #333333;
   line-height: 26px;
-`
+`;
 
 const BoxHeader = styled.div`
   width: 100%;
   padding-left: 5px;
   margin-bottom: 5px;
-`
+`;
 
 const Chat = props => (
   <div>
@@ -48,13 +48,11 @@ const Chat = props => (
 Chat.propTypes = {
   username: PropTypes.string,
   sendMessage: PropTypes.func.isRequired,
-  messages: PropTypes.arrayOf(
-    PropTypes.shape({
-      createdAt: PropTypes.string.isRequired,
-      message: PropTypes.string.isRequired,
-      id: PropTypes.number.isRequired,
-    }),
-  ).isRequired,
+  messages: PropTypes.arrayOf(PropTypes.shape({
+    createdAt: PropTypes.string.isRequired,
+    message: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
+  })).isRequired,
 };
 
 

@@ -36,7 +36,7 @@ const Search = styled.div`
   position: relative;
   width: 100%;
   padding: 5px;
-`
+`;
 
 const SearchInput = styled.input`
   width: 100%;
@@ -49,7 +49,7 @@ const SearchInput = styled.input`
   background-color: white;
   padding: 11px 10px;
   margin: 0px;
-`
+`;
 
 const SearchResults = styled.div`
   position: absolute;
@@ -62,7 +62,7 @@ const SearchResults = styled.div`
   list-style: none;
   padding: 0px;
   text-align: left;
-`
+`;
 
 class SearchVideo extends React.Component {
   constructor(props) {
@@ -89,7 +89,8 @@ class SearchVideo extends React.Component {
         if (this.props.results[index]) {
           this.props.addVideo(
             this.props.results[index].id.videoId,
-            this.props.results[index].snippet.title, this.props.id);
+            this.props.results[index].snippet.title, this.props.id,
+          );
         }
         break;
       case 'Escape':
@@ -110,19 +111,21 @@ class SearchVideo extends React.Component {
           value={this.props.query || ''}
           autoComplete="off"
         />
-        {this.props.results && this.props.query ? <SearchResults>
-          {this.props.results.map((result, index) =>
-            (<VideoResult
-              title={result.snippet.title}
-              image={result.snippet.thumbnails.default.url}
-              onItemClick={() => this.props.addVideo(result.id.videoId,
-                result.snippet.title, this.props.id)}
-              id={result.id.videoId}
-              key={result.id.videoId}
-              active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
-            />),
-          )}
-        </SearchResults> : undefined }
+        {this.props.results && this.props.query ?
+          <SearchResults>
+            {this.props.results.map((result, index) =>
+              (<VideoResult
+                title={result.snippet.title}
+                image={result.snippet.thumbnails.default.url}
+                onItemClick={() => this.props.addVideo(
+                  result.id.videoId,
+                  result.snippet.title, this.props.id,
+                )}
+                id={result.id.videoId}
+                key={result.id.videoId}
+                active={index === this.props.index % 5 || index === ((5 + this.props.index) % 5)}
+              />))}
+          </SearchResults> : undefined }
       </Search>
     );
   }
@@ -137,12 +140,10 @@ SearchVideo.propTypes = {
   clearYoutubeResults: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
   id: PropTypes.number,
-  results: PropTypes.arrayOf(
-    PropTypes.shape({
-      snippet: PropTypes.object.isRequired,
-      id: PropTypes.object.isRequired,
-    }),
-  ).isRequired,
+  results: PropTypes.arrayOf(PropTypes.shape({
+    snippet: PropTypes.object.isRequired,
+    id: PropTypes.object.isRequired,
+  })).isRequired,
 };
 
 SearchVideo.defaultProps = {

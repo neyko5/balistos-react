@@ -17,7 +17,7 @@ const RelatedBox = styled.div`
   margin-bottom: 10px;
   float: left;
   width: 100%;
-`
+`;
 
 const Header = styled.div`
   width: 100%;
@@ -25,22 +25,22 @@ const Header = styled.div`
   margin-bottom: 5px;
   display: flex;
   align-items: center;
-`
+`;
 
 const HeaderTitle = styled.div`
   font-size: 14px;
   font-weight: 600;
   color: #333333;
   line-height: 26px;
-`
+`;
 
 const Body = styled.div`
   padding: 12px 0px;
   width: 100%;
-`
+`;
 
 const RelatedVideos = props => (
-  <Box width={[1, 1, 1/2, 1/2]}>
+  <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <RelatedBox>
       <Header>
         <HeaderTitle>Related videos</HeaderTitle>
@@ -59,13 +59,11 @@ const RelatedVideos = props => (
 
 RelatedVideos.propTypes = {
   id: PropTypes.number,
-  related: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.shape({
-        videoId: PropTypes.string.isRequired,
-      }).isRequired,
+  related: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  }).isRequired).isRequired,
 };
 
 RelatedVideos.defaultProps = {

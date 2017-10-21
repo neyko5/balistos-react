@@ -10,7 +10,7 @@ const Message = styled.div`
 export const Author = styled.span`
   margin-right: 3px;
   font-weight: 700;
-  color: ${props => props.current ? '#9FA600': '#3e414c'}
+  color: ${props => (props.current ? '#9FA600' : '#3e414c')}
 `;
 
 const ChatMessage = props => (
@@ -18,7 +18,8 @@ const ChatMessage = props => (
     <Author
       current={props.message.user.username === props.username}
       title={new Date(props.message.createdAt).toDateString()}
-    >{props.message.user.username}:</Author>
+    >{props.message.user.username}:
+    </Author>
     <span>{props.message.message}</span>
   </Message>
 );

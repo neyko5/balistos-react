@@ -1,7 +1,8 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
 
-let StyledButton = styled.button`
+const StyledButton = styled.button`
     height: 38px;
     line-height: 38px;
     padding: 0 10px;
@@ -32,12 +33,21 @@ let StyledButton = styled.button`
     `}
 `;
 
-const Button = (props) => {
-  return (
-    <StyledButton {...props}>
-        {props.children}
-    </StyledButton>
-  );
+const Button = props => (
+  <StyledButton {...props}>
+    {props.children}
+  </StyledButton>
+);
+
+Button.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(React.PropTypes.node),
+    PropTypes.node,
+  ]),
+};
+
+Button.defaultProps = {
+  children: undefined,
 };
 
 export default Button;

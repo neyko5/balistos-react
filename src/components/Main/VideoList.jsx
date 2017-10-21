@@ -7,11 +7,11 @@ import VideoListItem from './VideoListItem';
 const EmptyItem = styled.div`
   color: #3E414C;
   padding: 10px;
-`
+`;
 
 const List = styled.div`
   width: 100%;
-`
+`;
 
 const VideoList = (props) => {
   if (props.videos.empty) {
@@ -37,22 +37,16 @@ const VideoList = (props) => {
 VideoList.propTypes = {
   current: PropTypes.shape({
     id: PropTypes.number.isRequired,
-    likes: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.number,
-      }),
-    ).isRequired,
+    likes: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.number,
+    })).isRequired,
   }),
-  videos: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      likes: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.number,
-        }),
-      ).isRequired,
-    }),
-  ),
+  videos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    likes: PropTypes.arrayOf(PropTypes.shape({
+      value: PropTypes.number,
+    })).isRequired,
+  })),
 };
 
 VideoList.defaultProps = {

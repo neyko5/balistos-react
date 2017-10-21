@@ -7,7 +7,7 @@ import Chat from './Chat';
 import ChatForm from './ChatForm';
 import ChatMessage from './ChatMessage';
 
-Enzyme.configure({ adapter: new Adapter()});
+Enzyme.configure({ adapter: new Adapter() });
 
 const messages = [
   {
@@ -32,31 +32,23 @@ const messages = [
 const username = 'testuser';
 
 it('should show chat form for logged in user', () => {
-  const chat = shallow(
-    <Chat messages={messages} username={username} sendMessage={jest.fn()} />,
-  );
+  const chat = shallow(<Chat messages={messages} username={username} sendMessage={jest.fn()} />);
   expect(chat.find(ChatForm).length).toBe(1);
 });
 
 it('should show not show chat form for non-logged in user', () => {
-  const chat = shallow(
-    <Chat messages={messages} sendMessage={jest.fn()} />,
-  );
+  const chat = shallow(<Chat messages={messages} sendMessage={jest.fn()} />);
   expect(chat.find(ChatForm).length).toBe(0);
 });
 
 it('should render three messages', () => {
-  const chat = shallow(
-    <Chat messages={messages} sendMessage={jest.fn()} />,
-  );
+  const chat = shallow(<Chat messages={messages} sendMessage={jest.fn()} />);
   expect(chat.find(ChatMessage).length).toBe(3);
 });
 
 
 test('should render correctly', () => {
-  const chat = renderer.create(
-    <Chat messages={messages} username={username} sendMessage={jest.fn()} />,
-  );
+  const chat = renderer.create(<Chat messages={messages} username={username} sendMessage={jest.fn()} />);
   const tree = chat.toJSON();
   expect(tree).toMatchSnapshot();
 });

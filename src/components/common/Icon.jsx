@@ -1,10 +1,10 @@
 import React from 'react';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 import chatIcon from '../../img/chat.png';
 import noteIcon from '../../img/note.png';
 import messageIcon from '../../img/message.png';
 
-let StyledIcon = styled.i`
+const StyledIcon = styled.i`
     width: 26px;
     height: 26px;
     background-position: center;
@@ -25,10 +25,8 @@ let StyledIcon = styled.i`
     `}
 `;
 
-const Icon = (props) => {
-  return (
-    <StyledIcon {...props}></StyledIcon>
-  );
-};
+const Icon = props => (
+  <StyledIcon {...props} />
+);
 
 export default Icon;

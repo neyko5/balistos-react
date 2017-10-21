@@ -66,7 +66,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const Main = styled.div `
+const Main = styled.div`
   min-height: 100%;
   height: auto;
   margin: -50px auto -45px;
@@ -75,7 +75,7 @@ const Main = styled.div `
   {
       margin-top: 0;
   }
-`
+`;
 
 class Playlist extends React.Component {
   constructor(props) {
@@ -158,27 +158,27 @@ Playlist.propTypes = {
   playlist: PropTypes.shape({
     current: PropTypes.object,
     title: PropTypes.string,
-  }).isRequired,
+    username: PropTypes.string,
+    id: PropTypes.string,
+  }),
   match: PropTypes.shape({
     params: PropTypes.shape({
       playlistId: PropTypes.string.isRequired,
     }).isRequired,
   }).isRequired,
-  related: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.shape({
-        videoId: PropTypes.string.isRequired,
-      }).isRequired,
+  related: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.shape({
+      videoId: PropTypes.string.isRequired,
     }).isRequired,
-  ).isRequired,
+  }).isRequired),
 };
 
 Playlist.defaultProps = {
   playlist: {
     current: undefined,
     title: '',
-    related: [],
     id: undefined,
+    username: undefined,
   },
   related: [],
   username: undefined,

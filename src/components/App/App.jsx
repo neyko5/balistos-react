@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 
 import Home from '../Home/Home';
 import Playlist from '../Main/Playlist';
@@ -16,13 +17,17 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
+const FullHeight = styled.div`
+  height: 100%;
+`;
+
 const App = props => (
   <BrowserRouter>
-    <div className="full-height" role="presentation" onClick={props.clickOutside}>
+    <FullHeight onClick={props.clickOutside}>
       <Header />
       <Route exact path="/" component={Home} />
       <Route path="/playlist/:playlistId" component={Playlist} />
-    </div>
+    </FullHeight>
   </BrowserRouter>
 );
 

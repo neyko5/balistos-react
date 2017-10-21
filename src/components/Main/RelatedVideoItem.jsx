@@ -22,21 +22,21 @@ const RelatedItem = styled.div`
   padding: 5px 0px 5px 5px;
   display: flex;
   flex-direction: row;
-`
+`;
 
 const Image = styled.img`
   height: 60px;
   width: auto;
   flex-grow: 0;
   flex-shrink: 0;
-`
+`;
 const Info = styled.div`
   float: left;
   padding: 0 8px;
   width: 100%;
   position: relative;
   height: 100%;
-`
+`;
 
 const Title = styled.a`
   font-size: 14px;
@@ -47,7 +47,7 @@ const Title = styled.a`
   overflow: hidden;
   flex-grow: 1;
   flex-shrink: 1;
-`
+`;
 
 const AddButton = styled.button`
   border-radius: 0px;
@@ -60,7 +60,7 @@ const AddButton = styled.button`
   height: 40px;
   flex-grow: 0;
   flex-shrink: 0;
-`
+`;
 
 
 const RelatedVideoItem = props => (
@@ -71,9 +71,10 @@ const RelatedVideoItem = props => (
         className="title"
         rel="noopener noreferrer"
         target="_blank"
-        title={'Open in YouTube'}
+        title="Open in YouTube"
         href={`https://www.youtube.com/watch?v=${props.video.id.videoId}`}
-      >{props.video.snippet.title}</Title>
+      >{props.video.snippet.title}
+      </Title>
     </Info>
     <AddButton onClick={props.addVideo}> Add</AddButton>
   </RelatedItem>

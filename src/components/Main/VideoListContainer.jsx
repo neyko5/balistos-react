@@ -13,18 +13,18 @@ const PlaylistBox = styled.div`
   width: 100%;
   margin-top: 25px;
   margin-bottom: 40px;
-`
+`;
 
 const PlaylistBody = styled.div`
   float: left;
   width: 100%;
   height: 400px;
   overflow: auto;
-`
+`;
 
 
 const VideoListContainer = props => (
-  <Box width={[1, 1, 1/2, 1/2]}>
+  <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <PlaylistBox>
       <SearchVideo id={props.playlist.id} />
       <PlaylistBody>
@@ -41,12 +41,10 @@ VideoListContainer.propTypes = {
   playlist: PropTypes.shape({
     username: PropTypes.string,
     id: PropTypes.number,
-    title: PropTypes.title,
-    videos: PropTypes.arrayOf(
-      PropTypes.object.isRequired,
-    ).isRequired,
+    title: PropTypes.string,
+    videos: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     current: PropTypes.object,
-  }).isRequired,
+  }),
 
 };
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 import usersIcon from '../../img/users.png';
 
@@ -12,18 +12,18 @@ const Users = styled.div`
   float: left;
   width: 100%;
   border: 1px solid #CCCCCC;
-`
+`;
 const Header = styled.div`
   width: 100%;
   float: left;
-`
+`;
 const HeaderTitle = styled.div`
   color: #3E414C;
   font-size: 13px;
   font-weight: 700;
   float: left;
   line-height: 28px;
-`
+`;
 
 const Number = styled.div`
   background: #ffffff url(${usersIcon}) 6px center no-repeat;
@@ -35,13 +35,13 @@ const Number = styled.div`
   padding-left: 36px;
   padding-right: 10px;
   line-height: 28px;
-`
+`;
 
 const Body = styled.div`
   float: left;
   width: 100%;
   margin: 5px 0px;
-`
+`;
 const User = styled.div`
   margin-bottom: 5px;
   height: 24px;
@@ -59,7 +59,7 @@ const User = styled.div`
     color: #ffffff;
   `}
 
-`
+`;
 
 const ChatOnline = props => (
   <Users>
@@ -69,9 +69,11 @@ const ChatOnline = props => (
     </Header>
     <Body>
       {props.users && props.users.length && props.users.map(user => (
-        <User green={user.username === props.username}
+        <User
+          green={user.username === props.username}
           key={user.username}
-        >{user.username}</User>
+        >{user.username}
+        </User>
       ))}
     </Body>
   </Users>
@@ -79,11 +81,9 @@ const ChatOnline = props => (
 
 ChatOnline.propTypes = {
   username: PropTypes.string,
-  users: PropTypes.arrayOf(
-    PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }).isRequired,
-  ).isRequired,
+  users: PropTypes.arrayOf(PropTypes.shape({
+    username: PropTypes.string.isRequired,
+  }).isRequired).isRequired,
 };
 
 ChatOnline.defaultProps = {

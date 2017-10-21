@@ -57,7 +57,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const HeaderContainer = styled.header `
+const HeaderContainer = styled.header`
   height: 50px;
   width: 100%;
   background-color: #212121;
@@ -77,14 +77,14 @@ const HeaderContainer = styled.header `
         height: auto;
     }
   }
-`
+`;
 
 const RightMenu = styled.div`
   align-self: flex-end;
   flex: 1;
-`
+`;
 
-const Logo = styled.h1`
+const Logo = styled(Link)`
   background: url(${logoImage}) left center;
   margin: 0px;
   margin-top: 2px;

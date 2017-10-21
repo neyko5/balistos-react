@@ -18,7 +18,7 @@ const Background = styled.div`
   @media (min-width: 992px) {
       margin-top: 0;
   }
-`
+`;
 
 const Homeback = styled.div`
   background: #eaeaea;
@@ -27,7 +27,7 @@ const Homeback = styled.div`
   @media (min-width:320px) and (max-width:479px) {
     margin-top: 30px;
   }
-`
+`;
 
 const Presentation = styled.div`
   padding: 16px;
@@ -37,7 +37,7 @@ const Popular = styled.div`
   border-top: #DCDCDC 3px solid;
   margin: 20px 0px;
   display: flex;
-`
+`;
 
 const PopularHeader = styled.h3`
   color: #000;
@@ -51,13 +51,13 @@ const PopularHeader = styled.h3`
     margin-left:5px;
     font-size:22px;
   }
-`
+`;
 
 const NoteIcon = styled.div`
   width: 54px;
   height: 54px;
   background: #adbf00 url(${noteIcon}) no-repeat 50%;
-`
+`;
 
 const SectionTitle = styled.h2`
   color: #758000;
@@ -67,7 +67,7 @@ const SectionTitle = styled.h2`
         font-size: 21px;
   }
 }
-`
+`;
 
 const Text = styled.div`
   margin-top: 20px;
@@ -76,14 +76,14 @@ const Text = styled.div`
   @media (min-width:320px) and (max-width:479px) {
     font-size:12px;
   }
-`
+`;
 const MainTitle = styled.h1`
   font-size: 55px;
   width: 100%;
   color: #fff;
   font-weight: 200;
   text-align: center;
-`
+`;
 
 const Home = () => (
   <Background>
@@ -93,25 +93,28 @@ const Home = () => (
         <SearchPlaylistContainer />
         <Homeback>
           <Flex wrap>
-            <Box width={[1, 1, 1/2, 1/2]}>
+            <Box width={[1, 1, 1 / 2, 1 / 2]}>
               <Presentation>
                 <SectionTitle>What is Balistos?</SectionTitle>
                 <Text>Balistos is a simple application that uses the power of
                     YouTube to let you share your music taste with your friends or people with
                     the same ideas. Balistos lets you add music videos you like to the common
                     playlist, where all connected users can listen to them together and vote up
-                    the ones they like.</Text>
+                    the ones they like.
+                </Text>
               </Presentation>
             </Box>
-            <Box width={[1, 1, 1/2, 1/2]}>
+            <Box width={[1, 1, 1 / 2, 1 / 2]}>
               <Presentation>
                 <SectionTitle>How do I use Balistos?</SectionTitle>
-                <Text>Simple! You may search all the playlists and select the one
-                    you like by simply clicking on it. To be able to use full functionality of
-                    Balistos such as adding songs and voting you are required to register an account.
-                    If you don&apos;t like any of the playlist you may also create your own and share
-                    it with your friends. If you want to make it exclusive for your friends, make
-                    sure you protect it with password.</Text>
+                <Text>
+                  Simple! You may search all the playlists and select the one
+                  you like by simply clicking on it. To be able to use full 
+                  functionality of Balistos such as adding songs and voting 
+                  you are required to register an account. If you don&apos;t
+                  like any of the playlist you may also create your own and share
+                  it with your friends.
+                </Text>
               </Presentation>
             </Box>
           </Flex>

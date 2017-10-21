@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled, {css} from 'styled-components';
+import styled, { css } from 'styled-components';
 
 const Result = styled.button`
   width: 100%;
@@ -9,14 +9,14 @@ const Result = styled.button`
   ${props => props.active && css`
     background: #e8e8e8;
   `}
-`
+`;
 
 const Image = styled.img`
   float: left;
   margin-right: 10px;
   height: 40px;
   width: 60px;
-`
+`;
 
 const Title = styled.div`
   line-height: 40px;
@@ -26,7 +26,7 @@ const Title = styled.div`
   width: calc(100% - 70px);
   overflow: hidden;
   height: 40px;
-`
+`;
 
 const VideoResult = props => (
   <Result onClick={props.onItemClick} active={props.active}>

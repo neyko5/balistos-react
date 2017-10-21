@@ -105,10 +105,6 @@ html,body{
     background: white;
 }
 
-.full-height {
-    height: 100%;
-}
-
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;

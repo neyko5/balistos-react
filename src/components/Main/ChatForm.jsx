@@ -11,7 +11,7 @@ const Send = styled.div`
   background: #e8e8e8;
   float: left;
   width: 100%;
-`
+`;
 
 class ChatForm extends React.Component {
   constructor(props) {

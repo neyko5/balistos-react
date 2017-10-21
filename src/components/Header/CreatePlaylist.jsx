@@ -12,7 +12,7 @@ const LabelTitle = styled.div`
   color: #3e414c;
   float: left;
   line-height: 24px;
-`
+`;
 
 const Label = styled.label`
   margin-bottom: 5px;
@@ -20,7 +20,7 @@ const Label = styled.label`
   width: 100%;
   float: left;
   padding-bottom: 5px;
-`
+`;
 
 class CreatePlaylist extends React.Component {
   constructor(props) {
