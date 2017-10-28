@@ -84,7 +84,7 @@ const RightMenu = styled.div`
   flex: 1;
 `;
 
-const Logo = styled(Link)`
+const Logo = styled.div`
   background: url(${logoImage}) left center;
   margin: 0px;
   margin-top: 2px;
