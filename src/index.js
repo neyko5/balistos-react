@@ -13,6 +13,11 @@ const store = createStore(
   reducer,
   applyMiddleware(sagaMiddleware),
 );
+if (module.hot) {
+  module.hot.accept('./reducers', () => {
+    store.replaceReducer(reducer)
+  })
+}
 
 sagaMiddleware.run(rootSaga);
 
@@ -22,3 +27,14 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root'),
 );
+
+if (module.hot) {
+  module.hot.accept('./components/App/App', () => {
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('root'),
+    )
+  })
+}
