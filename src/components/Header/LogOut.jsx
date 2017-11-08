@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import PropTypes from 'prop-types';
 
 import Dropdown from './Dropdown';
 import Button from '../common/Button';

@@ -216,7 +216,7 @@ class VideoPlayer extends React.Component {
         tag: 'video',
         requireInteraction: false,
       };
-      Notification(`Balistos - ${this.props.playlistTitle}`, options);
+      new window.Notification(`Balistos - ${this.props.playlistTitle}`, options);
     }
   }
   componentWillUnmount() {

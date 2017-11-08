@@ -21,6 +21,7 @@
             "components": [ "Link" ],
             "specialLink": [ "hrefLeft", "hrefRight" ],
             "aspects": [ "noHref", "invalidHref", "preferButton" ]
-        }]
+        }],
+        "no-new": 0
     }
 }
