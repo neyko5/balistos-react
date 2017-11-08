@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -42,24 +43,22 @@ const Black = styled.span`
   color: #000;
 `;
 
-const PopularPlaylist = props => (
-  <Playlist to={`/playlist/${props.data.id}`}>
-    <Place>{props.index + 1}</Place>
-    <Square>
-      <Title>{props.data.title}</Title>
-      <Created>created by <Black>{props.data.username}</Black></Created>
-    </Square>
-  </Playlist>
-);
-
-PopularPlaylist.propTypes = {
-  index: PropTypes.number.isRequired,
-  data: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
-    username: PropTypes.string.isRequired,
-  }).isRequired,
-};
-
+const PopularPlaylist =
+  (props: {
+    index: number,
+    data: {
+      title: string,
+      id: number,
+      username: string,
+    }
+  }) => (
+    <Playlist to={`/playlist/${props.data.id}`}>
+      <Place>{props.index + 1}</Place>
+      <Square>
+        <Title>{props.data.title}</Title>
+        <Created>created by <Black>{props.data.username}</Black></Created>
+      </Square>
+    </Playlist>
+  );
 
 export default PopularPlaylist;
