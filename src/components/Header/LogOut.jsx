@@ -8,9 +8,9 @@ import Button from '../common/Button';
 const LogOut = (props: {
                   onLogoutClick: () => void
                 }) => (
-  <Dropdown small>
-    <Button green onClick={props.onLogoutClick}>Log Out</Button>
-  </Dropdown>
+                  <Dropdown small>
+                    <Button green onClick={props.onLogoutClick}>Log Out</Button>
+                  </Dropdown>
 );
 
 export default LogOut;

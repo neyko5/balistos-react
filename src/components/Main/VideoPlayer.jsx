@@ -303,7 +303,7 @@ class VideoPlayer extends React.Component {
               }
             </Player>
             <Progress>
-              <Bar width={this.state.total ? (this.state.elapsed / (this.state.total) * 100) : 0} />
+              <Bar width={this.state.total ? (this.state.elapsed / (this.state.total * 100)) : 0} />
             </Progress>
             <Toolbar>
               <Controls>
