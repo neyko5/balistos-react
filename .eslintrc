@@ -10,7 +10,8 @@
         "document": true,
         "localStorage": true,
         "window": true,
-        "Notification": true
+        "Notification": true,
+        "cy": true
     },
     "env": {
         "jest": true
