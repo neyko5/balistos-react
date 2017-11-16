@@ -1,6 +1,7 @@
+// @flow
 import * as actionTypes from '../constants/actionTypes';
 
-export function createPlaylist(title, description, history) {
+export function createPlaylist(title: string, description: string, history: any) {
   return {
     type: actionTypes.CREATE_PLAYLIST,
     title,
@@ -9,7 +10,7 @@ export function createPlaylist(title, description, history) {
   };
 }
 
-export function sendLoginRequest(username, password) {
+export function sendLoginRequest(username: string, password: string) {
   return {
     type: actionTypes.SEND_LOGIN_REQUEST,
     username,
@@ -17,7 +18,7 @@ export function sendLoginRequest(username, password) {
   };
 }
 
-export function sendRegisterRequest(username, password) {
+export function sendRegisterRequest(username: string, password: string) {
   return {
     type: actionTypes.SEND_REGISTER_REQUEST,
     username,
@@ -25,7 +26,7 @@ export function sendRegisterRequest(username, password) {
   };
 }
 
-export function setRegisterError(message) {
+export function setRegisterError(message: string) {
   return {
     type: actionTypes.SET_REGISTER_ERROR,
     message,
@@ -38,28 +39,28 @@ export function verifyToken() {
   };
 }
 
-export function setLoginError(message) {
+export function setLoginError(message: string) {
   return {
     type: actionTypes.SET_LOGIN_ERROR,
     message,
   };
 }
 
-export function fetchPlaylist(playlistId) {
+export function fetchPlaylist(playlistId: string) {
   return {
     type: actionTypes.FETCH_PLAYLIST,
     playlistId,
   };
 }
 
-export function searchYoutube(query) {
+export function searchYoutube(query: string) {
   return {
     type: actionTypes.SEARCH_YOUTUBE,
     query,
   };
 }
 
-export function addVideo(id, title, playlistId, autoAdded) {
+export function addVideo(id: string, title: string, playlistId: string, autoAdded: boolean) {
   return {
     type: actionTypes.ADD_VIDEO,
     title,
@@ -69,7 +70,7 @@ export function addVideo(id, title, playlistId, autoAdded) {
   };
 }
 
-export function sendHeartbeat(username, playlist) {
+export function sendHeartbeat(username: string, playlist: string) {
   return {
     type: actionTypes.SEND_HEARTBEAT,
     playlist,
@@ -77,14 +78,14 @@ export function sendHeartbeat(username, playlist) {
   };
 }
 
-export function getActiveUsers(playlist) {
+export function getActiveUsers(playlist: string) {
   return {
     type: actionTypes.GET_ACTIVE_USERS,
     playlist,
   };
 }
 
-export function updateSearchIndex(value) {
+export function updateSearchIndex(value: number) {
   return {
     type: actionTypes.UPDATE_SEARCH_INDEX,
     value,
@@ -105,14 +106,14 @@ export function resetYoutubeSearchQuery() {
   };
 }
 
-export function getRelatedVideos(videoId) {
+export function getRelatedVideos(videoId: string) {
   return {
     type: actionTypes.GET_RELATED_VIDEOS,
     videoId,
   };
 }
 
-export function likeVideo(videoId, value) {
+export function likeVideo(videoId: string, value: number) {
   return {
     type: actionTypes.LIKE_VIDEO,
     videoId,
@@ -127,21 +128,21 @@ export function logOut() {
   };
 }
 
-export function deleteVideo(videoId) {
+export function deleteVideo(videoId: string) {
   return {
     type: actionTypes.DELETE_VIDEO,
     videoId,
   };
 }
 
-export function finishVideo(videoId) {
+export function finishVideo(videoId: string) {
   return {
     type: actionTypes.FINISH_VIDEO,
     videoId,
   };
 }
 
-export function startVideo(videoId) {
+export function startVideo(videoId: string) {
   return {
     type: actionTypes.START_VIDEO,
     videoId,
@@ -149,7 +150,7 @@ export function startVideo(videoId) {
 }
 
 
-export function searchPlaylists(query) {
+export function searchPlaylists(query: string) {
   return {
     type: actionTypes.SEARCH_PLAYLISTS,
     query,
@@ -162,7 +163,7 @@ export function fetchPopularPlaylists() {
   };
 }
 
-export function sendMessage(message, playlistId) {
+export function sendMessage(message: string, playlistId: string) {
   return {
     type: actionTypes.SEND_MESSAGE,
     message,
