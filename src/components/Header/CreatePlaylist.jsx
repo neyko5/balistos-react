@@ -58,7 +58,12 @@ class CreatePlaylist extends React.Component {
         <form onSubmit={this.handleSubmit}>
           <Label htmlFor="title">
             <LabelTitle>Title</LabelTitle>
-            <Input type="text" name="title" onChange={this.handleChange} value={this.state.title} />
+            <Input
+              type="text"
+              name="title"
+              onChange={this.handleChange}
+              value={this.state.title}
+            />
           </Label>
           <Label htmlFor="description">
             <LabelTitle>Description</LabelTitle>
