@@ -123,7 +123,7 @@ class Header extends React.Component {
       <HeaderContainer>
         <Container>
           <Link to="/">
-            <Logo>Balistos</Logo>
+            <Logo id="logo">Balistos</Logo>
           </Link>
           {this.props.loggedIn ?
             <RightMenu>

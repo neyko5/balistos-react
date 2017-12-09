@@ -64,7 +64,7 @@ const SearchPlaylistContainer = props => (
   <SearchPlaylist>
     <SearchPlaylistInner>
       <Input
-        type="text"
+        name="search-playlist"
         placeholder="Search playlist"
         search
         onChange={props.onSearchInputChange}
