@@ -49,7 +49,7 @@ PopularPlaylistContainer.propTypes = {
   fetchPopularPlaylists: PropTypes.func.isRequired,
   playlists: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     username: PropTypes.string.isRequired,
   })).isRequired,
 };

@@ -5,19 +5,25 @@ import axios from '../axios';
 
 export function* sendLoginRequest(action) {
   try {
-    const response = yield axios.post('/authentication/login', {
-      username: action.username,
-      password: action.password,
+    const response = yield axios.post('/graphql', {
+      query: `{
+        login(username: "${action.username}", password: "${action.password}") {
+          success,
+          username,
+          userId,
+          token
+        }
+      }`,
     });
-    if (response.data.success) {
+    if (response.data.data.login && response.data.data.login.success) {
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
-        token: response.data.token,
-        userId: response.data.userId,
+        token: response.data.data.login.token,
+        userId: response.data.data.login.userId,
       });
     } else {
-      yield put({ type: actionTypes.SET_LOGIN_ERROR, message: response.data.message });
+      yield put({ type: actionTypes.SET_LOGIN_ERROR, message: response.data.data.login.message });
     }
   } catch (error) {
     yield put({ type: actionTypes.SET_LOGIN_ERROR, message: error.message });
@@ -26,19 +32,26 @@ export function* sendLoginRequest(action) {
 
 export function* sendRegisterRequest(action) {
   try {
-    const response = yield axios.post('/authentication/register', {
-      username: action.username,
-      password: action.password,
+    const response = yield axios.post('/graphql', {
+      query: `
+        mutation {
+          register(username: "${action.username}", password: "${action.password}") {
+            success,
+            username,
+            userId,
+            token
+          }
+        }`,
     });
-    if (response.data.success) {
+    if (response.data.data.register && response.data.data.register.success) {
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
-        token: response.data.token,
-        userId: response.data.userId,
+        token: response.data.data.register.token,
+        userId: response.data.data.register.userId,
       });
     } else {
-      yield put({ type: actionTypes.SET_REGISTER_ERROR, message: response.data.message });
+      yield put({ type: actionTypes.SET_REGISTER_ERROR, message: response.data.data.register.message });
     }
   } catch (error) {
     yield put({ type: actionTypes.SET_REGISTER_ERROR, message: error.message });
@@ -47,7 +60,17 @@ export function* sendRegisterRequest(action) {
 
 export function* verifyToken() {
   try {
-    yield axios.get('/authentication/verify');
+    const response = yield axios.post('/graphql', {
+      query:
+        `{
+            verifyToken {
+              success
+            }
+        }`,
+    });
+    if (!response.data.data.verifyToken.success) {
+      yield put({ type: actionTypes.EXPIRE_SESSION });
+    }
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       yield put({ type: actionTypes.EXPIRE_SESSION });
@@ -57,23 +80,53 @@ export function* verifyToken() {
 
 export function* fetchPopularPlaylists() {
   try {
-    const response = yield axios.get('/playlists/');
-    yield put({ type: actionTypes.SET_POPULAR_RESULTS, results: response.data });
+    const response = yield axios.post('/graphql', {
+      query: `{
+        getPlaylists {
+          id,
+          title,
+          description,
+          count,
+          username
+        }
+      }`,
+    });
+    if (response.data.data.getPlaylists) {
+      yield put({ type: actionTypes.SET_POPULAR_RESULTS, results: response.data.data.getPlaylists });
+    }
   } catch (error) {}
 }
 
 export function* searchPlaylists(action) {
   try {
-    const response = yield axios.get(`/playlists/search?q=${action.query}`);
-    yield put({ type: actionTypes.SET_PLAYLIST_RESULTS, results: response.data });
+    const response = yield axios.post('/graphql', {
+      query: `{
+        searchPlaylist(query: "${action.query}") {
+          id,
+          title,
+          description,
+          user {
+            username
+          }
+        }
+      }`,
+    });
+    if (response.data.data.searchPlaylist) {
+      yield put({ type: actionTypes.SET_PLAYLIST_RESULTS, results: response.data.data.searchPlaylist });
+    }
   } catch (error) {}
 }
 
 export function* createPlaylist(action) {
   try {
-    const response = yield axios.post('/playlists', {
-      title: action.title,
-      description: action.description,
+    const response = yield axios.post('/graphql', {
+      query: `
+        mutation{
+          createPlaylist(title: "${action.title}", description: "${action.description}") {
+            success,
+            id
+          }
+        }`,
     });
     if (response.data.id) {
       yield put({ type: actionTypes.CLOSE_ALL_WINDOWS });
@@ -88,10 +141,49 @@ export function* createPlaylist(action) {
 
 export function* fetchPlaylist(action) {
   try {
-    const response = yield axios.get(`/playlists/${action.playlistId}`, {});
-    if (response.data) {
-      document.title = `Balistos - ${response.data.title}`;
-      yield put({ type: actionTypes.SET_INITIAL_PLAYLIST_DATA, playlist: response.data });
+    const response = yield axios.post('/graphql', {
+      query: `{
+        getPlaylist(id: ${action.playlistId}) {
+          id,
+          title,
+          description,
+          user {
+            username
+          }
+          playlistVideos {
+            id,
+            active,
+            likes {
+              value,
+              id,
+              user {
+                username
+              }
+            },
+            user {
+              username
+            },
+            video {
+              id,
+              title,
+              youtubeId
+            }
+          }
+          chats {
+            message,
+            createdAt,
+            id,
+            user {
+              username
+            }
+          }
+        }
+      }`,
+    });
+    if (response.data && response.data.data && response.data.data.getPlaylist) {
+      const playlistData = response.data.data.getPlaylist;
+      document.title = `Balistos - ${playlistData.title}`;
+      yield put({ type: actionTypes.SET_INITIAL_PLAYLIST_DATA, playlist: playlistData });
     }
   } catch (error) {
     yield put({ type: actionTypes.DISPLAY_SERVER_ERROR });
@@ -100,9 +192,13 @@ export function* fetchPlaylist(action) {
 
 export function* sendMessage(action) {
   try {
-    yield axios.post('/chat/send', {
-      message: action.message,
-      playlistId: action.playlistId,
+    yield axios.post('/graphql', {
+      query:
+      `mutation{
+          createChat(message: "${action.message}", playlistId: "${action.playlistId}") {
+             success
+          }
+      }`,
     });
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -113,9 +209,13 @@ export function* sendMessage(action) {
 
 export function* likeVideo(action) {
   try {
-    yield axios.post('/videos/like', {
-      videoId: action.videoId,
-      value: action.value,
+    yield axios.post('/graphql', {
+      query:
+        `mutation{
+            likeVideo(videoId: "${action.videoId}", value: ${action.value}) {
+              success
+            }
+        }`,
     });
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -126,8 +226,13 @@ export function* likeVideo(action) {
 
 export function* finishVideo(action) {
   try {
-    yield axios.post('/videos/finish', {
-      videoId: action.videoId,
+    yield axios.post('/graphql', {
+      query:
+        `mutation{
+            finishVideo(videoId: "${action.videoId}") {
+              success
+            }
+        }`,
     });
     yield put({ type: actionTypes.SELECT_NEXT_VIDEO });
   } catch (error) {
@@ -137,8 +242,13 @@ export function* finishVideo(action) {
 
 export function* startVideo(action) {
   try {
-    yield axios.post('/videos/start', {
-      videoId: action.videoId,
+    yield axios.post('/graphql', {
+      query:
+        `mutation{
+            startVideo(videoId: "${action.videoId}") {
+              success
+            }
+        }`,
     });
   } catch (error) {
     yield put({ type: actionTypes.DISPLAY_SERVER_ERROR });
@@ -147,8 +257,13 @@ export function* startVideo(action) {
 
 export function* deleteVideo(action) {
   try {
-    yield axios.post('/videos/delete', {
-      videoId: action.videoId,
+    yield axios.post('/graphql', {
+      query:
+        `mutation{
+            deleteVideo(videoId: "${action.videoId}") {
+              success
+            }
+        }`,
     });
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -159,12 +274,16 @@ export function* deleteVideo(action) {
 
 export function* sendHeartbeat(action) {
   try {
-    const response = yield axios.post('/playlists/heartbeat', {
-      playlistId: action.playlist,
-      username: action.username,
+    const response = yield axios.post('/graphql', {
+      query:
+        `mutation{
+            heartbeat(playlistId: "${action.playlist}", username: "${action.username}") {
+              username
+            }
+        }`,
     });
-    if (response.data) {
-      yield put({ type: actionTypes.SET_ACTIVE_USERS, users: response.data });
+    if (response.data.data.heartbeat) {
+      yield put({ type: actionTypes.SET_ACTIVE_USERS, users: response.data.data.heartbeat });
     }
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
@@ -175,9 +294,16 @@ export function* sendHeartbeat(action) {
 
 export function* getActiveUsers(action) {
   try {
-    const response = yield axios.get(`/playlists/users/${action.playlist}`);
-    if (response.data) {
-      yield put({ type: actionTypes.SET_ACTIVE_USERS, users: response.data });
+    const response = yield axios.post('/graphql', {
+      query:
+        `{
+            getPlaylistUsers(playlistId: "${action.playlist}") {
+              username
+            }
+        }`,
+    });
+    if (response.data.data) {
+      yield put({ type: actionTypes.SET_ACTIVE_USERS, users: response.data.data });
     }
   } catch (error) {
     yield put({ type: actionTypes.DISPLAY_SERVER_ERROR });
@@ -186,11 +312,13 @@ export function* getActiveUsers(action) {
 
 export function* addVideo(action) {
   try {
-    yield axios.post('/videos/add', {
-      title: action.title,
-      youtubeId: action.youtubeId,
-      playlistId: action.playlistId,
-      autoAdded: action.autoAdded,
+    yield axios.post('/graphql', {
+      query:
+        `mutation{
+            addVideo(title: "${action.title}", playlistId: "${action.playlistId}", autoAdded: ${!!action.autoAdded}, youtubeId: "${action.youtubeId}") {
+              success
+        }
+      }`,
     });
     yield put({ type: actionTypes.SET_YOUTUBE_RESULTS, results: [] });
     yield put({ type: actionTypes.SET_YOUTUBE_SEARCH_QUERY, query: '' });

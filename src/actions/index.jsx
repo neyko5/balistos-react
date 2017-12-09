@@ -1,7 +1,12 @@
 // @flow
 import * as actionTypes from '../constants/actionTypes';
 
-export function createPlaylist(title: string, description: string, history: any) {
+export type Action = {
+  +type: string,
+};
+
+
+export function createPlaylist(title: string, description: string, history: any): Action {
   return {
     type: actionTypes.CREATE_PLAYLIST,
     title,
@@ -10,7 +15,7 @@ export function createPlaylist(title: string, description: string, history: any)
   };
 }
 
-export function sendLoginRequest(username: string, password: string) {
+export function sendLoginRequest(username: string, password: string): Action {
   return {
     type: actionTypes.SEND_LOGIN_REQUEST,
     username,
@@ -18,7 +23,7 @@ export function sendLoginRequest(username: string, password: string) {
   };
 }
 
-export function sendRegisterRequest(username: string, password: string) {
+export function sendRegisterRequest(username: string, password: string): Action {
   return {
     type: actionTypes.SEND_REGISTER_REQUEST,
     username,
@@ -26,41 +31,41 @@ export function sendRegisterRequest(username: string, password: string) {
   };
 }
 
-export function setRegisterError(message: string) {
+export function setRegisterError(message: string): Action {
   return {
     type: actionTypes.SET_REGISTER_ERROR,
     message,
   };
 }
 
-export function verifyToken() {
+export function verifyToken(): Action {
   return {
     type: actionTypes.VERIFY_TOKEN,
   };
 }
 
-export function setLoginError(message: string) {
+export function setLoginError(message: string): Action {
   return {
     type: actionTypes.SET_LOGIN_ERROR,
     message,
   };
 }
 
-export function fetchPlaylist(playlistId: string) {
+export function fetchPlaylist(playlistId: string): Action {
   return {
     type: actionTypes.FETCH_PLAYLIST,
     playlistId,
   };
 }
 
-export function searchYoutube(query: string) {
+export function searchYoutube(query: string): Action {
   return {
     type: actionTypes.SEARCH_YOUTUBE,
     query,
   };
 }
 
-export function addVideo(id: string, title: string, playlistId: string, autoAdded: boolean) {
+export function addVideo(id: string, title: string, playlistId: string, autoAdded: boolean): Action {
   return {
     type: actionTypes.ADD_VIDEO,
     title,
@@ -70,7 +75,7 @@ export function addVideo(id: string, title: string, playlistId: string, autoAdde
   };
 }
 
-export function sendHeartbeat(username: string, playlist: string) {
+export function sendHeartbeat(username: string, playlist: string): Action {
   return {
     type: actionTypes.SEND_HEARTBEAT,
     playlist,
@@ -78,42 +83,42 @@ export function sendHeartbeat(username: string, playlist: string) {
   };
 }
 
-export function getActiveUsers(playlist: string) {
+export function getActiveUsers(playlist: string): Action {
   return {
     type: actionTypes.GET_ACTIVE_USERS,
     playlist,
   };
 }
 
-export function updateSearchIndex(value: number) {
+export function updateSearchIndex(value: number): Action {
   return {
     type: actionTypes.UPDATE_SEARCH_INDEX,
     value,
   };
 }
 
-export function clearYoutubeResults() {
+export function clearYoutubeResults(): Action {
   return {
     type: actionTypes.SET_YOUTUBE_RESULTS,
     results: [],
   };
 }
 
-export function resetYoutubeSearchQuery() {
+export function resetYoutubeSearchQuery(): Action {
   return {
     type: actionTypes.SET_YOUTUBE_SEARCH_QUERY,
     query: '',
   };
 }
 
-export function getRelatedVideos(videoId: string) {
+export function getRelatedVideos(videoId: string): Action {
   return {
     type: actionTypes.GET_RELATED_VIDEOS,
     videoId,
   };
 }
 
-export function likeVideo(videoId: string, value: number) {
+export function likeVideo(videoId: string, value: number): Action {
   return {
     type: actionTypes.LIKE_VIDEO,
     videoId,
@@ -121,28 +126,28 @@ export function likeVideo(videoId: string, value: number) {
   };
 }
 
-export function logOut() {
+export function logOut(): Action {
   localStorage.clear();
   return {
     type: actionTypes.LOG_OUT,
   };
 }
 
-export function deleteVideo(videoId: string) {
+export function deleteVideo(videoId: string): Action {
   return {
     type: actionTypes.DELETE_VIDEO,
     videoId,
   };
 }
 
-export function finishVideo(videoId: string) {
+export function finishVideo(videoId: string): Action {
   return {
     type: actionTypes.FINISH_VIDEO,
     videoId,
   };
 }
 
-export function startVideo(videoId: string) {
+export function startVideo(videoId: string): Action {
   return {
     type: actionTypes.START_VIDEO,
     videoId,
@@ -150,20 +155,20 @@ export function startVideo(videoId: string) {
 }
 
 
-export function searchPlaylists(query: string) {
+export function searchPlaylists(query: string): Action {
   return {
     type: actionTypes.SEARCH_PLAYLISTS,
     query,
   };
 }
 
-export function fetchPopularPlaylists() {
+export function fetchPopularPlaylists(): Action {
   return {
     type: actionTypes.FETCH_POPULAR_PLAYLISTS,
   };
 }
 
-export function sendMessage(message: string, playlistId: string) {
+export function sendMessage(message: string, playlistId: string): Action {
   return {
     type: actionTypes.SEND_MESSAGE,
     message,
@@ -171,31 +176,31 @@ export function sendMessage(message: string, playlistId: string) {
   };
 }
 
-export function toggleLoginWindow() {
+export function toggleLoginWindow(): Action {
   return {
     type: actionTypes.TOGGLE_LOGIN_WINDOW,
   };
 }
 
-export function toggleRegisterWindow() {
+export function toggleRegisterWindow(): Action {
   return {
     type: actionTypes.TOGGLE_REGISTER_WINDOW,
   };
 }
 
-export function toggleLogoutWindow() {
+export function toggleLogoutWindow(): Action {
   return {
     type: actionTypes.TOGGLE_LOGOUT_WINDOW,
   };
 }
 
-export function toggleCreatePlaylistWindow() {
+export function toggleCreatePlaylistWindow(): Action {
   return {
     type: actionTypes.TOGGLE_CREATE_PLAYLIST_WINDOW,
   };
 }
 
-export function closeAllWindows() {
+export function closeAllWindows(): Action {
   return {
     type: actionTypes.CLOSE_ALL_WINDOWS,
   };

@@ -1,8 +1,10 @@
+
+// @flow
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import type { Dispatch } from 'redux';
 
 import UserMenu from './UserMenu';
 import LogOut from './LogOut';
@@ -23,8 +25,8 @@ import {
   verifyToken,
 } from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
-  ...ownProps,
+
+const mapStateToProps = (state: any) => ({
   username: state.auth.username,
   loggedIn: state.auth.loggedIn,
   loginOpen: state.windows.loginOpen,
@@ -33,7 +35,7 @@ const mapStateToProps = (state, ownProps) => ({
   createPlaylistOpen: state.windows.createPlaylistOpen,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch: Dispatch<*>) => ({
   verifyToken: () => {
     dispatch(verifyToken());
   },
@@ -52,8 +54,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   onLogoutClick: () => {
     dispatch(logOut());
   },
-  onCreatePlaylistSubmit: (title, description) => {
-    dispatch(createPlaylist(title, description, ownProps.history));
+  onCreatePlaylistSubmit: (title: string, description: string) => {
+    dispatch(createPlaylist(title, description));
   },
 });
 
@@ -111,13 +113,41 @@ const Logo = styled.div`
   }
 `;
 
+type Props = {
+  verifyToken: () => void,
+  onOpenLoginClick: () => void,
+  onOpenRegisterClick: () => void,
+  onOpenLogoutClick: () => void,
+  onCreatePlaylistSubmit: () => void,
+  onLogoutClick: () => void,
+  onOpenCreatePlaylistClick: () => void,
+  createPlaylistOpen: boolean,
+  logoutOpen: boolean,
+  registerOpen: boolean,
+  loginOpen: boolean,
+  loggedIn: boolean,
+  username: string,
+};
 
-class Header extends React.Component {
+type State = {
+};
+
+class Header extends React.Component<Props, State> {
+  static defaultProps = {
+    registerOpen: false,
+    username: undefined,
+    loggedIn: false,
+    createPlaylistOpen: false,
+    logoutOpen: false,
+    loginOpen: false,
+  }
+
   componentDidMount() {
     if (this.props.loggedIn) {
       this.props.verifyToken();
     }
   }
+
   render() {
     return (
       <HeaderContainer>
@@ -157,30 +187,5 @@ class Header extends React.Component {
     );
   }
 }
-
-Header.propTypes = {
-  verifyToken: PropTypes.func.isRequired,
-  onOpenLoginClick: PropTypes.func.isRequired,
-  onOpenRegisterClick: PropTypes.func.isRequired,
-  onOpenLogoutClick: PropTypes.func.isRequired,
-  onCreatePlaylistSubmit: PropTypes.func.isRequired,
-  onLogoutClick: PropTypes.func.isRequired,
-  createPlaylistOpen: PropTypes.bool,
-  logoutOpen: PropTypes.bool.isRequired,
-  registerOpen: PropTypes.bool,
-  loginOpen: PropTypes.bool,
-  onOpenCreatePlaylistClick: PropTypes.func.isRequired,
-  loggedIn: PropTypes.bool,
-  username: PropTypes.string,
-};
-
-Header.defaultProps = {
-  registerOpen: false,
-  username: undefined,
-  loggedIn: false,
-  createPlaylistOpen: false,
-  logoutOpen: false,
-  loginOpen: false,
-};
 
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Header));

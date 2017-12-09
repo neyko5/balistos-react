@@ -15,6 +15,7 @@ const SearchPlaylist = styled.div`
   padding: 10px;
   border-radius: 5px;
   margin: 0px auto;
+  position: relative;
 `;
 
 const SearchPlaylistInner = styled.div`
@@ -33,8 +34,8 @@ const SearchIcon = styled.div`
 
 const SearchResults = styled.ul`
   position: absolute;
-  top: 43px;
-  width: 100%;
+  top: 45px;
+  width: calc(100% - 20px);
   background: #fff;
   z-index: 20;
   background: #f6f6f6;
@@ -60,29 +61,48 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-const SearchPlaylistContainer = props => (
-  <SearchPlaylist>
-    <SearchPlaylistInner>
-      <Input
-        type="text"
-        name="search"
-        placeholder="Search playlist"
-        search
-        onChange={props.onSearchInputChange}
-      />
-      <SearchIcon />
-      <SearchResults>
-        {props.results.map(result => <SearchPlaylistResult key={result.id} result={result} />)}
-      </SearchResults>
-    </SearchPlaylistInner>
-  </SearchPlaylist>
-);
+class SearchPlaylistContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      query: '',
+    };
+
+    this.handleQueryChange = this.handleQueryChange.bind(this);
+  }
+  handleQueryChange(event) {
+    this.setState({
+      query: event.target.value,
+    });
+    this.props.onSearchInputChange(event);
+  }
+  render() {
+    return (
+      <SearchPlaylist>
+        <SearchPlaylistInner>
+          <Input
+            type="text"
+            placeholder="Search playlist"
+            search
+            name="query"
+            onChange={this.handleQueryChange}
+            value={this.state.query}
+          />
+          <SearchIcon />
+          <SearchResults>
+            {this.props.results.map(result => <SearchPlaylistResult key={result.id} result={result} />)}
+          </SearchResults>
+        </SearchPlaylistInner>
+      </SearchPlaylist>
+    );
+  }
+}
 
 SearchPlaylistContainer.propTypes = {
   onSearchInputChange: PropTypes.func.isRequired,
   results: PropTypes.arrayOf(PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   })).isRequired,
 };
