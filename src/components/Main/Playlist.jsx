@@ -159,7 +159,7 @@ Playlist.propTypes = {
     current: PropTypes.object,
     title: PropTypes.string,
     username: PropTypes.string,
-    id: PropTypes.string,
+    id: PropTypes.number,
   }),
   match: PropTypes.shape({
     params: PropTypes.shape({

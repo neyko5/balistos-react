@@ -139,7 +139,7 @@ SearchVideo.propTypes = {
   resetYoutubeSearchQuery: PropTypes.func.isRequired,
   clearYoutubeResults: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  id: PropTypes.number,
+  id: PropTypes.string,
   results: PropTypes.arrayOf(PropTypes.shape({
     snippet: PropTypes.object.isRequired,
     id: PropTypes.object.isRequired,

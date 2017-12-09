@@ -38,7 +38,7 @@ const SearchPlaylistResult = props => (
 SearchPlaylistResult.propTypes = {
   result: PropTypes.shape({
     title: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     description: PropTypes.string.isRequired,
   }).isRequired,
 };

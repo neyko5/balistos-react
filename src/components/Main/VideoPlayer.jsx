@@ -92,6 +92,7 @@ const ControlButton = styled.button`
   cursor: pointer;
   margin-right: 5px;
   float: left;
+  outline: none;
   ${props => props.pause && css`
     background: url(${pauseIcon}) no-repeat 50%;
   `}
@@ -144,6 +145,7 @@ const Speaker = styled.button`
   float: left;
   margin-right: 10px;
   cursor: pointer;
+  outline: none;
 `;
 const PlaylistHeader = styled.div`
   float: left;
@@ -303,7 +305,7 @@ class VideoPlayer extends React.Component {
               }
             </Player>
             <Progress>
-              <Bar width={this.state.total ? (this.state.elapsed / (this.state.total * 100)) : 0} />
+              <Bar width={this.state.total ? ((this.state.elapsed * 100) / (this.state.total)) : 0} />
             </Progress>
             <Toolbar>
               <Controls>
@@ -338,13 +340,13 @@ class VideoPlayer extends React.Component {
 
 VideoPlayer.propTypes = {
   playlistTitle: PropTypes.string,
-  playlistUsername: PropTypes.string.isRequired,
+  playlistUsername: PropTypes.string,
   deleteVideo: PropTypes.func.isRequired,
   finishVideo: PropTypes.func.isRequired,
   getRelatedVideos: PropTypes.func.isRequired,
   startVideo: PropTypes.func.isRequired,
   current: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     startedAt: PropTypes.number,
     video: PropTypes.shape({
       youtubeId: PropTypes.string.isRequired,
@@ -362,6 +364,7 @@ VideoPlayer.propTypes = {
 VideoPlayer.defaultProps = {
   current: undefined,
   playlistTitle: '',
+  playlistUsername: '',
 };
 
 export default VideoPlayer;
