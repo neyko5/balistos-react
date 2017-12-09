@@ -11,8 +11,8 @@ const PlaylistBox = styled.div`
   border-top: 0;
   float: left;
   width: 100%;
-  margin-top: 25px;
-  margin-bottom: 40px;
+  margin-top: 10px;
+  margin-bottom: 20px;
 `;
 
 const PlaylistBody = styled.div`
