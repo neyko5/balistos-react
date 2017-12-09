@@ -40,7 +40,7 @@ const VideoListContainer = props => (
 VideoListContainer.propTypes = {
   playlist: PropTypes.shape({
     username: PropTypes.string,
-    id: PropTypes.number,
+    id: PropTypes.string,
     title: PropTypes.string,
     videos: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
     current: PropTypes.object,

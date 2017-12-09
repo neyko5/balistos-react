@@ -34,7 +34,7 @@ const PlaylistItem = styled.div`
     background-color: rgba(0,0,0,.4);
   `}
   ${props => props.next && css`
-    background-color: rgba(0,0,0,.4);
+    background-color: rgba(0,0,0,.2);
   `}
 `;
 
@@ -219,7 +219,7 @@ VideoListItem.propTypes = {
   deleteVideo: PropTypes.func.isRequired,
   likeVideo: PropTypes.func.isRequired,
   video: PropTypes.shape({
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
     video: PropTypes.shape({
       youtubeId: PropTypes.string.isRequired,
       title: PropTypes.string.isRequired,

@@ -51,7 +51,7 @@ Chat.propTypes = {
   messages: PropTypes.arrayOf(PropTypes.shape({
     createdAt: PropTypes.string.isRequired,
     message: PropTypes.string.isRequired,
-    id: PropTypes.number.isRequired,
+    id: PropTypes.string.isRequired,
   })).isRequired,
 };
 

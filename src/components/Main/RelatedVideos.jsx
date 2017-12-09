@@ -58,7 +58,7 @@ const RelatedVideos = props => (
 );
 
 RelatedVideos.propTypes = {
-  id: PropTypes.number,
+  id: PropTypes.string,
   related: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.shape({
       videoId: PropTypes.string.isRequired,
