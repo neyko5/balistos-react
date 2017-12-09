@@ -3,17 +3,17 @@ describe("Balistos home page", () => {
     cy.visit("http://localhost:3000");
   });
 
-  xit("should have title named Balistos", () => {
+  it("should have title named Balistos", () => {
     cy.title().should("include", "Balistos");
   });
 
-  xit("should redirect to home after clicking on balistos logo", () => {
+  it("should redirect to home after clicking on balistos logo", () => {
     cy.visit("http://localhost:3000/test");
     cy.get("div#logo").click();
     cy.url().should("include", "http://localhost:3000/");
   });
 
-  xit("should log in and log out user", () => {
+  it("should log in and log out user", () => {
     cy.get("button#log-in-button").click();
     cy
       .get('input[name="username"')
@@ -27,7 +27,7 @@ describe("Balistos home page", () => {
     cy.get("div#username").contains("testuser123123");
   });
 
-  xit("should log out user", () => {
+  it("should log out user", () => {
     cy.get("button#log-in-button").click();
     cy
       .get('input[name="username"')
@@ -46,8 +46,14 @@ describe("Balistos home page", () => {
     cy.contains("Register");
   });
 
-  xit("should search for playlist named Carski playlist", () => {
-    cy.get('input[name="search-playlist"').type('Carski playlist');
-    //cy.contains('')
+  it("should search for playlist named Carski playlist, display title and desc", () => {
+    cy.get('input[name="query"]').type('Carski playlist');
+    cy.get('input[name="query"]').should('have.value', 'Carski playlist')
+    cy.get('.results').contains('Carski playlist');
+    cy.get('.results').contains('za legendose');
+  });
+
+  xit("should have popular playlists", () => {
+
   });
 });
