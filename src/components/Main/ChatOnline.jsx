@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import usersIcon from '../../img/users.png';
@@ -61,7 +62,10 @@ const User = styled.div`
 
 `;
 
-const ChatOnline = props => (
+const ChatOnline = (props: {
+  username: string,
+  users: any,
+}) => (
   <Users>
     <Header>
       <HeaderTitle>Users online</HeaderTitle>
@@ -78,16 +82,4 @@ const ChatOnline = props => (
     </Body>
   </Users>
 );
-
-ChatOnline.propTypes = {
-  username: PropTypes.string,
-  users: PropTypes.arrayOf(PropTypes.shape({
-    username: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
-};
-
-ChatOnline.defaultProps = {
-  username: undefined,
-};
-
 export default ChatOnline;

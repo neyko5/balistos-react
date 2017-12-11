@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import io from 'socket.io-client';
 import styled from 'styled-components';
@@ -21,6 +22,8 @@ import {
   closeAllWindows,
   addVideo,
 } from '../../actions';
+
+import type { Action } from '../../types';
 
 import { API_INDEX } from '../../settings';
 
@@ -77,11 +80,31 @@ const Main = styled.div`
   }
 `;
 
-class Playlist extends React.Component {
-  constructor(props) {
+type Props = {
+  socketAction: (Action) => void,
+  addVideo: (string, string, string) => void,
+  fetchVideos: (string) => void,
+  deleteVideo: (string) => void,
+  finishVideo: (string) => void,
+  startVideo: (string) => void,
+  heartbeat: (string, string) => void,
+  getActiveUsers: (string) => void,
+  getRelatedVideos: (string) => void,
+  closeAllWindows: () => void,
+  username: string,
+  playlist: any,
+  match: any,
+  related: any,
+}
+
+type State = {}
+
+class Playlist extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.heartbeat = this.heartbeat.bind(this);
   }
+
   componentDidMount() {
     this.initPlaylist();
     socket.on('action', (action) => {
@@ -102,11 +125,14 @@ class Playlist extends React.Component {
   componentWillUnmount() {
     socket.emit('leave', `playlist_${this.props.match.params.playlistId}`);
   }
+
   initPlaylist() {
     this.props.fetchVideos(this.props.match.params.playlistId);
     socket.emit('join', `playlist_${this.props.match.params.playlistId}`);
     this.heartbeat();
   }
+
+  heartbeat: Function;
   heartbeat() {
     if (this.props.username) {
       this.props.heartbeat(this.props.username, this.props.match.params.playlistId);
@@ -142,47 +168,4 @@ class Playlist extends React.Component {
     );
   }
 }
-
-Playlist.propTypes = {
-  username: PropTypes.string,
-  socketAction: PropTypes.func.isRequired,
-  addVideo: PropTypes.func.isRequired,
-  fetchVideos: PropTypes.func.isRequired,
-  deleteVideo: PropTypes.func.isRequired,
-  finishVideo: PropTypes.func.isRequired,
-  startVideo: PropTypes.func.isRequired,
-  heartbeat: PropTypes.func.isRequired,
-  getActiveUsers: PropTypes.func.isRequired,
-  getRelatedVideos: PropTypes.func.isRequired,
-  closeAllWindows: PropTypes.func.isRequired,
-  playlist: PropTypes.shape({
-    current: PropTypes.object,
-    title: PropTypes.string,
-    username: PropTypes.string,
-    id: PropTypes.number,
-  }),
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      playlistId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-  related: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.shape({
-      videoId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired),
-};
-
-Playlist.defaultProps = {
-  playlist: {
-    current: undefined,
-    title: '',
-    id: undefined,
-    username: undefined,
-  },
-  related: [],
-  username: undefined,
-};
-
-
 export default connect(mapStateToProps, mapDispatchToProps)(Playlist);

@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
@@ -11,7 +12,7 @@ const mapDispatchToProps = dispatch => ({
     dispatch(searchYoutube(e.currentTarget.value));
   },
   addVideo: (id, title, playlistId) => {
-    dispatch(addVideo(id, title, playlistId));
+    dispatch(addVideo(id, title, playlistId, false));
   },
   updateSearchIndex: (value) => {
     dispatch(updateSearchIndex(value));
@@ -64,7 +65,19 @@ const SearchResults = styled.div`
   text-align: left;
 `;
 
-class SearchVideo extends React.Component {
+type Props = {
+  query: string,
+  addVideo: (string, string, string) => void,
+  searchYoutube: string => void,
+  updateSearchIndex: (number) => void,
+  resetYoutubeSearchQuery: () => void,
+  clearYoutubeResults: () => void,
+  index: number,
+  id: string,
+  results: any
+}
+
+class SearchVideo extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.handleKeyEvent = this.handleKeyEvent.bind(this);
@@ -75,9 +88,11 @@ class SearchVideo extends React.Component {
   componentWillUnmount() {
     document.removeEventListener('keyup', this.handleKeyEvent, false);
   }
-  handleKeyEvent($event) {
+
+  handleKeyEvent: Function;
+  handleKeyEvent({ key }: SyntheticKeyboardEvent<HTMLInputElement>) {
     let index;
-    switch ($event.key) {
+    switch (key) {
       case 'ArrowUp':
         this.props.updateSearchIndex(-1);
         break;
@@ -130,25 +145,5 @@ class SearchVideo extends React.Component {
     );
   }
 }
-
-SearchVideo.propTypes = {
-  query: PropTypes.string,
-  addVideo: PropTypes.func.isRequired,
-  searchYoutube: PropTypes.func.isRequired,
-  updateSearchIndex: PropTypes.func.isRequired,
-  resetYoutubeSearchQuery: PropTypes.func.isRequired,
-  clearYoutubeResults: PropTypes.func.isRequired,
-  index: PropTypes.number.isRequired,
-  id: PropTypes.string,
-  results: PropTypes.arrayOf(PropTypes.shape({
-    snippet: PropTypes.object.isRequired,
-    id: PropTypes.object.isRequired,
-  })).isRequired,
-};
-
-SearchVideo.defaultProps = {
-  query: '',
-  id: undefined,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchVideo);

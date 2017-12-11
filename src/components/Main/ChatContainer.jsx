@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Box } from 'grid-styled';
 
@@ -21,7 +22,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-class ChatContainer extends React.Component {
+type Props = {
+  messages: any,
+  username: string,
+  playlist: any,
+  users: any,
+  sendMessage: () => void,
+}
+
+type State = {
+}
+
+class ChatContainer extends React.Component<Props, State> {
   componentDidUpdate(prevProps) {
     if (prevProps.messages.length && this.props.messages.length > prevProps.messages.length) {
       const newMessage = [...this.props.messages].pop();
@@ -32,10 +44,13 @@ class ChatContainer extends React.Component {
           tag: 'chat',
           requireInteraction: false,
         };
-        Notification(`Balistos - ${this.props.playlist.title}`, options);
+        new window.Notification(`Balistos - ${this.props.playlist.title}`, options);
       }
     }
-    document.getElementById('chatbox').scrollTop = document.getElementById('chatbox').scrollHeight;
+    const chatBoxElement = document.getElementById('chatbox');
+    if (chatBoxElement) {
+      chatBoxElement.scrollTop = Number.MAX_SAFE_INTEGER;
+    }
   }
   render() {
     return (
@@ -51,20 +66,5 @@ class ChatContainer extends React.Component {
     );
   }
 }
-
-ChatContainer.propTypes = {
-  username: PropTypes.string,
-  sendMessage: PropTypes.func.isRequired,
-  users: PropTypes.arrayOf(PropTypes.object.isRequired),
-  messages: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-  playlist: PropTypes.shape({
-    title: PropTypes.string,
-  }).isRequired,
-};
-
-ChatContainer.defaultProps = {
-  users: [],
-  username: undefined,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);

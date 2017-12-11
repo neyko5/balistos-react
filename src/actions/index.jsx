@@ -1,10 +1,7 @@
 // @flow
+
 import * as actionTypes from '../constants/actionTypes';
-
-export type Action = {
-  +type: string,
-};
-
+import type { Action } from '../types';
 
 export function createPlaylist(title: string, description: string, history: any): Action {
   return {
@@ -65,7 +62,12 @@ export function searchYoutube(query: string): Action {
   };
 }
 
-export function addVideo(id: string, title: string, playlistId: string, autoAdded: boolean): Action {
+export function addVideo(
+  id: string,
+  title: string,
+  playlistId: string,
+  autoAdded: boolean,
+): Action {
   return {
     type: actionTypes.ADD_VIDEO,
     title,
