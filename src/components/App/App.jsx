@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -21,7 +22,9 @@ const FullHeight = styled.div`
   height: 100%;
 `;
 
-const App = props => (
+const App = (props: {
+  clickOutside: () => void
+}) => (
   <BrowserRouter>
     <FullHeight onClick={props.clickOutside}>
       <Header />
@@ -30,10 +33,6 @@ const App = props => (
     </FullHeight>
   </BrowserRouter>
 );
-
-App.propTypes = {
-  clickOutside: PropTypes.func.isRequired,
-};
 
 export default connect(undefined, mapDispatchToProps)(App);
 

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Box } from 'grid-styled';
 import RelatedVideoItem from './RelatedVideoItem';
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     related: state.results.related,
     id: state.playlist.id,

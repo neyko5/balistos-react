@@ -1,6 +1,7 @@
+// @flow
+
 import React from 'react';
 import styled, { css } from 'styled-components';
-import PropTypes from 'prop-types';
 
 const StyledInput = styled.input`
   background: #F7F9F9;
@@ -20,7 +21,14 @@ const StyledInput = styled.input`
   `}
 `;
 
-const Input = props => (
+const Input = (props: {
+  type: string,
+  name: string,
+  onChange: () => void,
+  value?: string,
+  search?: boolean,
+  placeholder?: string,
+}) => (
   <StyledInput
     type={props.type}
     name={props.name}
@@ -31,18 +39,10 @@ const Input = props => (
   />
 );
 
-Input.propTypes = {
-  type: PropTypes.string.isRequired,
-  name: PropTypes.string.isRequired,
-  search: PropTypes.bool,
-  placeholder: PropTypes.string,
-  onChange: PropTypes.func.isRequired,
-  value: PropTypes.string,
-};
-
 Input.defaultProps = {
   search: false,
   value: '',
+  placeholder: '',
 };
 
 export default Input;

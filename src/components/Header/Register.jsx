@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -28,7 +29,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   error: state.auth.registerError,
 });
@@ -71,8 +72,23 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
+type Props = {
+  onSubmit: (string, string) => void,
+  error?: string,
+  onOpenLoginClick: () => void
+}
 
-class Register extends React.Component {
+type State = {
+  username: string,
+  password: string,
+}
+
+
+class Register extends React.Component<Props, State> {
+  static defaultProps = {
+    error: '',
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -84,13 +100,15 @@ class Register extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange: Function;
+  handleChange(event: any) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit: Function;
+  handleSubmit(event: any) {
     event.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
     this.setState({
@@ -134,12 +152,6 @@ class Register extends React.Component {
     );
   }
 }
-
-Register.propTypes = {
-  error: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
-  onOpenLoginClick: PropTypes.func.isRequired,
-};
 
 Register.defaultProps = {
   error: undefined,

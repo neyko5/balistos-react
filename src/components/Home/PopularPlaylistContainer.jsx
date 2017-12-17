@@ -1,12 +1,13 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Flex, Box } from 'grid-styled';
 import { connect } from 'react-redux';
 
 import PopularPlaylist from './PopularPlaylist';
 import { fetchPopularPlaylists } from '../../actions';
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     playlists: state.results.popular,
   };
@@ -18,7 +19,15 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-class PopularPlaylistContainer extends React.Component {
+type Props = {
+  fetchPopularPlaylists: () => void,
+  playlists: any,
+}
+
+type State = {
+}
+
+class PopularPlaylistContainer extends React.Component<Props, State> {
   componentWillMount() {
     this.props.fetchPopularPlaylists();
   }
@@ -44,14 +53,5 @@ class PopularPlaylistContainer extends React.Component {
     );
   }
 }
-
-PopularPlaylistContainer.propTypes = {
-  fetchPopularPlaylists: PropTypes.func.isRequired,
-  playlists: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    username: PropTypes.string.isRequired,
-  })).isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(PopularPlaylistContainer);

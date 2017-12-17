@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
   },
 });
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   results: state.results.youtube,
   query: state.results.query,
@@ -76,6 +76,8 @@ type Props = {
   id: string,
   results: any
 }
+
+type State = {}
 
 class SearchVideo extends React.Component<Props, State> {
   constructor(props) {

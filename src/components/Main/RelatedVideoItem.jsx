@@ -6,7 +6,7 @@ import styled from 'styled-components';
 
 import { addVideo, getRelatedVideos } from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   id: state.playlist.id,
 });

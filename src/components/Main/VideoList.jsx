@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import VideoListItem from './VideoListItem';
@@ -13,7 +14,11 @@ const List = styled.div`
   width: 100%;
 `;
 
-const VideoList = (props) => {
+const VideoList = (props: {
+  videos: any,
+  current: any,
+
+}) => {
   if (props.videos.empty) {
     return <EmptyItem>Playlist is empty. Please search and add a video.</EmptyItem>;
   }
@@ -32,26 +37,6 @@ const VideoList = (props) => {
       }).map((video, index) => <VideoListItem video={video} key={video.id} index={index + 1} />)}
     </List>
   );
-};
-
-VideoList.propTypes = {
-  current: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    likes: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.number,
-    })).isRequired,
-  }),
-  videos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    likes: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.number,
-    })).isRequired,
-  })),
-};
-
-VideoList.defaultProps = {
-  videos: [],
-  current: undefined,
 };
 
 export default VideoList;

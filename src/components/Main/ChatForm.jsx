@@ -1,7 +1,6 @@
 // @flow
 
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Input from '../common/Input';
@@ -75,9 +74,5 @@ class ChatForm extends React.Component<Props, State> {
     );
   }
 }
-
-ChatForm.propTypes = {
-  sendMessage: PropTypes.func.isRequired,
-};
 
 export default ChatForm;

@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import SearchPlaylistResult from './SearchPlaylistResult';
@@ -55,13 +56,22 @@ const mapStateToProps = (state, ownProps) => ({
   results: state.results.playlists,
 });
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = (dispatch: any) => ({
   onSearchInputChange: (e) => {
-    dispatch(searchPlaylists(e.target.value, ownProps.token));
+    dispatch(searchPlaylists(e.target.value));
   },
 });
 
-class SearchPlaylistContainer extends React.Component {
+type Props = {
+  onSearchInputChange: (Event) => void,
+  results: any,
+}
+
+type State = {
+  query: string,
+}
+
+class SearchPlaylistContainer extends React.Component<Props, State> {
   constructor(props) {
     super(props);
     this.state = {
@@ -70,12 +80,15 @@ class SearchPlaylistContainer extends React.Component {
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
   }
+
+  handleQueryChange: Function;
   handleQueryChange(event) {
     this.setState({
       query: event.target.value,
     });
     this.props.onSearchInputChange(event);
   }
+
   render() {
     return (
       <SearchPlaylist>
@@ -90,21 +103,13 @@ class SearchPlaylistContainer extends React.Component {
           />
           <SearchIcon />
           <SearchResults>
-            {this.props.results.map(result => <SearchPlaylistResult key={result.id} result={result} />)}
+            {this.props.results.map(result =>
+              <SearchPlaylistResult key={result.id} result={result} />)}
           </SearchResults>
         </SearchPlaylistInner>
       </SearchPlaylist>
     );
   }
 }
-
-SearchPlaylistContainer.propTypes = {
-  onSearchInputChange: PropTypes.func.isRequired,
-  results: PropTypes.arrayOf(PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  })).isRequired,
-};
 
 export default connect(mapStateToProps, mapDispatchToProps)(SearchPlaylistContainer);

@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const Result = styled.button`
@@ -28,18 +29,17 @@ const Title = styled.div`
   height: 40px;
 `;
 
-const VideoResult = props => (
+const VideoResult = (props: {
+  onItemClick: () => void,
+  active: boolean,
+  image: string,
+  title: string
+
+}) => (
   <Result onClick={props.onItemClick} active={props.active}>
     <Image src={props.image} alt={props.title} />
     <Title>{props.title}</Title>
   </Result>
 );
-
-VideoResult.propTypes = {
-  active: PropTypes.bool.isRequired,
-  onItemClick: PropTypes.func.isRequired,
-  image: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-};
 
 export default VideoResult;

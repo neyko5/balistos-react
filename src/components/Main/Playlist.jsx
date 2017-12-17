@@ -112,7 +112,7 @@ class Playlist extends React.Component<Props, State> {
     });
     window.Notification.requestPermission();
   }
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: Props) {
     if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
       socket.emit('leave', `playlist_${prevProps.match.params.playlistId}`);
       this.initPlaylist();
