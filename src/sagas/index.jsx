@@ -51,7 +51,10 @@ export function* sendRegisterRequest(action) {
         userId: response.data.data.register.userId,
       });
     } else {
-      yield put({ type: actionTypes.SET_REGISTER_ERROR, message: response.data.data.register.message });
+      yield put({
+        type: actionTypes.SET_REGISTER_ERROR,
+        message: response.data.data.register.message,
+      });
     }
   } catch (error) {
     yield put({ type: actionTypes.SET_REGISTER_ERROR, message: error.message });
@@ -92,7 +95,7 @@ export function* fetchPopularPlaylists() {
       }`,
     });
     if (response.data.data.getPlaylists) {
-      yield put({ 
+      yield put({
         type: actionTypes.SET_POPULAR_RESULTS,
         results: response.data.data.getPlaylists,
       });

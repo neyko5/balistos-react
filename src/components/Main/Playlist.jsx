@@ -23,9 +23,8 @@ import {
   addVideo,
 } from '../../actions';
 
-import type { Action } from '../../types';
-
 import { API_INDEX } from '../../settings';
+import type { YoutubeResultVideoType, PlaylistType, Action } from '../../types/index';
 
 const socket = io(API_INDEX);
 
@@ -83,18 +82,18 @@ const Main = styled.div`
 type Props = {
   socketAction: (Action) => void,
   addVideo: (string, string, string) => void,
-  fetchVideos: (string) => void,
-  deleteVideo: (string) => void,
-  finishVideo: (string) => void,
-  startVideo: (string) => void,
+  fetchVideos: (number) => void,
+  deleteVideo: (number) => void,
+  finishVideo: (number) => void,
+  startVideo: (number) => void,
   heartbeat: (string, string) => void,
   getActiveUsers: (string) => void,
   getRelatedVideos: (string) => void,
   closeAllWindows: () => void,
   username: string,
-  playlist: any,
+  playlist: PlaylistType,
   match: any,
-  related: any,
+  related: YoutubeResultVideoType,
 }
 
 type State = {}

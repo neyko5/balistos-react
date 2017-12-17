@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 
 import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../actions';
 import VideoResult from './VideoResult';
+import type { YoutubeResultVideoType } from '../../types/index';
 
 const mapDispatchToProps = dispatch => ({
   searchYoutube: (e) => {
@@ -74,7 +75,7 @@ type Props = {
   clearYoutubeResults: () => void,
   index: number,
   id: string,
-  results: any
+  results: Array<YoutubeResultVideoType>,
 }
 
 type State = {}

@@ -12,6 +12,8 @@ import playIcon from '../../img/play.png';
 import pauseIcon from '../../img/pause.png';
 import speakerIcon from '../../img/volume.png';
 
+import type { VideoType } from '../../types';
+
 const MainWindow = styled.div`
   background: #ffffff;
   float: left;
@@ -174,10 +176,10 @@ const PlaylistUsername = styled.span`
 `;
 
 type Props = {
-  finishVideo: (string) => void,
-  deleteVideo: (string) => void,
-  current: any,
-  startVideo: (string) => void,
+  finishVideo: (number) => void,
+  deleteVideo: (number) => void,
+  current: VideoType,
+  startVideo: (number) => void,
   getRelatedVideos: (string) => void,
   playlistTitle: string,
   playlistUsername: string

@@ -3,12 +3,11 @@
 import * as actionTypes from '../constants/actionTypes';
 import type { Action } from '../types';
 
-export function createPlaylist(title: string, description: string, history: any): Action {
+export function createPlaylist(title: string, description: string): Action {
   return {
     type: actionTypes.CREATE_PLAYLIST,
     title,
     description,
-    history,
   };
 }
 
@@ -113,14 +112,14 @@ export function resetYoutubeSearchQuery(): Action {
   };
 }
 
-export function getRelatedVideos(videoId: string): Action {
+export function getRelatedVideos(videoId: number): Action {
   return {
     type: actionTypes.GET_RELATED_VIDEOS,
     videoId,
   };
 }
 
-export function likeVideo(videoId: string, value: number): Action {
+export function likeVideo(videoId: number, value: number): Action {
   return {
     type: actionTypes.LIKE_VIDEO,
     videoId,
@@ -135,21 +134,21 @@ export function logOut(): Action {
   };
 }
 
-export function deleteVideo(videoId: string): Action {
+export function deleteVideo(videoId: number): Action {
   return {
     type: actionTypes.DELETE_VIDEO,
     videoId,
   };
 }
 
-export function finishVideo(videoId: string): Action {
+export function finishVideo(videoId: number): Action {
   return {
     type: actionTypes.FINISH_VIDEO,
     videoId,
   };
 }
 
-export function startVideo(videoId: string): Action {
+export function startVideo(videoId: number): Action {
   return {
     type: actionTypes.START_VIDEO,
     videoId,
@@ -157,7 +156,7 @@ export function startVideo(videoId: string): Action {
 }
 
 
-export function searchPlaylists(query: string): Action {
+export function searchPlaylists(query: number): Action {
   return {
     type: actionTypes.SEARCH_PLAYLISTS,
     query,

@@ -5,6 +5,8 @@ import styled from 'styled-components';
 
 import VideoListItem from './VideoListItem';
 
+import type { VideoType } from '../../types';
+
 const EmptyItem = styled.div`
   color: #3E414C;
   padding: 10px;
@@ -15,8 +17,8 @@ const List = styled.div`
 `;
 
 const VideoList = (props: {
-  videos: any,
-  current: any,
+  videos: Array<VideoType>,
+  current: VideoType,
 
 }) => {
   if (props.videos.empty) {

@@ -2,6 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
+import type { ChatMessageType } from '../../types/index';
 
 const Message = styled.div`
   margin-bottom: 3px;
@@ -16,7 +17,7 @@ export const Author = styled.span`
 
 const ChatMessage = (props: {
   username: string,
-  message: any,
+  message: ChatMessageType,
 }) => (
   <Message>
     <Author

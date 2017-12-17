@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
 import Icon from '../common/Icon';
+import type { ChatMessageType } from '../../types/index';
 
 const Chatbox = styled.div`
   padding: 12px 10px;
@@ -30,7 +31,7 @@ const BoxHeader = styled.div`
 const Chat = (props: {
   username: string,
   sendMessage: () => void,
-  messages: any,
+  messages: Array<ChatMessageType>,
 }) => (
   <div>
     <BoxHeader>

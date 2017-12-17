@@ -7,6 +7,8 @@ import styled from 'styled-components';
 import VideoList from './VideoList';
 import SearchVideo from './SearchVideo';
 
+import type { PlaylistType } from '../../types';
+
 const PlaylistBox = styled.div`
   background: #e1e1e1;
   border-top: 0;
@@ -25,7 +27,7 @@ const PlaylistBody = styled.div`
 
 
 const VideoListContainer = (props: {
-  playlist: any
+  playlist: PlaylistType
 }) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <PlaylistBox>

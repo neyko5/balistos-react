@@ -8,6 +8,7 @@ import { searchPlaylists } from '../../actions';
 import searchIcon from '../../img/search-white.png';
 import transparentImg from '../../img/transparent.png';
 import Input from '../common/Input';
+import type { PlaylistType } from '../../types/index';
 
 const SearchPlaylist = styled.div`
   max-width: 620px;
@@ -64,7 +65,7 @@ const mapDispatchToProps = (dispatch: any) => ({
 
 type Props = {
   onSearchInputChange: (Event) => void,
-  results: any,
+  results: Array<PlaylistType>,
 }
 
 type State = {

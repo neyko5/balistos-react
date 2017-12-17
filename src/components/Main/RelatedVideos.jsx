@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Box } from 'grid-styled';
 import RelatedVideoItem from './RelatedVideoItem';
+import type { YoutubeResultVideoType } from '../../types/index';
 
 function mapStateToProps(state: any) {
   return {
@@ -45,7 +46,7 @@ const Body = styled.div`
 
 const RelatedVideos = (props: {
   id: string,
-  related: any,
+  related: Array<YoutubeResultVideoType>,
 }) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <RelatedBox>

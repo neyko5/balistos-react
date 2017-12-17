@@ -9,6 +9,8 @@ import ThumbsUpSVG from '../../img/thumbs_up.svg';
 import ThumbsDownSVG from '../../img/thumbs_down.svg';
 import deleteIcon from '../../img/del.png';
 
+import type { VideoType } from '../../types';
+
 const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   userId: state.auth.userId,
@@ -142,10 +144,10 @@ const Delete = styled.button`
 `;
 
 const VideoListItem = (props: {
-  video: any,
+  video: VideoType,
   index: number,
   userId: number,
-  deleteVideo: (string) => void,
+  deleteVideo: (number) => void,
   likeVideo: (number) => void,
 
 }) => {

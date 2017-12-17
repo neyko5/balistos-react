@@ -7,6 +7,7 @@ import { Box } from 'grid-styled';
 import Chat from './Chat';
 import ChatOnline from './ChatOnline';
 import { sendMessage } from '../../actions';
+import type { ChatMessageType, UserType, PlaylistType } from '../../types/index';
 
 function mapStateToProps(state) {
   return {
@@ -17,16 +18,16 @@ function mapStateToProps(state) {
 }
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  sendMessage: (message) => {
+  sendMessage: (message: string) => {
     dispatch(sendMessage(message, ownProps.id));
   },
 });
 
 type Props = {
-  messages: any,
+  messages: Array<ChatMessageType>,
   username: string,
-  playlist: any,
-  users: any,
+  playlist: PlaylistType,
+  users: Array<UserType>,
   sendMessage: () => void,
 }
 

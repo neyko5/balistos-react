@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import type { PlaylistType } from '../../types/index';
 
 
 const PlaylistResult = styled(Link)`
@@ -30,7 +31,7 @@ const PlaylistResultDescription = styled.div`
 `;
 
 const SearchPlaylistResult = (props: {
-  result: any,
+  result: PlaylistType,
 }) => (
   <PlaylistResult to={`/playlist/${props.result.id}`}>
     <PlaylistResultTitle>{props.result.title}</PlaylistResultTitle>

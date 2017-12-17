@@ -6,6 +6,8 @@ import styled from 'styled-components';
 
 import { addVideo, getRelatedVideos } from '../../actions';
 
+import type { YoutubeResultVideoType } from '../../types';
+
 const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   id: state.playlist.id,
@@ -65,7 +67,7 @@ const AddButton = styled.button`
 
 
 const RelatedVideoItem = (props: {
-  video: any,
+  video: YoutubeResultVideoType,
   addVideo: string => void,
 }) => (
   <RelatedItem>

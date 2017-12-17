@@ -4,6 +4,7 @@ import React from 'react';
 import styled, { css } from 'styled-components';
 
 import usersIcon from '../../img/users.png';
+import type { UserType } from '../../types/index';
 
 const Users = styled.div`
   margin-top: 15px;
@@ -64,7 +65,7 @@ const User = styled.div`
 
 const ChatOnline = (props: {
   username: string,
-  users: any,
+  users: Array<UserType>,
 }) => (
   <Users>
     <Header>

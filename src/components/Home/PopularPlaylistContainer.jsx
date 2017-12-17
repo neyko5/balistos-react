@@ -7,6 +7,8 @@ import { connect } from 'react-redux';
 import PopularPlaylist from './PopularPlaylist';
 import { fetchPopularPlaylists } from '../../actions';
 
+import type { PlaylistType } from '../../types';
+
 function mapStateToProps(state: any) {
   return {
     playlists: state.results.popular,
@@ -21,7 +23,7 @@ const mapDispatchToProps = dispatch => ({
 
 type Props = {
   fetchPopularPlaylists: () => void,
-  playlists: any,
+  playlists: Array<PlaylistType>,
 }
 
 type State = {
