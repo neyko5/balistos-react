@@ -24,14 +24,12 @@ describe('actions', () => {
   it('should create an action to create playlist', () => {
     const title = 'Playlist title';
     const description = 'Playlist description';
-    const history = {};
     const expectedAction = {
       type: types.CREATE_PLAYLIST,
       title,
       description,
-      history,
     };
-    expect(actions.createPlaylist(title, description, history)).toEqual(expectedAction);
+    expect(actions.createPlaylist(title, description)).toEqual(expectedAction);
   });
 
   it('should create an action for login request', () => {

@@ -48,7 +48,11 @@ it('should render three messages', () => {
 
 
 test('should render correctly', () => {
-  const chat = renderer.create(<Chat messages={messages} username={username} sendMessage={jest.fn()} />);
+  const chat = renderer.create(<Chat
+    messages={messages}
+    username={username}
+    sendMessage={jest.fn()}
+  />);
   const tree = chat.toJSON();
   expect(tree).toMatchSnapshot();
 });
