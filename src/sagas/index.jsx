@@ -51,7 +51,10 @@ export function* sendRegisterRequest(action) {
         userId: response.data.data.register.userId,
       });
     } else {
-      yield put({ type: actionTypes.SET_REGISTER_ERROR, message: response.data.data.register.message });
+      yield put({
+        type: actionTypes.SET_REGISTER_ERROR,
+        message: response.data.data.register.message,
+      });
     }
   } catch (error) {
     yield put({ type: actionTypes.SET_REGISTER_ERROR, message: error.message });
@@ -92,7 +95,10 @@ export function* fetchPopularPlaylists() {
       }`,
     });
     if (response.data.data.getPlaylists) {
-      yield put({ type: actionTypes.SET_POPULAR_RESULTS, results: response.data.data.getPlaylists });
+      yield put({
+        type: actionTypes.SET_POPULAR_RESULTS,
+        results: response.data.data.getPlaylists,
+      });
     }
   } catch (error) {}
 }
@@ -112,7 +118,10 @@ export function* searchPlaylists(action) {
       }`,
     });
     if (response.data.data.searchPlaylist) {
-      yield put({ type: actionTypes.SET_PLAYLIST_RESULTS, results: response.data.data.searchPlaylist });
+      yield put({
+        type: actionTypes.SET_PLAYLIST_RESULTS,
+        results: response.data.data.searchPlaylist,
+      });
     }
   } catch (error) {}
 }
@@ -130,7 +139,7 @@ export function* createPlaylist(action) {
     });
     if (response.data.id) {
       yield put({ type: actionTypes.CLOSE_ALL_WINDOWS });
-      action.history.push(`/playlist/${response.data.id}`);
+      window.location.hash = `/playlist/${response.data.id}`;
     }
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {

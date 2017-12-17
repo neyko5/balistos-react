@@ -1,3 +1,5 @@
+// @flow
+
 import React from 'react';
 import styled, { css } from 'styled-components';
 import chatIcon from '../../img/chat.png';
@@ -25,8 +27,18 @@ const StyledIcon = styled.i`
     `}
 `;
 
-const Icon = props => (
+const Icon = (props: {
+    message?: boolean,
+    note?: ?boolean,
+    chat?: ?boolean,
+}) => (
   <StyledIcon {...props} />
 );
+
+Icon.defaultProps = {
+  message: false,
+  note: false,
+  chat: false,
+};
 
 export default Icon;

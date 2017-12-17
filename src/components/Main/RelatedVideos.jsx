@@ -1,16 +1,21 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Box } from 'grid-styled';
 import RelatedVideoItem from './RelatedVideoItem';
+import type { YoutubeResultVideoType } from '../../types/index';
 
-function mapStateToProps(state) {
+function mapStateToProps(state: any) {
   return {
     related: state.results.related,
     id: state.playlist.id,
   };
 }
+
+const mapDispatchToProps = () => ({
+});
 
 const RelatedBox = styled.div`
   margin-top: 15px;
@@ -39,7 +44,10 @@ const Body = styled.div`
   width: 100%;
 `;
 
-const RelatedVideos = props => (
+const RelatedVideos = (props: {
+  id: string,
+  related: Array<YoutubeResultVideoType>,
+}) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <RelatedBox>
       <Header>
@@ -56,18 +64,4 @@ const RelatedVideos = props => (
     </RelatedBox>
   </Box>
 );
-
-RelatedVideos.propTypes = {
-  id: PropTypes.string,
-  related: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.shape({
-      videoId: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired).isRequired,
-};
-
-RelatedVideos.defaultProps = {
-  id: undefined,
-};
-
-export default connect(mapStateToProps, undefined)(RelatedVideos);
+export default connect(mapStateToProps, mapDispatchToProps)(RelatedVideos);

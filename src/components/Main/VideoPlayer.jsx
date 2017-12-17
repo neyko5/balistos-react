@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import YouTube from 'react-youtube';
 import ReactSlider from 'react-slider';
 import vTime from 'video-time';
@@ -10,6 +11,8 @@ import { youtubeParams } from '../../settings';
 import playIcon from '../../img/play.png';
 import pauseIcon from '../../img/pause.png';
 import speakerIcon from '../../img/volume.png';
+
+import type { VideoType } from '../../types';
 
 const MainWindow = styled.div`
   background: #ffffff;
@@ -172,9 +175,29 @@ const PlaylistUsername = styled.span`
   font-style: italic;
 `;
 
+type Props = {
+  finishVideo: (number) => void,
+  deleteVideo: (number) => void,
+  current: VideoType,
+  startVideo: (number) => void,
+  getRelatedVideos: (string) => void,
+  playlistTitle: string,
+  playlistUsername: string
 
-class VideoPlayer extends React.Component {
-  constructor(props) {
+}
+
+type State = {
+   elapsed: number,
+   total: number,
+   volume: number,
+   previousVolume: number,
+   paused: boolean,
+   player: any
+}
+
+
+class VideoPlayer extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       elapsed: 0,
@@ -182,6 +205,7 @@ class VideoPlayer extends React.Component {
       volume: 100,
       previousVolume: 0,
       paused: false,
+      player: undefined,
     };
     this.onReady = this.onReady.bind(this);
     this.onSpeakerClick = this.onSpeakerClick.bind(this);
@@ -193,7 +217,8 @@ class VideoPlayer extends React.Component {
     this.finishCurrentVideo = this.finishCurrentVideo.bind(this);
     this.deleteCurrentVideo = this.deleteCurrentVideo.bind(this);
   }
-  componentDidUpdate(prevProps) {
+
+  componentDidUpdate(prevProps: Props) {
     if (prevProps.current && this.props.current &&
       prevProps.current.video.youtubeId !== this.props.current.video.youtubeId) {
       if (this.state.player) {
@@ -221,17 +246,21 @@ class VideoPlayer extends React.Component {
       new window.Notification(`Balistos - ${this.props.playlistTitle}`, options);
     }
   }
+
   componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
-  onReady(event) {
+  onReady: Function;
+  onReady(event: Event) {
     this.setState({
       player: event.target,
     });
     setTimeout(this.updateElapsed, 500);
   }
-  onSpeakerClick() {
+
+  onSpeakerClick: Function;
+  onSpeakerClick(): void {
     if (this.state.volume === 0) {
       this.setState({
         volume: this.state.previousVolume,
@@ -246,35 +275,49 @@ class VideoPlayer extends React.Component {
       this.state.player.setVolume(0);
     }
   }
-  onSliderChange(value) {
+
+  onSliderChange: Function;
+  onSliderChange(value: number) {
     this.setState({
       volume: value,
     });
     this.state.player.setVolume(value);
   }
+
+  resumeVideo: Function;
   resumeVideo() {
     this.setState({
       paused: false,
     });
   }
+
+  finishCurrentVideo: Function;
   finishCurrentVideo() {
     this.props.finishVideo(this.props.current.id);
   }
+
+  deleteCurrentVideo: Function;
   deleteCurrentVideo() {
     this.props.deleteVideo(this.props.current.id);
   }
+
+  play: Function;
   play() {
     this.setState({
       paused: false,
     });
     this.state.player.playVideo();
   }
+
+  pause: Function;
   pause() {
     this.setState({
       paused: true,
     });
     this.state.player.pauseVideo();
   }
+
+  updateElapsed: Function;
   updateElapsed() {
     this.setState({
       elapsed: this.state.player.getCurrentTime(),
@@ -282,6 +325,8 @@ class VideoPlayer extends React.Component {
     });
     this.timeout = setTimeout(this.updateElapsed, 500);
   }
+
+  timeout: any;
 
   render() {
     return (
@@ -305,7 +350,9 @@ class VideoPlayer extends React.Component {
               }
             </Player>
             <Progress>
-              <Bar width={this.state.total ? ((this.state.elapsed * 100) / (this.state.total)) : 0} />
+              <Bar width={this.state.total ?
+                ((this.state.elapsed * 100) / (this.state.total)) : 0}
+              />
             </Progress>
             <Toolbar>
               <Controls>
@@ -337,34 +384,5 @@ class VideoPlayer extends React.Component {
     );
   }
 }
-
-VideoPlayer.propTypes = {
-  playlistTitle: PropTypes.string,
-  playlistUsername: PropTypes.string,
-  deleteVideo: PropTypes.func.isRequired,
-  finishVideo: PropTypes.func.isRequired,
-  getRelatedVideos: PropTypes.func.isRequired,
-  startVideo: PropTypes.func.isRequired,
-  current: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    startedAt: PropTypes.number,
-    video: PropTypes.shape({
-      youtubeId: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-    likes: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.number,
-    })).isRequired,
-    user: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }).isRequired,
-  }),
-};
-
-VideoPlayer.defaultProps = {
-  current: undefined,
-  playlistTitle: '',
-  playlistUsername: '',
-};
 
 export default VideoPlayer;

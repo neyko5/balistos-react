@@ -1,6 +1,7 @@
+// @flow
+
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 
 const ContainerComponent = styled.div`
     margin: 0px auto;
@@ -13,21 +14,12 @@ const ContainerComponent = styled.div`
     }
 `;
 
-const Container = props => (
+const Container = (props: {
+  children: any
+}) => (
   <ContainerComponent>
     {props.children}
   </ContainerComponent>
 );
-
-Container.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
-
-Container.defaultProps = {
-  children: undefined,
-};
 
 export default Container;

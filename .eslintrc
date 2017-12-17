@@ -1,4 +1,5 @@
 {
+    "parser": "babel-eslint",
     "extends": [
         "plugin:flowtype/recommended",
         "airbnb"
@@ -11,7 +12,8 @@
         "localStorage": true,
         "window": true,
         "Notification": true,
-        "cy": true
+        "cy": true,
+        "HTMLInputElement": true
     },
     "env": {
         "jest": true
@@ -23,6 +25,8 @@
             "specialLink": [ "hrefLeft", "hrefRight","to" ],
             "aspects": [ "noHref", "invalidHref", "preferButton" ]
         }],
-        "no-new": 0
+        "no-new": 0,
+        "flowtype/define-flow-type": 1,
+        "flowtype/use-flow-type": 1
     }
 }

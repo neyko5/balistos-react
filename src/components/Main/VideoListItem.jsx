@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled, { css } from 'styled-components';
 
@@ -8,7 +9,9 @@ import ThumbsUpSVG from '../../img/thumbs_up.svg';
 import ThumbsDownSVG from '../../img/thumbs_down.svg';
 import deleteIcon from '../../img/del.png';
 
-const mapStateToProps = (state, ownProps) => ({
+import type { VideoType } from '../../types';
+
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   userId: state.auth.userId,
 });
@@ -140,7 +143,14 @@ const Delete = styled.button`
   cursor: pointer;
 `;
 
-const VideoListItem = (props) => {
+const VideoListItem = (props: {
+  video: VideoType,
+  index: number,
+  userId: number,
+  deleteVideo: (number) => void,
+  likeVideo: (number) => void,
+
+}) => {
   const upLike = props.video.likes
     .some(like => like.userId === props.userId && like.value === 1);
   const downLike = props.video.likes
@@ -211,30 +221,6 @@ const VideoListItem = (props) => {
         </DeleteColumn> : undefined}
     </PlaylistItem>
   );
-};
-
-VideoListItem.propTypes = {
-  index: PropTypes.number.isRequired,
-  userId: PropTypes.number,
-  deleteVideo: PropTypes.func.isRequired,
-  likeVideo: PropTypes.func.isRequired,
-  video: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    video: PropTypes.shape({
-      youtubeId: PropTypes.string.isRequired,
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-    likes: PropTypes.arrayOf(PropTypes.shape({
-      value: PropTypes.number,
-    })).isRequired,
-    user: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
-VideoListItem.defaultProps = {
-  userId: undefined,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(VideoListItem);

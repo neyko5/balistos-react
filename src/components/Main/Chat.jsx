@@ -1,10 +1,12 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import ChatMessage from './ChatMessage';
 import ChatForm from './ChatForm';
 import Icon from '../common/Icon';
+import type { ChatMessageType } from '../../types/index';
 
 const Chatbox = styled.div`
   padding: 12px 10px;
@@ -26,7 +28,11 @@ const BoxHeader = styled.div`
   margin-bottom: 5px;
 `;
 
-const Chat = props => (
+const Chat = (props: {
+  username: string,
+  sendMessage: () => void,
+  messages: Array<ChatMessageType>,
+}) => (
   <div>
     <BoxHeader>
       <Icon chat />
@@ -44,20 +50,5 @@ const Chat = props => (
     {props.username ? <ChatForm sendMessage={props.sendMessage} /> : undefined}
   </div>
 );
-
-Chat.propTypes = {
-  username: PropTypes.string,
-  sendMessage: PropTypes.func.isRequired,
-  messages: PropTypes.arrayOf(PropTypes.shape({
-    createdAt: PropTypes.string.isRequired,
-    message: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-  })).isRequired,
-};
-
-
-Chat.defaultProps = {
-  username: undefined,
-};
 
 export default Chat;

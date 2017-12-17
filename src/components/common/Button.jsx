@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
@@ -33,21 +34,12 @@ const StyledButton = styled.button`
     `}
 `;
 
-const Button = props => (
+const Button = (props: {
+  children: any
+}) => (
   <StyledButton {...props}>
     {props.children}
   </StyledButton>
 );
-
-Button.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
-
-Button.defaultProps = {
-  children: undefined,
-};
 
 export default Button;

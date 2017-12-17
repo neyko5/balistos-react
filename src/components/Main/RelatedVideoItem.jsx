@@ -1,11 +1,14 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { addVideo, getRelatedVideos } from '../../actions';
 
-const mapStateToProps = (state, ownProps) => ({
+import type { YoutubeResultVideoType } from '../../types';
+
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   id: state.playlist.id,
 });
@@ -63,7 +66,10 @@ const AddButton = styled.button`
 `;
 
 
-const RelatedVideoItem = props => (
+const RelatedVideoItem = (props: {
+  video: YoutubeResultVideoType,
+  addVideo: string => void,
+}) => (
   <RelatedItem>
     <Image src={`https://img.youtube.com/vi/${props.video.id.videoId}/0.jpg`} alt={props.video.snippet.title} />
     <Info>
@@ -79,17 +85,4 @@ const RelatedVideoItem = props => (
     <AddButton onClick={props.addVideo}> Add</AddButton>
   </RelatedItem>
 );
-
-RelatedVideoItem.propTypes = {
-  addVideo: PropTypes.func.isRequired,
-  video: PropTypes.shape({
-    id: PropTypes.shape({
-      videoId: PropTypes.string.isRequired,
-    }).isRequired,
-    snippet: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-    }).isRequired,
-  }).isRequired,
-};
-
 export default connect(mapStateToProps, mapDispatchToProps)(RelatedVideoItem);

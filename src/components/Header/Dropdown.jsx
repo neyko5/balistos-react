@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 const DropdownContainer = styled.div`
@@ -18,23 +19,17 @@ const DropdownContainer = styled.div`
     }
 `;
 
-const Dropdown = props => (
+const Dropdown = (props: {
+  small?: boolean,
+  children: any,
+}) => (
   <DropdownContainer onClick={event => event.stopPropagation()} small={props.small}>
     {props.children}
   </DropdownContainer>
 );
 
-Dropdown.propTypes = {
-  small: PropTypes.bool,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
-};
-
 Dropdown.defaultProps = {
   small: false,
-  children: undefined,
 };
 
 export default Dropdown;

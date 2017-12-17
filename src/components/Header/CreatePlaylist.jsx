@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Dropdown from './Dropdown';
@@ -22,8 +23,17 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
-class CreatePlaylist extends React.Component {
-  constructor(props) {
+type Props = {
+  onCreatePlaylistSubmit: (string, string) => void,
+}
+
+type State = {
+  title: string,
+  description: string
+}
+
+class CreatePlaylist extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       title: '',
@@ -34,13 +44,15 @@ class CreatePlaylist extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
+  handleChange: Function;
+  handleChange(event: any) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit: Function;
+  handleSubmit(event: Event) {
     event.preventDefault();
     if (!this.state.title.trim() || !this.state.description.trim()) {
       return;
@@ -80,9 +92,5 @@ class CreatePlaylist extends React.Component {
     );
   }
 }
-
-CreatePlaylist.propTypes = {
-  onCreatePlaylistSubmit: PropTypes.func.isRequired,
-};
 
 export default CreatePlaylist;

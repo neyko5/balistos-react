@@ -1,10 +1,13 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Box } from 'grid-styled';
 import styled from 'styled-components';
 
 import VideoList from './VideoList';
 import SearchVideo from './SearchVideo';
+
+import type { PlaylistType } from '../../types';
 
 const PlaylistBox = styled.div`
   background: #e1e1e1;
@@ -23,7 +26,9 @@ const PlaylistBody = styled.div`
 `;
 
 
-const VideoListContainer = props => (
+const VideoListContainer = (props: {
+  playlist: PlaylistType
+}) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <PlaylistBox>
       <SearchVideo id={props.playlist.id} />
@@ -36,24 +41,5 @@ const VideoListContainer = props => (
     </PlaylistBox>
   </Box>
 );
-
-VideoListContainer.propTypes = {
-  playlist: PropTypes.shape({
-    username: PropTypes.string,
-    id: PropTypes.string,
-    title: PropTypes.string,
-    videos: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
-    current: PropTypes.object,
-  }),
-
-};
-
-VideoListContainer.defaultProps = {
-  playlist: {
-    username: undefined,
-    id: undefined,
-    current: undefined,
-  },
-};
 
 export default VideoListContainer;

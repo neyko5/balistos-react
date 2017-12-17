@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -12,11 +13,11 @@ const mapDispatchToProps = dispatch => ({
   onOpenRegisterClick: () => {
     dispatch(toggleRegisterWindow());
   },
-  onSubmit: (username, password) => {
+  onSubmit: (username: string, password: string) => {
     dispatch(sendLoginRequest(username, password));
   },
 });
-const mapStateToProps = (state, ownProps) => ({
+const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
   error: state.auth.loginError,
 });
@@ -59,7 +60,22 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
-class Login extends React.Component {
+type Props = {
+  onSubmit: (string, string) => void,
+  error?: string,
+  onOpenRegisterClick: () => void,
+}
+
+type State = {
+  username: string,
+  password: string,
+}
+
+class Login extends React.Component<Props, State> {
+  static defaultProps = {
+    error: '',
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -71,12 +87,14 @@ class Login extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  handleChange: Function;
   handleChange(event) {
     this.setState({
       [event.target.name]: event.target.value,
     });
   }
 
+  handleSubmit: Function;
   handleSubmit(event) {
     event.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
@@ -121,16 +139,5 @@ class Login extends React.Component {
     );
   }
 }
-
-Login.propTypes = {
-  error: PropTypes.string,
-  onSubmit: PropTypes.func.isRequired,
-  onOpenRegisterClick: PropTypes.func.isRequired,
-};
-
-Login.defaultProps = {
-  error: undefined,
-};
-
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

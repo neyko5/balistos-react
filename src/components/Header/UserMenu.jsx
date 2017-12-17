@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { css } from 'styled-components';
 
 import userIcon from '../../img/user.png';
@@ -67,7 +68,14 @@ const ArrowDown = styled.div`
   margin-left: 8px;
 `;
 
-const UserMenu = props => (
+const UserMenu = (props: {
+  loggedIn: boolean,
+  onOpenLoginClick?: () => void,
+  onOpenRegisterClick?: () => void,
+  onOpenLogoutClick?: () => void,
+  username?: string,
+  onOpenCreatePlaylistClick?: () => void,
+}) => (
   props.loggedIn ?
     <Menu onClick={event => event.stopPropagation()}>
       <MenuButton
@@ -92,15 +100,6 @@ const UserMenu = props => (
       </MenuButton>
     </Menu>
 );
-
-UserMenu.propTypes = {
-  loggedIn: PropTypes.bool.isRequired,
-  onOpenLoginClick: PropTypes.func,
-  onOpenRegisterClick: PropTypes.func,
-  onOpenLogoutClick: PropTypes.func,
-  username: PropTypes.string,
-  onOpenCreatePlaylistClick: PropTypes.func,
-};
 
 UserMenu.defaultProps = {
   onOpenLoginClick: undefined,

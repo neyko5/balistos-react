@@ -1,5 +1,6 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
 import Input from '../common/Input';
@@ -13,8 +14,16 @@ const Send = styled.div`
   width: 100%;
 `;
 
-class ChatForm extends React.Component {
-  constructor(props) {
+type Props = {
+  sendMessage: string => void
+}
+
+type State = {
+  message: string,
+}
+
+class ChatForm extends React.Component<Props, State> {
+  constructor(props: Props) {
     super(props);
     this.state = {
       message: '',
@@ -24,13 +33,18 @@ class ChatForm extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value,
-    });
+  handleChange: Function;
+  handleSubmit: Function;
+
+  handleChange(event: Event): void {
+    if (event.target instanceof HTMLInputElement) {
+      this.setState({
+        message: event.target.value,
+      });
+    }
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: Event): void {
     event.preventDefault();
     if (!this.state.message.trim()) {
       return;
@@ -60,9 +74,5 @@ class ChatForm extends React.Component {
     );
   }
 }
-
-ChatForm.propTypes = {
-  sendMessage: PropTypes.func.isRequired,
-};
 
 export default ChatForm;

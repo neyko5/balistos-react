@@ -1,7 +1,9 @@
+// @flow
+
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import type { PlaylistType } from '../../types/index';
 
 
 const PlaylistResult = styled(Link)`
@@ -28,19 +30,13 @@ const PlaylistResultDescription = styled.div`
   font-size: 13px;
 `;
 
-const SearchPlaylistResult = props => (
+const SearchPlaylistResult = (props: {
+  result: PlaylistType,
+}) => (
   <PlaylistResult to={`/playlist/${props.result.id}`}>
     <PlaylistResultTitle>{props.result.title}</PlaylistResultTitle>
     <PlaylistResultDescription>{props.result.description}</PlaylistResultDescription>
   </PlaylistResult>
 );
-
-SearchPlaylistResult.propTypes = {
-  result: PropTypes.shape({
-    title: PropTypes.string.isRequired,
-    id: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-  }).isRequired,
-};
 
 export default SearchPlaylistResult;
