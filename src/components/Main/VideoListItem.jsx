@@ -20,7 +20,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   likeVideo: (value) => {
     dispatch(likeVideo(ownProps.video.id, value));
   },
-  deleteVideo: (videoId) => {
+  deleteVideo: (videoId: number) => {
     dispatch(deleteVideo(videoId));
   },
 });
