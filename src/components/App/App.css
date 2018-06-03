@@ -108,14 +108,14 @@ html,body{
 ::-webkit-scrollbar {
     width: 5px;
     height: 5px;
-    background: transparent;
+    background: #ffffff;
 }
 ::-webkit-scrollbar-track {
     width: 5px;
     height: 5px;
-    background: transparent;
+    background: #ffffff;
 }
 ::-webkit-scrollbar-thumb {
-    background: #CCCCCC;
-    border-radius: 4px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 0;
 }

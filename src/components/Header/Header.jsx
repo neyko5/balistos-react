@@ -62,8 +62,7 @@ const mapDispatchToProps = (dispatch: Dispatch<*>) => ({
 const HeaderContainer = styled.header`
   height: 50px;
   width: 100%;
-  background-color: #212121;
-  border-bottom: 1px solid #666666;
+  background-color: #333333;
   @media (min-width: 1280px) {
       position: fixed;
       top: 0;
@@ -86,31 +85,25 @@ const RightMenu = styled.div`
   flex: 1;
 `;
 
-const Logo = styled.div`
-  background: url(${logoImage}) left center;
-  margin: 0px;
-  margin-top: 2px;
-  height: 42px;
-  padding-left: 42px;
-  font-size: 30px;
-  background-repeat: no-repeat;
-  background-size: contain;
-  line-height: 46px;
-  width: auto;
-  float:left;
-  color: #ffffff;
+const LogoLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+  height: 50px;
+  align-items: center;
+`;
+
+const Title = styled.title`
+  display: flex;
+  align-items: flex-end;
+  height: 48px;
+  margin-left: 8px;
+  color: #f0f0f0;
   font-weight: 200;
-  @media (max-width: 992px) {
-      margin-left: 0px;
-      width: 50px;
-  }
-  @media (max-width: 768px) {
-    width: 30px;
-    margin-left: 0px;
-    background-repeat: no-repeat;
-    background-position: center left;
-    text-indent: -99999px;     
-  }
+  font-size: 36px;
+`;
+
+const Logo = styled.img`
+  height: 40px;
 `;
 
 type Props = {
@@ -152,9 +145,10 @@ class Header extends React.Component<Props, State> {
     return (
       <HeaderContainer>
         <Container>
-          <Link to="/">
-            <Logo>Balistos</Logo>
-          </Link>
+          <LogoLink to="/">
+            <Logo src={logoImage}></Logo>
+            <Title>Balistos</Title>
+          </LogoLink>
           {this.props.loggedIn ?
             <RightMenu>
               <UserMenu
