@@ -84,17 +84,19 @@ const UserMenu = (props: {
       </MenuButton>
       <User onClick={props.onOpenLogoutClick} >
         <UserIcon />
-        <Username>{props.username}</Username>
+        <Username id="username">{props.username}</Username>
         <ArrowDown />
       </User>
     </Menu> :
     <Menu onClick={event => event.stopPropagation()}>
       <MenuButton
+        id="log-in-button"
         borderLeft
         onClick={props.onOpenLoginClick}
       >Log in
       </MenuButton>
       <MenuButton
+        id="register-button"
         onClick={props.onOpenRegisterClick}
       >Register
       </MenuButton>
