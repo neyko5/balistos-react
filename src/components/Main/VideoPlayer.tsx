@@ -16,7 +16,7 @@ const MainWindow = styled.div`
   background: #ffffff;
   float: left;
   width: 100%;
-  margin: 25px 0 0;
+  margin: 10px 0 0;
 `;
 
 const Video = styled.div`

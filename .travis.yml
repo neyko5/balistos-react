@@ -7,3 +7,4 @@ cache:
 script:
   - npm run build
   - npm test
+  - cypress run --record --key 9b22f9f4-14fa-4210-a961-4c912e6b41d6
