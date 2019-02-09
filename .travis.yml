@@ -10,4 +10,4 @@ script:
   - npm run build
   - npm test
   - npm start -- --silent &
-  - cypress run --record --parallel --key 9b22f9f4-14fa-4210-a961-4c912e6b41d6
+  - cypress run --record --key 9b22f9f4-14fa-4210-a961-4c912e6b41d6
