@@ -92,7 +92,7 @@ const Home = () => (
         <MainTitle>Share your music taste with your friends!</MainTitle>
         <SearchPlaylistContainer />
         <Homeback>
-          <Flex wrap>
+          <Flex flexWrap={'wrap'}>
             <Box width={[1, 1, 1 / 2, 1 / 2]}>
               <Presentation>
                 <SectionTitle>What is Balistos?</SectionTitle>

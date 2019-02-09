@@ -9,7 +9,7 @@ const LogOut = (props: {
                   onLogoutClick: () => void
                 }) => (
                   <Dropdown small>
-                    <Button green id="log-out" onClick={props.onLogoutClick}>Log Out</Button>
+                    <Button green onClick={props.onLogoutClick}>Log Out</Button>
                   </Dropdown>
 );
 

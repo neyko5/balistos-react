@@ -8,7 +8,6 @@ export const SET_INITIAL_PLAYLIST_DATA: string = 'SET_INITIAL_PLAYLIST_DATA';
 export const UPDATE_OR_INSERT_LIKE: string = 'UPDATE_OR_INSERT_LIKE';
 export const REMOVE_VIDEO: string = 'REMOVE_VIDEO';
 export const SELECT_NEXT_VIDEO: string = 'SELECT_NEXT_VIDEO';
-export const INSERT_VIDEO: string = 'INSERT_VIDEO';
 export const INSERT_MESSAGE: string = 'INSERT_MESSAGE';
 export const SET_ACTIVE_USERS: string = 'SET_ACTIVE_USERS';
 export const SET_PLAYLIST_RESULTS: string = 'SET_PLAYLIST_RESULTS';

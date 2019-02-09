@@ -142,7 +142,7 @@ class Playlist extends React.Component<Props, State> {
     return (
       <Main onClick={this.props.closeAllWindows}>
         <Container>
-          <Flex wrap>
+          <Flex flexWrap={'wrap'}>
             <VideoPlayer
               playlistTitle={this.props.playlist.title}
               playlistUsername={this.props.playlist.username}

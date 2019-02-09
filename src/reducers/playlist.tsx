@@ -1,5 +1,6 @@
 import * as actionTypes from '../constants/actionTypes';
 import { LikeType, VideoType } from '../types';
+import { Video } from '../models/video';
 
 function playlist(state: {
   videos: Array<VideoType>,
@@ -7,28 +8,22 @@ function playlist(state: {
   playlistResults: Array<any>,
   messages: Array<any>,
   users: Array<any>,
-  current?: VideoType
 } = {
   videos: [],
   results: [],
   playlistResults: [],
   messages: [],
-  users: [],
-  current: undefined
+  users: []
 }, action: any) {
   switch (action.type) {
     case actionTypes.SET_INITIAL_PLAYLIST_DATA: {
-      const first = action.playlist.playlistVideos &&
-        action.playlist.playlistVideos.sort((a: VideoType, b: VideoType) => {
-          const diff = b.likes.reduce((total: number, like: LikeType) => total + like.value, 0) -
-            a.likes.reduce((total: number, like: LikeType) => total + like.value, 0);
-          return diff === 0 ? a.id - b.id : diff;
-        })[0];
-      let videos = action.playlist.playlistVideos ? action.playlist.playlistVideos.filter((video: VideoType) => !first || video.id !== first.id) : [];
+      let videos = action.playlist.playlistVideos.map((video: VideoType) => new Video(video)).sort((a: Video, b: Video) => {
+        const diff = b.likeCount - a.likeCount;
+        return diff === 0 ? a.id - b.id : diff;
+      });
       return {
         ...state,
         videos: videos,
-        current: first,
         messages: action.playlist.chats,
         users: action.playlist.playlistUsers,
         id: action.playlist.id,
@@ -58,22 +53,9 @@ function playlist(state: {
         }),
       };
     case actionTypes.REMOVE_VIDEO:
-      if (state && state.current && state.current.id === action.videoId) {
-        const next: VideoType = state.videos.sort((a: VideoType, b: VideoType) => {
-          const diff = b.likes.reduce((total: number, like: LikeType) => total + like.value, 0)
-            - a.likes.reduce((total: number, like: LikeType) => total + like.value, 0);
-          return diff === 0 ? a.id - b.id : diff;
-        })[0];
-        return {
-          ...state,
-          current: next,
-          videos: state.videos.filter((video: VideoType) => !next || (next && video.id !== next.id)),
-        };
-      }
-
       return {
         ...state,
-        videos: state.videos.filter((video: VideoType) => video.id !== action.videoId),
+        videos: state.videos.filter((video: VideoType) => video.id !== action.videoId)
       };
 
     case actionTypes.DEACTIVATE_VIDEO:
@@ -82,31 +64,11 @@ function playlist(state: {
         videos: state.videos.filter((video: VideoType) => video.id !== action.videoId),
       };
     case actionTypes.SELECT_NEXT_VIDEO: {
-      const next: VideoType = state.videos.sort((a: VideoType, b: VideoType) => {
-        const diff = b.likes.reduce((total: number, like: LikeType) => total + like.value, 0) -
-         a.likes.reduce((total: number, like: LikeType) => total + like.value, 0);
-        return diff === 0 ? a.id - b.id : diff;
-      })[0];
       return {
         ...state,
-        current: next,
-        videos: state.videos.filter((video: VideoType) => !next || (next && video.id !== next.id)),
+        videos: state.videos.slice(1)
       };
     }
-
-    case actionTypes.INSERT_VIDEO:
-      if (state.current) {
-        return {
-          ...state,
-          videos: [...state.videos, action.video],
-        };
-      }
-
-      return {
-        ...state,
-        current: action.video,
-      };
-
 
     case actionTypes.INSERT_MESSAGE:
       return {
