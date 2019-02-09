@@ -1,12 +1,10 @@
 language: node_js
 node_js:
-  - 10
+  - 8
 cache:
-  npm: true # this cashes ~/.npm folder on Travis
   directories:
-    # we also need to cache folder with Cypress binary
-    - ~/.cache
-install:
-  - npm ci
+    - node_modules
 script:
-  - $(npm bin)/cypress run --record --key 9b22f9f4-14fa-4210-a961-4c912e6b41d6
+  - npm run build
+  - npm test
+  - npm start && cypress run --record --key 9b22f9f4-14fa-4210-a961-4c912e6b41d6
