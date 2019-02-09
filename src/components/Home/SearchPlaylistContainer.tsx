@@ -104,7 +104,7 @@ class SearchPlaylistContainer extends React.Component<Props, State> {
             value={this.state.query}
           />
           <SearchIcon />
-          <SearchResults>
+          <SearchResults data-cy="search-results">
             {this.props.results.map(result =>
               <SearchPlaylistResult key={result.id} result={result} />)}
           </SearchResults>

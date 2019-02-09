@@ -136,7 +136,7 @@ class Header extends React.Component<Props, State> {
     return (
       <HeaderContainer>
         <Container>
-          <LogoLink to="/">
+          <LogoLink to="/" id="logo">
             <Logo src={logoImage}></Logo>
             <Title>Balistos</Title>
           </LogoLink>

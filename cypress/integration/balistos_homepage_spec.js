@@ -9,7 +9,7 @@ describe("Balistos home page", () => {
 
   it("should redirect to home after clicking on balistos logo", () => {
     cy.visit("http://localhost:3000/test");
-    cy.get("div#logo").click();
+    cy.get("#logo").click();
     cy.url().should("include", "http://localhost:3000/");
   });
 
@@ -41,7 +41,7 @@ describe("Balistos home page", () => {
     cy.get("div#username").contains("testuser123123");
 
     cy.get("div#username").click();
-    cy.get("button#log-out").click();
+    cy.get("button[data-cy=log-out]").click();
     cy.contains("Log in");
     cy.contains("Register");
   });
@@ -49,11 +49,7 @@ describe("Balistos home page", () => {
   it("should search for playlist named Carski playlist, display title and desc", () => {
     cy.get('input[name="query"]').type('Carski playlist');
     cy.get('input[name="query"]').should('have.value', 'Carski playlist')
-    cy.get('.results').contains('Carski playlist');
-    cy.get('.results').contains('za legendose');
-  });
-
-  xit("should have popular playlists", () => {
-
+    cy.get('ul[data-cy=search-results]').contains('Carski playlist');
+    cy.get('ul[data-cy=search-results]').contains('za legendose');
   });
 });

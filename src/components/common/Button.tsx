@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -46,6 +44,7 @@ type Props = {
     topMargin?: boolean,
     right?: boolean,
     type?: string,
+    id?: string,
     onClick?: () => void
 }
 
