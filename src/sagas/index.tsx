@@ -34,10 +34,16 @@ export function* sendLoginRequest(action: any) {
         userId: response.data.data.login.userId,
       });
     } else {
-      yield put({ type: actionTypes.SET_LOGIN_ERROR, message: response.data.data.login.message });
+      yield put({ 
+        type: actionTypes.SET_LOGIN_ERROR, 
+        message: response.data.errors[0].message 
+      });
     }
   } catch (error) {
-    yield put({ type: actionTypes.SET_LOGIN_ERROR, message: error.message });
+    yield put({ 
+      type: actionTypes.SET_LOGIN_ERROR, 
+      message: error.message
+    });
   }
 }
 
@@ -64,11 +70,14 @@ export function* sendRegisterRequest(action: any) {
     } else {
       yield put({
         type: actionTypes.SET_REGISTER_ERROR,
-        message: response.data.data.register.message,
+        message: response.data.errors[0].message
       });
     }
   } catch (error) {
-    yield put({ type: actionTypes.SET_REGISTER_ERROR, message: error.message });
+    yield put({ 
+      type: actionTypes.SET_REGISTER_ERROR, 
+      message: error.message 
+    });
   }
 }
 

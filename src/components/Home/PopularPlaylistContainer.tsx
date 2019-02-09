@@ -36,7 +36,7 @@ class PopularPlaylistContainer extends React.Component<Props, State> {
   }
   render() {
     return (
-      <Flex wrap>
+      <Flex flexWrap={'wrap'}>
         <Box width={[1, 1, 1 / 2, 1 / 2]} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index < this.props.playlists.length / 2)

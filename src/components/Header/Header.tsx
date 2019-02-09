@@ -136,9 +136,10 @@ class Header extends React.Component<Props, State> {
     return (
       <HeaderContainer>
         <Container>
-          <Link to="/">
-            <Logo></Logo>
-          </Link>
+          <LogoLink to="/">
+            <Logo src={logoImage}></Logo>
+            <Title>Balistos</Title>
+          </LogoLink>
           {this.props.loggedIn ?
             <RightMenu>
               <UserMenu
