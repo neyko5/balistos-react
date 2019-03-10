@@ -41,3 +41,4 @@ export const START_VIDEO: string = "START_VIDEO";
 export const GET_RELATED_VIDEOS: string = "GET_RELATED_VIDEOS";
 export const DEACTIVATE_VIDEO: string = "DEACTIVATE_VIDEO";
 export const DISPLAY_SERVER_ERROR: string = "DISPLAY_SERVER_ERROR";
+export const INSERT_VIDEO: string = "INSERT_VIDEO";

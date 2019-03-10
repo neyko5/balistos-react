@@ -27,7 +27,7 @@ export function* sendLoginRequest(action: any) {
       }`,
     });
     if (response.data.data.login && response.data.data.login.success) {
-      localStorage.setItem("token", action.response.data.data.login.token);
+      localStorage.setItem("token", response.data.data.login.token);
       localStorage.setItem("username", action.username);
       localStorage.setItem("userId", response.data.data.login.userId);
       yield put({
@@ -64,7 +64,7 @@ export function* sendRegisterRequest(action: any) {
         }`,
     });
     if (response.data.data.register && response.data.data.register.success) {
-      localStorage.setItem("token", action.response.data.data.register.token);
+      localStorage.setItem("token", response.data.data.register.token);
       localStorage.setItem("username", action.username);
       localStorage.setItem("userId", response.data.data.register.userId);
       yield put({
@@ -230,7 +230,7 @@ export function* sendMessage(action: any) {
     yield axios.post("/graphql", {
       query:
       `mutation{
-          createChat(message: "${action.message}", playlistId: "${action.playlistId}") {
+          createChat(message: "${action.message}", playlistId: ${action.playlistId}) {
              success
           }
       }`,
@@ -247,7 +247,7 @@ export function* likeVideo(action: any) {
     yield axios.post("/graphql", {
       query:
         `mutation{
-            likeVideo(videoId: "${action.videoId}", value: ${action.value}) {
+            likeVideo(videoId: ${action.videoId}, value: ${action.value}) {
               success
             }
         }`,
@@ -264,7 +264,7 @@ export function* finishVideo(action: any) {
     yield axios.post("/graphql", {
       query:
         `mutation{
-            finishVideo(videoId: "${action.videoId}") {
+            finishVideo(videoId: ${action.videoId}) {
               success
             }
         }`,
@@ -280,7 +280,7 @@ export function* startVideo(action: any) {
     yield axios.post("/graphql", {
       query:
         `mutation{
-            startVideo(videoId: "${action.videoId}") {
+            startVideo(videoId: ${action.videoId}) {
               success
             }
         }`,
@@ -295,7 +295,7 @@ export function* deleteVideo(action: any) {
     yield axios.post("/graphql", {
       query:
         `mutation{
-            deleteVideo(videoId: "${action.videoId}") {
+            deleteVideo(videoId: ${action.videoId}) {
               success
             }
         }`,
@@ -312,7 +312,7 @@ export function* sendHeartbeat(action: any) {
     const response = yield axios.post("/graphql", {
       query:
         `mutation{
-            heartbeat(playlistId: "${action.playlist}", username: "${action.username}") {
+            heartbeat(playlistId: ${action.playlist}, username: "${action.username}") {
               username
             }
         }`,
@@ -332,7 +332,7 @@ export function* getActiveUsers(action: any) {
     const response = yield axios.post("/graphql", {
       query:
         `{
-            getPlaylistUsers(playlistId: "${action.playlist}") {
+            getPlaylistUsers(playlistId: ${action.playlist}) {
               username
             }
         }`,
@@ -350,7 +350,7 @@ export function* addVideo(action: any) {
     yield axios.post("/graphql", {
       query:
         `mutation{
-            addVideo(title: "${action.title}", playlistId: "${action.playlistId}", autoAdded: ${!!action.autoAdded}, youtubeId: "${action.youtubeId}") {
+            addVideo(title: "${action.title}", playlistId: ${action.playlistId}, autoAdded: ${!!action.autoAdded}, youtubeId: "${action.youtubeId}") {
               success
         }
       }`,

@@ -52,6 +52,11 @@ function playlist(state: {
           return video;
         }),
       };
+    case actionTypes.INSERT_VIDEO:
+      return {
+        ...state,
+        videos: [...state.videos, action.video],
+      };
     case actionTypes.REMOVE_VIDEO:
       return {
         ...state,
