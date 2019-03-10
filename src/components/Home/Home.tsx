@@ -1,12 +1,12 @@
-import React from 'react';
-import { Flex, Box } from 'grid-styled';
-import styled from 'styled-components';
+import { Box, Flex } from "grid-styled";
+import React from "react";
+import styled from "styled-components";
 
-import SearchPlaylistContainer from './SearchPlaylistContainer';
-import PopularPlaylistContainer from './PopularPlaylistContainer';
-import Container from '../common/Container';
-import backgroundImage from '../../img/back.png';
-import noteIcon from '../../img/note-big.png';
+import backgroundImage from "../../img/back.png";
+import noteIcon from "../../img/note-big.png";
+import Container from "../common/Container";
+import PopularPlaylistContainer from "./PopularPlaylistContainer";
+import SearchPlaylistContainer from "./SearchPlaylistContainer";
 
 const Background = styled.div`
   background: url(${backgroundImage}) repeat-x;
@@ -92,7 +92,7 @@ const Home = () => (
         <MainTitle>Share your music taste with your friends!</MainTitle>
         <SearchPlaylistContainer />
         <Homeback>
-          <Flex flexWrap={'wrap'}>
+          <Flex flexWrap={"wrap"}>
             <Box width={[1, 1, 1 / 2, 1 / 2]}>
               <Presentation>
                 <SectionTitle>What is Balistos?</SectionTitle>
@@ -109,8 +109,8 @@ const Home = () => (
                 <SectionTitle>How do I use Balistos?</SectionTitle>
                 <Text>
                   Simple! You may search all the playlists and select the one
-                  you like by simply clicking on it. To be able to use full 
-                  functionality of Balistos such as adding songs and voting 
+                  you like by simply clicking on it. To be able to use full
+                  functionality of Balistos such as adding songs and voting
                   you are required to register an account. If you don&apos;t
                   like any of the playlist you may also create your own and share
                   it with your friends.

@@ -1,11 +1,11 @@
 // @flow
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import VideoListItem from './VideoListItem';
+import VideoListItem from "./VideoListItem";
 
-import { VideoType } from '../../types';
+import { VideoType } from "../../types";
 
 const EmptyItem = styled.div`
   color: #3E414C;
@@ -17,7 +17,7 @@ const List = styled.div`
 `;
 
 const VideoList = (props: {
-  videos: Array<VideoType>,
+  videos: VideoType[],
   current: VideoType,
 
 }) => {

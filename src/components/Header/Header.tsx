@@ -1,30 +1,29 @@
 
 // @flow
-import React from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Dispatch } from 'redux';
+import React from "react";
+import { connect } from "react-redux";
+import { Link, withRouter } from "react-router-dom";
+import { Dispatch } from "redux";
+import styled from "styled-components";
 
-import UserMenu from './UserMenu';
-import LogOut from './LogOut';
-import CreatePlaylist from './CreatePlaylist';
-import Login from './Login';
-import Register from './Register';
-import Container from '../common/Container';
+import Container from "../common/Container";
+import CreatePlaylist from "./CreatePlaylist";
+import Login from "./Login";
+import LogOut from "./LogOut";
+import Register from "./Register";
+import UserMenu from "./UserMenu";
 
-import logoImage from '../../img/logo.png';
+import logoImage from "../../img/logo.png";
 
 import {
-  toggleLoginWindow,
-  toggleCreatePlaylistWindow,
-  toggleRegisterWindow,
-  toggleLogoutWindow,
-  logOut,
   createPlaylist,
+  logOut,
+  toggleCreatePlaylistWindow,
+  toggleLoginWindow,
+  toggleLogoutWindow,
+  toggleRegisterWindow,
   verifyToken,
-} from '../../actions';
-
+} from "../../actions";
 
 const mapStateToProps = (state: any) => ({
   username: state.auth.username,
@@ -106,38 +105,38 @@ const Logo = styled.img`
   height: 40px;
 `;
 
-type Props = {
-  verifyToken: () => void,
-  onOpenLoginClick: () => void,
-  onOpenRegisterClick: () => void,
-  onOpenLogoutClick: () => void,
-  onCreatePlaylistSubmit: (title: string, description: string) => void
-  onLogoutClick: () => void,
-  onOpenCreatePlaylistClick: () => void,
-  createPlaylistOpen: boolean,
-  logoutOpen: boolean,
-  registerOpen: boolean,
-  loginOpen: boolean,
-  loggedIn: boolean,
-  username: string,
-};
+interface Props {
+  verifyToken: () => void;
+  onOpenLoginClick: () => void;
+  onOpenRegisterClick: () => void;
+  onOpenLogoutClick: () => void;
+  onCreatePlaylistSubmit: (title: string, description: string) => void;
+  onLogoutClick: () => void;
+  onOpenCreatePlaylistClick: () => void;
+  createPlaylistOpen: boolean;
+  logoutOpen: boolean;
+  registerOpen: boolean;
+  loginOpen: boolean;
+  loggedIn: boolean;
+  username: string;
+}
 
-type State = {
-};
+interface State {
+}
 
 class Header extends React.Component<Props, State> {
-  componentDidMount() {
+  public componentDidMount() {
     if (this.props.loggedIn) {
       this.props.verifyToken();
     }
   }
 
-  render() {
+  public render() {
     return (
       <HeaderContainer>
         <Container>
           <LogoLink to="/" id="logo">
-            <Logo src={logoImage}></Logo>
+            <Logo src={logoImage} />
             <Title>Balistos</Title>
           </LogoLink>
           {this.props.loggedIn ?
@@ -148,13 +147,13 @@ class Header extends React.Component<Props, State> {
                 username={this.props.username}
                 loggedIn={this.props.loggedIn}
               />
-              {this.props.logoutOpen ? <LogOut
+              {this.props.logoutOpen && <LogOut
                 onLogoutClick={this.props.onLogoutClick}
-              /> : undefined}
+              />}
 
-              {this.props.createPlaylistOpen ? <CreatePlaylist
+              {this.props.createPlaylistOpen && <CreatePlaylist
                 onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}
-              /> : undefined}
+              />}
             </RightMenu> :
             <RightMenu>
               <UserMenu
@@ -163,8 +162,8 @@ class Header extends React.Component<Props, State> {
                 username={this.props.username}
                 loggedIn={this.props.loggedIn}
               />
-              {this.props.loginOpen ? <Login /> : undefined}
-              {this.props.registerOpen ? <Register /> : undefined }
+              {this.props.loginOpen && <Login />}
+              {this.props.registerOpen && <Register />}
             </RightMenu>
           }
         </Container>

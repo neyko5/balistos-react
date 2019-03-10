@@ -1,5 +1,5 @@
-import * as actionTypes from '../constants/actionTypes';
-import { Action } from '../types';
+import * as actionTypes from "../constants/actionTypes";
+import { Action } from "../types";
 
 function results(state = {
   popular: [],
@@ -7,7 +7,7 @@ function results(state = {
   playlists: [],
   related: [],
   youtubeIndex: 0,
-}, action: any) {
+},               action: any) {
   switch (action.type) {
     case actionTypes.SET_PLAYLIST_RESULTS:
       return {

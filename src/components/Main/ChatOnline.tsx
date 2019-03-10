@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
-import usersIcon from '../../img/users.png';
-import { UserType } from '../../types/index';
+import usersIcon from "../../img/users.png";
+import { UserType } from "../../types/index";
 
 const Users = styled.div`
   margin-top: 15px;
@@ -62,13 +62,13 @@ const User = styled.div`
   `}
 `;
 
-type UserProps = {
-  green: boolean
+interface UserProps {
+  green: boolean;
 }
 
 const ChatOnline = (props: {
   username: string,
-  users: Array<UserType>,
+  users: UserType[],
 }) => (
   <Users>
     <Header>
@@ -76,7 +76,7 @@ const ChatOnline = (props: {
       <Number>{props.users && props.users.length}</Number>
     </Header>
     <Body>
-      {props.users && props.users.length && props.users.map(user => (
+      {props.users && props.users.length && props.users.map((user) => (
         <User
           green={user.username === props.username}
           key={user.username}

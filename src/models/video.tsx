@@ -1,12 +1,12 @@
-import { VideoType, UserType, LikeType, YoutubeVideoType } from "../types";
+import { LikeType, UserType, VideoType, YoutubeVideoType } from "../types";
 
 export class Video {
-    id: number;
-    startedAt: number;
-    video: YoutubeVideoType;
-    likes: Array<LikeType>;
-    user: UserType;
-    autoAdded: boolean;
+    public id: number;
+    public startedAt: number;
+    public video: YoutubeVideoType;
+    public likes: LikeType[];
+    public user: UserType;
+    public autoAdded: boolean;
 
     constructor(data: VideoType) {
         this.id = data.id;
@@ -18,6 +18,6 @@ export class Video {
     }
 
     get likeCount() {
-        return this.likes.reduce((total: number, like: LikeType) => total + like.value, 0)
+        return this.likes.reduce((total: number, like: LikeType) => total + like.value, 0);
     }
 }

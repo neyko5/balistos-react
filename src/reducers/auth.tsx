@@ -1,11 +1,6 @@
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from "../constants/actionTypes";
 
-function auth(state = {
-  token: localStorage.getItem('token') || undefined,
-  username: localStorage.getItem('username') || undefined,
-  loggedIn: !!localStorage.getItem('token'),
-  userId: parseInt(localStorage.getItem('userId') || '', 10) || undefined,
-}, action: any) {
+function auth(state = {}, action: any) {
   switch (action.type) {
     case actionTypes.AUTH_SET_FROM_STORAGE:
       return {
@@ -35,9 +30,6 @@ function auth(state = {
         loginError: undefined,
       };
     case actionTypes.POST_LOGIN:
-      localStorage.setItem('token', action.token);
-      localStorage.setItem('username', action.username);
-      localStorage.setItem('userId', action.userId);
       return {
         ...state,
         username: action.username,

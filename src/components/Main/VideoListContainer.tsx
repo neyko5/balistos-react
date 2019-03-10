@@ -1,13 +1,13 @@
 // @flow
 
-import React from 'react';
-import { Box } from 'grid-styled';
-import styled from 'styled-components';
+import { Box } from "grid-styled";
+import React from "react";
+import styled from "styled-components";
 
-import VideoList from './VideoList';
-import SearchVideo from './SearchVideo';
+import SearchVideo from "./SearchVideo";
+import VideoList from "./VideoList";
 
-import { PlaylistType } from '../../types';
+import { PlaylistType } from "../../types";
 
 const PlaylistBox = styled.div`
   background: #e1e1e1;
@@ -25,9 +25,8 @@ const PlaylistBody = styled.div`
   overflow: auto;
 `;
 
-
 const VideoListContainer = (props: {
-  playlist: PlaylistType
+  playlist: PlaylistType,
 }) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <PlaylistBox>

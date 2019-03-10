@@ -1,11 +1,11 @@
 // @flow
 
-import React, { FormEvent } from 'react';
-import styled from 'styled-components';
+import React, { FormEvent } from "react";
+import styled from "styled-components";
 
-import Dropdown from './Dropdown';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import Button from "../common/Button";
+import Input from "../common/Input";
+import Dropdown from "./Dropdown";
 
 const LabelTitle = styled.div`
   font-weight: 700;
@@ -23,47 +23,47 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
-type Props = {
-  onCreatePlaylistSubmit: (title: string, description: string) => void,
+interface Props {
+  onCreatePlaylistSubmit: (title: string, description: string) => void;
 }
 
-type State = {
-  title: string,
-  description: string
+interface State {
+  title: string;
+  description: string;
 }
 
 class CreatePlaylist extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      title: '',
-      description: '',
+      description: "",
+      title: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event: FormEvent<HTMLFormElement>) {
-    let update: any = {};
-    let target = event.target as HTMLInputElement;
+  public handleChange(event: FormEvent<HTMLFormElement>) {
+    const update: any = {};
+    const target = event.target as HTMLInputElement;
     update[target.name] = target.value;
     this.setState(update);
   }
 
-  handleSubmit(event: FormEvent<HTMLFormElement>) {
+  public handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!this.state.title.trim() || !this.state.description.trim()) {
       return;
     }
     this.props.onCreatePlaylistSubmit(this.state.title, this.state.description);
     this.setState({
-      title: '',
-      description: '',
+      title: "",
+      description: "",
     });
   }
 
-  render() {
+  public render() {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
@@ -85,7 +85,7 @@ class CreatePlaylist extends React.Component<Props, State> {
               value={this.state.description}
             />
           </Label>
-          <Button type="submit" green>Create</Button>
+          <Button type="submit" green={true}>Create</Button>
         </form>
       </Dropdown>
     );

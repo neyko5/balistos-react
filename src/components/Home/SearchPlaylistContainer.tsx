@@ -1,14 +1,14 @@
 // @flow
 
-import React, { FormEvent } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
-import SearchPlaylistResult from './SearchPlaylistResult';
-import { searchPlaylists } from '../../actions';
-import searchIcon from '../../img/search-white.png';
-import transparentImg from '../../img/transparent.png';
-import Input from '../common/Input';
-import { PlaylistType } from '../../types/index';
+import React, { FormEvent } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { searchPlaylists } from "../../actions";
+import searchIcon from "../../img/search-white.png";
+import transparentImg from "../../img/transparent.png";
+import { PlaylistType } from "../../types/index";
+import Input from "../common/Input";
+import SearchPlaylistResult from "./SearchPlaylistResult";
 
 const SearchPlaylist = styled.div`
   max-width: 620px;
@@ -59,53 +59,51 @@ const mapStateToProps = (state: any, ownProps: any) => ({
 
 const mapDispatchToProps = (dispatch: any) => ({
   onSearchInputChange: (e: FormEvent<HTMLInputElement>) => {
-    let target = e.target as HTMLInputElement;
+    const target = e.target as HTMLInputElement;
     dispatch(searchPlaylists(target.value));
   },
 });
 
-type Props = {
-  onSearchInputChange: (event: FormEvent<HTMLInputElement>) => void,
-  results: Array<PlaylistType>,
+interface Props {
+  onSearchInputChange: (event: FormEvent<HTMLInputElement>) => void;
+  results: PlaylistType[];
 }
-
-type State = {
-  query: string,
+interface State {
+  query: string;
 }
-
 class SearchPlaylistContainer extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      query: '',
+      query: "",
     };
 
     this.handleQueryChange = this.handleQueryChange.bind(this);
   }
 
-  handleQueryChange(event: FormEvent<HTMLInputElement>) {
-    let target = event.target as HTMLInputElement;
+  public handleQueryChange(event: FormEvent<HTMLInputElement>) {
+    const target = event.target as HTMLInputElement;
     this.setState({
       query: target.value,
     });
     this.props.onSearchInputChange(event);
   }
 
-  render() {
+  public render() {
     return (
       <SearchPlaylist>
         <SearchPlaylistInner>
           <Input
             type="text"
             placeholder="Search playlist"
-            search
+            search={true}
             name="query"
             onChange={this.handleQueryChange}
             value={this.state.query}
           />
           <SearchIcon />
           <SearchResults data-cy="search-results">
-            {this.props.results.map(result =>
+            {this.props.results.map((result) =>
               <SearchPlaylistResult key={result.id} result={result} />)}
           </SearchResults>
         </SearchPlaylistInner>

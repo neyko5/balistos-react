@@ -1,12 +1,12 @@
-import React, { FormEvent } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import React, { FormEvent } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-import { sendLoginRequest, toggleRegisterWindow } from '../../actions';
-import Dropdown from './Dropdown';
-import Input from '../common/Input';
-import Button from '../common/Button';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { sendLoginRequest, toggleRegisterWindow } from "../../actions";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import Dropdown from "./Dropdown";
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onOpenRegisterClick: () => {
@@ -59,50 +59,50 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
-type Props = {
-  onSubmit: (arg0: string, arg1: string) => void,
-  error?: string,
-  onOpenRegisterClick: () => void,
+interface Props {
+  onSubmit: (arg0: string, arg1: string) => void;
+  error?: string;
+  onOpenRegisterClick: () => void;
 }
 
-type State = {
-  username: string,
-  password: string,
+interface State {
+  username: string;
+  password: string;
 }
 
 class Login extends React.Component<Props, State> {
-  static defaultProps = {
-    error: '',
-  }
+  public static defaultProps = {
+    error: "",
+  };
 
   constructor(props: Props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event: FormEvent<HTMLFormElement>) {
-    let update: any = {};
-    let target = event.target as HTMLInputElement;
+  public handleChange(event: FormEvent<HTMLFormElement>) {
+    const update: any = {};
+    const target = event.target as HTMLInputElement;
     update[target.name] = target.value;
     this.setState(update);
   }
 
-  handleSubmit(event: FormEvent<HTMLFormElement>) {
+  public handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
     this.setState({
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     });
   }
 
-  render() {
+  public render() {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
@@ -125,7 +125,7 @@ class Login extends React.Component<Props, State> {
               value={this.state.password}
             />
           </Label>
-          <Button type="submit" green topMargin>Log In</Button>
+          <Button type="submit" green={true} topMargin={true}>Log In</Button>
           <NoAccount>No account yet?
             <NoAccountLink
               onClick={this.props.onOpenRegisterClick}

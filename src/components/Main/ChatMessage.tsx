@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
-import styled from 'styled-components';
-import { ChatMessageType } from '../../types/index';
+import React from "react";
+import styled from "styled-components";
+import { ChatMessageType } from "../../types/index";
 
 const Message = styled.div`
   margin-bottom: 3px;
@@ -12,13 +12,12 @@ const Message = styled.div`
 export const Author = styled.span`
   margin-right: 3px;
   font-weight: 700;
-  color: ${(props: AuthorProps) => (props.current ? '#9FA600' : '#3e414c')}
+  color: ${(props: AuthorProps) => (props.current ? "#9FA600" : "#3e414c")}
 `;
 
-type AuthorProps = {
-  current: boolean
+interface AuthorProps {
+  current: boolean;
 }
-
 const ChatMessage = (props: {
   username: string,
   message: ChatMessageType,

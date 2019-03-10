@@ -1,12 +1,12 @@
 // @flow
 
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import ChatMessage from './ChatMessage';
-import ChatForm from './ChatForm';
-import Icon from '../common/Icon';
-import { ChatMessageType } from '../../types/index';
+import { ChatMessageType } from "../../types/index";
+import Icon from "../common/Icon";
+import ChatForm from "./ChatForm";
+import ChatMessage from "./ChatMessage";
 
 const Chatbox = styled.div`
   padding: 12px 10px;
@@ -31,16 +31,16 @@ const BoxHeader = styled.div`
 const Chat = (props: {
   username: string,
   sendMessage: (message: string) => void,
-  messages: Array<ChatMessageType>,
+  messages: ChatMessageType[],
 }) => (
   <div>
     <BoxHeader>
-      <Icon chat />
+      <Icon chat={true} />
       <Title>Chat with your buddies</Title>
     </BoxHeader>
     <Chatbox id="chatbox">
       {props.messages.sort((a, b) => (a.createdAt < b.createdAt ? -1 : 1))
-        .map(message => (<ChatMessage
+        .map((message) => (<ChatMessage
           message={message}
           username={props.username}
           key={message.id}

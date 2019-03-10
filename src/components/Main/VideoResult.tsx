@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 const Result = styled.button`
   width: 100%;
@@ -12,7 +12,7 @@ const Result = styled.button`
   `}
 `;
 
-type ResultProps = {
+interface ResultProps {
   active?: boolean;
 }
 
@@ -40,12 +40,12 @@ const VideoResult = (props: Props) => (
   </Result>
 );
 
-type Props =  {
-  onItemClick: () => void,
-  active: boolean,
-  image: string,
-  title: string
-  id: string
+interface Props {
+  onItemClick: () => void;
+  active: boolean;
+  image: string;
+  title: string;
+  id: string;
 }
 
 export default VideoResult;

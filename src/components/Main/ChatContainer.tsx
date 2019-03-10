@@ -1,13 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { Box } from 'grid-styled';
+import { Box } from "grid-styled";
+import React from "react";
+import { connect } from "react-redux";
 
-import Chat from './Chat';
-import ChatOnline from './ChatOnline';
-import { sendMessage } from '../../actions';
-import { ChatMessageType, UserType, PlaylistType } from '../../types/index';
-import { Dispatch } from 'redux';
 import { any } from 'bluebird';
+import { Dispatch } from "redux";
+import { sendMessage } from "../../actions";
+import { ChatMessageType, PlaylistType, UserType } from "../../types/index";
+import Chat from "./Chat";
+import ChatOnline from "./ChatOnline";
 
 function mapStateToProps(state: any) {
   return {
@@ -23,37 +23,37 @@ const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
   },
 });
 
-type Props = {
-  messages: Array<ChatMessageType>,
-  username: string,
-  playlist: PlaylistType,
-  users: Array<UserType>,
-  sendMessage: (message: string) => void,
+interface Props {
+  messages: ChatMessageType[];
+  username: string;
+  playlist: PlaylistType;
+  users: UserType[];
+  sendMessage: (message: string) => void;
 }
 
-type State = {
+interface State {
 }
 
 class ChatContainer extends React.Component<Props, State> {
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     if (prevProps.messages.length && this.props.messages.length > prevProps.messages.length) {
       const newMessage = [...this.props.messages].pop();
       if (newMessage && newMessage.user.username !== this.props.username) {
         const options = {
           body: `${newMessage.user.username}: ${newMessage.message}`,
-          icon: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAWCAYAAAAxSueLAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8xMC8xNMmEH5sAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAACPElEQVRIiZ2VMZbTMBCGv+RtQYc5wYYTrLkADm5o8CPptltzApIbZE+woaTCOQHep15rlXTejjK5gdPRhUIjLBzFcXbe85Mljeaf0fwzGh0OB0KSpNkEmAFTIAIS2doBW6ACSqNVHTQQkFEXLEmzCFgDdwNtGGBltKouAkvSbAYUwGtZ2mMjqGUEiOWbAteerW9Gq8UgsCTNcuCHB7ICCqNVc+qwOLf2QDdGq7wXTPJTS0Q7YDY0F4FrnxutypDuWMaVAO2B6SVJN1o1Es2zLK1P6Tow59XaaLUdCtSRmYzXcr1HMnr/4dMUeJL5WweWpNkCS4SF0ao5N5czNXAjtgyQ+867yOxuCxQBD9iIF+fmnglHpj/YuqyTNIuDYEIUxNMCS/fi3NwzEcn4HSixPKicXcfGRjbujVYrXiBJmk1p0zE3WpVJmv3E5nJjtMpdZI6qCz/sC8WxcOdRfynjHfxP/T1t2IMBkzSLkjSraInxL4fCgVr0pmNvMRcdB7gSIvQB5WLMNelNoKD37mdIb4yxLIuxBIiBCce9MZhvjw9vTnX92jO0pO0wITHYWjvqOl6/rY1W764CQEXH44eOjV/YOqqwZbANeSB5d6S5B7jq6BTA58DZHfAb+Ai8Am772pqUgauzwuVx3NGrvP9n4BH4YrSaALfY673Bdoa1z1phpZs/CVBJS//jl7pPvDaV96g90t7OHpvP4mIwDzQGvtK+2k4a2pbly9xoVb4IrMeJCNst/CdmCyyNVs1f0AcWcVDaseIAAAAASUVORK5CYII=',
-          tag: 'chat',
+          icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAWCAYAAAAxSueLAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8xMC8xNMmEH5sAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAACPElEQVRIiZ2VMZbTMBCGv+RtQYc5wYYTrLkADm5o8CPptltzApIbZE+woaTCOQHep15rlXTejjK5gdPRhUIjLBzFcXbe85Mljeaf0fwzGh0OB0KSpNkEmAFTIAIS2doBW6ACSqNVHTQQkFEXLEmzCFgDdwNtGGBltKouAkvSbAYUwGtZ2mMjqGUEiOWbAteerW9Gq8UgsCTNcuCHB7ICCqNVc+qwOLf2QDdGq7wXTPJTS0Q7YDY0F4FrnxutypDuWMaVAO2B6SVJN1o1Es2zLK1P6Tow59XaaLUdCtSRmYzXcr1HMnr/4dMUeJL5WweWpNkCS4SF0ao5N5czNXAjtgyQ+867yOxuCxQBD9iIF+fmnglHpj/YuqyTNIuDYEIUxNMCS/fi3NwzEcn4HSixPKicXcfGRjbujVYrXiBJmk1p0zE3WpVJmv3E5nJjtMpdZI6qCz/sC8WxcOdRfynjHfxP/T1t2IMBkzSLkjSraInxL4fCgVr0pmNvMRcdB7gSIvQB5WLMNelNoKD37mdIb4yxLIuxBIiBCce9MZhvjw9vTnX92jO0pO0wITHYWjvqOl6/rY1W764CQEXH44eOjV/YOqqwZbANeSB5d6S5B7jq6BTA58DZHfAb+Ai8Am772pqUgauzwuVx3NGrvP9n4BH4YrSaALfY673Bdoa1z1phpZs/CVBJS//jl7pPvDaV96g90t7OHpvP4mIwDzQGvtK+2k4a2pbly9xoVb4IrMeJCNst/CdmCyyNVs1f0AcWcVDaseIAAAAASUVORK5CYII=",
+          tag: "chat",
           requireInteraction: false,
         };
         new (window as any).Notification(`Balistos - ${this.props.playlist.title}`, options);
       }
     }
-    const chatBoxElement = document.getElementById('chatbox');
+    const chatBoxElement = document.getElementById("chatbox");
     if (chatBoxElement) {
       chatBoxElement.scrollTop = Number.MAX_SAFE_INTEGER;
     }
   }
-  render() {
+  public render() {
     return (
       <Box width={[1, 1, 1 / 2, 1 / 2]}>
         {this.props.users && this.props.users.length ?

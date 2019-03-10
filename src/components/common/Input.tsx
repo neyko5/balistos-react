@@ -1,7 +1,7 @@
 // @flow
 
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 const StyledInput = styled.input`
   background: #F7F9F9;
@@ -21,7 +21,7 @@ const StyledInput = styled.input`
   `}
 `;
 
-const Input = (props:Props) => (
+const Input = (props: Props) => (
   <StyledInput
     type={props.type}
     name={props.name}
@@ -32,19 +32,19 @@ const Input = (props:Props) => (
   />
 );
 
-type Props = {
-  type: string,
-  name: string,
-  onChange: (event: any) => void,
-  value?: string,
-  search?: boolean,
-  placeholder?: string,
+interface Props {
+  type: string;
+  name: string;
+  onChange: (event: any) => void;
+  value?: string;
+  search?: boolean;
+  placeholder?: string;
 }
 
 Input.defaultProps = {
   search: false,
-  value: '',
-  placeholder: '',
+  value: "",
+  placeholder: "",
 };
 
 export default Input;

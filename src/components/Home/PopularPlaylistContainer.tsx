@@ -1,14 +1,14 @@
 // @flow
 
-import React from 'react';
-import { Flex, Box } from 'grid-styled';
-import { connect } from 'react-redux';
+import { Box, Flex } from "grid-styled";
+import React from "react";
+import { connect } from "react-redux";
 
-import PopularPlaylist from './PopularPlaylist';
-import { fetchPopularPlaylists } from '../../actions';
+import { fetchPopularPlaylists } from "../../actions";
+import PopularPlaylist from "./PopularPlaylist";
 
-import { PlaylistType } from '../../types';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { PlaylistType } from "../../types";
 
 function mapStateToProps(state: any) {
   return {
@@ -22,21 +22,21 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
 });
 
-type Props = {
-  fetchPopularPlaylists: () => void,
-  playlists: Array<PlaylistType>,
+interface Props {
+  fetchPopularPlaylists: () => void;
+  playlists: PlaylistType[];
 }
 
-type State = {
+interface State {
 }
 
 class PopularPlaylistContainer extends React.Component<Props, State> {
-  componentWillMount() {
+  public componentWillMount() {
     this.props.fetchPopularPlaylists();
   }
-  render() {
+  public render() {
     return (
-      <Flex flexWrap={'wrap'}>
+      <Flex flexWrap={"wrap"}>
         <Box width={[1, 1, 1 / 2, 1 / 2]} px={2}>
           {this.props.playlists
             .filter((playlist, index) => index < this.props.playlists.length / 2)

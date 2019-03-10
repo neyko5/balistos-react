@@ -1,14 +1,14 @@
 // @flow
 
-import React, { FormEvent } from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Dispatch } from 'redux';
+import React, { FormEvent } from "react";
+import { connect } from "react-redux";
+import { Dispatch } from "redux";
+import styled from "styled-components";
 
-import { sendRegisterRequest, toggleLoginWindow, setRegisterError } from '../../actions';
-import Dropdown from './Dropdown';
-import Input from '../common/Input';
-import Button from '../common/Button';
+import { sendRegisterRequest, setRegisterError, toggleLoginWindow } from "../../actions";
+import Button from "../common/Button";
+import Input from "../common/Input";
+import Dropdown from "./Dropdown";
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   setErrorMessage: (message: string) => {
@@ -19,11 +19,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
   },
   onSubmit: (username: string, password: string) => {
     if (username.trim().length < 4) {
-      dispatch(setRegisterError('Username should be min 4 characters.'));
+      dispatch(setRegisterError("Username should be min 4 characters."));
       return;
     }
     if (password.trim().length < 6) {
-      dispatch(setRegisterError('Password should be min 6 characters.'));
+      dispatch(setRegisterError("Password should be min 6 characters."));
       return;
     }
     dispatch(sendRegisterRequest(username, password));
@@ -73,51 +73,50 @@ const Label = styled.label`
   padding-bottom: 5px;
 `;
 
-type Props = {
-  onSubmit: (arg0: string, arg1: string) => void,
-  error?: string,
-  onOpenLoginClick: () => void
+interface Props {
+  onSubmit: (arg0: string, arg1: string) => void;
+  error?: string;
+  onOpenLoginClick: () => void;
 }
 
-type State = {
-  username: string,
-  password: string,
+interface State {
+  username: string;
+  password: string;
 }
-
 
 class Register extends React.Component<Props, State> {
-  static defaultProps = {
-    error: '',
-  }
+  public static defaultProps = {
+    error: "",
+  };
 
   constructor(props: Props) {
     super(props);
     this.state = {
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleChange(event: FormEvent<HTMLFormElement>) {
-    let update: any = {};
-    let target = event.target as HTMLInputElement;
+  public handleChange(event: FormEvent<HTMLFormElement>) {
+    const update: any = {};
+    const target = event.target as HTMLInputElement;
     update[target.name] = target.value;
     this.setState(update);
   }
 
-  handleSubmit(event: any) {
+  public handleSubmit(event: any) {
     event.preventDefault();
     this.props.onSubmit(this.state.username, this.state.password);
     this.setState({
-      username: '',
-      password: '',
+      username: "",
+      password: "",
     });
   }
 
-  render() {
+  public render() {
     return (
       <Dropdown>
         <form onSubmit={this.handleSubmit}>
@@ -140,7 +139,7 @@ class Register extends React.Component<Props, State> {
               value={this.state.password}
             />
           </Label>
-          <Button green topMargin type="submit">Register</Button>
+          <Button green={true} topMargin={true} type="submit">Register</Button>
           <NoAccount>Already have an account?
             <NoAccountLink
               onClick={this.props.onOpenLoginClick}
@@ -154,7 +153,7 @@ class Register extends React.Component<Props, State> {
 }
 
 Register.defaultProps = {
-  error: '',
+  error: "",
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Register);

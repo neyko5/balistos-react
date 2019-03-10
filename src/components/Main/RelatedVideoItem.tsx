@@ -1,11 +1,11 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
+import React from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-import { addVideo, getRelatedVideos } from '../../actions';
+import { addVideo, getRelatedVideos } from "../../actions";
 
-import { YoutubeResultVideoType } from '../../types';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { YoutubeResultVideoType } from "../../types";
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
@@ -63,7 +63,6 @@ const AddButton = styled.button`
   flex-grow: 0;
   flex-shrink: 0;
 `;
-
 
 const RelatedVideoItem = (props: {
   video: YoutubeResultVideoType,

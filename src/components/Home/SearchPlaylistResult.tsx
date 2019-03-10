@@ -1,10 +1,9 @@
 // @flow
 
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { PlaylistType } from '../../types/index';
-
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
+import { PlaylistType } from "../../types/index";
 
 const PlaylistResult = styled(Link)`
   border-bottom: 1px solid #cccccc;

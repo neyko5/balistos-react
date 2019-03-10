@@ -1,11 +1,11 @@
 // @flow
 
-import React from 'react';
-import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { Box } from 'grid-styled';
-import RelatedVideoItem from './RelatedVideoItem';
-import { YoutubeResultVideoType } from '../../types/index';
+import { Box } from "grid-styled";
+import React from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
+import { YoutubeResultVideoType } from "../../types/index";
+import RelatedVideoItem from "./RelatedVideoItem";
 
 function mapStateToProps(state: any) {
   return {
@@ -46,7 +46,7 @@ const Body = styled.div`
 
 const RelatedVideos = (props: {
   id: string,
-  related: Array<YoutubeResultVideoType>,
+  related: YoutubeResultVideoType[],
 }) => (
   <Box width={[1, 1, 1 / 2, 1 / 2]}>
     <RelatedBox>
@@ -54,7 +54,7 @@ const RelatedVideos = (props: {
         <HeaderTitle>Related videos</HeaderTitle>
       </Header>
       <Body>
-        {props.related.map(video => (
+        {props.related.map((video) => (
           <RelatedVideoItem
             video={video}
             id={props.id}

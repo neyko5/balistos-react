@@ -1,16 +1,16 @@
-import React from 'react';
-import YouTube from 'react-youtube';
-import ReactSlider from 'react-slider';
-import vTime from 'video-time';
-import styled, { css } from 'styled-components';
-import { Box } from 'grid-styled';
+import { Box } from "grid-styled";
+import React from "react";
+import ReactSlider from "react-slider";
+import YouTube from "react-youtube";
+import styled, { css } from "styled-components";
+import vTime from "video-time";
 
-import { youtubeParams } from '../../settings';
-import playIcon from '../../img/play.png';
-import pauseIcon from '../../img/pause.png';
-import speakerIcon from '../../img/volume.png';
+import pauseIcon from "../../img/pause.png";
+import playIcon from "../../img/play.png";
+import speakerIcon from "../../img/volume.png";
+import { youtubeParams } from "../../settings";
 
-import { VideoType } from '../../types';
+import { VideoType } from "../../types";
 
 const MainWindow = styled.div`
   background: #ffffff;
@@ -75,8 +75,8 @@ const Bar = styled.div`
   max-width: 100%;
 `;
 
-type BarProps = {
-  width?: number
+interface BarProps {
+  width?: number;
 }
 
 const Toolbar = styled.div`
@@ -106,7 +106,7 @@ const ControlButton = styled.button`
   `}
 `;
 
-type ControlButtonProps = {
+interface ControlButtonProps {
   pause?: boolean;
   play?: boolean;
 }
@@ -128,7 +128,7 @@ const Time = styled.div`
   `}
 `;
 
-type TimeProps = {
+interface TimeProps {
   total?: boolean;
 }
 
@@ -186,28 +186,29 @@ const PlaylistUsername = styled.span`
   font-style: italic;
 `;
 
-type Props = {
-  finishVideo: (videoId: number) => void,
-  deleteVideo: (videoId: number) => void,
-  current: VideoType,
-  startVideo: (videoId: number) => void,
-  getRelatedVideos: (youtubeVideoId: string) => void,
-  playlistTitle: string,
-  playlistUsername: string
+interface Props {
+  finishVideo: (videoId: number) => void;
+  deleteVideo: (videoId: number) => void;
+  current: VideoType | undefined;
+  startVideo: (videoId: number) => void;
+  getRelatedVideos: (youtubeVideoId: string) => void;
+  playlistTitle: string;
+  playlistUsername: string;
 
 }
 
-type State = {
-   elapsed: number,
-   total: number,
-   volume: number,
-   previousVolume: number,
-   paused: boolean,
-   player: any
+interface State {
+   elapsed: number;
+   total: number;
+   volume: number;
+   previousVolume: number;
+   paused: boolean;
+   player: any;
 }
-
 
 class VideoPlayer extends React.Component<Props, State> {
+
+  public timeout: any;
   constructor(props: Props) {
     super(props);
     this.state = {
@@ -229,7 +230,7 @@ class VideoPlayer extends React.Component<Props, State> {
     this.deleteCurrentVideo = this.deleteCurrentVideo.bind(this);
   }
 
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     if (prevProps.current && this.props.current &&
       prevProps.current.video.youtubeId !== this.props.current.video.youtubeId) {
       if (this.state.player) {
@@ -251,25 +252,25 @@ class VideoPlayer extends React.Component<Props, State> {
       const options = {
         body: this.props.current.video.title,
         icon: `https://img.youtube.com/vi/${this.props.current.video.youtubeId}/0.jpg`,
-        tag: 'video',
+        tag: "video",
         requireInteraction: false,
       };
       new (window as any).Notification(`Balistos - ${this.props.playlistTitle}`, options);
     }
   }
 
-  componentWillUnmount() {
+  public componentWillUnmount() {
     clearTimeout(this.timeout);
   }
 
-  onReady(event: Event) {
+  public onReady(event: Event) {
     this.setState({
       player: event.target,
     });
     setTimeout(this.updateElapsed, 500);
   }
 
-  onSpeakerClick(): void {
+  public onSpeakerClick(): void {
     if (this.state.volume === 0) {
       this.setState({
         volume: this.state.previousVolume,
@@ -285,42 +286,46 @@ class VideoPlayer extends React.Component<Props, State> {
     }
   }
 
-  onSliderChange(value: any) {
+  public onSliderChange(value: any) {
     this.setState({
       volume: value,
     });
     this.state.player.setVolume(value);
   }
 
-  resumeVideo() {
+  public resumeVideo() {
     this.setState({
       paused: false,
     });
   }
 
-  finishCurrentVideo() {
-    this.props.finishVideo(this.props.current.id);
+  public finishCurrentVideo() {
+    if (this.props.current) {
+      this.props.finishVideo(this.props.current.id);
+    }
   }
 
-  deleteCurrentVideo() {
-    this.props.deleteVideo(this.props.current.id);
+  public deleteCurrentVideo() {
+    if (this.props.current) {
+      this.props.deleteVideo(this.props.current.id);
+    }
   }
 
-  play() {
+  public play() {
     this.setState({
       paused: false,
     });
     this.state.player.playVideo();
   }
 
-  pause() {
+  public pause() {
     this.setState({
       paused: true,
     });
     this.state.player.pauseVideo();
   }
 
-  updateElapsed() {
+  public updateElapsed() {
     this.setState({
       elapsed: this.state.player.getCurrentTime(),
       total: this.state.player.getDuration(),
@@ -328,9 +333,7 @@ class VideoPlayer extends React.Component<Props, State> {
     this.timeout = setTimeout(this.updateElapsed, 500);
   }
 
-  timeout: any;
-
-  render() {
+  public render() {
     return (
       <Box width={[1, 1, 1 / 2, 1 / 2]}>
         <MainWindow>
@@ -359,12 +362,12 @@ class VideoPlayer extends React.Component<Props, State> {
             <Toolbar>
               <Controls>
                 {this.state.paused ?
-                  <ControlButton play onClick={this.play} /> :
-                  <ControlButton pause onClick={this.pause} />}
+                  <ControlButton play={true} onClick={this.play} /> :
+                  <ControlButton pause={true} onClick={this.pause} />}
               </Controls>
               <Timer>
                 <Time>{vTime(this.state.elapsed)}</Time>
-                <Time total> / {vTime(this.state.total)} </Time>
+                <Time total={true}> / {vTime(this.state.total)} </Time>
               </Timer>
               <Volume>
                 <Speaker className="speaker" onClick={this.onSpeakerClick} />

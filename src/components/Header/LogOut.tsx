@@ -1,15 +1,15 @@
 // @flow
 
-import React from 'react';
+import React from "react";
 
-import Dropdown from './Dropdown';
-import Button from '../common/Button';
+import Button from "../common/Button";
+import Dropdown from "./Dropdown";
 
 const LogOut = (props: {
-                  onLogoutClick: () => void
+                  onLogoutClick: () => void,
                 }) => (
-                  <Dropdown small>
-                    <Button data-cy="log-out" green onClick={props.onLogoutClick}>Log Out</Button>
+                  <Dropdown small={true}>
+                    <Button data-cy="log-out" green={true} onClick={props.onLogoutClick}>Log Out</Button>
                   </Dropdown>
 );
 

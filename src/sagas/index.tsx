@@ -1,22 +1,22 @@
 import { put, takeEvery } from 'redux-saga/effects';
-import * as actionTypes from '../constants/actionTypes';
+import * as actionTypes from "../constants/actionTypes";
 
-import axios from 'axios';
-import { API_INDEX } from '../settings';
+import axios from "axios";
+import { API_INDEX, YOUTUBE_API_KEY } from "../settings";
 
 axios.defaults.baseURL = API_INDEX;
 
 axios.interceptors.request.use((config) => {
   const newConfig = config;
-  if (localStorage.getItem('token')) {
-    newConfig.headers.Authorization = `Bearer ${localStorage.getItem('token')}`;
+  if (localStorage.getItem("token")) {
+    newConfig.headers.Authorization = `Bearer ${localStorage.getItem("token")}`;
   }
   return newConfig;
 });
 
 export function* sendLoginRequest(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `{
         login(username: "${action.username}", password: "${action.password}") {
           success,
@@ -27,6 +27,9 @@ export function* sendLoginRequest(action: any) {
       }`,
     });
     if (response.data.data.login && response.data.data.login.success) {
+      localStorage.setItem("token", action.response.data.data.login.token);
+      localStorage.setItem("username", action.username);
+      localStorage.setItem("userId", response.data.data.login.userId);
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
@@ -34,22 +37,22 @@ export function* sendLoginRequest(action: any) {
         userId: response.data.data.login.userId,
       });
     } else {
-      yield put({ 
-        type: actionTypes.SET_LOGIN_ERROR, 
-        message: response.data.errors[0].message 
+      yield put({
+        type: actionTypes.SET_LOGIN_ERROR,
+        message: response.data.errors[0].message,
       });
     }
   } catch (error) {
-    yield put({ 
-      type: actionTypes.SET_LOGIN_ERROR, 
-      message: error.message
+    yield put({
+      type: actionTypes.SET_LOGIN_ERROR,
+      message: error.message,
     });
   }
 }
 
 export function* sendRegisterRequest(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `
         mutation {
           register(username: "${action.username}", password: "${action.password}") {
@@ -61,6 +64,9 @@ export function* sendRegisterRequest(action: any) {
         }`,
     });
     if (response.data.data.register && response.data.data.register.success) {
+      localStorage.setItem("token", action.response.data.data.register.token);
+      localStorage.setItem("username", action.username);
+      localStorage.setItem("userId", response.data.data.register.userId);
       yield put({
         type: actionTypes.POST_LOGIN,
         username: action.username,
@@ -70,20 +76,20 @@ export function* sendRegisterRequest(action: any) {
     } else {
       yield put({
         type: actionTypes.SET_REGISTER_ERROR,
-        message: response.data.errors[0].message
+        message: response.data.errors[0].message,
       });
     }
   } catch (error) {
-    yield put({ 
-      type: actionTypes.SET_REGISTER_ERROR, 
-      message: error.message 
+    yield put({
+      type: actionTypes.SET_REGISTER_ERROR,
+      message: error.message,
     });
   }
 }
 
 export function* verifyToken() {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query:
         `{
             verifyToken {
@@ -103,7 +109,7 @@ export function* verifyToken() {
 
 export function* fetchPopularPlaylists() {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `{
         getPlaylists {
           id,
@@ -125,7 +131,7 @@ export function* fetchPopularPlaylists() {
 
 export function* searchPlaylists(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `{
         searchPlaylist(query: "${action.query}") {
           id,
@@ -148,7 +154,7 @@ export function* searchPlaylists(action: any) {
 
 export function* createPlaylist(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `
         mutation{
           createPlaylist(title: "${action.title}", description: "${action.description}") {
@@ -170,7 +176,7 @@ export function* createPlaylist(action: any) {
 
 export function* fetchPlaylist(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query: `{
         getPlaylist(id: ${action.playlistId}) {
           id,
@@ -221,7 +227,7 @@ export function* fetchPlaylist(action: any) {
 
 export function* sendMessage(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
       `mutation{
           createChat(message: "${action.message}", playlistId: "${action.playlistId}") {
@@ -238,7 +244,7 @@ export function* sendMessage(action: any) {
 
 export function* likeVideo(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
         `mutation{
             likeVideo(videoId: "${action.videoId}", value: ${action.value}) {
@@ -255,7 +261,7 @@ export function* likeVideo(action: any) {
 
 export function* finishVideo(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
         `mutation{
             finishVideo(videoId: "${action.videoId}") {
@@ -271,7 +277,7 @@ export function* finishVideo(action: any) {
 
 export function* startVideo(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
         `mutation{
             startVideo(videoId: "${action.videoId}") {
@@ -286,7 +292,7 @@ export function* startVideo(action: any) {
 
 export function* deleteVideo(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
         `mutation{
             deleteVideo(videoId: "${action.videoId}") {
@@ -303,7 +309,7 @@ export function* deleteVideo(action: any) {
 
 export function* sendHeartbeat(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query:
         `mutation{
             heartbeat(playlistId: "${action.playlist}", username: "${action.username}") {
@@ -323,7 +329,7 @@ export function* sendHeartbeat(action: any) {
 
 export function* getActiveUsers(action: any) {
   try {
-    const response = yield axios.post('/graphql', {
+    const response = yield axios.post("/graphql", {
       query:
         `{
             getPlaylistUsers(playlistId: "${action.playlist}") {
@@ -341,7 +347,7 @@ export function* getActiveUsers(action: any) {
 
 export function* addVideo(action: any) {
   try {
-    yield axios.post('/graphql', {
+    yield axios.post("/graphql", {
       query:
         `mutation{
             addVideo(title: "${action.title}", playlistId: "${action.playlistId}", autoAdded: ${!!action.autoAdded}, youtubeId: "${action.youtubeId}") {
@@ -350,7 +356,7 @@ export function* addVideo(action: any) {
       }`,
     });
     yield put({ type: actionTypes.SET_YOUTUBE_RESULTS, results: [] });
-    yield put({ type: actionTypes.SET_YOUTUBE_SEARCH_QUERY, query: '' });
+    yield put({ type: actionTypes.SET_YOUTUBE_SEARCH_QUERY, query: "" });
   } catch (error) {
     if (error.response && (error.response.status === 401 || error.response.status === 403)) {
       yield put({ type: actionTypes.EXPIRE_SESSION });
@@ -362,13 +368,13 @@ export function* searchYoutube(action: any) {
   yield put({ type: actionTypes.SET_YOUTUBE_SEARCH_QUERY, query: action.query });
   try {
     const response = yield axios.create({
-      baseURL: 'https://www.googleapis.com',
-    }).get('/youtube/v3/search', {
+      baseURL: "https://www.googleapis.com",
+    }).get("/youtube/v3/search", {
       params: {
         q: action.query,
-        key: 'AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0',
-        part: 'snippet',
-        type: 'video',
+        key: YOUTUBE_API_KEY,
+        part: "snippet",
+        type: "video",
         videoSyndicated: true,
         videoEmbeddable: true,
       },
@@ -384,13 +390,13 @@ export function* searchYoutube(action: any) {
 export function* getRelatedVideos(action: any) {
   try {
     const response = yield axios.create({
-      baseURL: 'https://www.googleapis.com',
-    }).get('/youtube/v3/search', {
+      baseURL: "https://www.googleapis.com",
+    }).get("/youtube/v3/search", {
       params: {
         relatedToVideoId: action.videoId,
-        key: 'AIzaSyA0SUe7isd62Q2wNqHMAG91VFQEANrl7a0',
-        part: 'snippet',
-        type: 'video',
+        key: YOUTUBE_API_KEY,
+        part: "snippet",
+        type: "video",
         maxResults: 10,
         videoSyndicated: true,
         videoEmbeddable: true,
@@ -408,7 +414,7 @@ export function* expireSession() {
   localStorage.clear();
   yield put({ type: actionTypes.LOG_OUT });
   yield put({ type: actionTypes.TOGGLE_LOGIN_WINDOW });
-  yield put({ type: actionTypes.SET_LOGIN_ERROR, message: 'Your session has expired.' });
+  yield put({ type: actionTypes.SET_LOGIN_ERROR, message: "Your session has expired." });
 }
 
 export default function* rootSaga() {

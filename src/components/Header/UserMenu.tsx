@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
-import userIcon from '../../img/user.png';
-import arrowDownIcon from '../../img/dropdown.png';
+import arrowDownIcon from "../../img/dropdown.png";
+import userIcon from "../../img/user.png";
 
 const Menu = styled.div`
   position: relative;
@@ -37,9 +37,9 @@ const MenuButton = styled.button`
 }
 `;
 
-type MenuButtonProps = {
-  borderLeft?: boolean,
-  onClick?: () => void
+interface MenuButtonProps {
+  borderLeft?: boolean;
+  onClick?: () => void;
 }
 
 const User = styled.button`
@@ -74,9 +74,13 @@ const ArrowDown = styled.div`
   margin-left: 8px;
 `;
 
-const UserMenu = (props: Props) => (
+const UserMenu = (props: Props) => {
+  function stopPropagation(event: any) {
+    event.stopPropagation();
+  }
+  return (
   props.loggedIn ?
-    <Menu onClick={event => event.stopPropagation()}>
+    (<Menu onClick={stopPropagation}>
       <MenuButton
         onClick={props.onOpenCreatePlaylistClick}
       >New playlist
@@ -86,11 +90,11 @@ const UserMenu = (props: Props) => (
         <Username id="username">{props.username}</Username>
         <ArrowDown />
       </User>
-    </Menu> :
-    <Menu onClick={event => event.stopPropagation()}>
+    </Menu>) :
+    (<Menu onClick={stopPropagation}>
       <MenuButton
         id="log-in-button"
-        borderLeft
+        borderLeft={true}
         onClick={props.onOpenLoginClick}
       >Log in
       </MenuButton>
@@ -99,17 +103,17 @@ const UserMenu = (props: Props) => (
         onClick={props.onOpenRegisterClick}
       >Register
       </MenuButton>
-    </Menu>
+    </Menu>)
 );
-
-type Props = {
-  loggedIn: boolean,
-  borderLeft?: boolean,
-  onOpenLoginClick?: () => void,
-  onOpenRegisterClick?: () => void,
-  onOpenLogoutClick?: () => void,
-  username?: string,
-  onOpenCreatePlaylistClick?: () => void,
+};
+interface Props {
+  loggedIn: boolean;
+  borderLeft?: boolean;
+  onOpenLoginClick?: () => void;
+  onOpenRegisterClick?: () => void;
+  onOpenLogoutClick?: () => void;
+  username?: string;
+  onOpenCreatePlaylistClick?: () => void;
 }
 
 UserMenu.defaultProps = {
@@ -119,6 +123,5 @@ UserMenu.defaultProps = {
   username: undefined,
   onOpenCreatePlaylistClick: undefined,
 };
-
 
 export default UserMenu;

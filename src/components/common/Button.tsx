@@ -1,5 +1,5 @@
-import React from 'react';
-import styled, { css } from 'styled-components';
+import React from "react";
+import styled, { css } from "styled-components";
 
 const StyledButton = styled.button`
     height: 38px;
@@ -38,14 +38,14 @@ const Button = (props: Props) => (
   </StyledButton>
 );
 
-type Props = {
-    children: any,
-    green: boolean,
-    topMargin?: boolean,
-    right?: boolean,
-    type?: string,
-    id?: string,
-    onClick?: () => void
+interface Props {
+    children: any;
+    green: boolean;
+    topMargin?: boolean;
+    right?: boolean;
+    type?: string;
+    id?: string;
+    onClick?: () => void;
 }
 
 export default Button;

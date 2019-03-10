@@ -1,8 +1,8 @@
 // @flow
 
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
+import styled from "styled-components";
 
 const Playlist = styled(Link)`
   background: #ddd;
@@ -50,7 +50,7 @@ const PopularPlaylist =
       title: string,
       id: number,
       username: string,
-    }
+    },
   }) => (
     <Playlist to={`/playlist/${props.data.id}`}>
       <Place>{props.index + 1}</Place>

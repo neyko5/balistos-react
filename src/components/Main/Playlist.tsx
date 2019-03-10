@@ -1,29 +1,29 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import io from 'socket.io-client';
-import styled from 'styled-components';
-import { Flex } from 'grid-styled';
+import { Flex } from "grid-styled";
+import React from "react";
+import { connect } from "react-redux";
+import io from "socket.io-client";
+import styled from "styled-components";
 
-import VideoListContainer from './VideoListContainer';
-import VideoPlayer from './VideoPlayer';
-import ChatContainer from './ChatContainer';
-import RelatedVideos from './RelatedVideos';
-import Container from '../common/Container';
 import {
-  fetchPlaylist,
-  sendHeartbeat,
-  finishVideo,
-  deleteVideo,
-  getActiveUsers,
-  startVideo,
-  getRelatedVideos,
-  closeAllWindows,
   addVideo,
-} from '../../actions';
+  closeAllWindows,
+  deleteVideo,
+  fetchPlaylist,
+  finishVideo,
+  getActiveUsers,
+  getRelatedVideos,
+  sendHeartbeat,
+  startVideo,
+} from "../../actions";
+import Container from "../common/Container";
+import ChatContainer from "./ChatContainer";
+import RelatedVideos from "./RelatedVideos";
+import VideoListContainer from "./VideoListContainer";
+import VideoPlayer from "./VideoPlayer";
 
-import { API_INDEX } from '../../settings';
-import { YoutubeResultVideoType, PlaylistType, Action } from '../../types/index';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { API_INDEX } from "../../settings";
+import { Action, PlaylistType, YoutubeResultVideoType } from "../../types/index";
 
 const socket = io(API_INDEX);
 
@@ -78,24 +78,24 @@ const Main = styled.div`
   }
 `;
 
-type Props = {
-  socketAction: (action: Action) => void,
-  addVideo: (youtubeId: string, title: string, playlistId: number) => void,
-  fetchVideos: (playlistId: string) => void,
-  deleteVideo: (videoId: number) => void,
-  finishVideo: (videoId: number) => void,
-  startVideo: (videoId: number) => void,
-  heartbeat: (username: string, playlist: string) => void,
-  getActiveUsers: (playlist: string) => void,
-  getRelatedVideos: (youtubeVideoId: string) => void,
-  closeAllWindows: () => void,
-  username: string,
-  playlist: PlaylistType,
-  match: any,
-  related: YoutubeResultVideoType[],
+interface Props {
+  socketAction: (action: Action) => void;
+  addVideo: (youtubeId: string, title: string, playlistId: number) => void;
+  fetchVideos: (playlistId: string) => void;
+  deleteVideo: (videoId: number) => void;
+  finishVideo: (videoId: number) => void;
+  startVideo: (videoId: number) => void;
+  heartbeat: (username: string, playlist: string) => void;
+  getActiveUsers: (playlist: string) => void;
+  getRelatedVideos: (youtubeVideoId: string) => void;
+  closeAllWindows: () => void;
+  username: string;
+  playlist: PlaylistType;
+  match: any;
+  related: YoutubeResultVideoType[];
 }
 
-type State = {}
+interface State {}
 
 class Playlist extends React.Component<Props, State> {
   constructor(props: Props) {
@@ -103,16 +103,16 @@ class Playlist extends React.Component<Props, State> {
     this.heartbeat = this.heartbeat.bind(this);
   }
 
-  componentDidMount() {
+  public componentDidMount() {
     this.initPlaylist();
-    socket.on('action', (action: Action) => {
+    socket.on("action", (action: Action) => {
       this.props.socketAction(action);
     });
     (window as any).Notification.requestPermission();
   }
-  componentDidUpdate(prevProps: Props) {
+  public componentDidUpdate(prevProps: Props) {
     if (this.props.match.params.playlistId !== prevProps.match.params.playlistId) {
-      socket.emit('leave', `playlist_${prevProps.match.params.playlistId}`);
+      socket.emit("leave", `playlist_${prevProps.match.params.playlistId}`);
       this.initPlaylist();
     }
     if (prevProps.playlist.current && !this.props.playlist.current && this.props.related.length) {
@@ -120,17 +120,17 @@ class Playlist extends React.Component<Props, State> {
       this.props.addVideo(related.id.videoId, related.snippet.title, this.props.playlist.id);
     }
   }
-  componentWillUnmount() {
-    socket.emit('leave', `playlist_${this.props.match.params.playlistId}`);
+  public componentWillUnmount() {
+    socket.emit("leave", `playlist_${this.props.match.params.playlistId}`);
   }
 
-  initPlaylist() {
+  public initPlaylist() {
     this.props.fetchVideos(this.props.match.params.playlistId);
-    socket.emit('join', `playlist_${this.props.match.params.playlistId}`);
+    socket.emit("join", `playlist_${this.props.match.params.playlistId}`);
     this.heartbeat();
   }
 
-  heartbeat() {
+  public heartbeat() {
     if (this.props.username) {
       this.props.heartbeat(this.props.username, this.props.match.params.playlistId);
     } else {
@@ -138,15 +138,15 @@ class Playlist extends React.Component<Props, State> {
     }
     setTimeout(this.heartbeat, 60000);
   }
-  render() {
+  public render() {
     return (
       <Main onClick={this.props.closeAllWindows}>
         <Container>
-          <Flex flexWrap={'wrap'}>
+          <Flex flexWrap={"wrap"}>
             <VideoPlayer
               playlistTitle={this.props.playlist.title}
               playlistUsername={this.props.playlist.username}
-              current={this.props.playlist.current}
+              current={this.props.playlist.videos.length ? this.props.playlist.videos[0] : undefined}
               getRelatedVideos={this.props.getRelatedVideos}
               finishVideo={this.props.finishVideo}
               startVideo={this.props.startVideo}

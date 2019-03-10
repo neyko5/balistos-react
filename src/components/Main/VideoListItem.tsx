@@ -1,14 +1,14 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import styled, { css } from 'styled-components';
+import React from "react";
+import { connect } from "react-redux";
+import styled, { css } from "styled-components";
 
-import { likeVideo, deleteVideo } from '../../actions';
-import ThumbsUpSVG from '../../img/thumbs_up.svg';
-import ThumbsDownSVG from '../../img/thumbs_down.svg';
-import deleteIcon from '../../img/del.png';
+import { deleteVideo, likeVideo } from "../../actions";
+import deleteIcon from "../../img/del.png";
+import ThumbsDownSVG from "../../img/thumbs_down.svg";
+import ThumbsUpSVG from "../../img/thumbs_up.svg";
 
-import { VideoType, LikeType } from '../../types';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { LikeType, VideoType } from "../../types";
 
 const mapStateToProps = (state: any, ownProps: any) => ({
   ...ownProps,
@@ -40,7 +40,7 @@ const PlaylistItem = styled.div`
   `}
 `;
 
-type PlaylistItemProps = {
+interface PlaylistItemProps {
   next?: boolean;
   first?: boolean;
 }
@@ -69,7 +69,7 @@ const VoteButton = styled.button`
   `}
 `;
 
-type VoteButtonProps = {
+interface VoteButtonProps {
   upActive?: boolean;
   downActive?: boolean;
 }
@@ -90,7 +90,7 @@ const Number = styled.div`
   `}
 `;
 
-type NumberProps = {
+interface NumberProps {
   full?: boolean;
 }
 
@@ -171,15 +171,15 @@ const VideoListItem = (props: {
   const likeCount = props.video.likes
     .reduce((total: number, like: LikeType) => total + like.value, 0);
 
-  let playlistItemStatus = '';
+  let playlistItemStatus = "";
   let playlistItemFirst = false;
   let playlistItemNext = false;
   if (props.index === 0) {
     playlistItemFirst = true;
-    playlistItemStatus = 'Now playing';
+    playlistItemStatus = "Now playing";
   } else if (props.index === 1) {
     playlistItemNext = true;
-    playlistItemStatus = 'Next';
+    playlistItemStatus = "Next";
   }
 
   return (
@@ -189,8 +189,8 @@ const VideoListItem = (props: {
           <VoteButton
             upActive={upLike}
             onClick={() => props.likeVideo(upLike ? 0 : 1)}
-            title={props.video.likes.filter(like => like.value === 1)
-              .map(like => like.user.username).join(', ')}
+            title={props.video.likes.filter((like) => like.value === 1)
+              .map((like) => like.user.username).join(", ")}
           >
             <SvgIcon>
               <use xlinkHref={`${ThumbsUpSVG}#thumbs_up`} />
@@ -200,8 +200,8 @@ const VideoListItem = (props: {
           <VoteButton
             downActive={upLike}
             onClick={() => props.likeVideo(downLike ? 0 : -1)}
-            title={props.video.likes.filter(like => like.value === -1)
-              .map(like => like.user.username).join(', ')}
+            title={props.video.likes.filter((like) => like.value === -1)
+              .map((like) => like.user.username).join(", ")}
           >
             <SvgIcon>
               <use xlinkHref={`${ThumbsDownSVG}#thumbs_down`} />
@@ -209,7 +209,7 @@ const VideoListItem = (props: {
           </VoteButton>
         </Vote> :
         <Vote>
-          <Number full>{likeCount}</Number>
+          <Number full={true}>{likeCount}</Number>
         </Vote>}
       <ImgWrapper>
         <Status>{playlistItemStatus}</Status>
@@ -225,7 +225,7 @@ const VideoListItem = (props: {
         >{props.video.video.title}
         </Title>
         <AddedBy>
-          added by <Black>{props.video.autoAdded ? 'Balistos' : props.video.user.username}</Black>
+          added by <Black>{props.video.autoAdded ? "Balistos" : props.video.user.username}</Black>
         </AddedBy>
       </Info>
       {props.userId ?

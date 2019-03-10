@@ -1,13 +1,13 @@
 // @flow
 
-import React, { FormEvent, ChangeEvent } from 'react';
-import styled from 'styled-components';
-import { connect } from 'react-redux';
+import React, { ChangeEvent, FormEvent } from "react";
+import { connect } from "react-redux";
+import styled from "styled-components";
 
-import { searchYoutube, addVideo, updateSearchIndex, clearYoutubeResults, resetYoutubeSearchQuery } from '../../actions';
-import VideoResult from './VideoResult';
-import { YoutubeResultVideoType } from '../../types/index';
-import { Dispatch } from 'redux';
+import { Dispatch } from "redux";
+import { addVideo, clearYoutubeResults, resetYoutubeSearchQuery, searchYoutube, updateSearchIndex } from "../../actions";
+import { YoutubeResultVideoType } from "../../types/index";
+import VideoResult from "./VideoResult";
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   searchYoutube: (e: FormEvent<HTMLFormElement>) => {
@@ -67,43 +67,43 @@ const SearchResults = styled.div`
   text-align: left;
 `;
 
-type Props = {
-  query: string,
-  addVideo: (id: string, title: string, playlistId: string) => void,
-  searchYoutube: (event: ChangeEvent<HTMLInputElement>) => void,
-  updateSearchIndex: (index: number) => void,
-  resetYoutubeSearchQuery: () => void,
-  clearYoutubeResults: () => void,
-  index: number,
-  id: string,
-  results: Array<YoutubeResultVideoType>,
+interface Props {
+  query: string;
+  addVideo: (id: string, title: string, playlistId: string) => void;
+  searchYoutube: (event: ChangeEvent<HTMLInputElement>) => void;
+  updateSearchIndex: (index: number) => void;
+  resetYoutubeSearchQuery: () => void;
+  clearYoutubeResults: () => void;
+  index: number;
+  id: string;
+  results: YoutubeResultVideoType[];
 }
 
-type State = {}
+interface State {}
 
 class SearchVideo extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.handleKeyEvent = this.handleKeyEvent.bind(this);
   }
-  componentDidMount() {
-    document.addEventListener('keyup', this.handleKeyEvent, false);
+  public componentDidMount() {
+    document.addEventListener("keyup", this.handleKeyEvent, false);
   }
-  componentWillUnmount() {
-    document.removeEventListener('keyup', this.handleKeyEvent, false);
+  public componentWillUnmount() {
+    document.removeEventListener("keyup", this.handleKeyEvent, false);
   }
 
-  handleKeyEvent(event: KeyboardEvent) {
-    let key = event.key;
+  public handleKeyEvent(event: KeyboardEvent) {
+    const key = event.key;
     let index;
     switch (key) {
-      case 'ArrowUp':
+      case "ArrowUp":
         this.props.updateSearchIndex(-1);
         break;
-      case 'ArrowDown':
+      case "ArrowDown":
         this.props.updateSearchIndex(1);
         break;
-      case 'Enter':
+      case "Enter":
         index = this.props.index < 0 ? ((5 + this.props.index) % 5) : this.props.index % 5;
         if (this.props.results[index]) {
           this.props.addVideo(
@@ -112,7 +112,7 @@ class SearchVideo extends React.Component<Props, State> {
           );
         }
         break;
-      case 'Escape':
+      case "Escape":
         this.props.clearYoutubeResults();
         this.props.resetYoutubeSearchQuery();
         break;
@@ -120,14 +120,14 @@ class SearchVideo extends React.Component<Props, State> {
         break;
     }
   }
-  render() {
+  public render() {
     return (
       <Search>
         <SearchInput
           type="text"
           placeholder="Search for YouTube video and add to playlist"
           onChange={this.props.searchYoutube}
-          value={this.props.query || ''}
+          value={this.props.query || ""}
           autoComplete="off"
         />
         {this.props.results && this.props.query ?

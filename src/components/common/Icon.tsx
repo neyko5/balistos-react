@@ -1,10 +1,10 @@
 // @flow
 
-import React from 'react';
-import styled, { css } from 'styled-components';
-import chatIcon from '../../img/chat.png';
-import noteIcon from '../../img/note.png';
-import messageIcon from '../../img/message.png';
+import React from "react";
+import styled, { css } from "styled-components";
+import chatIcon from "../../img/chat.png";
+import messageIcon from "../../img/message.png";
+import noteIcon from "../../img/note.png";
 
 const StyledIcon = styled.i`
     width: 26px;
@@ -31,10 +31,10 @@ const Icon = (props: Props) => (
   <StyledIcon {...props} />
 );
 
-type Props = {
-    message?: boolean,
-    note?: boolean,
-    chat?: boolean
+interface Props {
+    message?: boolean;
+    note?: boolean;
+    chat?: boolean;
 }
 
 export default Icon;

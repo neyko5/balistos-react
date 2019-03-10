@@ -1,22 +1,23 @@
-import * as actionTypes from '../constants/actionTypes';
-import { 
-  Action, 
-  CreatePlaylistAction, 
-  SendRegisterRequestAction, 
-  SendLoginRequestAction, 
-  SetErrorMessageAction, 
-  SearchAction, 
-  FetchPlaylistAction, 
-  AddVideoAction, 
-  SendHeartbeatAction, 
-  GetActiveUsersAction, 
-  UpdateSearchIndexAction, 
-  ClearYoutubeResultsAction, 
-  VideoAction, 
-  LikeVideoAction, 
-  SendMessageAction, 
-  YoutubeVideoAction
-} from '../types';
+import * as actionTypes from "../constants/actionTypes";
+import {
+  Action,
+  AddVideoAction,
+  ClearYoutubeResultsAction,
+  CreatePlaylistAction,
+  FetchPlaylistAction,
+  GetActiveUsersAction,
+  LikeVideoAction,
+  SearchAction,
+  SendHeartbeatAction,
+  SendLoginRequestAction,
+  SendMessageAction,
+  SendRegisterRequestAction,
+  SetAuthDataFromStorage,
+  SetErrorMessageAction,
+  UpdateSearchIndexAction,
+  VideoAction,
+  YoutubeVideoAction,
+} from "../types";
 
 export function createPlaylist(title: string, description: string): CreatePlaylistAction {
   return {
@@ -52,6 +53,16 @@ export function setRegisterError(message: string): SetErrorMessageAction {
 export function verifyToken(): Action {
   return {
     type: actionTypes.VERIFY_TOKEN,
+  };
+}
+
+export function setAuthFromStorage(): SetAuthDataFromStorage {
+  return {
+    type: actionTypes.AUTH_SET_FROM_STORAGE,
+    token: localStorage.getItem("token") || "",
+    username: localStorage.getItem("username") || "",
+    loggedIn: !!localStorage.getItem("token"),
+    userId: parseInt(localStorage.getItem("userId") || "", 10) || 0,
   };
 }
 
@@ -123,7 +134,7 @@ export function clearYoutubeResults(): ClearYoutubeResultsAction {
 export function resetYoutubeSearchQuery(): SearchAction {
   return {
     type: actionTypes.SET_YOUTUBE_SEARCH_QUERY,
-    query: '',
+    query: "",
   };
 }
 
@@ -169,7 +180,6 @@ export function startVideo(videoId: number): VideoAction {
     videoId,
   };
 }
-
 
 export function searchPlaylists(query: string): SearchAction {
   return {
