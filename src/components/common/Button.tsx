@@ -12,6 +12,7 @@ const StyledButton = styled.button`
     border-radius: 5px;
     margin-bottom: 2px;
     margin-right: 2px;
+    outline: none;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;

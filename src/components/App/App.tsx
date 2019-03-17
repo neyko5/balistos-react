@@ -152,7 +152,7 @@ const App = (props: {
 }) => {
   useEffect(() => {
     props.setAuthFromStorage();
-  });
+  }, []);
   return (
   <BrowserRouter>
     <FullHeight onClick={props.clickOutside}>
