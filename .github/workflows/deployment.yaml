@@ -1,0 +1,45 @@
+name: Deployment Workflow
+on:
+    push:
+        branches:
+            - master
+
+jobs:
+    deploy:
+        runs-on: ubuntu-latest
+        env:
+            gcp-project: balistos
+        steps:
+            - name: echo branch ref
+              run: echo ${{ env.GITHUB_BASE_REF }}
+            - name: setup node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: 10.13
+            - name: install yarn
+              run: npm install -g yarn
+            - name: configure gcloud
+              uses: GoogleCloudPlatform/github-actions/setup-gcloud@master
+              with:
+                  version: '275.0.0'
+                  service_account_email: ${{ secrets.GCP_SA_EMAIL }}
+                  service_account_key: ${{ secrets.GCP_SA_KEY }}
+            - name: checkout
+              uses: actions/checkout@v2
+            - name: install dependencies
+              run: yarn install
+            - name: set GCP project
+              run: gcloud config set project ${{ env.gcp-project }}
+
+            - name: 'deploy to firebase'
+              uses: w9jds/firebase-action@master
+              with:
+                  args: deploy -P balistos -f
+              env:
+                  GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+                  REACT_APP_API_KEY: ${{ secrets.REACT_APP_API_KEY }}
+                  REACT_APP_PROJECT_ID: ${{ secrets.REACT_APP_PROJECT_ID }}
+                  REACT_APP_APPID: ${{ secrets.REACT_APP_APPID }}
+                  REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
+                  REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
+                  REACT_APP_YOUTUBE_API_KEY: ${{ secrets.REACT_APP_YOUTUBE_API_KEY }}

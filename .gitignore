@@ -34,3 +34,7 @@ build
 
 # cypress e2e test videos
 cypress/videos
+
+.firebase
+
+.env

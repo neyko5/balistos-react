@@ -1,41 +1,48 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { applyMiddleware, createStore } from "redux";
-import { composeWithDevTools } from "redux-devtools-extension";
-import createSagaMiddleware from "redux-saga";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import {
+    firebaseReducer,
+    ReactReduxFirebaseProvider,
+} from 'react-redux-firebase';
+import { combineReducers, compose, createStore } from 'redux';
+import { createFirestoreInstance, firestoreReducer } from 'redux-firestore';
+import App from './components/App/App';
+import { firebase } from './config/firebase';
 
-import App from "./components/App/App";
-import reducer from "./reducers";
-import rootSaga from "./sagas";
-
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(
-  reducer,
-  composeWithDevTools(applyMiddleware(sagaMiddleware)),
-);
-if (module.hot) {
-  module.hot.accept("./reducers", () => {
-    store.replaceReducer(reducer);
-  });
+declare global {
+    interface Window {
+        __REDUX_DEVTOOLS_EXTENSION__?: typeof compose;
+    }
 }
 
-sagaMiddleware.run(rootSaga);
+const rrfConfig = {
+    userProfile: 'users',
+    useFirestoreForProfile: true,
+};
+
+const rootReducer = combineReducers({
+    firebase: firebaseReducer,
+    firestore: firestoreReducer,
+});
+
+const store = createStore(
+    rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
+const rrfProps = {
+    firebase,
+    config: rrfConfig,
+    dispatch: store.dispatch,
+    createFirestoreInstance,
+};
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root"),
+    <Provider store={store}>
+        <ReactReduxFirebaseProvider {...rrfProps}>
+            <App />
+        </ReactReduxFirebaseProvider>
+    </Provider>,
+    document.getElementById('root')
 );
-
-if (module.hot) {
-  module.hot.accept("./components/App/App", () => {
-    ReactDOM.render(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-      document.getElementById("root"),
-    );
-  });
-}

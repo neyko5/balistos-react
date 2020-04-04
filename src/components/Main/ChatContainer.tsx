@@ -1,71 +1,40 @@
-import { Box } from "grid-styled";
-import React from "react";
-import { connect } from "react-redux";
+import { Box } from 'grid-styled';
+import React from 'react';
+import { connect } from 'react-redux';
+import { compose } from 'redux';
+import { ChatMessageType, UserType, AuthUserType } from '../../types/index';
+import Chat from './Chat';
+import ChatOnline from './ChatOnline';
 
-import { any } from 'bluebird';
-import { Dispatch } from "redux";
-import { sendMessage } from "../../actions";
-import { ChatMessageType, PlaylistType, UserType } from "../../types/index";
-import Chat from "./Chat";
-import ChatOnline from "./ChatOnline";
-
-function mapStateToProps(state: any) {
-  return {
-    messages: state.playlist.messages,
-    users: state.playlist.users,
-    username: state.auth.username,
-  };
-}
-
-const mapDispatchToProps = (dispatch: Dispatch, ownProps: any) => ({
-  sendMessage: (message: string) => {
-    dispatch(sendMessage(message, ownProps.id));
-  },
-});
+import { firestoreConnect } from 'react-redux-firebase';
 
 interface Props {
-  messages: ChatMessageType[];
-  username: string;
-  playlist: PlaylistType;
-  users: UserType[];
-  sendMessage: (message: string) => void;
+    id: string;
+    users: UserType[];
+    chats: ChatMessageType[];
+    user: AuthUserType;
 }
 
-interface State {
-}
-
-class ChatContainer extends React.Component<Props, State> {
-  public componentDidUpdate(prevProps: Props) {
-    if (prevProps.messages.length && this.props.messages.length > prevProps.messages.length) {
-      const newMessage = [...this.props.messages].pop();
-      if (newMessage && newMessage.user.username !== this.props.username) {
-        const options = {
-          body: `${newMessage.user.username}: ${newMessage.message}`,
-          icon: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAWCAYAAAAxSueLAAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEgAACxIB0t1+/AAAABZ0RVh0Q3JlYXRpb24gVGltZQAwNC8xMC8xNMmEH5sAAAAcdEVYdFNvZnR3YXJlAEFkb2JlIEZpcmV3b3JrcyBDUzbovLKMAAACPElEQVRIiZ2VMZbTMBCGv+RtQYc5wYYTrLkADm5o8CPptltzApIbZE+woaTCOQHep15rlXTejjK5gdPRhUIjLBzFcXbe85Mljeaf0fwzGh0OB0KSpNkEmAFTIAIS2doBW6ACSqNVHTQQkFEXLEmzCFgDdwNtGGBltKouAkvSbAYUwGtZ2mMjqGUEiOWbAteerW9Gq8UgsCTNcuCHB7ICCqNVc+qwOLf2QDdGq7wXTPJTS0Q7YDY0F4FrnxutypDuWMaVAO2B6SVJN1o1Es2zLK1P6Tow59XaaLUdCtSRmYzXcr1HMnr/4dMUeJL5WweWpNkCS4SF0ao5N5czNXAjtgyQ+867yOxuCxQBD9iIF+fmnglHpj/YuqyTNIuDYEIUxNMCS/fi3NwzEcn4HSixPKicXcfGRjbujVYrXiBJmk1p0zE3WpVJmv3E5nJjtMpdZI6qCz/sC8WxcOdRfynjHfxP/T1t2IMBkzSLkjSraInxL4fCgVr0pmNvMRcdB7gSIvQB5WLMNelNoKD37mdIb4yxLIuxBIiBCce9MZhvjw9vTnX92jO0pO0wITHYWjvqOl6/rY1W764CQEXH44eOjV/YOqqwZbANeSB5d6S5B7jq6BTA58DZHfAb+Ai8Am772pqUgauzwuVx3NGrvP9n4BH4YrSaALfY673Bdoa1z1phpZs/CVBJS//jl7pPvDaV96g90t7OHpvP4mIwDzQGvtK+2k4a2pbly9xoVb4IrMeJCNst/CdmCyyNVs1f0AcWcVDaseIAAAAASUVORK5CYII=",
-          tag: "chat",
-          requireInteraction: false,
-        };
-        new (window as any).Notification(`Balistos - ${this.props.playlist.title}`, options);
-      }
-    }
-    const chatBoxElement = document.getElementById("chatbox");
-    if (chatBoxElement) {
-      chatBoxElement.scrollTop = Number.MAX_SAFE_INTEGER;
-    }
-  }
-  public render() {
+const ChatContainer = (props: Props) => {
     return (
-      <Box width={[1, 1, 1 / 2, 1 / 2]}>
-        {this.props.users && this.props.users.length ?
-          <ChatOnline users={this.props.users} username={this.props.username} /> : undefined}
-        <Chat
-          messages={this.props.messages}
-          sendMessage={this.props.sendMessage}
-          username={this.props.username}
-        />
-      </Box>
+        <Box width={[1, 1, 1 / 2, 1 / 2]}>
+            {props.users && props.users.length && (
+                <ChatOnline users={props.users} user={props.user} />
+            )}
+            <Chat id={props.id} messages={props.chats} user={props.user} />
+        </Box>
     );
-  }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(ChatContainer);
+export default compose(
+    firestoreConnect((props: any) => [
+        {
+            collection: `playlists/${props.id}/chats`,
+            storeAs: 'chats',
+        },
+    ]),
+    connect((state: any) => ({
+        user: state.firebase.auth,
+        chats: state.firestore.ordered.chats || [],
+    }))
+)(ChatContainer) as React.ComponentType<any>;

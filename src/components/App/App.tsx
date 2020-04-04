@@ -1,15 +1,12 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { BrowserRouter, Route } from "react-router-dom";
-import { Dispatch } from "redux";
-import styled, {createGlobalStyle} from "styled-components";
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
+import styled, { createGlobalStyle } from 'styled-components';
 
-import { closeAllWindows, setAuthFromStorage } from "../../actions";
-import Header from "../Header/Header";
-import Home from "../Home/Home";
-import Playlist from "../Main/Playlist";
+import Header from '../Header/Header';
+import Home from '../Home/Home';
+import Playlist from '../Main/Playlist';
 
-const Global = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
 *{
   box-sizing: border-box;
 }
@@ -133,35 +130,21 @@ html,body{
 }
 `;
 
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  clickOutside: () => {
-    dispatch(closeAllWindows());
-  },
-  setAuthFromStorage: () => {
-    dispatch(setAuthFromStorage());
-  },
-});
-
 const FullHeight = styled.div`
-  height: 100%;
+    height: 100%;
 `;
 
-const App = (props: {
-  clickOutside: () => void,
-  setAuthFromStorage: () => void,
-}) => {
-  useEffect(() => {
-    props.setAuthFromStorage();
-  }, []);
-  return (
-  <BrowserRouter>
-    <FullHeight onClick={props.clickOutside}>
-      <Global />
-      <Header />
-      <Route exact={true} path="/" component={Home} />
-      <Route path="/playlist/:playlistId" component={Playlist} />
-    </FullHeight>
-  </BrowserRouter>
-); };
+const App = (props: {}) => {
+    return (
+        <BrowserRouter>
+            <FullHeight>
+                <GlobalStyles />
+                <Header />
+                <Route exact={true} path="/" component={Home} />
+                <Route path="/playlist/:playlistId" component={Playlist} />
+            </FullHeight>
+        </BrowserRouter>
+    );
+};
 
-export default connect(undefined, mapDispatchToProps)(App);
+export default App;

@@ -1,75 +1,62 @@
 // @flow
 
-import React, { FormEvent } from "react";
-import styled from "styled-components";
-
-import Button from "../common/Button";
-import Icon from "../common/Icon";
-import Input from "../common/Input";
+import React, { FormEvent } from 'react';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
+import Button from '../common/Button';
+import Icon from '../common/Icon';
+import Input from '../common/Input';
+import { AuthUserType } from '../../types';
+import { addChatToPlaylist } from '../../services/firestore.service';
 
 const Send = styled.div`
-  padding: 10px;
-  background: #e8e8e8;
-  float: left;
-  width: 100%;
+    padding: 10px;
+    background: #e8e8e8;
+    float: left;
+    width: 100%;
 `;
 
 interface Props {
-  sendMessage: (message: string) => void;
+    id: string;
+    user: AuthUserType;
 }
 
-interface State {
-  message: string;
-}
+const ChatForm = (props: Props) => {
+    const [message, setMessage] = React.useState('');
 
-class ChatForm extends React.Component<Props, State> {
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      message: "",
-    };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
-
-  public handleChange(event: FormEvent<HTMLFormElement>): void {
-    if (event.target instanceof HTMLInputElement) {
-      this.setState({
-        message: event.target.value,
-      });
+    function handleChange(event: FormEvent<HTMLFormElement>): void {
+        if (event.target instanceof HTMLInputElement) {
+            setMessage(event.target.value);
+        }
     }
-  }
 
-  public handleSubmit(event: FormEvent<HTMLFormElement>): void {
-    event.preventDefault();
-    if (!this.state.message.trim()) {
-      return;
+    function handleSubmit(event: FormEvent<HTMLFormElement>): void {
+        event.preventDefault();
+        if (!message.trim()) {
+            return;
+        }
+        addChatToPlaylist(props.id, message);
+        setMessage('');
     }
-    this.props.sendMessage(this.state.message);
-    this.setState({
-      message: "",
-    });
-  }
 
-  public render() {
     return (
-      <Send>
-        <form onSubmit={this.handleSubmit}>
-          <Input
-            type="text"
-            placeholder="Send a message"
-            name="message"
-            value={this.state.message}
-            onChange={this.handleChange}
-          />
-          <Button type="submit" green={true} right={true}>
-            <Icon message={true} /> Chat
-          </Button>
-        </form>
-      </Send>
+        <Send>
+            <form onSubmit={handleSubmit}>
+                <Input
+                    type="text"
+                    placeholder="Send a message"
+                    name="message"
+                    value={message}
+                    onChange={handleChange}
+                />
+                <Button type="submit" green={true} right={true}>
+                    <Icon message={true} /> Chat
+                </Button>
+            </form>
+        </Send>
     );
-  }
-}
+};
 
-export default ChatForm;
+export default connect((state: any) => ({
+    user: state.firebase.auth,
+}))(ChatForm) as React.ComponentType<any>;

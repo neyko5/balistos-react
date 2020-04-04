@@ -1,5 +1,5 @@
-import React from "react";
-import styled, { css } from "styled-components";
+import React from 'react';
+import styled, { css } from 'styled-components';
 
 const StyledButton = styled.button`
     height: 38px;
@@ -19,24 +19,30 @@ const StyledButton = styled.button`
     user-select: none;
     cursor: pointer;
     outline: none;
-    ${(props: Props) => props.green && css`
-        color: #fff;
-        background: #b1bb00;
-        -webkit-box-shadow: 2px 2px 0 #9fa800;
-        box-shadow: 2px 2px 0 #9fa800;
-    `}
-    ${(props: Props) => props.topMargin && css`
-        margin-top: 10px;
-    `}
-    ${(props: Props) => props.right && css`
-        float: right;
-    `}
+    ${(props: Props) =>
+        props.green &&
+        css`
+            color: #fff;
+            background: #b1bb00;
+            -webkit-box-shadow: 2px 2px 0 #9fa800;
+            box-shadow: 2px 2px 0 #9fa800;
+        `}
+    ${(props: Props) =>
+        props.topMargin &&
+        css`
+            margin-top: 10px;
+        `}
+    ${(props: Props) =>
+        props.right &&
+        css`
+            float: right;
+        `}
 `;
 
 const Button = (props: Props) => (
-  <StyledButton {...props}>
-    {props.children}
-  </StyledButton>
+    <StyledButton {...props} type={props.type || 'button'}>
+        {props.children}
+    </StyledButton>
 );
 
 interface Props {
@@ -44,7 +50,7 @@ interface Props {
     green: boolean;
     topMargin?: boolean;
     right?: boolean;
-    type?: string;
+    type?: 'button' | 'submit' | 'reset';
     id?: string;
     onClick?: () => void;
 }

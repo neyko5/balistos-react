@@ -1,175 +1,162 @@
-
-// @flow
-import React from "react";
-import { connect } from "react-redux";
-import { Link, withRouter } from "react-router-dom";
-import { Dispatch } from "redux";
-import styled from "styled-components";
-
-import Container from "../common/Container";
-import CreatePlaylist from "./CreatePlaylist";
-import Login from "./Login";
-import LogOut from "./LogOut";
-import Register from "./Register";
-import UserMenu from "./UserMenu";
-
-import logoImage from "../../img/logo.png";
-
-import {
-  createPlaylist,
-  logOut,
-  toggleCreatePlaylistWindow,
-  toggleLoginWindow,
-  toggleLogoutWindow,
-  toggleRegisterWindow,
-  verifyToken,
-} from "../../actions";
-
-const mapStateToProps = (state: any) => ({
-  username: state.auth.username,
-  loggedIn: state.auth.loggedIn,
-  loginOpen: state.windows.loginOpen,
-  registerOpen: state.windows.registerOpen,
-  logoutOpen: state.windows.logoutOpen,
-  createPlaylistOpen: state.windows.createPlaylistOpen,
-});
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  verifyToken: () => {
-    dispatch(verifyToken());
-  },
-  onOpenLoginClick: () => {
-    dispatch(toggleLoginWindow());
-  },
-  onOpenRegisterClick: () => {
-    dispatch(toggleRegisterWindow());
-  },
-  onOpenLogoutClick: () => {
-    dispatch(toggleLogoutWindow());
-  },
-  onOpenCreatePlaylistClick: () => {
-    dispatch(toggleCreatePlaylistWindow());
-  },
-  onLogoutClick: () => {
-    dispatch(logOut());
-  },
-  onCreatePlaylistSubmit: (title: string, description: string) => {
-    dispatch(createPlaylist(title, description));
-  },
-});
+import React from 'react';
+import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import logoImage from '../../img/logo.png';
+import Container from '../common/Container';
+import CreatePlaylist from './CreatePlaylist';
+import Login from './Login';
+import LogOut from './LogOut';
+import User from './User';
+import { AuthUserType } from '../../types';
 
 const HeaderContainer = styled.header`
-  height: 50px;
-  width: 100%;
-  background-color: #333333;
-  @media (min-width: 1280px) {
-      position: fixed;
-      top: 0;
-      z-index: 30;
-  }
-  @media (max-width: 1279px) and (min-width: 992px) {
-      position: fixed;
-      top: 0;
-      z-index: 2;
-  }
-  @media (min-width: 320px) and (max-width: 479px) {
-    header {
-        height: auto;
+    height: 50px;
+    width: 100%;
+    background-color: #333333;
+    @media (min-width: 1280px) {
+        position: fixed;
+        top: 0;
+        z-index: 30;
     }
-  }
+    @media (max-width: 1279px) and (min-width: 992px) {
+        position: fixed;
+        top: 0;
+        z-index: 2;
+    }
+    @media (min-width: 320px) and (max-width: 479px) {
+        header {
+            height: auto;
+        }
+    }
 `;
 
 const RightMenu = styled.div`
-  align-self: flex-end;
-  flex: 1;
+    display: flex;
 `;
 
 const LogoLink = styled(Link)`
-  display: flex;
-  text-decoration: none;
-  height: 50px;
-  align-items: center;
+    display: flex;
+    text-decoration: none;
+    height: 50px;
+    align-items: center;
 `;
 
 const Title = styled.title`
-  display: flex;
-  align-items: flex-end;
-  height: 48px;
-  margin-left: 8px;
-  color: #f0f0f0;
-  font-weight: 200;
-  font-size: 36px;
+    display: flex;
+    align-items: flex-end;
+    height: 48px;
+    margin-left: 8px;
+    color: #f0f0f0;
+    font-weight: 200;
+    font-size: 36px;
 `;
 
 const Logo = styled.img`
-  height: 40px;
+    height: 40px;
+`;
+
+interface MenuButtonProps {
+    borderLeft?: boolean;
+    onClick?: () => void;
+}
+
+const MenuButton = styled.button`
+  height: 50px;
+  border-right: 1px solid #333;
+  border-left: 1px solid #333;
+  padding: 0 20px;
+  line-height: 50px;
+  color: #dcdcdc;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  align-self: flex-end;
+  ${(props: MenuButtonProps) =>
+      props.borderLeft &&
+      css`
+          border-right: 0px;
+      `}
+  &:active {
+    background: #111;
+    color: #666;
+  }
+  @media (min-width:320px) and (max-width:479px) {
+    border-bottom: 1px solid #333;
+    padding: 0px 10px;
+  }
+}
+`;
+
+const Menu = styled.div`
+    position: relative;
+    float: right;
 `;
 
 interface Props {
-  verifyToken: () => void;
-  onOpenLoginClick: () => void;
-  onOpenRegisterClick: () => void;
-  onOpenLogoutClick: () => void;
-  onCreatePlaylistSubmit: (title: string, description: string) => void;
-  onLogoutClick: () => void;
-  onOpenCreatePlaylistClick: () => void;
-  createPlaylistOpen: boolean;
-  logoutOpen: boolean;
-  registerOpen: boolean;
-  loginOpen: boolean;
-  loggedIn: boolean;
-  username: string;
+    user: AuthUserType;
 }
 
-interface State {
-}
+const Header = (props: Props) => {
+    const [open, setOpen] = React.useState<string>('');
 
-class Header extends React.Component<Props, State> {
-  public componentDidMount() {
-    if (this.props.loggedIn) {
-      this.props.verifyToken();
+    function stopPropagation(event: any) {
+        event.stopPropagation();
     }
-  }
 
-  public render() {
+    function openCreatePlaylist() {
+        setOpen('createPlaylist');
+    }
+
+    function openLogout() {
+        setOpen('logout');
+    }
+
+    function openLogin() {
+        setOpen('login');
+    }
+
     return (
-      <HeaderContainer>
-        <Container>
-          <LogoLink to="/" id="logo">
-            <Logo src={logoImage} />
-            <Title>Balistos</Title>
-          </LogoLink>
-          {this.props.loggedIn ?
-            <RightMenu>
-              <UserMenu
-                onOpenLogoutClick={this.props.onOpenLogoutClick}
-                onOpenCreatePlaylistClick={this.props.onOpenCreatePlaylistClick}
-                username={this.props.username}
-                loggedIn={this.props.loggedIn}
-              />
-              {this.props.logoutOpen && <LogOut
-                onLogoutClick={this.props.onLogoutClick}
-              />}
-
-              {this.props.createPlaylistOpen && <CreatePlaylist
-                onCreatePlaylistSubmit={this.props.onCreatePlaylistSubmit}
-              />}
-            </RightMenu> :
-            <RightMenu>
-              <UserMenu
-                onOpenLoginClick={this.props.onOpenLoginClick}
-                onOpenRegisterClick={this.props.onOpenRegisterClick}
-                username={this.props.username}
-                loggedIn={this.props.loggedIn}
-              />
-              {this.props.loginOpen && <Login />}
-              {this.props.registerOpen && <Register />}
-            </RightMenu>
-          }
-        </Container>
-      </HeaderContainer>
+        <HeaderContainer>
+            <Container>
+                <LogoLink to="/" id="logo">
+                    <Logo src={logoImage} />
+                    <Title>Balistos</Title>
+                </LogoLink>
+                {props.user.uid ? (
+                    <RightMenu>
+                        <Menu onClick={stopPropagation}>
+                            <MenuButton onClick={openCreatePlaylist}>
+                                New playlist
+                            </MenuButton>
+                        </Menu>
+                        {open === 'logout' && <LogOut />}
+                        {open === 'createPlaylist' && (
+                            <CreatePlaylist setOpen={setOpen} />
+                        )}
+                        <User
+                            name={props.user.displayName}
+                            avatar={props.user.photoURL}
+                            onClick={openLogout}
+                        />
+                    </RightMenu>
+                ) : (
+                    <RightMenu>
+                        <Menu>
+                            <MenuButton borderLeft={true} onClick={openLogin}>
+                                Log in
+                            </MenuButton>
+                            {open === 'login' && <Login />}
+                        </Menu>
+                    </RightMenu>
+                )}
+            </Container>
+        </HeaderContainer>
     );
-  }
-}
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default connect((state: any) => {
+    return {
+        user: state.firebase.auth,
+    };
+})(Header);

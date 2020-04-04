@@ -1,44 +1,44 @@
 // @flow
 
-import { Box } from "grid-styled";
-import React from "react";
-import styled from "styled-components";
-
-import SearchVideo from "./SearchVideo";
-import VideoList from "./VideoList";
-
-import { PlaylistType } from "../../types";
+import { Box } from 'grid-styled';
+import React from 'react';
+import styled from 'styled-components';
+import SearchVideo from './SearchVideo';
+import VideoList from './VideoList';
 
 const PlaylistBox = styled.div`
-  background: #e1e1e1;
-  border-top: 0;
-  float: left;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 20px;
+    background: #e1e1e1;
+    border-top: 0;
+    float: left;
+    width: 100%;
+    margin-top: 10px;
+    margin-bottom: 20px;
 `;
 
 const PlaylistBody = styled.div`
-  float: left;
-  width: 100%;
-  height: 400px;
-  overflow: auto;
+    float: left;
+    width: 100%;
+    height: 400px;
+    overflow: auto;
 `;
 
 const VideoListContainer = (props: {
-  playlist: PlaylistType,
+    playlistId: string;
+    playlist: any;
+    videos: any;
 }) => (
-  <Box width={[1, 1, 1 / 2, 1 / 2]}>
-    <PlaylistBox>
-      <SearchVideo id={props.playlist.id} />
-      <PlaylistBody>
-        <VideoList
-          current={props.playlist.current}
-          videos={props.playlist.videos}
-        />
-      </PlaylistBody>
-    </PlaylistBox>
-  </Box>
+    <Box width={[1, 1, 1 / 2, 1 / 2]}>
+        <PlaylistBox>
+            <SearchVideo id={props.playlistId} />
+            <PlaylistBody>
+                <VideoList
+                    id={props.playlistId}
+                    current={props.playlist?.current}
+                    videos={props.videos}
+                />
+            </PlaylistBody>
+        </PlaylistBox>
+    </Box>
 );
 
 export default VideoListContainer;
