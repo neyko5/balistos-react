@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -7,6 +5,7 @@ const Result = styled.button`
     width: 100%;
     padding: 1px 5px;
     cursor: pointer;
+    display: flex;
     ${(props: ResultProps) =>
         props.active &&
         css`
@@ -19,7 +18,6 @@ interface ResultProps {
 }
 
 const Image = styled.img`
-    float: left;
     margin-right: 10px;
     height: 40px;
     width: 60px;
@@ -27,7 +25,6 @@ const Image = styled.img`
 
 const Title = styled.div`
     line-height: 40px;
-    float: left;
     font-size: 14px;
     color: #333;
     width: calc(100% - 70px);

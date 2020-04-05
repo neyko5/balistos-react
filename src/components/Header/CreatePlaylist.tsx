@@ -1,5 +1,3 @@
-// @flow
-
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
 
@@ -12,7 +10,6 @@ const LabelTitle = styled.div`
     font-weight: 700;
     font-size: 13px;
     color: #3e414c;
-    float: left;
     line-height: 24px;
 `;
 
@@ -20,7 +17,6 @@ const Label = styled.label`
     margin-bottom: 5px;
     margin-right: 20px;
     width: 100%;
-    float: left;
     padding-bottom: 5px;
 `;
 

@@ -107,13 +107,11 @@ const Status = styled.div`
 `;
 
 const Image = styled.img`
-    float: left;
     display: block;
     width: 120px;
     height: 90px;
 `;
 const Info = styled.div`
-    float: left;
     padding: 0 8px;
     width: 100%;
     position: relative;
@@ -143,12 +141,10 @@ const Black = styled.span`
 const DeleteColumn = styled.div`
     align-self: flex-start;
     width: 24px;
-    float: left;
 `;
 const Delete = styled.button`
     width: 24px;
     height: 24px;
-    float: left;
     background: url(${deleteIcon}) no-repeat 50%;
     cursor: pointer;
 `;

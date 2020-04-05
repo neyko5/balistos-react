@@ -7,7 +7,6 @@ const StyledButton = styled.button`
     padding: 0 10px;
     font-size: 13px;
     font-weight: 700;
-    float: left;
     border: 0;
     border-radius: 5px;
     margin-bottom: 2px;
@@ -31,11 +30,6 @@ const StyledButton = styled.button`
         props.topMargin &&
         css`
             margin-top: 10px;
-        `}
-    ${(props: Props) =>
-        props.right &&
-        css`
-            float: right;
         `}
 `;
 

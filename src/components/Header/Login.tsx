@@ -10,7 +10,6 @@ const OauthButton = styled.img`
 `;
 
 const ErrorMessage = styled.div`
-    float: right;
     font-size: 11px;
     line-height: 24px;
     color: #ff4f00;

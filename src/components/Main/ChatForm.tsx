@@ -1,5 +1,3 @@
-// @flow
-
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
@@ -12,7 +10,6 @@ import { addChatToPlaylist } from '../../services/firestore.service';
 const Send = styled.div`
     padding: 10px;
     background: #e8e8e8;
-    float: left;
     width: 100%;
 `;
 

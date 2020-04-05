@@ -7,7 +7,6 @@ import { addVideoToPlaylist } from '../../services/firestore.service';
 import { searchYoutubeVideos } from '../../services/youtube.service';
 
 const Search = styled.div`
-    float: left;
     position: relative;
     width: 100%;
     padding: 5px;
@@ -17,7 +16,6 @@ const SearchInput = styled.input`
     width: 100%;
     height: 40px;
     border-radius: 0px;
-    float: left;
     line-height: 18px;
     font-size: 13px;
     color: #333333;

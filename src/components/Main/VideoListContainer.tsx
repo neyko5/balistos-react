@@ -1,5 +1,3 @@
-// @flow
-
 import { Box } from 'grid-styled';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,14 +7,12 @@ import VideoList from './VideoList';
 const PlaylistBox = styled.div`
     background: #e1e1e1;
     border-top: 0;
-    float: left;
     width: 100%;
     margin-top: 10px;
     margin-bottom: 20px;
 `;
 
 const PlaylistBody = styled.div`
-    float: left;
     width: 100%;
     height: 400px;
     overflow: auto;

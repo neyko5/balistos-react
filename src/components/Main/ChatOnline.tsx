@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import styled, { css } from 'styled-components';
 
@@ -11,19 +9,16 @@ const Users = styled.div`
     margin-bottom: 10px;
     padding: 3px 3px 10px 10px;
     background: #f6f6f6;
-    float: left;
     width: 100%;
     border: 1px solid #cccccc;
 `;
 const Header = styled.div`
     width: 100%;
-    float: left;
 `;
 const HeaderTitle = styled.div`
     color: #3e414c;
     font-size: 13px;
     font-weight: 700;
-    float: left;
     line-height: 28px;
 `;
 
@@ -33,14 +28,12 @@ const Count = styled.div`
     color: #3e414c;
     font-size: 12px;
     font-weight: 600;
-    float: right;
     padding-left: 36px;
     padding-right: 10px;
     line-height: 28px;
 `;
 
 const Body = styled.div`
-    float: left;
     width: 100%;
     margin: 5px 0px;
 `;
@@ -48,7 +41,6 @@ const User = styled.div`
     margin-bottom: 5px;
     height: 24px;
     border-radius: 3px;
-    float: left;
     margin-right: 5px;
     font-size: 12px;
     font-style: italic;

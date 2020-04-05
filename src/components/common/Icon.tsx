@@ -1,5 +1,3 @@
-// @flow
-
 import React from 'react';
 import styled, { css } from 'styled-components';
 import chatIcon from '../../img/chat.png';
@@ -11,7 +9,6 @@ const StyledIcon = styled.i`
     height: 26px;
     background-position: center;
     background-repeat: no-repeat;
-    float: left;
     margin-top: 6px;
     margin-right: 6px;
     ${(props: Props) =>

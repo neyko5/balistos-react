@@ -17,7 +17,6 @@ const Image = styled.img`
     flex-shrink: 0;
 `;
 const Info = styled.div`
-    float: left;
     padding: 0 8px;
     width: 100%;
     position: relative;

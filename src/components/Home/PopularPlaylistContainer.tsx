@@ -1,6 +1,4 @@
-// @flow
-
-import { Box, Flex } from 'grid-styled';
+import { Flex } from 'grid-styled';
 import React from 'react';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
@@ -16,15 +14,9 @@ interface Props {
 const PopularPlaylistContainer: React.FC<Props> = (props: Props) => {
     return (
         <Flex flexWrap={'wrap'}>
-            <Box width={[1, 1, 1 / 2, 1 / 2]} px={2}>
-                {props.playlists.map((result: PlaylistType, index: number) => (
-                    <PopularPlaylist
-                        {...result}
-                        index={index}
-                        key={result.id}
-                    />
-                ))}
-            </Box>
+            {props.playlists.map((result: PlaylistType, index: number) => (
+                <PopularPlaylist {...result} index={index} key={result.id} />
+            ))}
         </Flex>
     );
 };

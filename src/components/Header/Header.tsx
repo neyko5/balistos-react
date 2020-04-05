@@ -90,7 +90,6 @@ const MenuButton = styled.button`
 
 const Menu = styled.div`
     position: relative;
-    float: right;
 `;
 
 interface Props {

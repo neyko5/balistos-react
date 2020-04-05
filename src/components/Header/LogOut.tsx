@@ -1,14 +1,11 @@
-// @flow
-
 import React from 'react';
-
 import Button from '../common/Button';
 import Dropdown from './Dropdown';
 import { firebase } from '../../config/firebase';
 
 const LogOut = () => {
     function logout() {
-        firebase.auth().signOut();
+        return firebase.auth().signOut();
     }
     return (
         <Dropdown small={true}>

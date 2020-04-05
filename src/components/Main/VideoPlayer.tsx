@@ -15,7 +15,6 @@ import { finishVideo } from '../../services/firestore.service';
 
 const MainWindow = styled.div`
     background: #ffffff;
-    float: left;
     width: 100%;
     margin: 10px 0 0;
 `;
@@ -66,7 +65,6 @@ const Progress = styled.div`
     width: 100%;
     height: 5px;
     background: #dcdcdc;
-    float: left;
 `;
 
 const Bar = styled.div`
@@ -83,13 +81,14 @@ interface BarProps {
 const Toolbar = styled.div`
     width: 100%;
     height: 35px;
-    float: left;
     background: #4d4c4c;
     padding: 7px 10px;
+    display: flex;
+    justify-content: space-between;
 `;
 
 const Controls = styled.div`
-    float: left;
+    display: flex;
 `;
 
 const ControlButton = styled.button`
@@ -97,7 +96,6 @@ const ControlButton = styled.button`
     height: 20px;
     cursor: pointer;
     margin-right: 5px;
-    float: left;
     outline: none;
     ${(props: ControlButtonProps) =>
         props.pause &&
@@ -117,8 +115,8 @@ interface ControlButtonProps {
 }
 
 const Timer = styled.div`
-    float: left;
     margin-left: 20px;
+    display: flex;
 `;
 
 const Time = styled.div`
@@ -126,7 +124,6 @@ const Time = styled.div`
     line-height: 22px;
     color: #fff;
     font-size: 12px;
-    float: left;
     ${(props: TimeProps) =>
         props.total &&
         css`
@@ -140,12 +137,11 @@ interface TimeProps {
 }
 
 const Volume = styled.div`
-    float: right;
+    display: flex;
     .slider {
         width: 64px;
         margin-top: 9px;
         height: 5px;
-        float: left;
         background: #dcdcdc;
         cursor: pointer;
         .handle {
@@ -163,13 +159,11 @@ const Speaker = styled.button`
     width: 16px;
     height: 22px;
     background: url(${speakerIcon}) 50% no-repeat;
-    float: left;
     margin-right: 10px;
     cursor: pointer;
     outline: none;
 `;
 const PlaylistHeader = styled.div`
-    float: left;
     padding-right: 10px;
     width: 100%;
     height: 40px;
@@ -191,6 +185,17 @@ const PlaylistUsername = styled.span`
     font-style: italic;
 `;
 
+const StyledThumb = styled.div`
+    width: 5px;
+    height: 13px;
+    top: -4px;
+    position: absolute;
+    background: rgb(255, 255, 255);
+    cursor: grab;
+`;
+
+const Thumb = (props: any) => <StyledThumb {...props} />;
+
 interface Props {
     current: VideoType | false;
     playlistTitle: string;
@@ -198,22 +203,13 @@ interface Props {
     id: string;
 }
 
-interface PlayerState {
-    elapsed: number;
-    total: number;
-    volume: number;
-    previousVolume: number;
-    paused: boolean;
-}
-
 const VideoPlayer = (props: Props) => {
-    const [playerState, setPlayerState] = React.useState<PlayerState>({
-        elapsed: 0,
-        total: 0,
-        volume: 100,
-        previousVolume: 0,
-        paused: false,
-    });
+    const [elapsed, setElapsed] = React.useState<number>(0);
+    const [total, setTotal] = React.useState<number>(0);
+    const [volume, setVolume] = React.useState<number>(100);
+    const [previousVolume, setPreviousVolume] = React.useState<number>(0);
+    const [paused, setPaused] = React.useState<boolean>(false);
+
     const timeout = React.useRef(0);
     const player = React.useRef<any>(null);
 
@@ -265,28 +261,19 @@ const VideoPlayer = (props: Props) => {
     }
 
     function onSpeakerClick(): void {
-        if (playerState.volume === 0) {
-            setPlayerState({
-                ...playerState,
-                volume: playerState.previousVolume,
-                previousVolume: 0,
-            });
-            player.current.setVolume(playerState.previousVolume);
+        if (volume === 0) {
+            setVolume(previousVolume);
+            setPreviousVolume(0);
+            player.current.setVolume(previousVolume);
         } else {
-            setPlayerState({
-                ...playerState,
-                volume: 0,
-                previousVolume: playerState.volume,
-            });
+            setPreviousVolume(volume);
+            setVolume(0);
             player.current.setVolume(0);
         }
     }
 
     function onSliderChange(value: any) {
-        setPlayerState({
-            ...playerState,
-            volume: value,
-        });
+        setVolume(value);
 
         player.current.setVolume(value);
     }
@@ -298,27 +285,18 @@ const VideoPlayer = (props: Props) => {
     }
 
     function play() {
-        setPlayerState({
-            ...playerState,
-            paused: false,
-        });
+        setPaused(false);
         player.current.playVideo();
     }
 
     function pause() {
-        setPlayerState({
-            ...playerState,
-            paused: true,
-        });
+        setPaused(true);
         player.current.pauseVideo();
     }
 
     function updateElapsed() {
-        setPlayerState({
-            ...playerState,
-            elapsed: player?.current.getCurrentTime(),
-            total: player.current.getDuration(),
-        });
+        setElapsed(player?.current.getCurrentTime());
+        setTotal(player.current.getDuration());
         timeout.current = setTimeout(updateElapsed, 500);
     }
 
@@ -346,29 +324,19 @@ const VideoPlayer = (props: Props) => {
                         )}
                     </Player>
                     <Progress>
-                        <Bar
-                            width={
-                                playerState.total
-                                    ? (playerState.elapsed * 100) /
-                                      playerState.total
-                                    : 0
-                            }
-                        />
+                        <Bar width={total ? (elapsed * 100) / total : 0} />
                     </Progress>
                     <Toolbar>
                         <Controls>
-                            {playerState.paused ? (
+                            {paused ? (
                                 <ControlButton play={true} onClick={play} />
                             ) : (
                                 <ControlButton pause={true} onClick={pause} />
                             )}
                         </Controls>
                         <Timer>
-                            <Time>{vTime(playerState.elapsed)}</Time>
-                            <Time total={true}>
-                                {' '}
-                                / {vTime(playerState.total)}{' '}
-                            </Time>
+                            <Time>{vTime(elapsed)}</Time>
+                            <Time total={true}> / {vTime(total)} </Time>
                         </Timer>
                         <Volume>
                             <Speaker
@@ -377,7 +345,8 @@ const VideoPlayer = (props: Props) => {
                             />
                             <ReactSlider
                                 defaultValue={100}
-                                value={playerState.volume}
+                                value={volume}
+                                renderThumb={Thumb}
                                 onChange={onSliderChange}
                             />
                         </Volume>

@@ -1,16 +1,18 @@
-// @flow
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { UserType } from '../../types';
 
 const Playlist = styled(Link)`
     background: #ddd;
-    margin-bottom: 5px;
-    float: left;
+    margin: 0px 8px 8px 8px;
     width: 100%;
     display: flex;
     text-decoration: none;
+    flex: 1 0 40%;
+    @media (max-width: 479px) {
+        flex: 1 0 80%;
+    }
 `;
 
 const Place = styled.div`
@@ -47,10 +49,7 @@ const PopularPlaylist = (props: {
     index: number;
     title: string;
     id: number;
-    creator: {
-        name: string;
-        id: string;
-    };
+    creator: UserType;
 }) => (
     <Playlist to={`/playlist/${props.id}`}>
         <Place>{props.index + 1}</Place>

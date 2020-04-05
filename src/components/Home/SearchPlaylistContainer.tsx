@@ -14,16 +14,12 @@ const SearchPlaylist = styled.div`
     border-radius: 5px;
     margin: 0px auto;
     position: relative;
-`;
-
-const SearchPlaylistInner = styled.div`
     display: flex;
 `;
 
 const SearchIcon = styled.div`
     width: 54px;
     height: 35px;
-    float: left;
     border-top-right-radius: 5px;
     border-bottom-right-radius: 5px;
     background: #000 url(${searchIcon}) 50% no-repeat;
@@ -39,7 +35,6 @@ const SearchResults = styled.ul`
     background: #f6f6f6;
     border: 1px solid #ccc;
     border-radius: 3px;
-    float: left;
     list-style: none;
     margin: 0;
     padding: 0;
@@ -68,22 +63,20 @@ const SearchPlaylistContainer = (props: any) => {
 
     return (
         <SearchPlaylist>
-            <SearchPlaylistInner>
-                <Input
-                    type="text"
-                    placeholder="Search playlist"
-                    search={true}
-                    value={query}
-                    name="query"
-                    onChange={searchForPlaylists}
-                />
-                <SearchIcon />
-                <SearchResults data-cy="search-results">
-                    {results.map((result: any) => (
-                        <SearchPlaylistResult key={result.id} result={result} />
-                    ))}
-                </SearchResults>
-            </SearchPlaylistInner>
+            <Input
+                type="text"
+                placeholder="Search playlist"
+                search={true}
+                value={query}
+                name="query"
+                onChange={searchForPlaylists}
+            />
+            <SearchIcon />
+            <SearchResults data-cy="search-results">
+                {results.map((result: any) => (
+                    <SearchPlaylistResult key={result.id} result={result} />
+                ))}
+            </SearchResults>
         </SearchPlaylist>
     );
 };

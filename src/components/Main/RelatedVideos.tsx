@@ -1,5 +1,3 @@
-// @flow
-
 import { Box } from 'grid-styled';
 import React from 'react';
 import styled from 'styled-components';
@@ -9,7 +7,6 @@ import RelatedVideoItem from './RelatedVideoItem';
 const RelatedBox = styled.div`
     margin-top: 15px;
     margin-bottom: 10px;
-    float: left;
     width: 100%;
 `;
 
