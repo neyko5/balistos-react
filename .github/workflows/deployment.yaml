@@ -30,7 +30,8 @@ jobs:
               run: yarn install
             - name: set GCP project
               run: gcloud config set project ${{ env.gcp-project }}
-
+            - name: unit tests
+              run: yarn test
             - name: 'deploy to firebase'
               uses: w9jds/firebase-action@master
               with:

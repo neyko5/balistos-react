@@ -20,7 +20,7 @@ exports[`should render correctly 1`] = `
     className="c1"
     title="Thu May 11 2017"
   >
-    testuser
+    Tester 1
     :
   </span>
   <span>

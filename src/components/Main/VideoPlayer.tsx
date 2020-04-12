@@ -8,7 +8,7 @@ import vTime from 'video-time';
 import pauseIcon from '../../img/pause.png';
 import playIcon from '../../img/play.png';
 import speakerIcon from '../../img/volume.png';
-import { youtubeParams } from '../../settings';
+import { youtubeParams } from '../../config/youtube';
 
 import { VideoType } from '../../types';
 import { finishVideo } from '../../services/firestore.service';

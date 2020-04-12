@@ -43,8 +43,8 @@ export interface PlaylistType {
 export interface ChatMessageType {
     created_at: string;
     message: string;
-    id: string;
     creator: UserType;
+    id: string;
 }
 
 export interface YoutubeResultVideoType {

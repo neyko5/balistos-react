@@ -46,7 +46,9 @@ const Chat = (props: {
                     />
                 ))}
             </Chatbox>
-            {props.user && !props.user.isEmpty && <ChatForm id={props.id} />}
+            {props.user && !props.user.isEmpty && (
+                <ChatForm user={props.user} id={props.id} />
+            )}
         </>
     );
 };

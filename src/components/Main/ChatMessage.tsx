@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ChatMessageType } from '../../types/index';
+import { ChatMessageType, UserType } from '../../types/index';
 
 const Message = styled.div`
     margin-bottom: 3px;
@@ -17,7 +17,7 @@ interface AuthorProps {
     current: boolean;
 }
 
-const ChatMessage = (props: { user: any; message: ChatMessageType }) => (
+const ChatMessage = (props: { user: UserType; message: ChatMessageType }) => (
     <Message>
         <Author
             current={props.message.creator.id === props.user.id}

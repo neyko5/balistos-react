@@ -1,31 +1,31 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`should render correctly 1`] = `
-<div>
+Array [
   <div
-    className="sc-htoDjs iBmSRt"
+    className="sc-AxmLO eEtvOh"
   >
     <i
-      className="sc-bxivhb gKAPwg"
+      className="sc-AxjAm cjcnWH"
     />
     <div
-      className="sc-gzVnrw dQovUE"
+      className="sc-Axmtr GSDxK"
     >
       Chat with your buddies
     </div>
-  </div>
+  </div>,
   <div
-    className="sc-bZQynM hQocFL"
+    className="sc-AxheI gTUEWg"
     id="chatbox"
   >
     <div
-      className="sc-bdVaJa eNFPzl"
+      className="sc-AxhUy kbrQob"
     >
       <span
-        className="sc-bwzfXH BCqOY"
+        className="sc-AxgMl uvcNc"
         title="Tue Apr 11 2017"
       >
-        otheruser
+        Tester 2
         :
       </span>
       <span>
@@ -33,13 +33,13 @@ exports[`should render correctly 1`] = `
       </span>
     </div>
     <div
-      className="sc-bdVaJa eNFPzl"
+      className="sc-AxhUy kbrQob"
     >
       <span
-        className="sc-bwzfXH BCqOY"
+        className="sc-AxgMl eOucro"
         title="Thu May 11 2017"
       >
-        otheruser
+        Tester 1
         :
       </span>
       <span>
@@ -47,28 +47,29 @@ exports[`should render correctly 1`] = `
       </span>
     </div>
     <div
-      className="sc-bdVaJa eNFPzl"
+      className="sc-AxhUy kbrQob"
     >
       <span
-        className="sc-bwzfXH BCqOY"
+        className="sc-AxgMl uvcNc"
         title="Sun Jun 11 2017"
       >
-        otheruser
+        Tester 2
         :
       </span>
       <span>
         text 3
       </span>
     </div>
-  </div>
+  </div>,
   <div
-    className="sc-EHOje jQjERX"
+    className="sc-AxhCb fjRBxN"
   >
     <form
       onSubmit={[Function]}
     >
       <input
-        className="sc-htpNat gcnmGY"
+        autoComplete="off"
+        className="sc-AxiKw jGwyfn"
         name="message"
         onChange={[Function]}
         placeholder="Send a message"
@@ -76,15 +77,16 @@ exports[`should render correctly 1`] = `
         value=""
       />
       <button
-        className="sc-ifAKCX dRcVix"
+        className="sc-AxirZ jYIYLQ"
+        color="green"
         type="submit"
       >
         <i
-          className="sc-bxivhb bLEZVs"
+          className="sc-AxjAm ewJVQx"
         />
          Chat
       </button>
     </form>
-  </div>
-</div>
+  </div>,
+]
 `;

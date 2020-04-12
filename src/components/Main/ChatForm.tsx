@@ -1,6 +1,5 @@
 import React, { FormEvent } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import Button from '../common/Button';
 import Icon from '../common/Icon';
 import Input from '../common/Input';
@@ -54,6 +53,4 @@ const ChatForm = (props: Props) => {
     );
 };
 
-export default connect((state: any) => ({
-    user: state.firebase.auth,
-}))(ChatForm) as React.ComponentType<any>;
+export default ChatForm;

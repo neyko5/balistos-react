@@ -11,6 +11,8 @@ firebase.initializeApp({
 });
 
 const firestore = firebase.firestore();
-firestore.enablePersistence({ synchronizeTabs: true });
+if (process.env.NODE_ENV !== 'test') {
+    firestore.enablePersistence({ synchronizeTabs: true });
+}
 
 export { firestore, firebase };
