@@ -45,3 +45,8 @@ jobs:
                   REACT_APP_YOUTUBE_API_KEY: ${{ secrets.REACT_APP_YOUTUBE_API_KEY }}
             - name: Cypress run
               uses: cypress-io/github-action@v1
+              with:
+                  record: true
+                  browser: chrome
+              env:
+                  CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
