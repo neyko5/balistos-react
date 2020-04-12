@@ -1,18 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
-import googleButton from '../../img/btn_google_signin_normal.png';
-import facebookButton from '../../img/btn_facebook_login.png';
 import Dropdown from './Dropdown';
 import { firebase } from '../../config/firebase';
-
-const OauthButton = styled.img`
-    height: 50px;
-`;
+import { ReactComponent as Google } from '../../img/google.svg';
+import { ReactComponent as Facebook } from '../../img/facebook.svg';
+import Button from '../common/Button';
 
 const ErrorMessage = styled.div`
     font-size: 11px;
     line-height: 24px;
     color: #ff4f00;
+`;
+
+const ButtonText = styled.span`
+    vertical-align: top;
+    font-size: 16px;
+    font-weight: 500;
+    margin-left: 10px;
+`;
+
+const FacebookIcon = styled(Facebook)`
+    height: 24px;
+    width: 24px;
+    margin: 6px 0px;
+`;
+
+const GoogleIcon = styled(Google)`
+    height: 24px;
+    width: 24px;
+    margin: 6px 0px;
 `;
 
 const Login = () => {
@@ -38,13 +54,25 @@ const Login = () => {
     }
 
     return (
-        <Dropdown>
-            <button type="button" onClick={loginWithGoogle}>
-                <OauthButton src={googleButton} />
-            </button>
-            <button type="button" onClick={loginWithFacebook}>
-                <OauthButton src={facebookButton} />
-            </button>
+        <Dropdown width={232}>
+            <Button
+                color="google"
+                fullWidth={true}
+                type="button"
+                onClick={loginWithGoogle}
+            >
+                <GoogleIcon />
+                <ButtonText>Login with Google</ButtonText>
+            </Button>
+            <Button
+                color="facebook"
+                fullWidth={true}
+                type="button"
+                onClick={loginWithFacebook}
+            >
+                <FacebookIcon />
+                <ButtonText>Login with Facebook</ButtonText>
+            </Button>
             <ErrorMessage>{errorMessage}</ErrorMessage>
         </Dropdown>
     );

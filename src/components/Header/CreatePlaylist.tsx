@@ -66,7 +66,7 @@ const CreatePlaylist = (props: Props) => {
                         value={form.description}
                     />
                 </Label>
-                <Button type="submit" green={true}>
+                <Button type="submit" color="green">
                     Create
                 </Button>
             </form>

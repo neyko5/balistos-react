@@ -43,3 +43,5 @@ jobs:
                   REACT_APP_AUTH_DOMAIN: ${{ secrets.REACT_APP_AUTH_DOMAIN }}
                   REACT_APP_DATABASE_URL: ${{ secrets.REACT_APP_DATABASE_URL }}
                   REACT_APP_YOUTUBE_API_KEY: ${{ secrets.REACT_APP_YOUTUBE_API_KEY }}
+            - name: Cypress run
+              uses: cypress-io/github-action@v1

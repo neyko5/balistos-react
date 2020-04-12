@@ -28,6 +28,7 @@ const Input = (props: Props) => (
         onChange={props.onChange}
         value={props.value}
         search={props.search}
+        autoComplete="off"
         placeholder={props.placeholder}
     />
 );
@@ -39,6 +40,7 @@ interface Props {
     value?: string;
     search?: boolean;
     placeholder?: string;
+    autocomplete?: string;
 }
 
 Input.defaultProps = {

@@ -8,8 +8,8 @@ const LogOut = () => {
         return firebase.auth().signOut();
     }
     return (
-        <Dropdown small={true}>
-            <Button data-cy="log-out" green={true} onClick={logout}>
+        <Dropdown width={210}>
+            <Button data-cy="log-out" color="green" onClick={logout}>
                 Log Out
             </Button>
         </Dropdown>

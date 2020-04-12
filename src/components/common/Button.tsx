@@ -18,19 +18,36 @@ const StyledButton = styled.button`
     user-select: none;
     cursor: pointer;
     outline: none;
-    ${(props: Props) =>
-        props.green &&
-        css`
-            color: #fff;
-            background: #b1bb00;
-            -webkit-box-shadow: 2px 2px 0 #9fa800;
-            box-shadow: 2px 2px 0 #9fa800;
-        `}
+    ${(props: Props) => {
+        switch (props.color) {
+            case 'green':
+                return css`
+                    color: #fff;
+                    background: #b1bb00;
+                    box-shadow: 2px 2px 0 #9fa800;
+                `;
+            case 'facebook':
+                return css`
+                    color: #fff;
+                    background: #3b5998;
+                    box-shadow: 2px 2px 0 #34528e;
+                `;
+            case 'google':
+                return css`
+                    color: ##757575;
+                    background: white;
+                    box-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+                    border: 1px solid rgba(0, 0, 0, 0.25);
+                    text-align: left;
+                `;
+        }
+    }}
     ${(props: Props) =>
         props.topMargin &&
         css`
             margin-top: 10px;
         `}
+    ${(props: Props) => props.fullWidth && `width: 100%;`}
 `;
 
 const Button = (props: Props) => (
@@ -41,9 +58,10 @@ const Button = (props: Props) => (
 
 interface Props {
     children: any;
-    green: boolean;
+    color: string;
     topMargin?: boolean;
     right?: boolean;
+    fullWidth?: boolean;
     type?: 'button' | 'submit' | 'reset';
     id?: string;
     onClick?: () => void;

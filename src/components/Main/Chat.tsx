@@ -30,23 +30,25 @@ const Chat = (props: {
     user: any;
     id: string;
     messages: ChatMessageType[];
-}) => (
-    <>
-        <BoxHeader>
-            <Icon chat={true} />
-            <Title>Chat with your buddies</Title>
-        </BoxHeader>
-        <Chatbox id="chatbox">
-            {props.messages.map((message) => (
-                <ChatMessage
-                    message={message}
-                    user={props.user}
-                    key={message.id}
-                />
-            ))}
-        </Chatbox>
-        {props.user && <ChatForm id={props.id} />}
-    </>
-);
+}) => {
+    return (
+        <>
+            <BoxHeader>
+                <Icon chat={true} />
+                <Title>Chat with your buddies</Title>
+            </BoxHeader>
+            <Chatbox id="chatbox">
+                {props.messages.map((message) => (
+                    <ChatMessage
+                        message={message}
+                        user={props.user}
+                        key={message.id}
+                    />
+                ))}
+            </Chatbox>
+            {props.user && !props.user.isEmpty && <ChatForm id={props.id} />}
+        </>
+    );
+};
 
 export default Chat;

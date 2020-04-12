@@ -46,7 +46,7 @@ const ChatForm = (props: Props) => {
                     value={message}
                     onChange={handleChange}
                 />
-                <Button type="submit" green={true} right={true}>
+                <Button type="submit" color="green" right={true}>
                     <Icon message={true} /> Chat
                 </Button>
             </form>

@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 
 const DropdownContainer = styled.div`
     border: 1px solid #6d6d6d;
@@ -9,31 +9,28 @@ const DropdownContainer = styled.div`
     top: 50px;
     right: 5px;
     border-top: 0px;
+    width: ${(props: DropdownProps) =>
+        props.width ? `${props.width}px;` : '302px;'}
     padding: 10px;
-    width: ${(props: DropdownProps) => (props.small ? '210px' : '302px')};
 
-    @media (min-width: 40em) {
+    @media (min - width: 40em) {
         right: 15px;
     }
-`
+`;
 
 interface DropdownProps {
-    small?: boolean
+    width?: number;
 }
 
-const Dropdown = (props: { small?: boolean; children: any }) => {
+const Dropdown = (props: { width?: number; children: any }) => {
     function stopPropagation(event: any) {
-        event.stopPropagation()
+        event.stopPropagation();
     }
     return (
-        <DropdownContainer onClick={stopPropagation} small={props.small}>
+        <DropdownContainer onClick={stopPropagation} {...props}>
             {props.children}
         </DropdownContainer>
-    )
-}
+    );
+};
 
-Dropdown.defaultProps = {
-    small: false,
-}
-
-export default Dropdown
+export default Dropdown;
