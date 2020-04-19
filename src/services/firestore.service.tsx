@@ -7,8 +7,11 @@ export function addVideoToPlaylist(
 ) {
     const currentUser = firebase.auth().currentUser;
     return firestore.collection(`playlists/${playlistId}/videos`).add({
-        youtubeId: videoId,
+        youtube_id: videoId,
         title,
+        likes: [],
+        created_at: new Date().getTime(),
+        finished: false,
         creator: {
             id: currentUser?.uid,
             name: currentUser?.displayName,

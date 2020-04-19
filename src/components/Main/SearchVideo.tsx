@@ -37,10 +37,10 @@ const SearchResults = styled.div`
     text-align: left;
 `;
 
-interface Props {
+type Props = {
     id: string;
     user: AuthUserType;
-}
+};
 
 const SearchVideo = (props: Props) => {
     const [results, setResults] = React.useState<any[]>([]);

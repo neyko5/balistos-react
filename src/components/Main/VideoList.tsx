@@ -37,7 +37,7 @@ const VideoList = (props: {
                     index={0}
                 />
             )}
-            {props.videos.map((video, index) => (
+            {props.videos.map((video: VideoType, index: number) => (
                 <VideoListItem
                     video={video}
                     key={video.id}

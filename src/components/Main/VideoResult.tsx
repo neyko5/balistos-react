@@ -13,9 +13,9 @@ const Result = styled.button`
         `}
 `;
 
-interface ResultProps {
+type ResultProps = {
     active?: boolean;
-}
+};
 
 const Image = styled.img`
     margin-right: 10px;
@@ -45,12 +45,12 @@ const VideoResult = (props: Props) => {
     );
 };
 
-interface Props {
+type Props = {
     addVideo: (videoId: string, title: string) => void;
     active: boolean;
     image: string;
     title: string;
     id: string;
-}
+};
 
 export default VideoResult;

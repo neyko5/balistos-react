@@ -134,7 +134,7 @@ const FullHeight = styled.div`
     height: 100%;
 `;
 
-const App = (props: {}) => {
+const App = () => {
     return (
         <BrowserRouter>
             <FullHeight>

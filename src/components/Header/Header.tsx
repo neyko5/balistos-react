@@ -56,10 +56,10 @@ const Logo = styled.img`
     height: 40px;
 `;
 
-interface MenuButtonProps {
+type MenuButtonProps = {
     borderLeft?: boolean;
     onClick?: () => void;
-}
+};
 
 const MenuButton = styled.button`
   height: 50px;
@@ -92,9 +92,9 @@ const Menu = styled.div`
     position: relative;
 `;
 
-interface Props {
+type Props = {
     user: AuthUserType;
-}
+};
 
 const Header = (props: Props) => {
     const [open, setOpen] = React.useState<string>('');

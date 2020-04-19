@@ -56,11 +56,16 @@ const User = styled.div`
         `}
 `;
 
-interface UserProps {
+type UserProps = {
     green: boolean;
-}
+};
 
-const ChatOnline = (props: { user: AuthUserType; users: UserType[] }) => (
+type Props = {
+    user: AuthUserType;
+    users: UserType[];
+};
+
+const ChatOnline = (props: Props) => (
     <Users>
         <Header>
             <HeaderTitle>Users online</HeaderTitle>
@@ -69,7 +74,7 @@ const ChatOnline = (props: { user: AuthUserType; users: UserType[] }) => (
         <Body>
             {props.users &&
                 props.users.length &&
-                props.users.map((user) => (
+                props.users.map((user: UserType) => (
                     <User green={user.id === props.user.uid} key={user.id}>
                         {user.name}
                     </User>

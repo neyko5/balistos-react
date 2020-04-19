@@ -5,6 +5,7 @@ import searchIcon from '../../img/search-white.png';
 import transparentImg from '../../img/transparent.png';
 import Input from '../common/Input';
 import SearchPlaylistResult from './SearchPlaylistResult';
+import { PlaylistType } from '../../types';
 
 const SearchPlaylist = styled.div`
     max-width: 620px;
@@ -43,7 +44,11 @@ const SearchResults = styled.ul`
     }
 `;
 
-const SearchPlaylistContainer = (props: any) => {
+type Props = {
+    playlists: PlaylistType[];
+};
+
+const SearchPlaylistContainer = (props: Props) => {
     const [results, setResults] = React.useState<any[]>([]);
     const [query, setQuery] = React.useState('');
 

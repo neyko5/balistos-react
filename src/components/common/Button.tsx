@@ -1,6 +1,12 @@
 import React from 'react';
 import styled, { css } from 'styled-components';
 
+type StyledButtonProps = {
+    color?: 'green' | 'facebook' | 'google';
+    topMargin?: boolean;
+    fullWidth?: boolean;
+};
+
 const StyledButton = styled.button`
     height: 38px;
     line-height: 38px;
@@ -42,7 +48,7 @@ const StyledButton = styled.button`
                 `;
         }
     }}
-    ${(props: Props) =>
+    ${(props: StyledButtonProps) =>
         props.topMargin &&
         css`
             margin-top: 10px;
@@ -56,15 +62,15 @@ const Button = (props: Props) => (
     </StyledButton>
 );
 
-interface Props {
-    children: any;
-    color: string;
+type Props = {
+    children: React.ReactNode;
+    color?: 'green' | 'facebook' | 'google';
     topMargin?: boolean;
     right?: boolean;
     fullWidth?: boolean;
     type?: 'button' | 'submit' | 'reset';
     id?: string;
     onClick?: () => void;
-}
+};
 
 export default Button;

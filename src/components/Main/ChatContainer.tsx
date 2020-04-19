@@ -8,12 +8,12 @@ import ChatOnline from './ChatOnline';
 
 import { firestoreConnect } from 'react-redux-firebase';
 
-interface Props {
+type Props = {
     id: string;
     users: UserType[];
     chats: ChatMessageType[];
     user: AuthUserType;
-}
+};
 
 const ChatContainer = (props: Props) => {
     return (

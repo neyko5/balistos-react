@@ -18,11 +18,12 @@ const DropdownContainer = styled.div`
     }
 `;
 
-interface DropdownProps {
+type DropdownProps = {
     width?: number;
-}
+    children: React.ReactNode;
+};
 
-const Dropdown = (props: { width?: number; children: any }) => {
+const Dropdown = (props: DropdownProps) => {
     function stopPropagation(event: any) {
         event.stopPropagation();
     }

@@ -11,7 +11,6 @@ import speakerIcon from '../../img/volume.png';
 import { youtubeParams } from '../../config/youtube';
 
 import { VideoType } from '../../types';
-import { finishVideo } from '../../services/firestore.service';
 
 const MainWindow = styled.div`
     background: #ffffff;
@@ -67,16 +66,19 @@ const Progress = styled.div`
     background: #dcdcdc;
 `;
 
-const Bar = styled.div`
-    width: ${(props: BarProps) => props.width || 0}%;
+const Bar = styled.div.attrs<BarProps>((props: BarProps) => ({
+    style: {
+        width: `${props.width || 0}%`,
+    },
+}))<BarProps>`
     background: #d96459;
     height: 5px;
     max-width: 100%;
 `;
 
-interface BarProps {
+type BarProps = {
     width?: number;
-}
+};
 
 const Toolbar = styled.div`
     width: 100%;
@@ -109,10 +111,10 @@ const ControlButton = styled.button`
         `}
 `;
 
-interface ControlButtonProps {
+type ControlButtonProps = {
     pause?: boolean;
     play?: boolean;
-}
+};
 
 const Timer = styled.div`
     margin-left: 20px;
@@ -132,9 +134,9 @@ const Time = styled.div`
         `}
 `;
 
-interface TimeProps {
+type TimeProps = {
     total?: boolean;
-}
+};
 
 const Volume = styled.div`
     display: flex;
@@ -196,14 +198,21 @@ const StyledThumb = styled.div`
 
 const Thumb = (props: any) => <StyledThumb {...props} />;
 
-interface Props {
-    current: VideoType | false;
+type Props = {
+    current: VideoType | null;
     playlistTitle: string;
     playlistUsername: string;
     id: string;
-}
+    nextVideo: () => void;
+};
 
-const VideoPlayer = (props: Props) => {
+const VideoPlayer = ({
+    current,
+    playlistTitle,
+    playlistUsername,
+    id,
+    nextVideo,
+}: Props) => {
     const [elapsed, setElapsed] = React.useState<number>(0);
     const [total, setTotal] = React.useState<number>(0);
     const [volume, setVolume] = React.useState<number>(100);
@@ -213,43 +222,21 @@ const VideoPlayer = (props: Props) => {
     const timeout = React.useRef(0);
     const player = React.useRef<any>(null);
 
-    /*function componentDidUpdate(prevProps: Props) {
-        if (
-            prevProps.current &&
-            this.props.current &&
-            prevProps.current.youtubeId !== this.props.current.youtubeId
-        ) {
-            if (this.state.player) {
-                this.state.player.seekTo(0);
-            }
-            this.resumeVideo();
-            this.props.startVideo(this.props.current.id);
-            this.props.getRelatedVideos(this.props.current.youtubeId);
-        }
-        if (!prevProps.current && this.props.current) {
-            this.props.startVideo(this.props.current.id);
-            this.props.getRelatedVideos(this.props.current.youtubeId);
-            if (this.state.player) {
-                this.state.player.seekTo(this.props.current.startedAt);
-            }
-        }
-        if (
-            this.props.current &&
-            (!prevProps.current ||
-                prevProps.current.youtubeId !== this.props.current.youtubeId)
-        ) {
+    React.useEffect(() => {
+        if (current) {
             const options = {
-                body: this.props.current.title,
-                icon: `https://img.youtube.com/vi/${this.props.current.youtubeId}/0.jpg`,
+                body: current.title,
+                icon: `https:  //img.youtube.com/vi/${current.youtube_id}/0.jpg`,
                 tag: 'video',
                 requireInteraction: false,
             };
+            // tslint:disable-next-line:no-unused-expression
             new (window as any).Notification(
-                `Balistos - ${this.props.playlistTitle}`,
+                `Balistos - ${playlistTitle}`,
                 options
             );
         }
-    }*/
+    }, [current, playlistTitle]);
 
     React.useEffect(() => {
         return () => clearTimeout(timeout.current);
@@ -278,12 +265,6 @@ const VideoPlayer = (props: Props) => {
         player.current.setVolume(value);
     }
 
-    function finishCurrentVideo() {
-        if (props.current) {
-            finishVideo(props.id, props.current.id);
-        }
-    }
-
     function play() {
         setPaused(false);
         player.current.playVideo();
@@ -306,12 +287,12 @@ const VideoPlayer = (props: Props) => {
                 <Video>
                     <Player>
                         <Overlay />
-                        {props.current ? (
+                        {current ? (
                             <YouTube
-                                videoId={props.current.youtubeId}
+                                videoId={current.youtube_id}
                                 opts={youtubeParams}
                                 onReady={onReady}
-                                onEnd={finishCurrentVideo}
+                                onEnd={nextVideo}
                             />
                         ) : (
                             <VideoEmpty>
@@ -354,9 +335,9 @@ const VideoPlayer = (props: Props) => {
                 </Video>
             </MainWindow>
             <PlaylistHeader>
-                <PlaylistTitle>{props.playlistTitle}</PlaylistTitle>
+                <PlaylistTitle>{playlistTitle}</PlaylistTitle>
                 <Created> created by </Created>
-                <PlaylistUsername>{props.playlistUsername}</PlaylistUsername>
+                <PlaylistUsername>{playlistUsername}</PlaylistUsername>
             </PlaylistHeader>
         </Box>
     );

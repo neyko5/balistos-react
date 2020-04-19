@@ -32,10 +32,10 @@ const StyledIcon = styled.i`
 
 const Icon = (props: Props) => <StyledIcon {...props} />;
 
-interface Props {
+type Props = {
     message?: boolean;
     note?: boolean;
     chat?: boolean;
-}
+};
 
 export default Icon;

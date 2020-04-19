@@ -12,10 +12,10 @@ const Send = styled.div`
     width: 100%;
 `;
 
-interface Props {
+type Props = {
     id: string;
     user: AuthUserType;
-}
+};
 
 const ChatForm = (props: Props) => {
     const [message, setMessage] = React.useState('');

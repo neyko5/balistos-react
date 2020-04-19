@@ -33,7 +33,7 @@ const Input = (props: Props) => (
     />
 );
 
-interface Props {
+type Props = {
     type: string;
     name: string;
     onChange: (event: any) => void;
@@ -41,12 +41,6 @@ interface Props {
     search?: boolean;
     placeholder?: string;
     autocomplete?: string;
-}
-
-Input.defaultProps = {
-    search: false,
-    value: '',
-    placeholder: '',
 };
 
 export default Input;

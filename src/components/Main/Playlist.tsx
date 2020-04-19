@@ -2,6 +2,8 @@ import { Flex } from 'grid-styled';
 import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { compose } from 'redux';
+import { firestoreConnect } from 'react-redux-firebase';
 
 import Container from '../common/Container';
 import ChatContainer from './ChatContainer';
@@ -9,16 +11,13 @@ import RelatedVideos from './RelatedVideos';
 import VideoListContainer from './VideoListContainer';
 import VideoPlayer from './VideoPlayer';
 
-import { compose } from 'redux';
-
-import { firestoreConnect } from 'react-redux-firebase';
-
 import {
     PlaylistType,
     YoutubeResultVideoType,
     VideoType,
 } from '../../types/index';
 import { getRelatedYouTubeVideos } from '../../services/youtube.service';
+import { finishVideo } from '../../services/firestore.service';
 
 const Main = styled.div`
     min-height: 100%;
@@ -30,23 +29,37 @@ const Main = styled.div`
     }
 `;
 
-interface Props {
+type Props = {
     playlist: PlaylistType;
     videos: VideoType[];
     related: YoutubeResultVideoType[];
     id: string;
-}
+};
 
 const Playlist = (props: Props) => {
     const [related, setRelated] = React.useState([]);
+    const [current, setCurrent] = React.useState<VideoType | null>(null);
+
+    React.useEffect(() => {
+        if (props.videos.length > 0 && !current) {
+            setCurrent(props.videos[0]);
+        }
+    }, [props.videos, current]);
 
     React.useEffect(() => {
         if (props.videos.length > 0) {
-            getRelatedYouTubeVideos(props.videos[0].youtubeId).then((res) => {
+            getRelatedYouTubeVideos(props.videos[0].youtube_id).then((res) => {
                 setRelated(res);
             });
         }
     }, [props.videos]);
+
+    async function nextVideo() {
+        if (current) {
+            await finishVideo(props.id, current.id);
+            setCurrent(null);
+        }
+    }
 
     return (
         <Main>
@@ -55,7 +68,8 @@ const Playlist = (props: Props) => {
                     <VideoPlayer
                         playlistTitle={props.playlist?.title}
                         playlistUsername={props.playlist?.creator?.name}
-                        current={props.videos.length > 0 && props.videos[0]}
+                        current={current}
+                        nextVideo={nextVideo}
                         id={props.id}
                     />
                     <VideoListContainer
@@ -81,11 +95,20 @@ export default compose(
         {
             collection: `playlists/${state.match.params.playlistId}/videos`,
             storeAs: 'videos',
+            where: [['finished', '==', false]],
         },
     ]),
     connect((state: any, props: any) => ({
         playlist: state.firestore.data.playlist,
-        videos: state.firestore.ordered.videos || [],
+        videos: (state.firestore.ordered.videos || []).slice().sort(videoSort),
         id: props.match.params.playlistId,
     }))
 )(Playlist) as React.ComponentType;
+
+function videoSort(a: VideoType, b: VideoType) {
+    if (a.likes.length === b.likes.length) {
+        return a.created_at < b.created_at ? -1 : 1;
+    } else {
+        return a.likes.length > b.likes.length ? -1 : 1;
+    }
+}

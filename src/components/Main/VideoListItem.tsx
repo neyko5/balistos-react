@@ -31,10 +31,10 @@ const PlaylistItem = styled.div`
         `}
 `;
 
-interface PlaylistItemProps {
+type PlaylistItemProps = {
     next?: boolean;
     first?: boolean;
-}
+};
 
 const Vote = styled.div`
     flex-direction: column;
@@ -64,10 +64,10 @@ const VoteButton = styled.button`
         `}
 `;
 
-interface VoteButtonProps {
+type VoteButtonProps = {
     upActive?: boolean;
     downActive?: boolean;
-}
+};
 
 const SvgIcon = styled.svg`
     width: 32px;
@@ -87,9 +87,9 @@ const Count = styled.div`
         `}
 `;
 
-interface NumberProps {
+type NumberProps = {
     full?: boolean;
-}
+};
 
 const ImgWrapper = styled.div`
     position: relative;
@@ -219,7 +219,7 @@ const VideoListItem = (props: {
             <ImgWrapper>
                 <Status>{playlistItemStatus}</Status>
                 <Image
-                    src={`https://img.youtube.com/vi/${props.video.youtubeId}/0.jpg`}
+                    src={`https://img.youtube.com/vi/${props.video.youtube_id}/0.jpg`}
                     alt={props.video.title}
                 />
             </ImgWrapper>
@@ -229,14 +229,14 @@ const VideoListItem = (props: {
                     target="_blank"
                     rel="noopener noreferrer"
                     title="Open in YouTube"
-                    href={`https://www.youtube.com/watch?v=${props.video.youtubeId}`}
+                    href={`https://www.youtube.com/watch?v=${props.video.youtube_id}`}
                 >
                     {props.video.title}
                 </Title>
                 <AddedBy>
                     added by{' '}
                     <Black>
-                        {props.video.autoAdded
+                        {props.video.auto_added
                             ? 'Balistos'
                             : props.video.creator.name}
                     </Black>

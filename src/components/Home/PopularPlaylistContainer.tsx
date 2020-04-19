@@ -7,9 +7,9 @@ import { connect } from 'react-redux';
 import PopularPlaylist from './PopularPlaylist';
 import { PlaylistType } from '../../types';
 
-interface Props {
+type Props = {
     playlists: PlaylistType[];
-}
+};
 
 const PopularPlaylistContainer: React.FC<Props> = (props: Props) => {
     return (

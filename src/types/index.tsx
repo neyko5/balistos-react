@@ -1,53 +1,50 @@
-export interface UserType {
+export type UserType = {
     id: string;
     name: string;
-}
+};
 
-export interface AuthUserType {
+export type AuthUserType = {
     uid: string;
     displayName: string;
     photoURL: string;
-}
+};
 
-export interface LikeType {
+export type LikeType = {
     id: number;
     value: number;
     user: UserType;
     userId: number;
-}
+};
 
-export interface YoutubeVideoType {
-    youtubeId: string;
-    title: string;
-}
-
-export interface VideoType {
+export type VideoType = {
     id: string;
-    startedAt: number;
-    youtubeId: string;
+    started_at: number;
+    youtube_id: string;
     title: string;
     likes: string[];
     creator: UserType;
-    autoAdded: boolean;
-}
+    auto_added: boolean;
+    created_at: number;
+    finished: boolean;
+};
 
-export interface PlaylistType {
+export type PlaylistType = {
     current: VideoType;
     title: string;
     creator: UserType;
     id: number;
     videos: VideoType[];
     description: string;
-}
+};
 
-export interface ChatMessageType {
+export type ChatMessageType = {
     created_at: string;
     message: string;
     creator: UserType;
     id: string;
-}
+};
 
-export interface YoutubeResultVideoType {
+export type YoutubeResultVideoType = {
     id: {
         videoId: string;
     };
@@ -59,4 +56,4 @@ export interface YoutubeResultVideoType {
             };
         };
     };
-}
+};

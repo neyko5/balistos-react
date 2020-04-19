@@ -13,11 +13,16 @@ export const Author = styled.span`
     color: ${(props: AuthorProps) => (props.current ? '#9FA600' : '#3e414c')};
 `;
 
-interface AuthorProps {
+type AuthorProps = {
     current: boolean;
-}
+};
 
-const ChatMessage = (props: { user: UserType; message: ChatMessageType }) => (
+type Props = {
+    user: UserType;
+    message: ChatMessageType;
+};
+
+const ChatMessage = (props: Props) => (
     <Message>
         <Author
             current={props.message.creator.id === props.user.id}

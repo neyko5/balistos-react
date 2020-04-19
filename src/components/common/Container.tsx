@@ -14,7 +14,7 @@ const ContainerComponent = styled.div`
     }
 `;
 
-const Container = (props: { children: any }) => (
+const Container = (props: { children: React.ReactNode }) => (
     <ContainerComponent>{props.children}</ContainerComponent>
 );
 

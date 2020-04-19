@@ -27,7 +27,11 @@ const PlaylistResultDescription = styled.div`
     font-size: 13px;
 `;
 
-const SearchPlaylistResult = (props: { result: PlaylistType }) => (
+type Props = {
+    result: PlaylistType;
+};
+
+const SearchPlaylistResult = (props: Props) => (
     <PlaylistResult to={`/playlist/${props.result.id}`}>
         <PlaylistResultTitle>{props.result.title}</PlaylistResultTitle>
         <PlaylistResultDescription>

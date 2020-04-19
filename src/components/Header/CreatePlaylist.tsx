@@ -20,9 +20,9 @@ const Label = styled.label`
     padding-bottom: 5px;
 `;
 
-interface Props {
+type Props = {
     setOpen: (window: string) => void;
-}
+};
 
 const CreatePlaylist = (props: Props) => {
     const [form, setForm] = React.useState({ title: '', description: '' });

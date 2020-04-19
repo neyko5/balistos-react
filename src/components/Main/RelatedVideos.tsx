@@ -30,17 +30,19 @@ const Body = styled.div`
     width: 100%;
 `;
 
-const RelatedVideos = (props: {
+type Props = {
     id: string;
     related: YoutubeResultVideoType[];
-}) => (
+};
+
+const RelatedVideos = (props: Props) => (
     <Box width={[1, 1, 1 / 2, 1 / 2]}>
         <RelatedBox>
             <Header>
                 <HeaderTitle>Related videos</HeaderTitle>
             </Header>
             <Body>
-                {props.related.map((video) => (
+                {props.related.map((video: YoutubeResultVideoType) => (
                     <RelatedVideoItem
                         video={video}
                         id={props.id}
