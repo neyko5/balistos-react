@@ -14,7 +14,7 @@
     },
     "homepage": "https://www.balistos.com",
     "dependencies": {
-        "axios": "0.19.2",
+        "axios": "0.21.1",
         "firebase": "^7.13.1",
         "grid-styled": "5.0.2",
         "react": "16.13.1",
